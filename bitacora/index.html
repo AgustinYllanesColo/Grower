@@ -474,14 +474,6 @@ details.grupo>summary{font-size:17px}
 .ord-det.ord-urg{border-left-color:#B4521F}.ord-det.ord-avi{border-left-color:#C99A06}.ord-det.ord-info{border-left-color:var(--sky)}.ord-det.ord-ok{border-left-color:var(--leaf)}
 .ord-dt{font-family:Archivo,sans-serif;font-weight:700;font-size:14.5px;margin:0 0 3px}
 .ord-dd{font-size:13.5px;margin:0 0 3px;color:var(--ink)}
-.rg-c{display:inline-block;font-family:Archivo,sans-serif;font-size:11.5px;font-weight:700;border-radius:99px;padding:2px 8px;white-space:nowrap}
-.rg-ok{background:var(--leaf-soft);color:var(--leaf)}
-.rg-pronto{background:var(--mark);color:var(--ink)}
-.rg-regar{background:#F6D38A;color:#5A3B00}
-.rg-urg{background:#B4521F;color:#fff}
-.rg-llu{background:var(--sky-soft);color:var(--sky)}
-.rg-bar{display:block;height:4px;width:70px;background:var(--surface-3);border-radius:99px;overflow:hidden;margin-top:4px}
-.rg-bar i{display:block;height:100%;background:var(--sky)}
 .cr-more{margin-top:6px}
 .cr-more>summary{font-family:Archivo,sans-serif;font-size:12.5px;font-weight:600;color:var(--muted);cursor:pointer;padding:6px 0;list-style:none}
 .cr-more>summary::-webkit-details-marker{display:none}
@@ -505,6 +497,42 @@ details.grupo>summary{font-size:17px}
 .al details>summary::-webkit-details-marker{display:none}
 .al details[open] .al-d{margin-top:5px}
 .al-src{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--sky);margin:0 0 5px}
+.i{width:1.05em;height:1.05em;flex:none;stroke:currentColor;fill:none;stroke-width:1.8;stroke-linecap:round;stroke-linejoin:round;vertical-align:-.17em;margin-right:.3em}
+.i-sol{color:#C98A0A}.i-nub{color:var(--muted)}.i-llu{color:var(--sky)}
+.ord{position:relative}
+.ord-b{display:flex;align-items:center;gap:0}
+.ord-b .i{width:18px;height:18px;margin-right:6px}
+.ord-s{font-size:11.5px;color:var(--muted);font-weight:500}
+.ord-urg .ord-b{color:#9C3E10}.ord-avi .ord-b{color:#7A5700}.ord-info .ord-b{color:var(--sky)}.ord-ok .ord-b{color:var(--leaf)}
+.ord-dt .i{width:17px;height:17px}
+.st3{display:grid;grid-template-columns:repeat(3,minmax(0,1fr));gap:8px;margin:8px 0 6px}
+.st1{background:var(--surface);border-radius:4px;padding:7px 8px;display:flex;flex-direction:column;gap:1px;min-width:0}
+.st1-k{font-family:Archivo,sans-serif;font-size:10px;font-weight:600;letter-spacing:.05em;text-transform:uppercase;color:var(--muted)}
+.st1 b{font-family:Archivo,sans-serif;font-size:16px;letter-spacing:-.01em;font-variant-numeric:tabular-nums}
+.st1-s{font-size:11px;color:var(--muted)}
+.ord-warn{color:var(--iron);font-weight:600}
+.gw{display:flex;align-items:center;gap:6px}
+.gw-bar{width:54px;height:8px;border-radius:2px;background:var(--surface-3);overflow:hidden;box-shadow:inset 0 0 0 1px var(--line)}
+.gw-bar i{display:block;height:100%}
+.gw-n{font-family:"JetBrains Mono",monospace;font-size:11.5px;font-variant-numeric:tabular-nums;color:var(--muted);min-width:30px}
+.lv-low-t{color:#B4521F;font-weight:600}.lv-mid-t{color:#9A6F00}
+.lv-ok{background:var(--sky)}.lv-mid{background:#D9A21B}.lv-low{background:#B4521F}
+td.aw{min-width:112px}
+td.aw .rg-c{margin-top:5px}
+.rg-c{display:inline-flex;align-items:center;font-family:Archivo,sans-serif;font-size:11.5px;font-weight:700;border-radius:3px;padding:3px 8px 3px 6px;white-space:nowrap;letter-spacing:.01em}
+.rg-c .i{width:13px;height:13px;margin-right:4px}
+.rg-regar{background:#F2C14E;color:#3D2900}
+.rg-urg{background:#B4521F;color:#fff}
+.rg-llu{background:var(--sky-soft);color:var(--sky);box-shadow:inset 0 0 0 1px var(--sky)}
+.rg-ok{background:var(--leaf-soft);color:var(--leaf)}
+.mm-si{font-family:"JetBrains Mono",monospace;color:var(--sky)}
+.mm-no{color:var(--muted)}
+.vpd-t td{vertical-align:middle}
+.vv-h b{display:inline-flex;align-items:center}
+.vv-h b .i{color:var(--leaf);width:18px;height:18px}
+.oc .i{width:13px;height:13px;margin-right:2px}
+.al-t .i{width:15px;height:15px}
+.al-urg .al-t .i{color:#B4521F}.al-avi .al-t .i{color:var(--leaf);width:9px;height:9px;margin:0 7px 0 3px;vertical-align:.05em}.al-info .al-t .i{color:var(--sky)}
 .regla b{font-family:Archivo,sans-serif;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--leaf);display:block;margin-bottom:4px}
 </style>
 
@@ -2466,13 +2494,39 @@ function etapaVPD(){
 }
 function vpdDe(c){ if(c.vpd!=null) return {v:c.vpd, aprox:false}; if(c.tmax!=null&&c.hrmin!=null) return {v:vpdCalc(c.tmax,c.hrmin), aprox:true}; return null; }
 function fk(x){ return x.toFixed(1).replace(".",","); }
+/* ---- íconos de línea (mismo trazo que la barra de abajo) ---- */
+const ICP = {
+  sol:'<circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/>',
+  nube:'<path d="M17.5 19H9a7 7 0 1 1 6.7-9h1.8a4.5 4.5 0 1 1 0 9Z"/>',
+  solnube:'<path d="M12 2v2M4.9 4.9l1.4 1.4M20 12h2M19.1 4.9l-1.4 1.4M15.9 12.6A4 4 0 0 0 8.4 9.4"/><path d="M13 22H7a5 5 0 1 1 4.9-6H13a3 3 0 0 1 0 6Z"/>',
+  lluvia:'<path d="M4 14.9A7 7 0 1 1 15.7 8h1.8a4.5 4.5 0 0 1 2.5 8.2"/><path d="M16 14v6M8 14v6M12 16v6"/>',
+  tormenta:'<path d="M6 16.3A7 7 0 1 1 15.7 8h1.8a4.5 4.5 0 0 1 .5 9"/><path d="m13 12-3 5h4l-3 5"/>',
+  gota:'<path d="M12 22a7 7 0 0 0 7-7c0-2-1-3.9-3-5.5S12.5 5.5 12 3c-.5 2.5-2 4.9-4 6.5S5 13 5 15a7 7 0 0 0 7 7Z"/>',
+  ok:'<path d="M20 6 9 17l-5-5"/>',
+  reloj:'<circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/>',
+  cal:'<rect x="3" y="4" width="18" height="18" rx="2"/><path d="M16 2v4M8 2v4M3 10h18"/>',
+  bolsa:'<path d="M6 2 3 6v14a2 2 0 0 0 2 2h14a2 2 0 0 0 2-2V6l-3-4Z"/><path d="M3 6h18M16 10a4 4 0 0 1-8 0"/>',
+  casa:'<path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2Z"/><path d="M9 22V12h6v10"/>',
+  brote:'<path d="M12 21V9"/><path d="M12 9c0-3 2-5 5-5 0 3-2 5-5 5Z"/><path d="M12 13c0-3-2-5-5-5 0 3 2 5 5 5Z"/>',
+  maceta:'<path d="M5 11h14l-1.5 10h-11Z"/><path d="M12 11V5"/><path d="M12 7c0-2 1.5-3 3.5-3 0 2-1.5 3-3.5 3Z"/>',
+  alerta:'<path d="m21.7 18-8-14a2 2 0 0 0-3.5 0l-8 14A2 2 0 0 0 4 21h16a2 2 0 0 0 1.7-3Z"/><path d="M12 9v4M12 17h.01"/>',
+  info:'<circle cx="12" cy="12" r="9"/><path d="M12 16v-4M12 8h.01"/>',
+  punto:'<circle cx="12" cy="12" r="4" fill="currentColor"/>',
+  espera:'<path d="M5 22h14M5 2h14M17 22v-4.2a2 2 0 0 0-.6-1.4L12 12l-4.4 4.4a2 2 0 0 0-.6 1.4V22M7 2v4.2a2 2 0 0 0 .6 1.4L12 12l4.4-4.4a2 2 0 0 0 .6-1.4V2"/>',
+  niebla:'<path d="M4 9h16M4 14h12M7 19h13"/>',
+  olas:'<path d="M2 8c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2M2 14c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2"/>'
+};
+function ic(n, cl){ return '<svg class="i'+(cl?' '+cl:'')+'" viewBox="0 0 24 24" aria-hidden="true">'+(ICP[n]||'')+'</svg>'; }
 let riegoSel = null; try{ riegoSel = localStorage.getItem("bitacora-rg"); }catch(e){}
 function planRiego(){
   if (typeof Riego==="undefined") return null;
   try{ return Riego.plan({hoy:today, flor:florFoto(), tandas:tandas, eventos:eventos, obs:obs, diario:diario, clima:CLIMA.dias}); }catch(e){ return null; }
 }
-const CIELO = c => c.mm>=10?"⛈️":c.mm>=2?"🌧️":(c.prob!=null&&c.prob>=50)?"🌦️":(c.hrmin!=null&&c.hrmin>=75)?"☁️":"☀️";
-const RG_CHIP = {ok:["✓ bien","rg-ok"], pronto:["◔ aguanta","rg-pronto"], regar:["💧 regar","rg-regar"], urgente:["💧 regar ya","rg-urg"], lluvia:["☔ no regar","rg-llu"], saturado:["🌊 sobra agua","rg-llu"], regado:["✓ regado","rg-ok"]};
+const CIELO = c => ic(c.mm>=10?"tormenta":c.mm>=2?"lluvia":(c.prob!=null&&c.prob>=50)?"solnube":(c.hrmin!=null&&c.hrmin>=75)?"nube":"sol", c.mm>=2?"i-llu":(c.mm<2&&!(c.hrmin>=75)&&!(c.prob>=50))?"i-sol":"i-nub");
+const RG_ACC = {regar:["gota","Regar","rg-regar"], urgente:["gota","Regar ya","rg-urg"], lluvia:["lluvia","No regar","rg-llu"], saturado:["olas","Sobra agua","rg-llu"], regado:["ok","Regado","rg-ok"]};
+function nivelAgua(rest){ return rest>=50?"lv-ok":rest>=25?"lv-mid":"lv-low"; }
+function gauge(pct){ const rest=Math.max(0,Math.min(100,100-pct)); return '<span class="gw"><span class="gw-bar"><i class="'+nivelAgua(rest)+'" style="width:'+rest+'%"></i></span><span class="gw-n '+nivelAgua(rest)+'-t">'+rest+'%</span></span>'; }
+const ORD_IC = {urg:"alerta", avi:"gota", info:"lluvia", ok:"ok"};
 const NIVEL_CL = {urg:"ord-urg", avi:"ord-avi", info:"ord-info", ok:"ord-ok"};
 function climaTablaHTML(){
   if(!CLIMA.dias.length) return "";
@@ -2481,35 +2535,45 @@ function climaTablaHTML(){
   let g = P.find(x=>x.id===riegoSel) || P.find(x=>x.orden&&(x.orden.nivel==="urg"||x.orden.nivel==="avi")) || P[0];
   const rg = g.rango, pdia = {}; g.dias.forEach(x=>{ pdia[x.d]=x; });
   const ords = P.map(x=>{ const o=x.orden||{nivel:"ok",t:"—",d:""};
-    return '<button type="button" class="ord '+NIVEL_CL[o.nivel]+(x.id===g.id?' sel':'')+'" data-rg="'+x.id+'"><span class="ord-g">'+esc(x.nombre)+' · '+esc(x.txt)+'</span><b>'+esc(o.t)+'</b></button>'; }).join("");
-  const vchip = (v,noche) => { if(v==null) return '<span class="vpd-c">—</span>';
-    if(noche) return (v<0.15 && /flor/.test(g.etapa))?'<span class="vpd-c vpd-bajo" title="noche saturada: rocío">🌫</span>':'';
+    return '<button type="button" class="ord '+NIVEL_CL[o.nivel]+(x.id===g.id?' sel':'')+'" data-rg="'+x.id+'" aria-pressed="'+(x.id===g.id)+'"><span class="ord-g">'+esc(x.nombre)+'</span><span class="ord-b">'+ic(ORD_IC[o.nivel]||"ok")+'<b>'+esc(o.t)+'</b></span><span class="ord-s">'+esc(x.txt)+'</span></button>'; }).join("");
+  const vchip = (v,noche) => { if(v==null) return noche?'':'<span class="vpd-c">—</span>';
+    if(noche) return (v<0.15 && /flor/.test(g.etapa))?'<span class="vpd-c vpd-bajo" title="noche saturada: rocío">'+ic("niebla")+'</span>':'';
     const cl = !rg ? '' : v<rg[0] ? ' vpd-bajo' : v>rg[1]+0.4 ? ' vpd-alto' : v>rg[1] ? ' vpd-medio' : ' vpd-ok';
     return '<span class="vpd-c'+cl+'">'+fk(v)+'</span>'; };
-  const D = CLIMA.dias.filter(c=>c.d>=sumarDias(today,-2)).slice(0,11);
-  const filas = D.map(c=>{ const dd=new Date(c.d+"T12:00:00"), p=pdia[c.d], pas=c.d<today, vd=vpdDe(c);
-    const agua = p ? '<span class="rg-bar"><i style="width:'+Math.max(0,100-p.pct)+'%"></i></span>' : '';
-    const chip = p ? '<span class="rg-c '+RG_CHIP[p.est][1]+'">'+RG_CHIP[p.est][0]+'</span>' : (pas?'<span class="vivo-m">'+(c.obs?'medido':'estimado')+'</span>':'');
+  const hdia = {}; (g.hist||[]).forEach(h=>{ hdia[h.d]=h; });
+  const D = CLIMA.dias.filter(c=>c.d>=sumarDias(today,-3)).slice(0,12);
+  const filas = D.map(c=>{ const dd=new Date(c.d+"T12:00:00"), p=pdia[c.d], h=hdia[c.d], pas=c.d<today, vd=vpdDe(c);
+    const acc = p && RG_ACC[p.est] ? '<span class="rg-c '+RG_ACC[p.est][2]+'">'+ic(RG_ACC[p.est][0])+RG_ACC[p.est][1]+'</span>' : (h&&h.regado?'<span class="rg-c rg-ok">'+ic("ok")+'Regado</span>':'');
+    const agua = p ? gauge(p.pct) : (h ? gauge(h.pct) : '');
+    const chip = acc;
     return '<tr class="'+(c.d===today?'vpd-hoy':'')+(pas?' vpd-pas':'')+'">'
       + '<td>'+(c.d===today?'<b>hoy</b>':esc(DIA[dd.getDay()].slice(0,3)))+'<span class="cr-f">'+dd.getDate()+'/'+(dd.getMonth()+1)+'</span></td>'
       + '<td class="num">'+CIELO(c)+' '+(c.tmax!=null?Math.round(c.tmin)+'-'+Math.round(c.tmax)+'°':'')+'</td>'
-      + '<td class="num">'+(c.mm>=0.5?String(Math.round(c.mm*10)/10).replace(".",","):'0')+(c.prob!=null&&!pas?'<span class="cr-f">'+c.prob+'%</span>':'')+(c.conf==="baja"?'<span class="cr-f" title="las fuentes no coinciden">¿?</span>':'')+'</td>'
+      + '<td class="num">'+(c.mm>=0.5?'<b class="mm-si">'+String(Math.round(c.mm*10)/10).replace(".",",")+'</b>':'<span class="mm-no">0</span>')+(c.prob!=null&&!pas?'<span class="cr-f">'+c.prob+'%'+(c.conf==="baja"?' · dudoso':'')+'</span>':(pas?'<span class="cr-f">'+(c.obs?'medido':'estimado')+'</span>':''))+'</td>'
       + '<td class="num">'+(vd?vchip(vd.v,false):'—')+vchip(c.vpdn,true)+'</td>'
-      + '<td>'+chip+agua+'</td></tr>'; }).join("");
+      + '<td class="aw">'+agua+chip+'</td></tr>'; }).join("");
   const o = g.orden||{};
   const hoyP = pdia[today];
   return '<div class="cr" id="clima-card">'
-    + '<div class="cr-top"><h2 class="cr-t">Clima y riego</h2><span class="cr-f">'+(climaVigente()?'actualizado '+esc(fechaCorta(CLIMA.cargado)):'⚠ pronóstico vencido')+'</span></div>'
+    + '<div class="cr-top"><h2 class="cr-t">Clima y riego</h2><span class="cr-f">'+(climaVigente()?'actualizado '+esc(fechaCorta(CLIMA.cargado)):'pronóstico vencido')+'</span></div>'
     + '<div class="ords">'+ords+'</div>'
-    + '<div class="ord-det '+NIVEL_CL[o.nivel||"ok"]+'"><p class="ord-dt">'+esc(g.nombre)+': '+esc(o.t||"")+'</p><p class="ord-dd">'+esc(o.d||"")+'</p>'
-    +   (hoyP?'<p class="ord-dd">Agua usada hoy: <b>'+hoyP.pct+' %</b> de la reserva útil · se van ≈ '+String(hoyP.et).replace(".",",")+' '+(g.tipo==="suelo"?'mm':'L por maceta')+' por día'+(g.sinDato?' · <b>sin un riego o un dedo anotado: es una estimación gruesa</b>':'')+'</p>':'')
-    +   (g.rango?'<p class="ord-dd">VPD ideal para '+esc(g.etapa)+': <b>'+fk(g.rango[0])+'-'+fk(g.rango[1])+' kPa</b></p>':'')
+    + '<div class="ord-det '+NIVEL_CL[o.nivel||"ok"]+'"><p class="ord-dt">'+ic(ORD_IC[o.nivel||"ok"])+esc(g.nombre)+': '+esc(o.t||"")+'</p><p class="ord-dd">'+esc(o.d||"")+'</p>'
+    +   (function(){ const r=g.resumen||{}; const st=(k,v,sub)=>'<div class="st1"><span class="st1-k">'+k+'</span><b>'+v+'</b>'+(sub?'<span class="st1-s">'+sub+'</span>':'')+'</div>';
+          let h='<div class="st3">'
+            + st("Último riego", r.ultRiego?(r.diasSin===0?"hoy":"hace "+r.diasSin+" días"):"sin anotar", r.ultRiego?fechaCorta(r.ultRiego):"anotalo en Anotar")
+            + st("Lluvia desde entonces", r.lluvia!=null?String(r.lluvia).replace(".",",")+" mm":"—", r.ultRiego?"hasta ayer":"")
+            + st("Agua útil hoy", hoyP?(100-hoyP.pct)+"%":"—", hoyP?"se van "+String(hoyP.et).replace(".",",")+(g.tipo==="suelo"?" mm":" L")+"/día":"")
+            + '</div>';
+          if(r.pico!=null && r.pico>=90 && r.picoD) h+='<p class="ord-dd ord-warn">'+ic("alerta")+' Se quedó sin agua útil el '+esc(fechaCorta(r.picoD))+(g.id==="bancal"&&g.etapa==="cobertura"?': las plántulas de trébol sin mulch encima pudieron secarse. Mirá los claros en la visita.':'.')+'</p>';
+          if(g.sinDato) h+='<p class="ord-dd">Sin un riego o un dedo anotado, el cálculo es una estimación gruesa.</p>';
+          return h; })()
+    +   (g.rango?'<p class="ord-dd">VPD ideal para '+esc(g.etapa)+': <b>'+fk(g.rango[0])+'-'+fk(g.rango[1])+' kPa</b></p>':'<p class="ord-dd">Sin plantas en este grupo: el VPD no se colorea todavía.</p>')
     +   (g.etapa==="plántula"?'<p class="ord-dd">Plántula: el centro se seca antes que la maceta. En cada visita, dedo a 3 cm; si sale seco, anillo de 300 ml alrededor del tallo aunque la tabla diga «bien».</p>':'')
     + '</div>'
-    + '<div class="tablewrap"><table class="vpd-t"><tr><th>Día</th><th>Cielo</th><th>mm</th><th>VPD</th><th>'+esc(g.nombre.split(" ")[0])+'</th></tr>'+filas+'</table></div>'
+    + '<div class="tablewrap"><table class="vpd-t"><tr><th>Día</th><th>Cielo</th><th>Lluvia</th><th>VPD</th><th>Agua útil</th></tr>'+filas+'</table></div>'
     + '<details class="cr-more"><summary>Cómo leer la tabla y de dónde salen los números</summary><div>'
-    +   '<p><b>Riego.</b> <span class="rg-c rg-ok">✓ bien</span> <span class="rg-c rg-pronto">◔ aguanta</span> <span class="rg-c rg-regar">💧 regar</span> <span class="rg-c rg-urg">💧 regar ya</span> <span class="rg-c rg-llu">☔ no regar</span>. La barra es el agua útil que le queda. Se riega cuando se usó la mitad. Cada día se va lo que pide el clima (ET0, método Hargreaves de la FAO, corregido por el VPD) multiplicado por lo que consume la etapa. Entra la lluvia: la medida entera, la pronosticada solo si es probable. En una maceta la lluvia casi no cuenta: 10 mm son 1 litro.</p>'
-    +   '<p><b>VPD</b> (kPa, de 9 a 18 h): <span class="vpd-c vpd-ok">en rango</span> <span class="vpd-c vpd-medio">algo alto</span> <span class="vpd-c vpd-alto">estrés</span> <span class="vpd-c vpd-bajo">bajo</span>, contra la etapa del grupo que elegiste arriba. 🌫 = noche saturada: rocío adentro del cogollo.</p>'
+    +   '<p><b>Agua útil.</b> '+gauge(20)+' la barra es lo que le queda: azul sobra, ámbar hay que ir pensando, rojo está seco. La etiqueta aparece solo el día que hay que hacer algo: <span class="rg-c rg-regar">'+ic("gota")+'Regar</span> <span class="rg-c rg-urg">'+ic("gota")+'Regar ya</span> <span class="rg-c rg-llu">'+ic("lluvia")+'No regar</span>. Se riega cuando se usó la mitad. Cada día se va lo que pide el clima (ET0, método Hargreaves de la FAO, corregido por el VPD) multiplicado por lo que consume la etapa. Entra la lluvia: la medida entera, la pronosticada solo si es probable. En una maceta la lluvia casi no cuenta: 10 mm son 1 litro.</p>'
+    +   '<p><b>VPD</b> (kPa, de 9 a 18 h): <span class="vpd-c vpd-ok">en rango</span> <span class="vpd-c vpd-medio">algo alto</span> <span class="vpd-c vpd-alto">estrés</span> <span class="vpd-c vpd-bajo">bajo</span>, contra la etapa del grupo que elegiste arriba. En flor aparece '+ic("niebla")+' cuando la noche está saturada: rocío adentro del cogollo.</p>'
     +   '<p><b>El dedo manda.</b> La tabla es un cálculo; el suelo es el dato. Si el dedo contradice la tabla, marcalo en «Lo vivo»: el cálculo arranca de nuevo desde lo que viste. Por eso anotar cada riego (bancal, macetas o todo) es lo que la hace confiable.</p>'
     +   '<p><b>Fuentes.</b> '+esc(CLIMA.fuente||"")+' La probabilidad (%) sale de 31 corridas del modelo GFS; «¿?» marca los días en que las fuentes no coinciden. Un pronóstico nunca es seguro: por eso la tabla apuesta a la lluvia solo cuando es probable, y con semillas o plántulas nunca apuesta a la de mañana.</p>'
     + '</div></details></div>';
@@ -2768,9 +2832,9 @@ function rondaHTML(){
   return '<div class="alertas"><p class="al-src">Ronda automática · '+esc(fechaDia(a.fecha))+'</p>'+its.map(alHTML).join("")+'</div>';
 }
 function alHTML(a){
-  const ic={urg:"⚠",avi:"●",info:"ℹ"}[a.n]||"●";
+  const icn=ic({urg:"alerta",avi:"punto",info:"info"}[a.n]||"punto");
   return '<div class="al al-'+(a.n||"info")+'"><button class="al-x" data-visto="'+esc(a.id)+'" type="button" aria-label="Listo">✓</button>'
-    + (a.d ? '<details><summary class="al-t">'+ic+' '+esc(a.t)+'</summary><p class="al-d">'+esc(a.d)+'</p></details>' : '<p class="al-t">'+ic+' '+esc(a.t)+'</p>') + '</div>';
+    + (a.d ? '<details><summary class="al-t">'+icn+esc(a.t)+'</summary><p class="al-d">'+esc(a.d)+'</p></details>' : '<p class="al-t">'+icn+esc(a.t)+'</p>') + '</div>';
 }
 function alertasHTML(){
   const A=alertas(); if(!A.length) return "";
@@ -2803,13 +2867,13 @@ function vivoHTML(){
   const f=fdiario||today; const abrir = k => !obsEn(k,f);
   const od = (key, def) => ' data-vk="'+key+'"'+((vivoOpen[key]!==undefined ? vivoOpen[key] : def) ? ' open' : '');
   /* bancal */
-  out += '<div class="vv"><div class="vv-h"><b>🌱 Bancal</b><span class="vv-n">cover · día '+(dias(SIEMBRA_COVER)+1)+'</span></div>'
+  out += '<div class="vv"><div class="vv-h"><b>'+ic("brote")+'Bancal</b><span class="vv-n">cover · día '+(dias(SIEMBRA_COVER)+1)+'</span></div>'
     + '<div class="ocs">'+obsChip("trebol")+obsChip("dedo")+obsChip("olor")+obsChip("suelo")+'</div>'
     + '<details class="vivo-d"'+od("bancal", false)+'><summary>Anotar cómo lo ves</summary><div class="vivo-b">'+chipsHTML("trebol")+chipsHTML("dedo")+chipsHTML("suelo")+chipsHTML("olor")+'</div></details></div>';
   /* macetas cocinando */
   if (!tandas.t1){
     const d=dias(MACETAS_ARMADAS)+1;
-    out += '<div class="vv"><div class="vv-h"><b>🪴 Las 4 macetas</b><span class="vv-n">cocinando · día '+d+'</span></div>'
+    out += '<div class="vv"><div class="vv-h"><b>'+ic("maceta")+'Las 4 macetas</b><span class="vv-n">cocinando · día '+d+'</span></div>'
       + '<div class="ocs"><span class="oc '+(d>=10?'oc-ok':'oc-neu')+'">'+(d>=10?'listas para sembrar':'faltan '+(10-d)+' días')+'</span>'+obsChip("macetas")+obsChip("mhum")+'</div>'
       + '<details class="vivo-d"'+od("macetas", false)+'><summary>Anotar cómo están</summary><div class="vivo-b">'+chipsHTML("macetas")+chipsHTML("mhum")+'</div></details></div>';
   }
@@ -2824,14 +2888,14 @@ function vivoHTML(){
   });
   out += '</div>';
   const esp=TANDAS.filter(t=>!(tandas[t.id]||{}).f);
-  if (esp.length) out += '<div class="ocs" style="margin:2px 0 14px">'+esp.map(t=>'<span class="oc oc-na">⏳ '+esc(t.nombre.replace(" · autos",""))+' · '+esc(t.prev)+'</span>').join("")+'</div>';
+  if (esp.length) out += '<div class="ocs" style="margin:2px 0 14px">'+esp.map(t=>'<span class="oc oc-na">'+ic("espera")+esc(t.nombre.replace(" · autos",""))+' · '+esc(t.prev)+'</span>').join("")+'</div>';
   return out;
 }
 function tarjetaAcc(a){
   const cuando = a.due ? (a.st==="toca"&&a.temprano ? 'desde hoy, ideal el '+fechaDia(a.due) : (dias(a.due)>0 ? 'desde el '+fechaCorta(a.due)+' · hace '+dias(a.due)+' días' : 'hoy')) : 'cuando puedas';
   return '<div class="guia'+(a.st==="pendiente"?" guia-p":"")+'"><p class="guia-t">'+(a.st==="pendiente"?'<span class="st st-info">Pendiente</span>':'')+(a.otra?'<span class="st st-listo">Otra vez</span>':'')+(a.revisar?'<span class="st st-llega">¿Ya toca?</span>':'')+esc(a.n)+'</p>'
-    + '<div class="ocs"><span class="oc oc-neu">📅 '+esc(cuando)+'</span>'+(a.dur?'<span class="oc oc-neu">⏱ '+esc(a.dur)+'</span>':'')+(a.tipo==="compra"?'<span class="oc oc-neu">🛒 compra</span>':a.tipo==="casa"?'<span class="oc oc-neu">🏠 en casa</span>':'<span class="oc oc-neu">🌱 en la cama</span>')+'</div>'
-    + (climaAviso(a)?'<p class="guia-w" style="color:var(--iron);font-weight:600;margin:6px 0 8px">☔ '+esc(climaAviso(a))+'</p>':'')
+    + '<div class="ocs"><span class="oc oc-neu">'+ic("cal")+esc(cuando)+'</span>'+(a.dur?'<span class="oc oc-neu">'+ic("reloj")+esc(a.dur)+'</span>':'')+(a.tipo==="compra"?'<span class="oc oc-neu">'+ic("bolsa")+'compra</span>':a.tipo==="casa"?'<span class="oc oc-neu">'+ic("casa")+'en casa</span>':'<span class="oc oc-neu">'+ic("brote")+'en la cama</span>')+'</div>'
+    + (climaAviso(a)?'<p class="guia-w" style="color:var(--iron);font-weight:600;margin:6px 0 8px">'+ic("lluvia")+esc(climaAviso(a))+'</p>':'')
     + '<div class="accs"><button class="acc on" data-guia="'+a.id+'" type="button">'+(a.cond?'Ver si toca':'Empezar')+'</button>'+(a.st==="pendiente"?'':'<button class="acc" data-guia-luego="'+a.id+'" type="button">Más tarde</button>')+'</div></div>';
 }
 function ahoraHTML(){

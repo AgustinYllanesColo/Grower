@@ -116,13 +116,20 @@
       if (g.tipo === "suelo") return Math.max(0, mm - 1);
       return g.lluviaTapa ? 0 : mm * 0.1;            // una geotextil de 40 L junta ~0,1 L por mm
     };
-    /* pasado: desde el día siguiente al ancla hasta ayer */
+    /* pasado: desde el día siguiente al ancla hasta ayer (queda como historia) */
+    const hist = [];
     for (let f = suma(ancla, 1); f < hoy; f = suma(f, 1)) {
-      const c = dias[f]; def = Math.max(0, def + perdida(c, f) - entra(c, f, false));
+      const c = dias[f]; const llu = entra(c, f, false);
+      def = Math.max(0, def + perdida(c, f) - llu);
       if (riegos.has(f)) def = 0;
       if (dedos[f]) def = g.cap * ({ hum: 0.2, apenas: 0.5, seca: 0.85, secas: 0.6 }[dedos[f]] || 0.3);
       def = Math.min(def, g.cap);
+      hist.push({ d: f, pct: Math.round(def / g.cap * 100), llu: r1(llu), regado: riegos.has(f) });
     }
+    const ultR = [...riegos].filter(d => d <= hoy).sort().pop() || null;
+    const lluviaDesde = ultR ? r1(hist.filter(h => h.d > ultR).reduce((a, h) => a + (dias[h.d] ? (dias[h.d].mm || 0) : (lluAnot[h.d] || 0)), 0)) : null;
+    const pico = hist.reduce((m, h) => h.pct > (m ? m.pct : -1) ? h : m, null);
+    const resumen = { ultRiego: ultR, diasSin: ultR ? entre(ultR, hoy) : null, lluvia: lluviaDesde, pico: pico ? pico.pct : null, picoD: pico ? pico.d : null };
     /* hoy y lo que viene: decidir */
     const out = [], hoyRegado = riegos.has(hoy);
     if (hoyRegado) def = 0;
@@ -144,7 +151,7 @@
       out.push({ d: f, def: r1(def), pct: Math.round(frac * 100), est: est, txt: txt, et: r1(e), llu: r1(llu), dosis: dosis(g, def) });
       def = (est === "regar" || est === "urgente") ? e * 0.5 : fin;
     }
-    return { dias: out, ancla: ancla, sinDato: sinDato, orden: orden(g, out) };
+    return { dias: out, hist: hist, resumen: resumen, ancla: ancla, sinDato: sinDato, orden: orden(g, out) };
   }
   function dosis(g, def) {
     if (g.tipo === "suelo" && g.cap <= 8) return "riego suave: 8-10 mm = 16-20 L con regadera o a mano, sin lavar la semilla";
