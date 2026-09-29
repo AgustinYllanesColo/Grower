@@ -456,6 +456,55 @@ details.grupo>summary{font-size:17px}
 .vpd-medio{background:var(--mark);color:var(--ink)}
 .vpd-alto{background:var(--iron-soft);color:var(--iron)}
 .vpd-bajo{background:var(--sky-soft);color:var(--sky)}
+.cr{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:14px 14px 10px;margin:0 0 16px;box-shadow:var(--shadow-lg)}
+.cr-top{display:flex;align-items:baseline;justify-content:space-between;gap:8px;margin:0 0 10px}
+.cr-t{font-family:Archivo,sans-serif;font-size:18px;letter-spacing:-.02em;margin:0}
+.cr-f{display:block;font-family:"JetBrains Mono",monospace;font-size:10px;color:var(--muted);font-weight:400}
+.cr-top .cr-f{display:inline}
+.ords{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:7px;margin:0 0 9px}
+.ord{display:flex;flex-direction:column;gap:3px;text-align:left;border:1px solid var(--line);border-left:4px solid var(--line-strong);border-radius:4px;background:var(--ground);padding:9px 10px;cursor:pointer;font-family:Archivo,sans-serif;color:var(--ink)}
+.ord b{font-size:15.5px;letter-spacing:-.01em;line-height:1.2}
+.ord-g{font-size:11px;color:var(--muted);font-weight:600;text-transform:uppercase;letter-spacing:.04em}
+.ord.sel{outline:2px solid var(--ink);outline-offset:-1px}
+.ord-urg{border-left-color:#B4521F;background:color-mix(in srgb,#B4521F 9%,var(--surface))}
+.ord-avi{border-left-color:#C99A06;background:color-mix(in srgb,#E8B80E 12%,var(--surface))}
+.ord-info{border-left-color:var(--sky);background:var(--sky-soft)}
+.ord-ok{border-left-color:var(--leaf)}
+.ord-det{border-radius:4px;padding:9px 11px;margin:0 0 8px;border-left:4px solid var(--line-strong);background:var(--surface-2)}
+.ord-det.ord-urg{border-left-color:#B4521F}.ord-det.ord-avi{border-left-color:#C99A06}.ord-det.ord-info{border-left-color:var(--sky)}.ord-det.ord-ok{border-left-color:var(--leaf)}
+.ord-dt{font-family:Archivo,sans-serif;font-weight:700;font-size:14.5px;margin:0 0 3px}
+.ord-dd{font-size:13.5px;margin:0 0 3px;color:var(--ink)}
+.rg-c{display:inline-block;font-family:Archivo,sans-serif;font-size:11.5px;font-weight:700;border-radius:99px;padding:2px 8px;white-space:nowrap}
+.rg-ok{background:var(--leaf-soft);color:var(--leaf)}
+.rg-pronto{background:var(--mark);color:var(--ink)}
+.rg-regar{background:#F6D38A;color:#5A3B00}
+.rg-urg{background:#B4521F;color:#fff}
+.rg-llu{background:var(--sky-soft);color:var(--sky)}
+.rg-bar{display:block;height:4px;width:70px;background:var(--surface-3);border-radius:99px;overflow:hidden;margin-top:4px}
+.rg-bar i{display:block;height:100%;background:var(--sky)}
+.cr-more{margin-top:6px}
+.cr-more>summary{font-family:Archivo,sans-serif;font-size:12.5px;font-weight:600;color:var(--muted);cursor:pointer;padding:6px 0;list-style:none}
+.cr-more>summary::-webkit-details-marker{display:none}
+.cr-more p{font-size:13.5px;margin:0 0 8px}
+.vivos{display:grid;grid-template-columns:repeat(auto-fit,minmax(260px,1fr));gap:9px;margin:0 0 10px}
+.vv{background:var(--surface);border:1px solid var(--line);border-left:4px solid var(--leaf);border-radius:4px;padding:11px 12px;box-shadow:var(--shadow)}
+.vv-al{border-left-color:#B4521F}
+.vv-h{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:0 0 7px}
+.vv-h b{font-family:Archivo,sans-serif;font-size:16px}
+.vv-n{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted)}
+.ocs{display:flex;flex-wrap:wrap;gap:5px;margin:0 0 6px}
+.oc{display:inline-flex;align-items:baseline;gap:4px;font-family:Archivo,sans-serif;font-size:12.5px;font-weight:600;border-radius:99px;padding:4px 10px;background:var(--surface-2);color:var(--ink)}
+.oc small{font-weight:400;font-size:10.5px;color:var(--muted)}
+.oc-ok{background:var(--leaf-soft);color:var(--leaf)}
+.oc-mal{background:var(--iron-soft);color:var(--iron)}
+.oc-neu{background:var(--surface-2)}
+.oc-na{background:none;border:1px dashed var(--line-strong);color:var(--muted);font-weight:500}
+.oc-et{background:var(--ink);color:var(--ground)}
+.oc-viejo{opacity:.65}
+.al details>summary{list-style:none;cursor:pointer}
+.al details>summary::-webkit-details-marker{display:none}
+.al details[open] .al-d{margin-top:5px}
+.al-src{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--sky);margin:0 0 5px}
 .regla b{font-family:Archivo,sans-serif;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--leaf);display:block;margin-bottom:4px}
 </style>
 
@@ -730,7 +779,7 @@ details.grupo>summary{font-size:17px}
       </div>
     </details><details class="ficha">
       <summary>Secado en el altillo <span class="hint">decidido: se seca ahí. Qué medir, qué números buscar y cómo corregirlo</span></summary>
-      <div class="ficha-body"><div class="regla"><b>La regla (decidido el 29/9)</b>Se seca en el altillo. Por eso se mide: octubre para tener la base, noviembre en un día de calor, y la tanda 1 es el ensayo de verdad. El número que manda es el de ADENTRO de la caja, no el del cuarto: objetivo 16-22 °C y 55-65 %, o sea <b>VPD 0,6-0,9 kPa</b>, secado de 10 a 14 días. Humidificador solo hasta 26 °C y en volumen chico. Cajas en el piso (el calor se junta arriba), ventilar de noche y cerrar de día.</div>
+      <div class="ficha-body"><div class="regla"><b>La regla (actualizada el 29/9)</b>Se seca en el altillo, COLGADO: plantas enteras o ramas largas boca abajo en una soga, separadas, sin tocarse. Se mide en octubre y en noviembre. Objetivo alrededor de las flores: 16-22 °C y 55-65 %, o sea <b>VPD 0,6-0,9 kPa</b>, secado de 10 a 14 días. El calor no se arregla con humedad: se arregla eligiendo el día de corte y enfriando el altillo de noche. En abril el problema se da vuelta: sobra humedad. Cajas en el piso (el calor se junta arriba), ventilar de noche y cerrar de día.</div>
         <h4>Por qué el altillo es difícil (la cuenta, para que sepas contra qué peleás)</h4>
         <p>En diciembre la media de Buenos Aires es 23 °C con 63 % de humedad. Ese aire calentado a 28 °C en un altillo queda en 47 % (VPD 2,0) y a 33 °C en 35 % (VPD 3,3). Lo ideal para secar es VPD 0,8-1,0. Secar al doble o al triple de velocidad deja el cogollo seco por fuera y húmedo por dentro, con olor a pasto (la clorofila no llega a degradarse) y sin los terpenos livianos. No es opinión: es la física del aire. Lo que sí podés hacer es que el cogollo no sienta el aire del altillo.</p>
         <h4>Qué medir y cómo (el termohigrómetro)</h4>
@@ -745,13 +794,23 @@ details.grupo>summary{font-size:17px}
           <tr><td>1 · autos</td><td class="num">fin de dic</td><td class="num">23 ° · 63 %</td><td>Calor: secado demasiado rápido. Cajas sí o sí.</td></tr>
           <tr><td>2 · Doble Tangie</td><td class="num">principios de feb</td><td class="num">24 ° · 68 %</td><td>El peor: calor y más humedad. Lo que aprendas en diciembre se aplica acá.</td></tr>
           <tr><td>Toxi</td><td class="num">1ª quincena abr</td><td class="num">18 ° · 74 %</td><td>Al revés: el altillo templado es una ventaja. El riesgo es humedad: colgado o cajas abiertas, nunca cerradas.</td></tr></table></div>
+        <h4>Colgado en soga: cómo hacerlo bien</h4>
+        <p>Planta entera o ramas de 40-60 cm boca abajo, con las hojas grandes puestas (frenan el secado y hacen sombra al cogollo). Separación: que ninguna rama toque a la de al lado ni a la pared, un palmo entre plantas. La soga a la altura más baja que puedas: el aire caliente se junta arriba y cerca de la chapa hay 5 °C más que a un metro del piso. Termohigrómetro colgado entre las plantas, a la altura de los cogollos. Ventilador contra la pared, nunca a las flores. Si en tres días los cogollos de afuera ya crujen: secado demasiado rápido, hay que bajar el VPD (ver abajo).</p>
         <h4>El número en kPa para el secado</h4>
         <p><b>Secado: VPD 0,6-0,9 kPa adentro de la caja</b> (18 °C y 60 % = 0,83; 20 °C y 62 % = 0,89; 16 °C y 60 % = 0,73). Por encima de 1,1 seca demasiado rápido; por debajo de 0,5, casi no seca y se arma moho. <b>Curado en frasco: no se mide en VPD, se mide en humedad: 58-62 %.</b> Usá la calculadora de la ficha del termohigrómetro con lo que leas adentro de la caja.</p>
+        <h4>Calor sin aire acondicionado: lo que sí sirve, en orden</h4>
+        <p><b>1. Elegir el día de corte con el clima.</b> Es la herramienta más potente y es gratis. Los primeros 3-4 días del secado son los que más aroma se llevan, porque es cuando el cogollo tiene más agua y más superficie húmeda. Cortá cuando la tabla de «Clima y riego» muestre una tanda de días frescos por delante (después de un frente frío o de una lluvia), no al empezar una ola de calor. Con tricomas en ventana tenés margen de unos días: usalos.</p>
+        <p><b>2. Enfriar el altillo de noche y encerrarlo de día.</b> Ventana abierta y un ventilador SACANDO aire caliente hacia afuera desde el atardecer hasta la mañana; a las 9, todo cerrado. El altillo arranca el día a la temperatura de la noche y tarda en calentarse.</p>
+        <p><b>3. Cortar el sol de la chapa.</b> Lo que calienta un altillo es la radiación del techo. Una membrana aislante con aluminio (la de espuma con cara de aluminio que venden en corralones) engrapada debajo de la chapa, o al menos como un «techo» sobre la zona de la soga, baja varios grados en la tarde. Es lo más barato que cambia la temperatura de verdad; cuánto baja, lo vas a ver con el termohigrómetro.</p>
+        <p><b>4. Soga abajo, plantas enteras.</b> Ya dicho: altura mínima y masa grande. Una planta entera colgada seca más lento y más parejo que ramas sueltas.</p>
+        <p><b>5. Los primeros días, abajo.</b> Si la semana del corte viene caliente, los primeros 3-4 días la soga va en el lugar más fresco de la planta baja y después sube al altillo. Es un parche de días.</p>
+        <p><b>6. Qué NO:</b> balde de agua o trapos mojados (suben la humedad y casi no enfrían), climatizador evaporativo (con 60 % de humedad de Buenos Aires enfría 2-3 °C y te deja el cuarto a 80 %: moho), y ventilador a las flores.</p>
+        <p><b>Y en abril se resuelve solo el calor</b>: la media es 18 °C. El secado de las Toxi es el más fácil de la temporada en temperatura; su riesgo es la humedad (74 % de media): ventilación constante y nada de encerrarlas.</p>
         <h4>¿Y un humidificador?</h4>
         <p>Arregla la mitad del problema. Subir la humedad baja el VPD, así que el secado se hace más lento: bien. Pero no baja la temperatura, y los terpenos se evaporan por temperatura, no por VPD. Mirá cuánta humedad hace falta para llegar a 0,9 kPa: a 24 °C, 70 %; a 26 °C, 73 %; a 30 °C, 79 %; a 33 °C, 82 %. Aire a 30 °C con 80 % de humedad es el clima ideal del moho, y la pérdida de aroma sigue igual.</p>
-        <p>Veredicto: <b>útil hasta 26 °C, peligroso arriba de 28</b>. Si lo usás: (1) adentro de un volumen chico y cerrado (una caja grande de cartón o una carpa, no el altillo entero), (2) con el termohigrómetro adentro y un temporizador o higrostato que lo corte al pasar 65 %, (3) con agua destilada o de lluvia filtrada: los ultrasónicos con agua de canilla tiran un polvo blanco de sales que se pega en la flor, (4) nunca soplando sobre los cogollos. Arriba de 28 °C, primero se baja la temperatura (piso, ventilar de noche, sombra en la chapa), después se piensa en humedad.</p>
+        <p>Veredicto: <b>útil hasta 26 °C, peligroso arriba de 28</b>. Si lo usás: (1) adentro de un volumen chico y cerrado (una caja grande de cartón o una carpa, no el altillo entero), (2) con el termohigrómetro adentro y un temporizador o higrostato que lo corte al pasar 65 %, (3) con agua destilada o de lluvia filtrada: los ultrasónicos con agua de canilla tiran un polvo blanco de sales que se pega en la flor, (4) nunca soplando sobre los cogollos. Arriba de 28 °C, primero se baja la temperatura (lo de arriba), después se piensa en humedad. Con plantas colgadas en un altillo abierto, un humidificador chico casi no mueve la humedad del ambiente: sirve solo si armás un recinto (una carpa o un «cuarto» de nylon alrededor de la soga).</p>
         <h4>El ensayo antes de que importe</h4>
-        <p>En noviembre, con las hojas y ramitas que saques del LST o de la limpieza, armá una caja en el piso del altillo con el termohigrómetro adentro y mirá cuántos días tarda en secar el tallito. Es gratis y te dice si tu protocolo funciona antes de meter cogollos.</p>
+        <p>En noviembre, con las hojas y ramitas que saques del LST o de la limpieza, colgalas en la soga del altillo con el termohigrómetro al lado y mirá cuántos días tarda en secar el tallito. Es gratis y te dice si tu protocolo funciona antes de meter cogollos.</p>
         <h4>Curado</h4>
         <p>Un higrómetro chico por frasco (los mini digitales son baratos). Frasco a 3/4, 58-62 %. Si pasa 65 %, abrir un rato. Los frascos NO van al altillo en verano: al placard más fresco de la casa.</p>
       </div>
@@ -1544,6 +1603,7 @@ Y por lo tanto: <b>para los gatos, usá las ramas finas cruzadas, no la borra</b
   <footer><p class="sync" id="sync">Guardando local</p></footer>
 </div>
 
+<script src="riego.js"></script>
 <script>
 /* ============ estado ============ */
 let cosecha = {}, extr = [], avisosDoc = null, marks = {}, plantas = {}, tandas = {}, diario = [], fotos = [], vistas = {}, respuestas = [], borrados = {}, gastos = [], visitas = [], eventos = {}, inv = {}, obs = [], guia = null, fdiario = null, assetsNS = null, dbDoc = null, saveTimer = null, tab = "hoy", diagAbierto = false, tipAnotar = "", tipObs = {};
@@ -1573,7 +1633,7 @@ function obsUlt(k){ let m=null; obs.forEach(o=>{ if(o.k===k && (!m || o.d>m.d ||
 function obsSet(k,v){ const d=fdiario||today; obs=obs.filter(o=>!(o.k===k&&o.d===d)); obs.push({k:k,v:v,d:d,ts:Date.now()}); }
 function obsEn(k,d){ return obs.find(o=>o.k===k&&o.d===d); }
 function ultima(acc){ const e = diario.filter(x=>x.a===acc).sort((a,b)=>a.d<b.d?1:-1)[0]; return e ? e.d : null; }
-function ultimaPresencia(){ let m=null; diario.forEach(x=>{ if(x.a in LLUV) return; if(!m||x.d>m) m=x.d; }); obs.forEach(x=>{ if(!m||x.d>m) m=x.d; }); Object.keys(eventos).forEach(k=>{ const e=eventos[k]; if(e&&e.d&&e.estado!=="descartada"&&(!m||e.d>m)) m=e.d; }); return m; }
+function ultimaPresencia(){ let m=null; diario.forEach(x=>{ if(x.a in LLUV) return; if(!m||x.d>m) m=x.d; }); obs.forEach(x=>{ if(!m||x.d>m) m=x.d; }); Object.keys(eventos).forEach(k=>{ const e=eventos[k]; if(e&&e.d&&e.estado==="hecho"&&(!m||e.d>m)) m=e.d; }); return m; }
 
 /* ============ etapas de la temporada (mapa, no lista) ============ */
 function fechaGermT1(){ return (tandas.t1||{}).f || "2026-10-04"; }
@@ -1896,7 +1956,7 @@ function estadoTanda(tanda){
     pct: enFlor ? Math.min(100,Math.round(df/65*100)) : 0};
 }
 
-const ACC_BTN = [["riego","Regué"],["melaza","Melaza"],["nota","Nota…"]];
+const ACC_BTN = [["riego","Regué todo"],["riego_b","Regué bancal"],["riego_m","Regué macetas"],["melaza","Melaza"],["nota","Nota…"]];
 const ACC_OTRAS = [["extracto","Extracto de humus"],["top","Top dressing"],["mulch","Mulch"],
   ["fermento","Fermento"],["foliar","Foliar"],["lst","LST"],["bicho","Vi un bicho"],["poda","Deshojé"],["secado","Secado: T y HR"],["lluvia_poca","Llovizna (menos de 5 mm)"],["lluvia","Llovió"],["lluvia_fuerte","Tormenta / lluvia fuerte"]];
 const ACC_MAP = Object.fromEntries(ACC_BTN.concat(ACC_OTRAS));
@@ -2197,7 +2257,7 @@ function acciones(){
       riesgo:"Sin mirar adentro, la botrytis se ve cuando ya se comió el cogollo."});
     A.push({id:"secprep_"+tid, venc:21, n:"Dejar listo el secado · "+nm, tipo:"casa", desde:sumarDias(g,60), due:sumarDias(g,63),
       why:"Semana 10. Desde acá solo agua. El lugar se prepara ahora, no el día que cortaste.",
-      pasos:["Termohigrómetro 3 días en el piso del altillo: anotar máx y mín","Dos cajas de cartón grandes, limpias, con agujeros chicos arriba y abajo, en el piso","Ventilador apuntando a la pared, nunca a las cajas","Si la máxima pasa 28 °C: ventana abierta de noche y cerrada de día, sombra en la ventana, cajas dobles (un balde de agua NO alcanza: ver «Secado en el altillo»)","Lupa o clip macro a mano para los tricomas"], dur:"30 min",
+      pasos:["Termohigrómetro 3 días a la altura de la soga: anotar máx y mín","Soga tendida lo más baja posible, con lugar para que nada se toque","Ventilador apuntando a la pared, nunca a las plantas","Si la máxima pasa 28 °C: ventilar de noche y cerrar de día, membrana aislante o sombra bajo la chapa (un balde de agua NO sirve: ver «Secado en el altillo»)","Mirar la tabla de clima y elegir el día de corte antes de días frescos","Lupa o clip macro a mano para los tricomas"], dur:"30 min",
       riesgo:"Improvisar el secado el día del corte es exactamente lo que pasó el año pasado."});
     A.push({id:"cos_"+tid, n:"Cosechar · "+nm, tipo:"cama", desde:sumarDias(g,80), due:sumarDias(g,84), fecha:"¿Qué día cortaste?",
       cond:{q:"Con lupa, cáliz y hojitas de azúcar: ¿70-90 % lechosos y 5-10 % ámbar?", si:"Sí", no:"Todavía transparentes"},
@@ -2205,7 +2265,7 @@ function acciones(){
       pasos:COSECHA.slice(0,5).map(k=>k[1]), al:{cosecha:tid},
       riesgo:"Pasada de largo en un cogollo denso con 65 % de humedad es podredumbre."});
     A.push({id:"sec_"+tid, n:"Secado y curado · "+nm, tipo:"casa", due:evd("cos_"+tid)||sumarDias(g,84), req:["cos_"+tid], fecha:"¿Qué día lo pasaste a frascos?",
-      why:"En el altillo, en cajas en el piso. Objetivo ADENTRO de la caja: 16-22 °C y 55-65 %. En verano no vas a tener 18: lo compensás con planta entera, caja cerrada, ventilar de noche y revisión diaria. Anotá T y HR en cada visita con «Secado» en Anotar.",
+      why:"En el altillo, colgado en la soga. Objetivo alrededor de las flores: 16-22 °C y 55-65 % (VPD 0,6-0,9). En verano no vas a tener 18: lo compensás eligiendo el día de corte, planta entera, ventilar de noche y revisión diaria. Anotá T y HR en cada visita con «Secado» en Anotar.",
       pasos:COSECHA.slice(5).map(k=>k[1])});
   });
   /* --- compras: una semana antes de usarlas, nunca el mismo día --- */
@@ -2272,7 +2332,7 @@ function acciones(){
     pasos:["Termohigrómetro en el PISO del altillo, donde van a ir las cajas","Tres días seguidos: anotar temperatura y humedad a las 8, a las 15 y a las 22 (Nota: «altillo 15 h: 26 ° 48 %»)","Anotar ese mismo día la máxima de afuera (la bitácora la tiene en el clima): la diferencia altillo − afuera es lo que te sirve para predecir diciembre","Mirar si la ventana/chapa recibe sol directo a la tarde"], dur:"5 min × 3 días"});
   A.push({id:"medir_secado", venc:45, n:"Medir el altillo con calor y hacer el ensayo de secado", tipo:"casa", desde:"2026-11-08", due:"2026-11-22",
     why:"La primera semana de más de 28 °C afuera. Con la diferencia que mediste en octubre sabés qué esperar; ahora se confirma y se prueba el protocolo con material que no importa.",
-    pasos:["Tres días: termohigrómetro en el piso a las 8, 15 y 22","Ensayo: hojas y ramitas del LST en una caja de cartón en el piso, termohigrómetro ADENTRO de la caja","Contar los días hasta que el tallito se parte: 10-14 = protocolo bien; 5 o menos = cerrar más, cajas dobles, ventilar de noche","Anotar la conclusión en Nota: «secado: caja simple / doble / ventilar de noche…»"], dur:"10 min"});
+    pasos:["Tres días: termohigrómetro en el piso a las 8, 15 y 22","Ensayo: hojas y ramitas del LST colgadas en la soga, termohigrómetro al lado","Contar los días hasta que el tallito se parte: 10-14 = protocolo bien; 5 o menos = demasiado calor: membrana bajo la chapa y ventilar de noche","Anotar la conclusión en Nota: «secado: …»"], dur:"10 min"});
   /* --- en casa, sin fecha: se sugieren en orden de cadena --- */
   A.push({id:"imo1", n:"Enterrar el tupper de arroz (IMO, paso 1)", tipo:"casa", mk:"s206", para:"2026-10-04", paraTxt:"cuanto antes: la cadena tarda 2 semanas y el primer riego con IMO va con la tanda 1 sembrada y las Toxi al bancal (reemplaza el Kashi que se terminó)", why:"Biología de tu propio terreno, gratis. Es el reemplazo del Kashi que se terminó.",
     pasos:["Arroz cocido semiduro en un tupper, tapa de tela atada","Debajo del tronco cortado al lado de la cama, 3-5 cm bajo hojarasca vieja, cubierto con una teja","Marcar el lugar y anotar la fecha"], dur:"15 min"});
@@ -2321,8 +2381,16 @@ function acciones(){
   A.push({id:"c_balanza", n:"Comprar una balanza de joyería de 0,01 g", tipo:"compra", desde:"2026-09-29", due:"2026-10-20", venc:120,
     why:"Para las extracciones: un rosin de 0,5 g de kief da 0,1-0,25 g. La balanza de cocina (de a 1 g) no lo ve: sin 0,01 g no hay rendimiento, y sin rendimiento el experimento no enseña nada. Mercado Libre, «balanza digital 0,01 g 100 g», es barata.",
     pasos:["Balanza digital de bolsillo, 0,01 g de precisión, hasta 100-200 g","Si trae pesa de calibración, mejor"], dur:"10 min"});
+  A.push({id:"c_rosin", n:"Conseguir el papel para el rosin (o una lámina de teflón)", tipo:"compra", desde:"2026-09-29", due:"2026-10-15", venc:120,
+    why:"El papel manteca común no sirve: no tiene silicona, se pega y arruina la muestra. Sirve papel para hornear SILICONADO (la caja tiene que decir «siliconado» o «antiadherente», supermercado o casa de repostería) o, mejor, una lámina de teflón (PTFE) de las de prensas de sublimación: reutilizable, no se pega nada, Mercado Libre. En growshops también hay «papel para rosin».",
+    pasos:["Opción barata: papel para hornear siliconado (que lo diga en la caja)","Opción que dura: lámina de teflón PTFE 30×30 cm (ML: «lámina teflón sublimación»)","Una tarjeta vieja o espátula chica de metal para juntar"], dur:"20 min"});
+  A.push({id:"c_tamiz", n:"Bandeja de trimming con malla para juntar el kief", tipo:"compra", desde:"2026-09-29", due:"2026-12-01", venc:60,
+    why:"Lo que se te cae al manicurar no es polen: es kief (tricomas, la resina). El polen es de los machos y te llenaría de semillas. Para no perderlo nunca más: manicurar SIEMPRE sobre una bandeja de doble fondo con malla de 120-150 µm. Los tricomas pasan la malla y quedan en el fondo; las hojitas quedan arriba. Hacé falta antes de la cosecha de la tanda 1 (fin de diciembre).",
+    pasos:["Growshop o Mercado Libre: «bandeja trimming con malla» o «tamiz de polen 120 µm» (el nombre comercial usa «polen», es lo mismo)","Malla de 120-150 µm: más fina junta menos; más gruesa deja pasar basura verde","Una tarjeta y un pincel para juntar el fondo","Trucazo: el recorte congelado 1 hora antes de tamizar suelta mucho más"], dur:"20 min",
+    riesgo:"Sin bandeja, la resina que se desprende al manicurar termina en la mesa y en las manos: es lo más concentrado de la planta."});
   A.push({id:"exp_rosin1", n:"Experimento 1 · rosin de kief con la planchita", tipo:"casa", fecha:"¿Qué día lo hiciste?",
-    cond:{q:"¿Tenés la planchita, papel de horno SILICONADO, kief del picador y la balanza de 0,01 g?", si:"Sí, todo", no:"Me falta algo"},
+    req:["c_rosin","c_balanza"],
+    cond:{q:"¿Tenés la planchita, el papel siliconado o teflón, kief del picador y la balanza de 0,01 g?", si:"Sí, todo", no:"Me falta algo"},
     why:"Primer experimento guiado. Kief primero porque es casi pura resina: rinde mucho, se prensa a menos temperatura y enseña la técnica sin gastar flor. Lo que buscás aprender: cuánto calienta tu planchita y cuántos segundos aguanta tu material antes de oscurecerse. Anotalo todo en Plantas → Postcosecha: extracciones.",
     pasos:["Probar la planchita: si tiene regulación, al mínimo. Si no: un pedacito de papel de horno 10 s adentro; si amarillea o se oscurece, calienta de más (más de 200 °C): vas a usar papel doble y prensadas cortas","Pesar 0,3-0,5 g de kief en la balanza de 0,01 g y anotar","Sobrecito: papel de horno doblado varias veces alrededor del kief, bien cerrado (sin bolsa filtro sale con algo de polvo vegetal; para empezar está bien)","Ese sobrecito adentro de otro papel de horno doblado al medio","Planchita caliente, sobre una mesa firme: prensar con TODA la fuerza (tu peso encima con un libro o una tabla)","Contar: cuando se escucha el chisporroteo, 2-3 segundos más y soltar. Primera prueba: 4 s en total","Abrir: el aceite queda alrededor del sobrecito. Papel 5 minutos a la heladera y raspar con una tarjeta o un clip","Pesar el rosin. Rendimiento = rosin ÷ kief × 100. Kief bueno: 40-70 %","Anotar en el registro: temperatura (mínimo/fijo), segundos, rendimiento, color (dorado claro = bien; ámbar oscuro = calor o tiempo de más)","Repetir con otra porción cambiando UNA sola cosa (segundos o papel doble) y comparar","Planchita desenchufada y sobre algo que no se queme al terminar"],
     riesgo:"Papel manteca común (no siliconado) se pega y arruina la muestra; papel aluminio solo, no. La planchita a más de 200 °C quema terpenos: el aceite sale oscuro y sabe a quemado.", dur:"30 min"});
@@ -2398,29 +2466,53 @@ function etapaVPD(){
 }
 function vpdDe(c){ if(c.vpd!=null) return {v:c.vpd, aprox:false}; if(c.tmax!=null&&c.hrmin!=null) return {v:vpdCalc(c.tmax,c.hrmin), aprox:true}; return null; }
 function fk(x){ return x.toFixed(1).replace(".",","); }
+let riegoSel = null; try{ riegoSel = localStorage.getItem("bitacora-rg"); }catch(e){}
+function planRiego(){
+  if (typeof Riego==="undefined") return null;
+  try{ return Riego.plan({hoy:today, flor:florFoto(), tandas:tandas, eventos:eventos, obs:obs, diario:diario, clima:CLIMA.dias}); }catch(e){ return null; }
+}
+const CIELO = c => c.mm>=10?"⛈️":c.mm>=2?"🌧️":(c.prob!=null&&c.prob>=50)?"🌦️":(c.hrmin!=null&&c.hrmin>=75)?"☁️":"☀️";
+const RG_CHIP = {ok:["✓ bien","rg-ok"], pronto:["◔ aguanta","rg-pronto"], regar:["💧 regar","rg-regar"], urgente:["💧 regar ya","rg-urg"], lluvia:["☔ no regar","rg-llu"], saturado:["🌊 sobra agua","rg-llu"], regado:["✓ regado","rg-ok"]};
+const NIVEL_CL = {urg:"ord-urg", avi:"ord-avi", info:"ord-info", ok:"ord-ok"};
 function climaTablaHTML(){
   if(!CLIMA.dias.length) return "";
-  const et=etapaVPD(), rg=et?VPD_RANGO[et]:null;
-  const P=CLIMA.dias.filter(c=>c.d>=sumarDias(today,-2)).slice(0,8);
-  const chip=(v,noche)=>{ if(v==null) return '<span class="vpd-c">—</span>';
-    if(noche) return '<span class="vpd-c'+(v<0.15?' vpd-bajo':'')+'">'+fk(v)+'</span>';
+  const P = planRiego();
+  if(!P) return '<div class="cr"><h2 class="cr-t">Clima y riego</h2><p class="gas-mes">No se pudo cargar el motor de riego. Recargá la página.</p></div>';
+  let g = P.find(x=>x.id===riegoSel) || P.find(x=>x.orden&&(x.orden.nivel==="urg"||x.orden.nivel==="avi")) || P[0];
+  const rg = g.rango, pdia = {}; g.dias.forEach(x=>{ pdia[x.d]=x; });
+  const ords = P.map(x=>{ const o=x.orden||{nivel:"ok",t:"—",d:""};
+    return '<button type="button" class="ord '+NIVEL_CL[o.nivel]+(x.id===g.id?' sel':'')+'" data-rg="'+x.id+'"><span class="ord-g">'+esc(x.nombre)+' · '+esc(x.txt)+'</span><b>'+esc(o.t)+'</b></button>'; }).join("");
+  const vchip = (v,noche) => { if(v==null) return '<span class="vpd-c">—</span>';
+    if(noche) return (v<0.15 && /flor/.test(g.etapa))?'<span class="vpd-c vpd-bajo" title="noche saturada: rocío">🌫</span>':'';
     const cl = !rg ? '' : v<rg[0] ? ' vpd-bajo' : v>rg[1]+0.4 ? ' vpd-alto' : v>rg[1] ? ' vpd-medio' : ' vpd-ok';
     return '<span class="vpd-c'+cl+'">'+fk(v)+'</span>'; };
-  const filas=P.map(c=>{ const vd=vpdDe(c);
-    const dd=new Date(c.d+"T12:00:00");
-    return '<tr'+(c.d===today?' class="vpd-hoy"':'')+(c.d<today?' class="vpd-pas"':'')+'><td>'+esc(DIA[dd.getDay()].slice(0,3)+' '+dd.getDate()+'/'+(dd.getMonth()+1))+(c.obs?'':'<span class="vivo-m">'+(c.d<today?' est.':'')+'</span>')+'</td>'
-      + '<td class="num">'+(c.tmax!=null?Math.round(c.tmin)+'-'+Math.round(c.tmax)+'°':'—')+'</td>'
-      + '<td class="num">'+(c.hrmin!=null?c.hrmin+(c.hrmax!=null?'-'+c.hrmax:'')+'%':'—')+'</td>'
-      + '<td class="num">'+(c.mm>=1?'☔ '+String(c.mm).replace(".",","):'—')+'</td>'
-      + '<td class="num">'+(vd?chip(vd.v,false)+(vd.aprox?'<span class="vivo-m">≈</span>':''):'—')+'</td>'
-      + '<td class="num">'+chip(c.vpdn!=null?c.vpdn:null,true)+'</td></tr>'; }).join("");
-  const leer = rg ? 'Etapa que manda hoy: <b>'+et+'</b> · VPD de día (de 9 a 18 h) ideal <b>'+fk(rg[0])+'-'+fk(rg[1])+' kPa</b>.' : 'Todavía no hay plantas: el VPD sirve para aprender a leerlo y para el cover. Desde la siembra se colorea contra el rango de la etapa.';
-  return '<details class="card" id="clima-card" open><summary>Clima y VPD<span class="cnt">'+(climaVigente()?'al '+esc(fechaCorta(CLIMA.dias[CLIMA.dias.length-1].d)):'vencido')+'</span></summary><div class="card-body">'
-    + '<div class="tablewrap"><table class="vpd-t"><tr><th>Día</th><th>°C</th><th>HR</th><th>mm</th><th>VPD</th><th>noche</th></tr>'+filas+'</table></div>'
-    + '<p class="gas-mes">'+leer+' <span class="vpd-c vpd-ok">en rango</span> <span class="vpd-c vpd-medio">algo alto</span> <span class="vpd-c vpd-alto">estrés</span> <span class="vpd-c vpd-bajo">bajo / rocío</span></p>'
-    + '<p class="gas-mes">VPD (déficit de presión de vapor, en kPa) = cuánto «tira» el aire del agua de la hoja. Depende de la temperatura Y la humedad juntas: 25 °C con 80 % tira poco (0,6); 25 °C con 40 % tira mucho (1,9). De día se lee contra la etapa; de noche, cerca de 0 es rocío adentro del cogollo. Es el VPD del aire: la hoja al sol está unos grados más caliente. Ficha: Saber → «El termohigrómetro: VPD».</p>'
-    + '<p class="gas-mes" style="margin:0">'+esc(CLIMA.fuente||"")+' · cargado el '+esc(fechaCorta(CLIMA.cargado))+'</p>'
-    + '</div></details>';
+  const D = CLIMA.dias.filter(c=>c.d>=sumarDias(today,-2)).slice(0,11);
+  const filas = D.map(c=>{ const dd=new Date(c.d+"T12:00:00"), p=pdia[c.d], pas=c.d<today, vd=vpdDe(c);
+    const agua = p ? '<span class="rg-bar"><i style="width:'+Math.max(0,100-p.pct)+'%"></i></span>' : '';
+    const chip = p ? '<span class="rg-c '+RG_CHIP[p.est][1]+'">'+RG_CHIP[p.est][0]+'</span>' : (pas?'<span class="vivo-m">'+(c.obs?'medido':'estimado')+'</span>':'');
+    return '<tr class="'+(c.d===today?'vpd-hoy':'')+(pas?' vpd-pas':'')+'">'
+      + '<td>'+(c.d===today?'<b>hoy</b>':esc(DIA[dd.getDay()].slice(0,3)))+'<span class="cr-f">'+dd.getDate()+'/'+(dd.getMonth()+1)+'</span></td>'
+      + '<td class="num">'+CIELO(c)+' '+(c.tmax!=null?Math.round(c.tmin)+'-'+Math.round(c.tmax)+'°':'')+'</td>'
+      + '<td class="num">'+(c.mm>=0.5?String(Math.round(c.mm*10)/10).replace(".",","):'0')+(c.prob!=null&&!pas?'<span class="cr-f">'+c.prob+'%</span>':'')+(c.conf==="baja"?'<span class="cr-f" title="las fuentes no coinciden">¿?</span>':'')+'</td>'
+      + '<td class="num">'+(vd?vchip(vd.v,false):'—')+vchip(c.vpdn,true)+'</td>'
+      + '<td>'+chip+agua+'</td></tr>'; }).join("");
+  const o = g.orden||{};
+  const hoyP = pdia[today];
+  return '<div class="cr" id="clima-card">'
+    + '<div class="cr-top"><h2 class="cr-t">Clima y riego</h2><span class="cr-f">'+(climaVigente()?'actualizado '+esc(fechaCorta(CLIMA.cargado)):'⚠ pronóstico vencido')+'</span></div>'
+    + '<div class="ords">'+ords+'</div>'
+    + '<div class="ord-det '+NIVEL_CL[o.nivel||"ok"]+'"><p class="ord-dt">'+esc(g.nombre)+': '+esc(o.t||"")+'</p><p class="ord-dd">'+esc(o.d||"")+'</p>'
+    +   (hoyP?'<p class="ord-dd">Agua usada hoy: <b>'+hoyP.pct+' %</b> de la reserva útil · se van ≈ '+String(hoyP.et).replace(".",",")+' '+(g.tipo==="suelo"?'mm':'L por maceta')+' por día'+(g.sinDato?' · <b>sin un riego o un dedo anotado: es una estimación gruesa</b>':'')+'</p>':'')
+    +   (g.rango?'<p class="ord-dd">VPD ideal para '+esc(g.etapa)+': <b>'+fk(g.rango[0])+'-'+fk(g.rango[1])+' kPa</b></p>':'')
+    +   (g.etapa==="plántula"?'<p class="ord-dd">Plántula: el centro se seca antes que la maceta. En cada visita, dedo a 3 cm; si sale seco, anillo de 300 ml alrededor del tallo aunque la tabla diga «bien».</p>':'')
+    + '</div>'
+    + '<div class="tablewrap"><table class="vpd-t"><tr><th>Día</th><th>Cielo</th><th>mm</th><th>VPD</th><th>'+esc(g.nombre.split(" ")[0])+'</th></tr>'+filas+'</table></div>'
+    + '<details class="cr-more"><summary>Cómo leer la tabla y de dónde salen los números</summary><div>'
+    +   '<p><b>Riego.</b> <span class="rg-c rg-ok">✓ bien</span> <span class="rg-c rg-pronto">◔ aguanta</span> <span class="rg-c rg-regar">💧 regar</span> <span class="rg-c rg-urg">💧 regar ya</span> <span class="rg-c rg-llu">☔ no regar</span>. La barra es el agua útil que le queda. Se riega cuando se usó la mitad. Cada día se va lo que pide el clima (ET0, método Hargreaves de la FAO, corregido por el VPD) multiplicado por lo que consume la etapa. Entra la lluvia: la medida entera, la pronosticada solo si es probable. En una maceta la lluvia casi no cuenta: 10 mm son 1 litro.</p>'
+    +   '<p><b>VPD</b> (kPa, de 9 a 18 h): <span class="vpd-c vpd-ok">en rango</span> <span class="vpd-c vpd-medio">algo alto</span> <span class="vpd-c vpd-alto">estrés</span> <span class="vpd-c vpd-bajo">bajo</span>, contra la etapa del grupo que elegiste arriba. 🌫 = noche saturada: rocío adentro del cogollo.</p>'
+    +   '<p><b>El dedo manda.</b> La tabla es un cálculo; el suelo es el dato. Si el dedo contradice la tabla, marcalo en «Lo vivo»: el cálculo arranca de nuevo desde lo que viste. Por eso anotar cada riego (bancal, macetas o todo) es lo que la hace confiable.</p>'
+    +   '<p><b>Fuentes.</b> '+esc(CLIMA.fuente||"")+' La probabilidad (%) sale de 31 corridas del modelo GFS; «¿?» marca los días en que las fuentes no coinciden. Un pronóstico nunca es seguro: por eso la tabla apuesta a la lluvia solo cuando es probable, y con semillas o plántulas nunca apuesta a la de mañana.</p>'
+    + '</div></details></div>';
 }
 function climaLinea(){
   if (!climaVigente()) return '<p class="vivo-l aviso">Pronóstico vencido (cargado el '+esc(fechaCorta(CLIMA.cargado))+'): pedime uno nuevo en el chat. Mientras, anotá la lluvia con los botones de Anotar.</p>';
@@ -2567,13 +2659,13 @@ function diagHTML(){
 }
 
 const COSECHA = [
-  ["k1","Tres días antes: el altillo listo","Cajas de cartón grandes y limpias en el PISO del altillo, ventilador apuntando a la pared, termohigrómetro adentro de una caja, sombra en la ventana si le da el sol. No se improvisa el día del corte: eso fue lo del año pasado."],
+  ["k1","Tres días antes: el altillo listo","Soga tendida lo más baja posible, separación calculada para que ninguna rama se toque, ventilador contra la pared, termohigrómetro colgado entre las plantas, sombra en la chapa y la ventana. Y mirá la tabla de clima: cortá antes de días frescos, no antes de una ola de calor."],
   ["k2","Últimos 7 a 10 días: sequía leve controlada","Que insinúe decaimiento a la tarde y se recupere de noche. Nunca marchitarla del todo. Concentra aroma y te deja menos agua para sacar después."],
   ["k3","El día del corte: temprano a la mañana","Antes de que pegue el sol. Los terpenos son volátiles y el calor del mediodía se lleva los más livianos, que son justo los cítricos de la Doble Tangie y la Pineapple Slush."],
   ["k4","Cortá la planta entera con tallo, no cogollo por cogollo","Más masa es secado más lento, y el secado lento es todo. Sacale solo las hojas grandes. Las hojitas de azúcar se dejan y se sacan después de seco."],
   ["k4b","Pesala apenas cortada","Balanza de cocina, sin las hojas grandes: peso HÚMEDO en Plantas → Cosecha y rendimiento. Sin ese número no sabés el % de secado ni si el altillo funcionó. El recorte chico va a una bolsa al freezer: es tu material de extracción."],
   ["k5","Colgada boca abajo, a oscuras, sin ventilador apuntándole","El aire tiene que renovar el cuarto, nunca soplar sobre la flor: eso seca el exterior y deja el interior húmedo, que es exactamente como se arma la podredumbre."],
-  ["k6","Todos los días: mirá, olé y anotá","Si huele a pasto cortado o a amoníaco, hay poca ventilación. Si en tres días ya cruje, está secando demasiado rápido: cerrá más la caja."],
+  ["k6","Todos los días: mirá, olé y anotá","Si huele a pasto cortado o a amoníaco, hay poca ventilación. Si en tres días ya cruje por fuera, está secando demasiado rápido: bajá la soga, ventilá solo de noche, y la próxima vez cortá antes de días frescos."],
   ["k7","Entre el día 10 y el 14: la prueba del tallito","Doblá un tallo fino. Si se dobla, falta. Si se parte con un chasquido seco, está. El cogollo por fuera tiene que estar seco al tacto y por dentro apenas flexible."],
   ["k8","Pesá y a frascos, llenos al 75 %","Peso SECO en Plantas → Cosecha antes de meterlo. Nunca hasta arriba: el aire de adentro es parte del curado. Higrómetro adentro si tenés."],
   ["k9","Primera semana: abrí 10 minutos por día","Se llama burpear. Sale la humedad que el cogollo devuelve desde adentro. Si el higrómetro pasa de 65 %, dejalo abierto más rato o sacá los cogollos un par de horas."],
@@ -2590,6 +2682,8 @@ function hayCosechaCerca(){
 }
 /* ============ cambios acordados en el chat (la bitácora es la fuente; esto es el rastro) ============ */
 const CAMBIOS = [
+  {d:"2026-09-29", t:"Clima y riego: la tabla ahora dice cuándo regar cada grupo (bancal, macetas de cada tanda, maceta de la 4ª Toxi) con un balance de agua día por día: ET0 (Hargreaves, FAO) corregida por VPD, coeficiente de cada etapa, lluvia pronosticada contada según su probabilidad y riegos anotados. Órdenes arriba («Regá hoy», «No riegues: llueve»), VPD coloreado contra la etapa del grupo elegido. Fuentes nuevas: MET Norway (ECMWF) + 31 corridas del GFS para la probabilidad + wttr.in para ráfagas. Anotar tiene «Regué todo / bancal / macetas»."},
+  {d:"2026-09-29", t:"«Lo vivo» en recuadros con chips (verde bien, naranja mal, punteado sin dato); alertas con el título a la vista y el detalle plegado. Secado: colgado en soga en el altillo; cómo pelear el calor sin aire acondicionado. Compras nuevas: papel siliconado o teflón para rosin y bandeja de tamizado de 120-150 µm (lo que se junta es kief, no polen)."},
   {d:"2026-09-29", t:"Clima y VPD: tabla nueva arriba de «Hoy» con temperatura, humedad, lluvia y VPD de día y de noche (kPa), coloreado contra el rango de la etapa que manda. La ronda automática lo calcula hora por hora y avisa VPD alto (estrés) y noches saturadas (rocío en el cogollo). Recordatorio nuevo: «hace N días que no registrás riego ni llovió fuerte». Notificaciones propias por la app ntfy."},
   {d:"2026-09-29", t:"Secado en kPa: 0,6-0,9 adentro de la caja; curado 58-62 % en el frasco. Humidificador: útil hasta 26 °C y en volumen chico; arriba de 28 °C primero se baja la temperatura. Año pasado cargado como línea de base: 600 g a 1 kg secos por planta, con botrytis. Extracciones: Experimento 1 (rosin de kief con planchita) y 2 (rosin de flor), y compra de balanza de 0,01 g."},
   {d:"2026-09-29", t:"Toxi: floración y corte corregidos. En Lanús la flor franca arranca ~1/2 (no el 15/1) y 60 días de banco son 60-70 afuera: corte estimado 1ª quincena de abril, no marzo. Hay una guía nueva «Marcar el arranque de la flor» y desde esa fecha se recalcula todo (corte, Bt, techito, polinización)."},
@@ -2645,8 +2739,8 @@ function cabeceraHTML(){
 function alertas(){
   const A=[]; const V=vivas();
   const r=riegoPlan();
-  if (r.atras>=1 && !r.hoy) A.push({n:r.atras>=3?"urg":"avi", id:"riego"+r.prox, t:"Te tocaba regar el "+fechaCorta(r.prox)+(r.ur?(r.lluvia?" (lo último fue la lluvia del ":" (último riego: ")+fechaCorta(r.ur)+")":""), d:"Cada "+r.cada+" días porque "+r.motivo+". Si regaste y no lo anotaste, tocá «Regué»."});
-  if (r.hoy) A.push({n:"avi", id:"riegohoy"+today, t:"Regá hoy antes de irte", d:"Lo dijiste con el dedo: la tierra está seca o apenas húmeda. 2 baldes de 20 L en 2-3 pasadas."});
+  if (false && r.atras>=1 && !r.hoy) A.push({n:r.atras>=3?"urg":"avi", id:"riego"+r.prox, t:"Te tocaba regar el "+fechaCorta(r.prox)+(r.ur?(r.lluvia?" (lo último fue la lluvia del ":" (último riego: ")+fechaCorta(r.ur)+")":""), d:"Cada "+r.cada+" días porque "+r.motivo+". Si regaste y no lo anotaste, tocá «Regué»."});
+  if (false && r.hoy) A.push({n:"avi", id:"riegohoy"+today, t:"Regá hoy antes de irte", d:"Lo dijiste con el dedo: la tierra está seca o apenas húmeda. 2 baldes de 20 L en 2-3 pasadas."});
   const tf=lluviasTodas().find(l=>l.k===2 && dias(l.d)<=1); if (tf) A.push({n:"avi", id:"tormenta"+tf.d, t:"Hubo tormenta fuerte el "+fechaCorta(tf.d), d:"En la próxima visita: tutores, cúpulas, cartón de las macetas, mulch volado y charcos. El bancal no se riega hasta que el dedo diga seco."});
   const up=ultimaPresencia(); if(up && dias(up)>=5) A.push({n:"urg", id:"pres"+up, t:"Hace "+dias(up)+" días que no hay registro de la cama", d:"Con más de cuatro días, ni el mulch sostiene. Andá, y anotá lo que veas con los botones de «Lo vivo»."});
   const tarde=accConEstado().filter(a=>(a.st==="toca"||a.st==="pendiente") && a.due && dias(a.due)>=5 && a.riesgo && !a.temprano).sort((x,y)=>x.due<y.due?-1:1);
@@ -2667,16 +2761,21 @@ function alertas(){
   return A.filter(a=>!vistas[a.id]);
 }
 function rondaHTML(){
-  const a=avisosDoc; if(!a || !a.fecha || dias(a.fecha)>4 || !Array.isArray(a.items)) return "";
-  const its=a.items.map((x,i)=>Object.assign({id:"rv|"+a.fecha+"|"+i},x)).filter(x=>!vistas[x.id]);
-  return '<div class="estado" style="border-left-color:var(--sky)"><p class="k" style="color:var(--sky)">Ronda automática · '+esc(fechaDia(a.fecha))+'</p>'
-    + '<h2>'+esc(a.titulo||"Clima y consecuencias")+'</h2>'+(a.resumen?'<p class="sig">'+esc(a.resumen)+'</p>':'')+'</div>'
-    + (its.length?'<div class="alertas">'+its.map(x=>'<div class="al al-'+(x.n||"info")+'"><button class="al-x" data-visto="'+esc(x.id)+'" type="button" aria-label="Listo">✓</button><p class="al-t">'+esc(x.t)+'</p><p class="al-d">'+esc(x.d||"")+'</p></div>').join("")+'</div>':'');
+  const a=avisosDoc; if(!a || !a.fecha || dias(a.fecha)>2 || !Array.isArray(a.items)) return "";
+  const grupos=["Bancal:","Macetas","Maceta 4ª"];
+  const its=a.items.map((x,i)=>Object.assign({id:"rv|"+a.fecha+"|"+i},x)).filter(x=>!vistas[x.id] && !grupos.some(gn=>String(x.t||"").startsWith(gn)));
+  if(!its.length) return "";
+  return '<div class="alertas"><p class="al-src">Ronda automática · '+esc(fechaDia(a.fecha))+'</p>'+its.map(alHTML).join("")+'</div>';
+}
+function alHTML(a){
+  const ic={urg:"⚠",avi:"●",info:"ℹ"}[a.n]||"●";
+  return '<div class="al al-'+(a.n||"info")+'"><button class="al-x" data-visto="'+esc(a.id)+'" type="button" aria-label="Listo">✓</button>'
+    + (a.d ? '<details><summary class="al-t">'+ic+' '+esc(a.t)+'</summary><p class="al-d">'+esc(a.d)+'</p></details>' : '<p class="al-t">'+ic+' '+esc(a.t)+'</p>') + '</div>';
 }
 function alertasHTML(){
   const A=alertas(); if(!A.length) return "";
   const ord={urg:0,avi:1,info:2}; A.sort((a,b)=>ord[a.n]-ord[b.n]);
-  return '<div class="alertas">'+A.map(a=>'<div class="al al-'+a.n+'"><button class="al-x" data-visto="'+esc(a.id)+'" type="button" aria-label="Listo">✓</button><p class="al-t">'+esc(a.t)+'</p><p class="al-d">'+esc(a.d)+'</p></div>').join("")+'</div>';
+  return '<div class="alertas">'+A.map(alHTML).join("")+'</div>';
 }
 function riegoLinea(){
   const r=riegoPlan();
@@ -2689,42 +2788,50 @@ function riegoLinea(){
   return '<p class="vivo-l'+((r.atras>0||r.hoy)?' aviso':'')+'">'+esc(ult)+' · '+esc(prox)+'<span class="vivo-m"> · cada '+r.cada+' días: '+esc(r.motivo)+'</span></p>';
 }
 let vivoOpen = {};
+const OBS_BUENO = {trebol:["hojas","cubre"], dedo:["hum"], suelo:["no","tape"], olor:["bosque"], macetas:["bosque"], mhum:["hum"], enves:["nada"], hojas:["ok"]};
+const OBS_MALO = {trebol:[], dedo:["seca"], suelo:["sin"], olor:["agrio"], macetas:["agrio"], mhum:["secas"], enves:["algo"], hojas:["garra","mustia"]};
+const OBS_NOM = {trebol:"Trébol", dedo:"Dedo", suelo:"Suelo", olor:"Olor", macetas:"Olor", mhum:"Humedad", enves:"Envés", hojas:"Hojas"};
+function obsChip(k){
+  const o=obsUlt(k), d=OBS[k]; if(!d) return "";
+  if(!o) return '<span class="oc oc-na">'+OBS_NOM[k]+': sin dato</span>';
+  const op=d.o.find(x=>x[0]===o.v), cl=(OBS_BUENO[k]||[]).includes(o.v)?"oc-ok":(OBS_MALO[k]||[]).includes(o.v)?"oc-mal":"oc-neu";
+  const n=dias(o.d);
+  return '<span class="oc '+cl+(n>=5?' oc-viejo':'')+'">'+OBS_NOM[k]+': '+esc(op?op[1].toLowerCase():o.v)+' <small>'+(n===0?'hoy':n===1?'ayer':'hace '+n+' d')+'</small></span>';
+}
 function vivoHTML(){
-  const V=vivas(); let out='<h2 class="sec">Lo vivo</h2>';
+  const V=vivas(); let out='<h2 class="sec">Lo vivo</h2><div class="vivos">';
   const f=fdiario||today; const abrir = k => !obsEn(k,f);
   const od = (key, def) => ' data-vk="'+key+'"'+((vivoOpen[key]!==undefined ? vivoOpen[key] : def) ? ' open' : '');
   /* bancal */
-  const tre=obsUlt("trebol");
-  out += '<div class="vivo"><div class="vivo-h"><b>Bancal</b><span class="tan-q">cover crop sembrado el 11/9 · día '+(dias(SIEMBRA_COVER)+1)+'</span></div>'
-    + '<p class="vivo-l">Trébol: '+esc(obsTxt("trebol"))+(tre&&tre.v==="cubre"?' · listo para las Toxi':'')+'</p>'
-    + riegoLinea() + climaLinea()
-    + '<details class="vivo-d"'+od("bancal", abrir("trebol")||abrir("dedo"))+'><summary>¿Cómo lo ves hoy?</summary><div class="vivo-b">'+chipsHTML("trebol")+chipsHTML("dedo")+chipsHTML("suelo")+chipsHTML("olor")+'</div></details></div>';
+  out += '<div class="vv"><div class="vv-h"><b>🌱 Bancal</b><span class="vv-n">cover · día '+(dias(SIEMBRA_COVER)+1)+'</span></div>'
+    + '<div class="ocs">'+obsChip("trebol")+obsChip("dedo")+obsChip("olor")+obsChip("suelo")+'</div>'
+    + '<details class="vivo-d"'+od("bancal", false)+'><summary>Anotar cómo lo ves</summary><div class="vivo-b">'+chipsHTML("trebol")+chipsHTML("dedo")+chipsHTML("suelo")+chipsHTML("olor")+'</div></details></div>';
   /* macetas cocinando */
   if (!tandas.t1){
-    const d=dias(MACETAS_ARMADAS)+1; const om=obsUlt("macetas");
-    out += '<div class="vivo"><div class="vivo-h"><b>Las 4 macetas</b><span class="tan-q">armadas el 18/9 · cocinando día '+d+' de 10-14</span></div>'
-      + '<p class="vivo-l">'+(d<10?'Listas desde el 28/9. ':'Ya cumplieron los días. ')+'Se siembran cuando huelan a bosque: '+esc(obsTxt("macetas"))+'</p>'
-      + '<details class="vivo-d"'+od("macetas", abrir("macetas"))+'><summary>¿Cómo están?</summary><div class="vivo-b">'+chipsHTML("macetas")+chipsHTML("mhum")+'</div></details></div>';
+    const d=dias(MACETAS_ARMADAS)+1;
+    out += '<div class="vv"><div class="vv-h"><b>🪴 Las 4 macetas</b><span class="vv-n">cocinando · día '+d+'</span></div>'
+      + '<div class="ocs"><span class="oc '+(d>=10?'oc-ok':'oc-neu')+'">'+(d>=10?'listas para sembrar':'faltan '+(10-d)+' días')+'</span>'+obsChip("macetas")+obsChip("mhum")+'</div>'
+      + '<details class="vivo-d"'+od("macetas", false)+'><summary>Anotar cómo están</summary><div class="vivo-b">'+chipsHTML("macetas")+chipsHTML("mhum")+'</div></details></div>';
   }
   /* tandas vivas */
   V.forEach(([t,e])=>{
-    out += '<div class="vivo'+(e.sem>=12||(e.foto&&e.pct>=95)?" alerta":"")+'"><div class="vivo-h"><b>'+esc(t.nombre)+'</b><span class="tan-q">'+esc(t.que)+'</span></div>'
-      + '<p class="tan-big">día '+e.d+(e.sem?' · semana '+e.sem:'')+'</p><p class="tan-et">'+esc(e.etapa)+'</p>'
-      + '<div class="bar"><i style="width:'+e.pct+'%"></i></div><p class="tan-que">'+esc(e.que)+'</p>'
-      + '<details class="vivo-d"'+od("t-"+t.id, abrir("enves"))+'><summary>¿Cómo las ves hoy?</summary><div class="vivo-b">'+chipsHTML("enves")+chipsHTML("hojas")+'</div></details>'
-      + '<details class="tan-mas"><summary>Cosecha estimada y fecha de germinación</summary><p class="tan-cos">Cosecha estimada: '+fechaLinda(e.cosecha)+' al '+fechaLinda(e.cosechaHasta)+'. Se corta por tricomas, no por esta fecha.</p>'
-      + '<label class="tan-f">Germinó el <input type="date" data-tanda="'+t.id+'" value="'+e.g+'"></label>'+(e.sem?hitosCalHTML(t,e):'')+'</details></div>';
+    out += '<div class="vv'+(e.sem>=12||(e.foto&&e.pct>=95)?" vv-al":"")+'"><div class="vv-h"><b>'+esc(t.nombre)+'</b><span class="vv-n">día '+e.d+(e.sem?' · sem '+e.sem:'')+'</span></div>'
+      + '<div class="ocs"><span class="oc oc-et">'+esc(e.etapa)+'</span>'+obsChip("enves")+obsChip("hojas")+'</div>'
+      + '<div class="bar"><i style="width:'+e.pct+'%"></i></div>'
+      + '<details class="vivo-d"><summary>Qué toca esta semana</summary><div class="vivo-b"><p class="tan-que">'+esc(e.que)+'</p><p class="tan-cos">Cosecha estimada: '+fechaLinda(e.cosecha)+' al '+fechaLinda(e.cosechaHasta)+'. Se corta por tricomas.</p>'
+      + '<label class="tan-f">Germinó el <input type="date" data-tanda="'+t.id+'" value="'+e.g+'"></label>'+(e.sem?hitosCalHTML(t,e):'')+'</div></details>'
+      + '<details class="vivo-d"'+od("t-"+t.id, false)+'><summary>Anotar cómo las ves</summary><div class="vivo-b">'+chipsHTML("enves")+chipsHTML("hojas")+'</div></details></div>';
   });
-  /* tandas que vienen: una línea */
+  out += '</div>';
   const esp=TANDAS.filter(t=>!(tandas[t.id]||{}).f);
-  if (esp.length) out += '<p class="vivo-esp">Por venir: '+esp.map(t=>esc(t.nombre.replace(" · autos",""))+' ('+esc(t.prev)+')').join(" · ")+'. Se cargan solas al terminar la guía de siembra.</p>';
+  if (esp.length) out += '<div class="ocs" style="margin:2px 0 14px">'+esp.map(t=>'<span class="oc oc-na">⏳ '+esc(t.nombre.replace(" · autos",""))+' · '+esc(t.prev)+'</span>').join("")+'</div>';
   return out;
 }
 function tarjetaAcc(a){
   const cuando = a.due ? (a.st==="toca"&&a.temprano ? 'desde hoy, ideal el '+fechaDia(a.due) : (dias(a.due)>0 ? 'desde el '+fechaCorta(a.due)+' · hace '+dias(a.due)+' días' : 'hoy')) : 'cuando puedas';
   return '<div class="guia'+(a.st==="pendiente"?" guia-p":"")+'"><p class="guia-t">'+(a.st==="pendiente"?'<span class="st st-info">Pendiente</span>':'')+(a.otra?'<span class="st st-listo">Otra vez</span>':'')+(a.revisar?'<span class="st st-llega">¿Ya toca?</span>':'')+esc(a.n)+'</p>'
-    + '<p class="guia-w">'+esc(cuando)+(a.dur?' · '+esc(a.dur):'')+(a.cond?' · te pregunta primero si se cumple la condición':'')+'</p>'
-    + (climaAviso(a)?'<p class="guia-w" style="color:#B4521F;font-weight:600">☔ '+esc(climaAviso(a))+'</p>':'')
+    + '<div class="ocs"><span class="oc oc-neu">📅 '+esc(cuando)+'</span>'+(a.dur?'<span class="oc oc-neu">⏱ '+esc(a.dur)+'</span>':'')+(a.tipo==="compra"?'<span class="oc oc-neu">🛒 compra</span>':a.tipo==="casa"?'<span class="oc oc-neu">🏠 en casa</span>':'<span class="oc oc-neu">🌱 en la cama</span>')+'</div>'
+    + (climaAviso(a)?'<p class="guia-w" style="color:var(--iron);font-weight:600;margin:6px 0 8px">☔ '+esc(climaAviso(a))+'</p>':'')
     + '<div class="accs"><button class="acc on" data-guia="'+a.id+'" type="button">'+(a.cond?'Ver si toca':'Empezar')+'</button>'+(a.st==="pendiente"?'':'<button class="acc" data-guia-luego="'+a.id+'" type="button">Más tarde</button>')+'</div></div>';
 }
 function ahoraHTML(){
@@ -2768,7 +2875,7 @@ function fabHTML(){
   const puesto = a => diario.some(e=>e.d===f && e.a===a);
   const mb = melazaBloqueo();
   return '<p class="fab-d">'+(f===today?'Hoy':fechaLinda(f))+'</p>'
-    + '<button class="acc'+(puesto("riego")?" on":"")+'" data-acc="riego" type="button">'+(puesto("riego")?'✓ ':'')+'Regué</button>'
+    + [["riego","Regué todo"],["riego_b","Regué bancal"],["riego_m","Regué macetas"]].map(x=>'<button class="acc'+(puesto(x[0])?" on":"")+'" data-acc="'+x[0]+'" type="button">'+(puesto(x[0])?'✓ ':'')+x[1]+'</button>').join("")
     + '<button class="acc'+(puesto("melaza")?" on":(mb?" off":""))+'" data-acc="melaza" type="button">'+(puesto("melaza")?'✓ ':'')+'Melaza</button>'
     + '<button class="acc" data-acc="nota" type="button">Nota…</button>'
     + '<button class="acc" data-fab="foto" type="button">Foto</button>';
@@ -3236,6 +3343,8 @@ function onChange(e){
 }
 document.body.addEventListener("change", onChange);
 document.body.addEventListener("click", e=>{
+  const rgb=e.target.closest("button[data-rg]");
+  if (rgb){ riegoSel=rgb.dataset.rg; try{ localStorage.setItem("bitacora-rg",riegoSel); }catch(err){} renderHoy(); const c=document.getElementById("clima-card"); if(c) c.scrollIntoView({block:"start"}); return; }
   if (e.target.closest("#ex-ok")){
     const v=id=>(document.getElementById(id)||{}).value||"";
     if(!num(v("ex-g"))){ const g=document.getElementById("ex-g"); if(g) g.focus(); return; }

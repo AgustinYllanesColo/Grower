@@ -53,7 +53,7 @@ def kpa(x):
     return f"{x:.1f}".replace(".", ",")
 
 
-def pronostico():
+def wttr():
     url = f"https://wttr.in/{LAT_LON}?format=j1&lang=es"
     req = urllib.request.Request(url, headers={"User-Agent": "curl/8"})
     j = json.load(urllib.request.urlopen(req, timeout=40))
@@ -79,20 +79,104 @@ def pronostico():
     return out
 
 
+UA = {"User-Agent": "BitacoraSueloVivo/1.0 github.com/agustinyllanescolo/grower"}
+LAT, LON = -34.70, -58.39
+
+
+def get_json(url, timeout=40):
+    return json.load(urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout))
+
+
+def metno():
+    """MET Norway (modelo ECMWF): temperatura, humedad y lluvia hora a hora. La fuente principal."""
+    j = get_json(f"https://api.met.no/weatherapi/locationforecast/2.0/complete?lat={LAT}&lon={LON}")
+    dias = {}
+    for t in j["properties"]["timeseries"]:
+        loc = dt.datetime.fromisoformat(t["time"].replace("Z", "+00:00")).astimezone(TZ)
+        d = loc.date().isoformat()
+        det = t["data"]["instant"]["details"]
+        x = dias.setdefault(d, {"t": [], "h": [], "vd": [], "vn": [], "mm": 0.0, "v": [], "horas": 0})
+        T, H = det["air_temperature"], det["relative_humidity"]
+        x["t"].append(T); x["h"].append(H); x["v"].append(det.get("wind_speed", 0) * 3.6)
+        if 9 <= loc.hour <= 18: x["vd"].append(vpd(T, H))
+        if loc.hour >= 21 or loc.hour <= 6: x["vn"].append(vpd(T, H))
+        n1, n6 = t["data"].get("next_1_hours"), t["data"].get("next_6_hours")
+        if n1:
+            x["mm"] += n1["details"].get("precipitation_amount", 0); x["horas"] += 1
+        elif n6:
+            x["mm"] += n6["details"].get("precipitation_amount", 0); x["horas"] += 6
+            for k in ("air_temperature_max", "air_temperature_min"):
+                if k in n6["details"]: x["t"].append(n6["details"][k])
+    out = {}
+    for d, x in dias.items():
+        if x["horas"] < 18:          # día incompleto (hoy ya empezado o el último): se completa con otra fuente
+            continue
+        out[d] = {"tmax": round(max(x["t"]), 1), "tmin": round(min(x["t"]), 1), "hrmin": round(min(x["h"])), "hrmax": round(max(x["h"])),
+                  "mm": round(x["mm"], 1), "vpd": round(sum(x["vd"]) / len(x["vd"]), 2) if x["vd"] else None,
+                  "vpdmax": max(x["vd"]) if x["vd"] else None, "vpdn": min(x["vn"]) if x["vn"] else None, "viento": round(max(x["v"]))}
+    return out
+
+
+def ensemble():
+    """GFS por conjuntos (31 corridas): la PROBABILIDAD de lluvia y el rango de milímetros."""
+    j = get_json("https://ensemble-api.open-meteo.com/v1/ensemble?latitude=-34.70&longitude=-58.39&daily=precipitation_sum"
+                 "&models=gfs025&timezone=America%2FArgentina%2FBuenos_Aires&forecast_days=10")
+    dd = j["daily"]; ks = [k for k in dd if k.startswith("precipitation_sum")]
+    out = {}
+    for i, d in enumerate(dd["time"]):
+        v = sorted(x for x in (dd[k][i] for k in ks) if x is not None)
+        if not v: continue
+        q = lambda p: round(v[min(len(v) - 1, int(p * len(v)))], 1)
+        out[d] = {"prob": round(100 * sum(1 for x in v if x >= 1) / len(v)), "mm_p25": q(0.25), "mm_p50": q(0.5), "mm_p75": q(0.75)}
+    return out
+
+
+def pronostico():
+    """Une las tres fuentes. MET Norway manda en temperatura, humedad y lluvia; el conjunto da la probabilidad;
+    wttr.in aporta las ráfagas y un segundo voto. La confianza sale de cuánto coinciden."""
+    fuentes = []
+    try: M = metno(); fuentes.append("MET Norway")
+    except Exception as e: M = {}; print("met.no falló:", e, file=sys.stderr)
+    try: E = ensemble(); fuentes.append("GFS conjunto")
+    except Exception as e: E = {}; print("ensemble falló:", e, file=sys.stderr)
+    try: W = {w["d"]: w for w in wttr()}; fuentes.append("wttr.in")
+    except Exception as e: W = {}; print("wttr falló:", e, file=sys.stderr)
+    if not M and not W:
+        raise SystemExit("sin fuentes de clima")
+    out = []
+    for d in sorted(set(M) | set(W)):
+        if d < HOY.isoformat(): continue
+        m, w, e = M.get(d), W.get(d), E.get(d, {})
+        base = dict(m) if m else {k: w[k] for k in ("tmax", "tmin", "hrmin", "hrmax", "mm", "vpd", "vpdmax", "vpdn")}
+        if not m and w: base["fuente"] = "wttr.in"
+        base.update({k: e[k] for k in ("prob", "mm_p25", "mm_p75") if k in e})
+        if w: base["racha"] = w["racha"]; base["mm2"] = w["mm"]
+        # confianza: lluvia y temperatura según coincidan las fuentes
+        votos = [x for x in (base.get("mm"), e.get("mm_p50"), w["mm"] if w else None) if x is not None]
+        llueve = [x >= 2 for x in votos]
+        conf = "alta" if len(votos) >= 2 and (all(llueve) or not any(llueve)) else ("media" if len(votos) >= 2 else "baja")
+        if w and m and abs(w["tmax"] - m["tmax"]) > 3: conf = "media" if conf == "alta" else "baja"
+        if e.get("prob") is not None and 30 <= e["prob"] <= 70 and conf == "alta": conf = "media"
+        base["conf"] = conf
+        mm = base.get("mm") or 0
+        txt = (f"lluvia {mm:g} mm" if mm >= 1 else ("chaparrón posible" if e.get("prob", 0) >= 50 else "seco"))
+        if base.get("racha", 0) >= 40: txt += f", ráfagas de {base['racha']} km/h"
+        base.update({"d": d, "obs": False, "txt": txt})
+        out.append(base)
+    return out, " + ".join(fuentes)
+
+
 def main():
     ck = cargar(sys.argv[1]) if len(sys.argv) > 1 else {}
     clima_prev = cargar(sys.argv[2]) if len(sys.argv) > 2 else {}
     agenda = cargar(sys.argv[3]) if len(sys.argv) > 3 else {}
-    fc = pronostico()
+    fc, fuentes = pronostico()
     hoy = HOY.isoformat()
 
     # ---- clima: pasado conservado, pronóstico nuevo ----
     pasados = [d for d in clima_prev.get("dias", []) if d.get("d", "") < hoy][-10:]
-    clima = {"cargado": hoy, "fuente": "Registrado: estación MeteoLanus / lo anotado. Pronóstico: wttr.in Lanús (ronda automática).",
-             "dias": pasados + [{k: v for k, v in d.items() if k not in ("prob", "racha")} for d in fc]}
-    # el pronóstico largo anterior (Meteored u otro) se conserva más allá de los 3 días de wttr, si es reciente
-    if clima_prev.get("cargado") and (HOY - fecha(clima_prev["cargado"])).days <= 3:
-        clima["dias"] += [d for d in clima_prev.get("dias", []) if d.get("d", "") > fc[-1]["d"]]
+    clima = {"cargado": hoy, "fuente": "Pronóstico: " + fuentes + " (Lanús, ronda automática). Pasado: lo registrado.",
+             "dias": pasados + fc}
 
     # ---- estado del cultivo ----
     tandas = ck.get("tandas", {}) or {}
@@ -133,10 +217,10 @@ def main():
     llu48 = sum(d["mm"] for d in fc[:2])
     llu72 = sum(d["mm"] for d in fc)
     dia_lluvia = next((d for d in fc if d["mm"] >= 5), None)
-    racha = max(fc, key=lambda d: d["racha"])
+    racha = max(fc[:3], key=lambda d: d.get("racha") or 0); racha = dict(racha, racha=racha.get("racha") or 0)
     calor = max(fc, key=lambda d: d["tmax"])
     frio = min(fc, key=lambda d: d["tmin"])
-    hr_alta = min(d["hrmin"] for d in fc) >= 75
+    hr_alta = min(d["hrmin"] for d in fc[:3]) >= 75
 
     items = []
     def aviso(n, t, d):
@@ -196,39 +280,55 @@ def main():
     # ---- VPD: el clima leído como lo lee la planta ----
     if etapa:
         lo, hi = RANGOS[etapa]
-        alto = [d for d in fc if d["vpd"] > hi + 0.6]
-        bajo_noche = [d for d in fc if d["vpdn"] < 0.15]
+        alto = [d for d in fc[:4] if (d.get("vpd") or 0) > hi + 0.6]
+        bajo_noche = [d for d in fc[:4] if d.get("vpdn") is not None and d["vpdn"] < 0.15]
         if alto:
             d = max(alto, key=lambda x: x["vpd"])
             aviso("avi", f"VPD alto {nombre_dia(d['d'])}: {kpa(d['vpd'])} kPa de día (ideal en {etapa}: {lo}-{hi})",
                   "El aire tira agua de la hoja más rápido de lo que la raíz la repone: la planta cierra estomas al mediodía y deja de crecer. Suelo húmedo y mulch grueso es lo único que compensa afuera. No es día de topping, LST fuerte ni trasplante.")
         if bajo_noche and etapa in ("flor", "fin de flor") and len(bajo_noche) >= 2:
-            aviso("urg", f"Noches saturadas ({len(bajo_noche)} de {len(fc)}): rocío en los cogollos",
+            aviso("urg", f"Noches saturadas ({len(bajo_noche)} de 4): rocío en los cogollos",
                   "VPD de noche casi 0 = humedad 95-100 %: se condensa agua adentro de la flor. Es el clima de la botrytis. Cogollos por dentro en la próxima visita, defoliar el interior para que circule aire, techito puesto.")
     else:
         lo = hi = None
     # ---- recordatorios de la bitácora ----
-    if sin_riego is not None and sin_riego >= 3 and llu48 < 8:
-        aviso("urg" if (sin_riego >= 5 or calor["tmax"] >= 28) else "avi",
-              f"Hace {sin_riego} días que no registrás riego ni llovió fuerte",
-              "Andá a regar: bancal 2 baldes de 20 L en 2-3 pasadas"
-              + (" y las macetas hasta que escurran" if (t1 or t2 or toxi_plantada) else "")
-              + ". Si fuiste y no lo anotaste, anotalo: la bitácora calcula el próximo riego con eso.")
+    ordenes = riego_motor(sys.argv[1], clima, hoy)
+    for g in ordenes:
+        o = g.get("orden") or {}
+        if o.get("nivel") in ("urg", "avi"):
+            aviso(o["nivel"], f"{g['nombre']}: {o['t'].lower()}", o.get("d", ""))
+    if sin_riego is not None and sin_riego >= 4 and not any((g.get("orden") or {}).get("nivel") in ("urg", "avi") for g in ordenes):
+        aviso("info", f"Hace {sin_riego} días que no anotás un riego",
+              "Si regaste, anotalo: el cálculo del próximo riego parte de ese dato.")
     for a in prox:
         if a.get("st") in ("toca", "pendiente", "vencida") and a.get("due", "9") <= hoy:
             aviso("info", f"Toca: {a['n']}", "Está en «Hoy» con sus pasos.")
 
     orden = {"urg": 0, "avi": 1, "info": 2}
     items.sort(key=lambda i: orden[i["n"]])
-    linea = " · ".join(f"{nombre_dia(d['d'])} {d['tmin']}-{d['tmax']} °C {d['txt']}, VPD {kpa(d['vpd'])}" for d in fc)
+    linea = " · ".join(f"{nombre_dia(d['d'])} {round(d['tmin'])}-{round(d['tmax'])} °C {d['txt']}" + (f", VPD {kpa(d['vpd'])}" if d.get("vpd") is not None else "") for d in fc[:3])
     titulo = items[0]["t"] if items else "Nada que cambie el plan"
-    avisos = {"fecha": hoy, "titulo": titulo, "resumen": linea, "items": items, "etapa": etapa, "rango": [lo, hi] if lo else None}
+    avisos = {"fecha": hoy, "titulo": titulo, "resumen": linea, "items": items, "riego": [{"id": g["id"], "orden": g.get("orden")} for g in ordenes], "etapa": etapa, "rango": [lo, hi] if lo else None}
     os.makedirs("out", exist_ok=True)
     json.dump(clima, open("out/clima.json", "w"), ensure_ascii=False)
     json.dump(avisos, open("out/avisos.json", "w"), ensure_ascii=False)
     urg = [i for i in items if i["n"] == "urg"]
     notificar(items, linea)
     print(("⚠ " if urg else "") + titulo + (f" (+{len(items)-1} avisos)" if len(items) > 1 else "") + ". " + linea)
+
+
+def riego_motor(ck_path, clima, hoy):
+    """Corre el mismo motor de riego que usa la página (bitacora/riego.js) con el clima recién armado."""
+    import subprocess, tempfile
+    js = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "bitacora", "riego.js")
+    with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as t:
+        json.dump(clima, t, ensure_ascii=False)
+    try:
+        r = subprocess.run(["node", js, ck_path, t.name, hoy], capture_output=True, text=True, timeout=60)
+        return json.loads(r.stdout) if r.returncode == 0 and r.stdout else []
+    except Exception as e:
+        print("motor de riego falló:", e, file=sys.stderr)
+        return []
 
 
 def notificar(items, linea):
