@@ -12,7 +12,7 @@ Uso:
 Los .json son los que deja ArtifactData con out_dir (con o sin envoltorio "data").
 Todas las reglas son deterministas: el modelo solo mueve archivos.
 """
-import json, sys, os, urllib.request, datetime as dt
+import json, sys, os, math, urllib.request, urllib.parse, datetime as dt
 
 LAT_LON = "Lanus,Argentina"
 TZ = dt.timezone(dt.timedelta(hours=-3))
@@ -40,6 +40,19 @@ def nombre_dia(s):
     return f"el {DIAS[f.weekday()]} {f.day}/{f.month}"
 
 
+def vpd(t, hr):
+    """VPD del aire en kPa (Tetens). Hoja al sol suele estar 1-3 °C distinta: esto es el aire."""
+    return round(0.6108 * math.exp(17.27 * t / (t + 237.3)) * (1 - hr / 100), 2)
+
+
+# rangos de VPD por etapa (kPa, aire, de día)
+RANGOS = {"plántula": (0.4, 0.8), "vegetativo": (0.8, 1.2), "flor": (1.0, 1.5), "fin de flor": (1.2, 1.6)}
+
+
+def kpa(x):
+    return f"{x:.1f}".replace(".", ",")
+
+
 def pronostico():
     url = f"https://wttr.in/{LAT_LON}?format=j1&lang=es"
     req = urllib.request.Request(url, headers={"User-Agent": "curl/8"})
@@ -51,11 +64,18 @@ def pronostico():
         racha = max(int(h["WindGustKmph"]) for h in hs)
         prob = max(int(h["chanceofrain"]) for h in hs)
         hrmin = min(int(h["humidity"]) for h in hs)
+        # wttr da cada 3 h (0,3,…,21): día = 9-18 h, noche = 0-6 y 21 h
+        dia = [h for h in hs if 900 <= int(h["time"]) <= 1800]
+        noche = [h for h in hs if int(h["time"]) <= 600 or int(h["time"]) >= 2100]
+        vd = [vpd(float(h["tempC"]), float(h["humidity"])) for h in dia] or [0]
+        vn = [vpd(float(h["tempC"]), float(h["humidity"])) for h in noche] or [0]
+        hrmax = max(int(h["humidity"]) for h in hs)
         txt = (f"lluvia {mm:g} mm" if mm >= 1 else ("chaparrón posible" if prob >= 60 else "seco"))
         if racha >= 40:
             txt += f", ráfagas de {racha} km/h"
         out.append({"d": w["date"], "mm": mm, "tmax": int(w["maxtempC"]), "tmin": int(w["mintempC"]),
-                    "hrmin": hrmin, "prob": prob, "racha": racha, "obs": False, "txt": txt})
+                    "hrmin": hrmin, "hrmax": hrmax, "vpd": round(sum(vd) / len(vd), 2), "vpdmax": max(vd),
+                    "vpdn": min(vn), "prob": prob, "racha": racha, "obs": False, "txt": txt})
     return out
 
 
@@ -98,6 +118,14 @@ def main():
     autos_final = [n for n, e in (("tanda 1", t1), ("tanda 2", t2)) if e and 70 <= e <= 95]
     toxi_flor = dia_flor_toxi is not None and dia_flor_toxi >= 1
     toxi_final = dia_flor_toxi is not None and dia_flor_toxi >= 50
+    etapa = ("fin de flor" if (autos_final or toxi_final) else "flor" if (autos_flor or toxi_flor)
+             else "vegetativo" if (toxi_plantada or (t1 and t1 > 21) or (t2 and t2 > 21))
+             else "plántula" if plantulas else None)
+    # último riego efectivo: riego anotado, lluvia anotada, o ≥8 mm en el clima
+    riegos = [e["d"] for e in diario if e.get("a") in ("riego", "lluvia", "lluvia_fuerte")]
+    riegos += [d["d"] for d in clima["dias"] if d.get("d", "") <= hoy and d.get("mm", 0) >= 8]
+    ult_riego = max(riegos) if riegos else None
+    sin_riego = (HOY - fecha(ult_riego)).days if ult_riego else None
     prox = [a for a in agenda.get("items", []) if a.get("due", "9") <= (HOY + dt.timedelta(days=3)).isoformat()]
     prox_ids = " ".join(a["id"] for a in prox)
 
@@ -165,16 +193,60 @@ def main():
                 aviso("info", f"Día de siembra: {d_siembra['txt']}, {d_siembra['tmin']}-{d_siembra['tmax']} °C",
                       "Con sol y más de 15 °C, cúpula enterrada y sustrato húmedo de antes. Con lluvia fuerte ese día, sembrá igual: la cúpula protege.")
 
+    # ---- VPD: el clima leído como lo lee la planta ----
+    if etapa:
+        lo, hi = RANGOS[etapa]
+        alto = [d for d in fc if d["vpd"] > hi + 0.6]
+        bajo_noche = [d for d in fc if d["vpdn"] < 0.15]
+        if alto:
+            d = max(alto, key=lambda x: x["vpd"])
+            aviso("avi", f"VPD alto {nombre_dia(d['d'])}: {kpa(d['vpd'])} kPa de día (ideal en {etapa}: {lo}-{hi})",
+                  "El aire tira agua de la hoja más rápido de lo que la raíz la repone: la planta cierra estomas al mediodía y deja de crecer. Suelo húmedo y mulch grueso es lo único que compensa afuera. No es día de topping, LST fuerte ni trasplante.")
+        if bajo_noche and etapa in ("flor", "fin de flor") and len(bajo_noche) >= 2:
+            aviso("urg", f"Noches saturadas ({len(bajo_noche)} de {len(fc)}): rocío en los cogollos",
+                  "VPD de noche casi 0 = humedad 95-100 %: se condensa agua adentro de la flor. Es el clima de la botrytis. Cogollos por dentro en la próxima visita, defoliar el interior para que circule aire, techito puesto.")
+    else:
+        lo = hi = None
+    # ---- recordatorios de la bitácora ----
+    if sin_riego is not None and sin_riego >= 3 and llu48 < 8:
+        aviso("urg" if (sin_riego >= 5 or calor["tmax"] >= 28) else "avi",
+              f"Hace {sin_riego} días que no registrás riego ni llovió fuerte",
+              "Andá a regar: bancal 2 baldes de 20 L en 2-3 pasadas"
+              + (" y las macetas hasta que escurran" if (t1 or t2 or toxi_plantada) else "")
+              + ". Si fuiste y no lo anotaste, anotalo: la bitácora calcula el próximo riego con eso.")
+    for a in prox:
+        if a.get("st") in ("toca", "pendiente", "vencida") and a.get("due", "9") <= hoy:
+            aviso("info", f"Toca: {a['n']}", "Está en «Hoy» con sus pasos.")
+
     orden = {"urg": 0, "avi": 1, "info": 2}
     items.sort(key=lambda i: orden[i["n"]])
-    linea = " · ".join(f"{nombre_dia(d['d'])} {d['tmin']}-{d['tmax']} °C {d['txt']}" for d in fc)
+    linea = " · ".join(f"{nombre_dia(d['d'])} {d['tmin']}-{d['tmax']} °C {d['txt']}, VPD {kpa(d['vpd'])}" for d in fc)
     titulo = items[0]["t"] if items else "Nada que cambie el plan"
-    avisos = {"fecha": hoy, "titulo": titulo, "resumen": linea, "items": items}
+    avisos = {"fecha": hoy, "titulo": titulo, "resumen": linea, "items": items, "etapa": etapa, "rango": [lo, hi] if lo else None}
     os.makedirs("out", exist_ok=True)
     json.dump(clima, open("out/clima.json", "w"), ensure_ascii=False)
     json.dump(avisos, open("out/avisos.json", "w"), ensure_ascii=False)
     urg = [i for i in items if i["n"] == "urg"]
+    notificar(items, linea)
     print(("⚠ " if urg else "") + titulo + (f" (+{len(items)-1} avisos)" if len(items) > 1 else "") + ". " + linea)
+
+
+def notificar(items, linea):
+    """Notificación propia de la bitácora vía ntfy (app «ntfy» en el celular, suscripta al tema)."""
+    tema = os.environ.get("NTFY_TOPIC")
+    if not tema or not items:
+        return
+    urg = any(i["n"] == "urg" for i in items)
+    cuerpo = "\n".join(("⚠ " if i["n"] == "urg" else "• ") + i["t"] for i in items[:5]) + "\n\n" + linea
+    req = urllib.request.Request("https://ntfy.sh/" + tema, data=cuerpo.encode(), headers={
+        "Title": "Bitácora Suelo Vivo".encode("utf-8").decode("latin-1"),
+        "Priority": "high" if urg else "default",
+        "Tags": "seedling",
+        "Click": "https://claude.ai/artifact/RVpKesdPsPyMQEudSAySMa"})
+    try:
+        urllib.request.urlopen(req, timeout=20)
+    except Exception as e:
+        print("ntfy falló:", e, file=sys.stderr)
 
 
 if __name__ == "__main__":

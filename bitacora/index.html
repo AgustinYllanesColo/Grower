@@ -446,6 +446,16 @@ details.grupo>summary{font-size:17px}
 #grp-extr select,#grp-extr input,#grp-cos .plant input[type=text]{font:inherit;font-size:16px;color:var(--ink);background:var(--ground);border:1px solid var(--line-strong);border-radius:3px;padding:9px 10px;min-height:44px;max-width:100%}
 #ex-ok{font-family:Archivo,sans-serif;font-size:14px;font-weight:600;color:var(--ground);background:var(--leaf);border:0;border-radius:99px;padding:11px 18px;min-height:44px;cursor:pointer}
 #grp-cos .plant input[type=text]{width:100%;margin-top:8px}
+.vpd-t{min-width:0}
+.vpd-t td,.vpd-t th{padding:7px 5px 7px 0;font-size:13px;white-space:nowrap}
+.vpd-t td.num{font-size:12.5px}
+.vpd-t tr.vpd-hoy td{font-weight:700}
+.vpd-t tr.vpd-pas td{opacity:.6}
+.vpd-c{display:inline-block;font-family:"JetBrains Mono",monospace;font-size:12.5px;border-radius:99px;padding:2px 7px;background:var(--surface-2);color:var(--ink)}
+.vpd-ok{background:var(--leaf-soft);color:var(--leaf)}
+.vpd-medio{background:var(--mark);color:var(--ink)}
+.vpd-alto{background:var(--iron-soft);color:var(--iron)}
+.vpd-bajo{background:var(--sky-soft);color:var(--sky)}
 .regla b{font-family:Archivo,sans-serif;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--leaf);display:block;margin-bottom:4px}
 </style>
 
@@ -720,7 +730,7 @@ details.grupo>summary{font-size:17px}
       </div>
     </details><details class="ficha">
       <summary>Secado en el altillo <span class="hint">decidido: se seca ahí. Qué medir, qué números buscar y cómo corregirlo</span></summary>
-      <div class="ficha-body"><div class="regla"><b>La regla (decidido el 29/9)</b>Se seca en el altillo. Por eso se mide: octubre para tener la base, noviembre en un día de calor, y la tanda 1 es el ensayo de verdad. El número que manda es el de ADENTRO de la caja, no el del cuarto: objetivo 16-22 °C y 55-65 %, secado de 10 a 14 días. Cajas en el piso (el calor se junta arriba), ventilar de noche y cerrar de día.</div>
+      <div class="ficha-body"><div class="regla"><b>La regla (decidido el 29/9)</b>Se seca en el altillo. Por eso se mide: octubre para tener la base, noviembre en un día de calor, y la tanda 1 es el ensayo de verdad. El número que manda es el de ADENTRO de la caja, no el del cuarto: objetivo 16-22 °C y 55-65 %, o sea <b>VPD 0,6-0,9 kPa</b>, secado de 10 a 14 días. Humidificador solo hasta 26 °C y en volumen chico. Cajas en el piso (el calor se junta arriba), ventilar de noche y cerrar de día.</div>
         <h4>Por qué el altillo es difícil (la cuenta, para que sepas contra qué peleás)</h4>
         <p>En diciembre la media de Buenos Aires es 23 °C con 63 % de humedad. Ese aire calentado a 28 °C en un altillo queda en 47 % (VPD 2,0) y a 33 °C en 35 % (VPD 3,3). Lo ideal para secar es VPD 0,8-1,0. Secar al doble o al triple de velocidad deja el cogollo seco por fuera y húmedo por dentro, con olor a pasto (la clorofila no llega a degradarse) y sin los terpenos livianos. No es opinión: es la física del aire. Lo que sí podés hacer es que el cogollo no sienta el aire del altillo.</p>
         <h4>Qué medir y cómo (el termohigrómetro)</h4>
@@ -735,6 +745,11 @@ details.grupo>summary{font-size:17px}
           <tr><td>1 · autos</td><td class="num">fin de dic</td><td class="num">23 ° · 63 %</td><td>Calor: secado demasiado rápido. Cajas sí o sí.</td></tr>
           <tr><td>2 · Doble Tangie</td><td class="num">principios de feb</td><td class="num">24 ° · 68 %</td><td>El peor: calor y más humedad. Lo que aprendas en diciembre se aplica acá.</td></tr>
           <tr><td>Toxi</td><td class="num">1ª quincena abr</td><td class="num">18 ° · 74 %</td><td>Al revés: el altillo templado es una ventaja. El riesgo es humedad: colgado o cajas abiertas, nunca cerradas.</td></tr></table></div>
+        <h4>El número en kPa para el secado</h4>
+        <p><b>Secado: VPD 0,6-0,9 kPa adentro de la caja</b> (18 °C y 60 % = 0,83; 20 °C y 62 % = 0,89; 16 °C y 60 % = 0,73). Por encima de 1,1 seca demasiado rápido; por debajo de 0,5, casi no seca y se arma moho. <b>Curado en frasco: no se mide en VPD, se mide en humedad: 58-62 %.</b> Usá la calculadora de la ficha del termohigrómetro con lo que leas adentro de la caja.</p>
+        <h4>¿Y un humidificador?</h4>
+        <p>Arregla la mitad del problema. Subir la humedad baja el VPD, así que el secado se hace más lento: bien. Pero no baja la temperatura, y los terpenos se evaporan por temperatura, no por VPD. Mirá cuánta humedad hace falta para llegar a 0,9 kPa: a 24 °C, 70 %; a 26 °C, 73 %; a 30 °C, 79 %; a 33 °C, 82 %. Aire a 30 °C con 80 % de humedad es el clima ideal del moho, y la pérdida de aroma sigue igual.</p>
+        <p>Veredicto: <b>útil hasta 26 °C, peligroso arriba de 28</b>. Si lo usás: (1) adentro de un volumen chico y cerrado (una caja grande de cartón o una carpa, no el altillo entero), (2) con el termohigrómetro adentro y un temporizador o higrostato que lo corte al pasar 65 %, (3) con agua destilada o de lluvia filtrada: los ultrasónicos con agua de canilla tiran un polvo blanco de sales que se pega en la flor, (4) nunca soplando sobre los cogollos. Arriba de 28 °C, primero se baja la temperatura (piso, ventilar de noche, sombra en la chapa), después se piensa en humedad.</p>
         <h4>El ensayo antes de que importe</h4>
         <p>En noviembre, con las hojas y ramitas que saques del LST o de la limpieza, armá una caja en el piso del altillo con el termohigrómetro adentro y mirá cuántos días tarda en secar el tallito. Es gratis y te dice si tu protocolo funciona antes de meter cogollos.</p>
         <h4>Curado</h4>
@@ -1081,7 +1096,7 @@ Y por lo tanto: <b>para los gatos, usá las ramas finas cruzadas, no la borra</b
         <h4>4 · Rosin</h4>
         <p>Calor y presión, sin solventes: material entre papel manteca siliconado, planchita o prensa, 10-30 segundos de presión fuerte. De flor: 90-105 °C, rinde 10-20 %. De hash: 70-90 °C, rinde 50-70 %. Muchas planchitas de pelo no bajan de 150 °C: rinden menos y queman los terpenos. El mejor uso es prensar el hash del agua fría.</p>
         <h4>El orden que te recomiendo</h4>
-        <p>Enero: manteca con el recorte de la tanda 1 (aprendés a dosificar con poco en juego). Abril: hash en agua fría con el recorte congelado de las Toxi, y rosin de ese hash si querés el paso siguiente. Cada prueba con su registro: material, gramos, temperatura, tiempo, rendimiento.</p>
+        <p>Ahora: rosin de kief con la planchita (Experimento 1), después rosin de flor del año pasado (Experimento 2): balanza de 0,01 g sí o sí. Enero: manteca con el recorte de la tanda 1 (aprendés a dosificar con poco en juego). Abril: hash en agua fría con el recorte congelado de las Toxi, y rosin de ese hash si querés el paso siguiente. Cada prueba con su registro: material, gramos, temperatura, tiempo, rendimiento.</p>
       </div>
     </details><details class="ficha">
       <summary>Colores en el cogollo <span class="hint">rosa, violeta, rojo: qué es cierto y qué no</span></summary>
@@ -2303,6 +2318,17 @@ function acciones(){
     cond:{q:"¿Las semillas se ven oscuras y con vetas, y el cáliz se abre solo?", si:"Sí", no:"Todavía claras"},
     why:"4-6 semanas después de polinizar. Se cosechan con la rama, se secan una semana y se guardan como las regulares.",
     pasos:["Cortar la rama marcada aparte del resto","Secar 7-10 días en bolsa de papel","Sacar las semillas a mano; descartar las blancas o verdes","Frasco con sílica, etiqueta: cruce y fecha","Anotar en el cuaderno todo lo que aprendiste del cruce"]});
+  A.push({id:"c_balanza", n:"Comprar una balanza de joyería de 0,01 g", tipo:"compra", desde:"2026-09-29", due:"2026-10-20", venc:120,
+    why:"Para las extracciones: un rosin de 0,5 g de kief da 0,1-0,25 g. La balanza de cocina (de a 1 g) no lo ve: sin 0,01 g no hay rendimiento, y sin rendimiento el experimento no enseña nada. Mercado Libre, «balanza digital 0,01 g 100 g», es barata.",
+    pasos:["Balanza digital de bolsillo, 0,01 g de precisión, hasta 100-200 g","Si trae pesa de calibración, mejor"], dur:"10 min"});
+  A.push({id:"exp_rosin1", n:"Experimento 1 · rosin de kief con la planchita", tipo:"casa", fecha:"¿Qué día lo hiciste?",
+    cond:{q:"¿Tenés la planchita, papel de horno SILICONADO, kief del picador y la balanza de 0,01 g?", si:"Sí, todo", no:"Me falta algo"},
+    why:"Primer experimento guiado. Kief primero porque es casi pura resina: rinde mucho, se prensa a menos temperatura y enseña la técnica sin gastar flor. Lo que buscás aprender: cuánto calienta tu planchita y cuántos segundos aguanta tu material antes de oscurecerse. Anotalo todo en Plantas → Postcosecha: extracciones.",
+    pasos:["Probar la planchita: si tiene regulación, al mínimo. Si no: un pedacito de papel de horno 10 s adentro; si amarillea o se oscurece, calienta de más (más de 200 °C): vas a usar papel doble y prensadas cortas","Pesar 0,3-0,5 g de kief en la balanza de 0,01 g y anotar","Sobrecito: papel de horno doblado varias veces alrededor del kief, bien cerrado (sin bolsa filtro sale con algo de polvo vegetal; para empezar está bien)","Ese sobrecito adentro de otro papel de horno doblado al medio","Planchita caliente, sobre una mesa firme: prensar con TODA la fuerza (tu peso encima con un libro o una tabla)","Contar: cuando se escucha el chisporroteo, 2-3 segundos más y soltar. Primera prueba: 4 s en total","Abrir: el aceite queda alrededor del sobrecito. Papel 5 minutos a la heladera y raspar con una tarjeta o un clip","Pesar el rosin. Rendimiento = rosin ÷ kief × 100. Kief bueno: 40-70 %","Anotar en el registro: temperatura (mínimo/fijo), segundos, rendimiento, color (dorado claro = bien; ámbar oscuro = calor o tiempo de más)","Repetir con otra porción cambiando UNA sola cosa (segundos o papel doble) y comparar","Planchita desenchufada y sobre algo que no se queme al terminar"],
+    riesgo:"Papel manteca común (no siliconado) se pega y arruina la muestra; papel aluminio solo, no. La planchita a más de 200 °C quema terpenos: el aceite sale oscuro y sabe a quemado.", dur:"30 min"});
+  A.push({id:"exp_rosin2", n:"Experimento 2 · rosin de flor del año pasado", tipo:"casa", req:["exp_rosin1"], fecha:"¿Qué día lo hiciste?",
+    why:"Con lo aprendido en el kief. La flor necesita más calor y más segundos, y rinde mucho menos (10-20 %). Sirve para saber si la flor del año pasado vale la pena prensarla o fumarla.",
+    pasos:["1 g de flor en un cogollo aplastado un poco con los dedos, sin tallo","Papel de horno doblado, sin sobre","Prensar 6-10 s con toda la fuerza (más si la planchita calienta poco)","Heladera, raspar, pesar, anotar","Comparar rendimiento y color con el de kief"], dur:"20 min"});
   A.push({id:"invierno", n:"Planificar el cultivo de invierno", tipo:"casa", desde:"2027-04-01", due:"2027-04-11",
     why:"Decisión de Tomy: en invierno se cultiva sí o sí. Se planifica en abril con la temporada cerrada y las conclusiones del cuaderno en la mano. Expectativa honesta: en exterior de invierno en Buenos Aires se cosechan 10-40 g por planta; lo que más rinde en invierno es mantener una MADRE de la mejor Toxi para clonar en septiembre.",
     pasos:["Leer el cuaderno entero: qué genética dio mejor y por qué","Decidir: autos en mini invernadero de plástico, madre de Toxi bajo lamparita o ventana, o las dos cosas","Ver qué quedó de insumos y qué hay que comprar en el pedido grande de abril","Abrir la temporada de invierno en la bitácora"], dur:"1 h"});
@@ -2361,6 +2387,41 @@ function lluviasTodas(){
 }
 function lluviaReciente(n){ return lluviasTodas().find(l=>l.k>=1 && dias(l.d)<=n) || null; }
 function lluviaQueViene(hasta, min){ min=min||5; return CLIMA.dias.find(c=>c.d>=today && c.d<=sumarDias(today,hasta) && c.mm>=min) || null; }
+const VPD_RANGO = {"plántula":[0.4,0.8],"vegetativo":[0.8,1.2],"flor":[1.0,1.5],"fin de flor":[1.2,1.6]};
+function etapaVPD(){
+  const ord=["plántula","vegetativo","flor","fin de flor"]; let e=-1;
+  vivas().forEach(([t,st])=>{ let x;
+    if(t.tipo==="auto") x = st.sem<=3?0:st.sem<=5?1:st.sem>=10?3:2;
+    else x = st.enFlor ? (st.df>=50?3:2) : (st.d<=21?0:1);
+    if(x>e) e=x; });
+  return e>=0 ? ord[e] : null;
+}
+function vpdDe(c){ if(c.vpd!=null) return {v:c.vpd, aprox:false}; if(c.tmax!=null&&c.hrmin!=null) return {v:vpdCalc(c.tmax,c.hrmin), aprox:true}; return null; }
+function fk(x){ return x.toFixed(1).replace(".",","); }
+function climaTablaHTML(){
+  if(!CLIMA.dias.length) return "";
+  const et=etapaVPD(), rg=et?VPD_RANGO[et]:null;
+  const P=CLIMA.dias.filter(c=>c.d>=sumarDias(today,-2)).slice(0,8);
+  const chip=(v,noche)=>{ if(v==null) return '<span class="vpd-c">—</span>';
+    if(noche) return '<span class="vpd-c'+(v<0.15?' vpd-bajo':'')+'">'+fk(v)+'</span>';
+    const cl = !rg ? '' : v<rg[0] ? ' vpd-bajo' : v>rg[1]+0.4 ? ' vpd-alto' : v>rg[1] ? ' vpd-medio' : ' vpd-ok';
+    return '<span class="vpd-c'+cl+'">'+fk(v)+'</span>'; };
+  const filas=P.map(c=>{ const vd=vpdDe(c);
+    const dd=new Date(c.d+"T12:00:00");
+    return '<tr'+(c.d===today?' class="vpd-hoy"':'')+(c.d<today?' class="vpd-pas"':'')+'><td>'+esc(DIA[dd.getDay()].slice(0,3)+' '+dd.getDate()+'/'+(dd.getMonth()+1))+(c.obs?'':'<span class="vivo-m">'+(c.d<today?' est.':'')+'</span>')+'</td>'
+      + '<td class="num">'+(c.tmax!=null?Math.round(c.tmin)+'-'+Math.round(c.tmax)+'°':'—')+'</td>'
+      + '<td class="num">'+(c.hrmin!=null?c.hrmin+(c.hrmax!=null?'-'+c.hrmax:'')+'%':'—')+'</td>'
+      + '<td class="num">'+(c.mm>=1?'☔ '+String(c.mm).replace(".",","):'—')+'</td>'
+      + '<td class="num">'+(vd?chip(vd.v,false)+(vd.aprox?'<span class="vivo-m">≈</span>':''):'—')+'</td>'
+      + '<td class="num">'+chip(c.vpdn!=null?c.vpdn:null,true)+'</td></tr>'; }).join("");
+  const leer = rg ? 'Etapa que manda hoy: <b>'+et+'</b> · VPD de día (de 9 a 18 h) ideal <b>'+fk(rg[0])+'-'+fk(rg[1])+' kPa</b>.' : 'Todavía no hay plantas: el VPD sirve para aprender a leerlo y para el cover. Desde la siembra se colorea contra el rango de la etapa.';
+  return '<details class="card" id="clima-card" open><summary>Clima y VPD<span class="cnt">'+(climaVigente()?'al '+esc(fechaCorta(CLIMA.dias[CLIMA.dias.length-1].d)):'vencido')+'</span></summary><div class="card-body">'
+    + '<div class="tablewrap"><table class="vpd-t"><tr><th>Día</th><th>°C</th><th>HR</th><th>mm</th><th>VPD</th><th>noche</th></tr>'+filas+'</table></div>'
+    + '<p class="gas-mes">'+leer+' <span class="vpd-c vpd-ok">en rango</span> <span class="vpd-c vpd-medio">algo alto</span> <span class="vpd-c vpd-alto">estrés</span> <span class="vpd-c vpd-bajo">bajo / rocío</span></p>'
+    + '<p class="gas-mes">VPD (déficit de presión de vapor, en kPa) = cuánto «tira» el aire del agua de la hoja. Depende de la temperatura Y la humedad juntas: 25 °C con 80 % tira poco (0,6); 25 °C con 40 % tira mucho (1,9). De día se lee contra la etapa; de noche, cerca de 0 es rocío adentro del cogollo. Es el VPD del aire: la hoja al sol está unos grados más caliente. Ficha: Saber → «El termohigrómetro: VPD».</p>'
+    + '<p class="gas-mes" style="margin:0">'+esc(CLIMA.fuente||"")+' · cargado el '+esc(fechaCorta(CLIMA.cargado))+'</p>'
+    + '</div></details>';
+}
 function climaLinea(){
   if (!climaVigente()) return '<p class="vivo-l aviso">Pronóstico vencido (cargado el '+esc(fechaCorta(CLIMA.cargado))+'): pedime uno nuevo en el chat. Mientras, anotá la lluvia con los botones de Anotar.</p>';
   const R=CLIMA.dias.filter(c=>c.d<today && c.d>=sumarDias(today,-7));
@@ -2529,6 +2590,8 @@ function hayCosechaCerca(){
 }
 /* ============ cambios acordados en el chat (la bitácora es la fuente; esto es el rastro) ============ */
 const CAMBIOS = [
+  {d:"2026-09-29", t:"Clima y VPD: tabla nueva arriba de «Hoy» con temperatura, humedad, lluvia y VPD de día y de noche (kPa), coloreado contra el rango de la etapa que manda. La ronda automática lo calcula hora por hora y avisa VPD alto (estrés) y noches saturadas (rocío en el cogollo). Recordatorio nuevo: «hace N días que no registrás riego ni llovió fuerte». Notificaciones propias por la app ntfy."},
+  {d:"2026-09-29", t:"Secado en kPa: 0,6-0,9 adentro de la caja; curado 58-62 % en el frasco. Humidificador: útil hasta 26 °C y en volumen chico; arriba de 28 °C primero se baja la temperatura. Año pasado cargado como línea de base: 600 g a 1 kg secos por planta, con botrytis. Extracciones: Experimento 1 (rosin de kief con planchita) y 2 (rosin de flor), y compra de balanza de 0,01 g."},
   {d:"2026-09-29", t:"Toxi: floración y corte corregidos. En Lanús la flor franca arranca ~1/2 (no el 15/1) y 60 días de banco son 60-70 afuera: corte estimado 1ª quincena de abril, no marzo. Hay una guía nueva «Marcar el arranque de la flor» y desde esa fecha se recalcula todo (corte, Bt, techito, polinización)."},
   {d:"2026-09-29", t:"Se germinan las 4 Toxi: 3 al bancal y la 4ª a una geotextil de 40 L (no 20: agua) apoyada sobre tierra, armada el 11/10. Una sola compra grande antes del 8/10: 3 geotextiles 40 L, Growmix 80 L, compost 20 L, humus 30 L. La tanda 2 pasa a 2 geotextiles de 40 L."},
   {d:"2026-09-29", t:"Secado: se seca en el ALTILLO. Ficha nueva «Secado en el altillo» con qué medir (piso, 8/15/22 h), tabla de qué hacer según la máxima, y ensayo de secado en noviembre con las hojas del LST. Guías «Medir el altillo» en octubre y noviembre."},
@@ -2770,7 +2833,7 @@ function renderHoy(){
   if (guia){ document.getElementById("hoy").innerHTML = guiaHTML(); return; }
   if (diagAbierto){ document.getElementById("hoy").innerHTML = diagHTML(); return; }
   document.getElementById("hoy").innerHTML =
-      cabeceraHTML() + rondaHTML() + alertasHTML() + vivoHTML() + ahoraHTML() + esperaHTML() + anotarHTML()
+      cabeceraHTML() + rondaHTML() + alertasHTML() + climaTablaHTML() + vivoHTML() + ahoraHTML() + esperaHTML() + anotarHTML()
     + '<button id="sos" type="button">Algo anda mal →</button>'
     + (hayCosechaCerca() ? cosechaHTML() : "")
     + casaHTML() + proximosHTML() + cambiosHTML();
@@ -2880,7 +2943,7 @@ function cosechaRegHTML(){
       + '</div></details>';
   }).join("");
   return '<details class="card" id="grp-cos"><summary>Cosecha y rendimiento<span class="cnt">'+Object.keys(cosecha).filter(k=>num(cosecha[k].seco)).length+' pesadas</span></summary><div class="card-body">'
-    + '<p class="intro">Balanza de cocina, dos veces por planta: recién cortada (sin las hojas grandes) y el día que va a frasco. Descarte = lo que tiraste por moho u oruga. Sin estos números, en abril no sabés qué genética conviene ni si el secado funcionó. Año pasado: dos plantas en el bancal, «un kilo cada una» — falta saber si era húmedo o seco.</p>'
+    + '<p class="intro">Balanza de cocina, dos veces por planta: recién cortada (sin las hojas grandes) y el día que va a frasco. Descarte = lo que tiraste por moho u oruga. Sin estos números, en abril no sabés qué genética conviene ni si el secado funcionó. Año pasado (tu línea de base): dos plantas en el bancal, en seco y sin pesar todo: la primera pesada pasó los 200 g y quedaba más del doble, o sea unos 600 g a 1 kg por planta. Y con botrytis. Este año el objetivo no es superar ese número: es igualarlo con cero cogollos podridos y mejor secado.</p>'
     + grupos + '</div></details>';
 }
 const EX_TIPOS=[["manteca","Manteca / aceite"],["tintura","Tintura"],["agua","Hash en agua fría"],["rosin","Rosin"],["dry","Dry sift (tamizado)"],["otro","Otro"]];
@@ -2900,7 +2963,7 @@ function extrHTML(){
     + '<button id="ex-ok" type="button">Agregar</button></div>'
     + (lista.length ? '<ul class="dlog">'+lista.map(x=>{ const r=(x.u==="g"&&num(x.g))?Math.round(num(x.p)/num(x.g)*1000)/10:null;
         return '<li><span class="df">'+fechaCorta(x.d)+'</span><span class="da"><b>'+esc((EX_TIPOS.find(t=>t[0]===x.t)||[0,x.t])[1])+'</b> · '+esc((EX_MAT.find(t=>t[0]===x.m)||[0,x.m])[1])+' '+fmtQ(num(x.g))+' g → '+fmtQ(num(x.p))+' '+esc(x.u)+(r!==null?' · <b>'+String(r).replace(".",",")+' %</b>':'')+(x.n?'<br>'+esc(x.n):'')+'</span><button class="dx" data-exdel="'+esc(x.id)+'" type="button" aria-label="Borrar">×</button></li>'; }).join("")+'</ul>'
-      : '<p class="gal-vacia">Todavía nada. La primera prueba razonable: manteca con el recorte de la tanda 1, en enero.</p>')
+      : '<p class="gal-vacia">Todavía nada. Arrancamos ya: «Experimento 1 · rosin de kief con la planchita» está en Hoy → cosas de casa. Después, manteca con el recorte de la tanda 1 en enero.</p>')
     + '</div></details>';
 }
 function renderGen(){

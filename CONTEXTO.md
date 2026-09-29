@@ -30,6 +30,11 @@ Regla de la bitácora: **certeza, no dudas**. Lo que no hace falta no va, y lo q
 - **Breeder**: 12 Super Lemon Haze regulares en casa, lejos del bancal.
 - **Secado: en el ALTILLO.** Medirlo con el termohigrómetro en octubre y en noviembre, y hacer el ensayo de secado. Cajas en el piso y ventilación de noche.
 - **Plagas**: Bt kurstaki (Dipel) en flor cada 7-10 días; techito de nylon sobre el bancal desde la semana 3 de flor de las Toxi; cúpula enterrada contra babosas.
-- **Registro de cosecha** por planta (húmedo, seco, descarte) y registro de extracciones. Falta un dato: el «1 kg por planta» del año pasado, ¿era húmedo o seco?
+- **Registro de cosecha** por planta (húmedo, seco, descarte) y registro de extracciones.
+- **Año pasado (línea de base):** 2 plantas en el bancal, ~600 g a 1 kg SECOS por planta (primera pesada >200 g y quedaba más del doble), con botrytis.
+- **Extracciones:** Tomy es novato (solo kief del picador). Experimentos guiados: 1) rosin de kief con planchita, 2) rosin de flor. Falta comprar la balanza de 0,01 g.
+- **Visitas:** cada 3-4 días con imprevistos. Diseñar para la ausencia (40 L, mulch, recordatorios de riego).
+- **Clima = aliado:** VPD en kPa de día (9-18 h) y de noche en la tabla «Clima y VPD». Rangos de día: plántula 0,4-0,8 · vegetativo 0,8-1,2 · flor 1,0-1,5 · fin de flor 1,2-1,6. Noche <0,15 = rocío. Secado: 0,6-0,9 adentro de la caja; curado 58-62 % en el frasco.
+- **Notificaciones propias:** app ntfy, suscripta al tema que está en la Routine «Ronda Suelo Vivo» (trig_01QU2vywp6rGJqJrsxJpUsNV). Lo que Tomy quiere a futuro: una app de verdad (PWA con push).
 - Agua: de lluvia como principal; ácido ascórbico en polvo de respaldo.
 - Nada de lombricario. Nada de freezer ni heladera para secar.
