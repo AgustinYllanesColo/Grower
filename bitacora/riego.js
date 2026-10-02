@@ -102,6 +102,14 @@
     const hoy = S.hoy, dias = {}; (S.clima || []).forEach(c => { dias[c.d] = c; });
     const ultimoClima = (S.clima || []).reduce((m, c) => c.d > m ? c.d : m, hoy);
     const riegos = new Set((S.diario || []).filter(e => g.riegos.includes(e.a)).map(e => e.d));
+    /* riego con litros anotados ("20 L", "3,5 L c/u"): resta esa agua; sin litros, se asume que quedó lleno */
+    const parcial = {}, lleno = new Set();
+    (S.diario || []).filter(e => g.riegos.includes(e.a)).forEach(e => {
+      const m = String(e.n || "").match(/^\s*(\d+(?:[.,]\d+)?)\s*L/i);
+      if (m && e.a !== "riego") { const L = parseFloat(m[1].replace(",", ".")); parcial[e.d] = (parcial[e.d] || 0) + (g.tipo === "suelo" ? L / 2 : L); }
+      else lleno.add(e.d);
+    });
+    const regar = (def, f) => { if (lleno.has(f)) def = 0; if (parcial[f] != null) def = Math.max(0, def - parcial[f]); return def; };
     const lluAnot = {}; (S.diario || []).forEach(e => { if (LLUVIA_ANOTADA[e.a] != null) lluAnot[e.d] = Math.max(lluAnot[e.d] || 0, LLUVIA_ANOTADA[e.a]); });
     const dedos = {}; (S.obs || []).forEach(o => { if (o.k === g.dedo) dedos[o.d] = o.v; });
     /* pluviómetro propio: manda sobre cualquier otra fuente */
@@ -112,10 +120,11 @@
     (S.obs || []).filter(o => o.k === g.dedo && o.p != null && Q[o.v] != null).sort((a, b) => a.d < b.d ? -1 : 1)
       .forEach(o => { kcal = Math.min(1.6, Math.max(0.6, kcal * (1 + 0.6 * (Q[o.v] - o.p)))); ncal++; });
     /* ancla: el último dato firme (riego, dedo o armado) */
-    const firmes = [...riegos, ...Object.keys(dedos), g.desde].filter(Boolean).filter(d => d <= hoy).sort();
+    const firmes = [...lleno, ...Object.keys(dedos), g.desde].filter(Boolean).filter(d => d <= hoy).sort();
     let ancla = firmes.length ? firmes[firmes.length - 1] : suma(hoy, -7);
     let def = 0, sinDato = !firmes.length;
-    if (dedos[ancla] && !riegos.has(ancla)) def = g.cap * ({ hum: 0.2, apenas: 0.5, seca: 0.85, secas: 0.6 }[dedos[ancla]] || 0.3);
+    if (dedos[ancla]) def = g.cap * ({ hum: 0.2, apenas: 0.5, seca: 0.85, secas: 0.6 }[dedos[ancla]] || 0.3);
+    if (ancla < hoy) def = regar(def, ancla);   /* el dedo se mira antes de regar */
     if (sinDato) def = g.cap * 0.5;
     const perdida = (c, f) => { const e = et0(c, f); return (g.tipo === "suelo" ? e * g.kc : e * g.coef) * kcal; };
     const entra = (c, f, segura) => {
@@ -143,8 +152,8 @@
     for (let f = suma(ancla, 1); f < hoy; f = suma(f, 1)) {
       const c = dias[f]; const llu = entra(c, f, false);
       def = Math.max(0, def + perdida(c, f) - llu);
-      if (riegos.has(f)) def = 0;
       if (dedos[f]) def = g.cap * ({ hum: 0.2, apenas: 0.5, seca: 0.85, secas: 0.6 }[dedos[f]] || 0.3);
+      def = regar(def, f);
       def = Math.min(def, g.cap);
       hist.push({ d: f, pct: Math.round(def / g.cap * 100), llu: r1(llu), regado: riegos.has(f) });
     }
@@ -154,7 +163,7 @@
     const resumen = { ultRiego: ultR, diasSin: ultR ? entre(ultR, hoy) : null, lluvia: lluviaDesde, pico: pico ? pico.pct : null, picoD: pico ? pico.d : null };
     /* hoy y lo que viene: decidir */
     const out = [], hoyRegado = riegos.has(hoy);
-    if (hoyRegado) def = 0;
+    if (hoyRegado) def = regar(def, hoy);
     let saturado = false;
     for (let k = 0, f = hoy; f <= ultimoClima && k < 10; k++, f = suma(f, 1)) {
       const c = dias[f], e = perdida(c, f), llu = entra(c, f, true), lluBruta = entra(c, f, false);
