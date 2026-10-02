@@ -1130,7 +1130,7 @@ Y por lo tanto: <b>para los gatos, usá las ramas finas cruzadas, no la borra</b
 
     </div></details><details class="card grupo"><summary>Riego y la cama a distancia<span class="cnt">2 fichas</span></summary><div class="card-body"><details class="ficha">
       <summary>La cama a distancia <span class="hint">cultivar en un lugar al que vas cada tres o cuatro días</span></summary>
-      <div class="ficha-body"><div class="regla"><b>La regla</b>Todo lo que dependa de que estés presente, falla. Mulch FINO mientras el trébol nace (una plántula no atraviesa 8 cm de pasto seco); cuando el cover tenga porte, 8-10 cm antes del calor de diciembre. Riego para tres días: 2 baldes de 20 L en 2-3 pasadas con un minuto de espera. Suelo desnudo se tapa antes que cualquier otra cosa. Test: el dedo hasta la tierra tiene que salir húmedo.</div>
+      <div class="ficha-body"><div class="regla"><b>La regla</b>Todo lo que dependa de que estés presente, falla. Mulch FINO mientras el trébol nace (una plántula no atraviesa 8 cm de pasto seco); cuando el cover tenga porte, 8-10 cm antes del calor de diciembre. Riego para tres días: 4 baldes de 10 L en 2-3 pasadas con un minuto de espera. Suelo desnudo se tapa antes que cualquier otra cosa. Test: el dedo hasta la tierra tiene que salir húmedo.</div>
         <p>Tu bancal no está donde vivís. Vas cada algunos días, no todos los días. Eso no es un detalle: es la restricción que ordena todo lo demás, y hay que diseñar el cultivo alrededor de ella en vez de pelearla.</p>
 
         <h4>La regla que sale de ahí</h4>
@@ -2348,7 +2348,7 @@ function acciones(){
     riesgo:"Si en verano deja de llover y no lo tenés, cada riego de canilla frena la biología del suelo."});
   A.push({id:"agua_lluvia", n:"Juntar agua de lluvia (y taparla)", tipo:"cama", desde:"2026-09-29", due:"2026-09-29", cada:14, hasta:"2027-03-31",
     why:"El agua de lluvia es la mejor que tenés: sin cloro, sin cloramina, y cae gratis justo en la época de tormentas. Reemplaza al ácido ascórbico mientras llueva. Agua quieta destapada es criadero del mosquito del dengue: se tapa o se usa antes de 5 días.",
-    pasos:["2 o 3 baldes de 20 L destapados antes de la lluvia, o uno bajo la bajada del techo","Si es del techo: dejar ir los primeros minutos (lavan hojas y polvo)","Cuando terminó de llover: tapar con tapa o tela atada","Usarla dentro de 5 días; si sobra, al bancal"], dur:"5 min"});
+    pasos:["2 o 3 baldes destapados antes de la lluvia, o uno bajo la bajada del techo","Si es del techo: dejar ir los primeros minutos (lavan hojas y polvo)","Cuando terminó de llover: tapar con tapa o tela atada","Usarla dentro de 5 días; si sobra, al bancal"], dur:"5 min"});
   A.push({id:"c_siembra", n:"Juntar lo de la siembra: vasitos, botellas, tutores, rociador, etiquetas", tipo:"compra", desde:"2026-09-27", due:"2026-10-02", venc:20,
     why:"Todo gratis o de almacén, pero tiene que estar el domingo 4/10 en la mano: 4 medias botellas transparentes + 4 vasitos de 500 ml con agujeros (Toxi) + 12 vasitos (breeder) + 8 tutores/cañas + un rociador o botella con tapa agujereada + etiquetas y fibrón.",
     pasos:["4 botellas de 1,5 L cortadas a la mitad, sin tapa, 3-4 agujeros","16 vasitos de 500 ml (yogur, café) con 4 agujeros abajo","8 tutores: cañas, ramas rectas, listones (4 para las macetas, 4 para las Toxi después)","Rociador de mano o botella con la tapa agujereada","Etiquetas (tapas de botella, cinta de papel) y fibrón indeleble","Ramas finas para cruzar sobre las macetas"], dur:"30 min",
@@ -2706,7 +2706,7 @@ const OBS = {
   trebol:{q:"¿Cómo viene el trébol?", o:[["nada","Nada todavía"],["asomo","Asomaron plantines"],["hojas","Hojas verdaderas"],["cubre","Tapa el suelo"]],
     r:{nada:"Si hace menos de 10 días que sembraste, es normal. Que no se seque ni un día.", asomo:"Riego suave y seguido. Nada encima: ni borra, ni melaza, ni mulch grueso.", hojas:"Ya se ve qué salió. Si hay claros, la resiembra se destraba sola.", cubre:"Cover cerrado: se destraban la borra, el trasplante de las Toxi y el mulch grueso."}},
   dedo:{q:"Dedo a 3 cm bajo el mulch, hasta la tierra:", o:[["hum","Húmeda"],["apenas","Apenas húmeda"],["seca","Seca, sale polvo"]],
-    r:{hum:"No hace falta regar hoy.", apenas:"Regá hoy, profundo: 2 baldes de 20 L en 2-3 pasadas con un minuto entre cada una.", seca:"Regá ya, en 2-3 pasadas. Si el trébol ya tiene porte, sumá mulch; si recién nace, no lo tapes: vení más seguido."}},
+    r:{hum:"No hace falta regar hoy.", apenas:"Regá hoy, profundo: 4 baldes de 10 L en 2-3 pasadas con un minuto entre cada una.", seca:"Regá ya, en 2-3 pasadas. Si el trébol ya tiene porte, sumá mulch; si recién nace, no lo tapes: vení más seguido."}},
   suelo:{q:"¿Tierra a la vista?", o:[["no","No, todo tapado"],["tape","Sí, y la tapé"],["sin","Sí, sin material"]],
     r:{no:"", tape:"Bien: el suelo desnudo se tapa antes que cualquier otra cosa.", sin:"Pasto seco, cartón u hojas de la calle: lo que haya. Y ramas finas cruzadas encima por los gatos."}},
   olor:{q:"Levantá un poco el mulch y olé:", o:[["bosque","A tierra de bosque"],["nada","A nada"],["agrio","Agrio o a alcohol"]],

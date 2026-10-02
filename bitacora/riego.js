@@ -184,9 +184,9 @@
     return conConfianza({ dias: out, hist: hist, resumen: resumen, ancla: ancla, sinDato: sinDato, orden: orden(g, out) });
   }
   function dosis(g, def) {
-    if (g.tipo === "suelo" && g.cap <= 8) return "riego suave: 8-10 mm = 16-20 L con regadera o a mano, sin lavar la semilla";
-    if (g.tipo === "suelo") { const mm = Math.max(15, Math.min(30, Math.round(def + 5))); return mm + " mm = " + Math.round(mm * 2) + " L (" + Math.ceil(mm * 2 / 20) + " baldes de 20 L) en 2-3 pasadas"; }
-    const l = Math.max(3, Math.round(def + 1)); return "≈ " + l + " L por maceta, despacio, hasta que escurra";
+    if (g.tipo === "suelo" && g.cap <= 8) return "riego suave: 8-10 mm = 16-20 L (2 baldes de 10 L) con regadera o a mano, sin lavar la semilla";
+    if (g.tipo === "suelo") { const mm = Math.max(15, Math.min(30, Math.round(def + 5))); return mm + " mm = " + Math.round(mm * 2) + " L (" + Math.ceil(mm * 2 / 10) + " baldes de 10 L) en 2-3 pasadas"; }
+    const l = Math.max(3, Math.round(def + 1)); return "≈ " + l + " L por maceta (" + (l >= 10 ? Math.round(l / 10 * 10) / 10 + " baldes" : "medio balde o menos") + "), despacio, hasta que escurra";
   }
   const DIAS_N = ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"];
   function cuando(f, hoy) { const n = entre(hoy, f); return n === 0 ? "hoy" : n === 1 ? "mañana" : DIAS_N[d2(f).getDay()] + " " + d2(f).getDate() + "/" + (d2(f).getMonth() + 1); }
