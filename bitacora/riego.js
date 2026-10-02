@@ -157,7 +157,7 @@
       const dd = out.find(x => x.d === suma(g.siembra, -1)) || out[0];
       out.forEach(x => { if (x.d === dd.d) { x.est = "regar"; x.txt = "regar a fondo"; } });
       return { dias: out, hist: hist, resumen: resumen, ancla: ancla, sinDato: sinDato,
-               orden: { nivel: "avi", t: dd.d === hoy ? "Regá a fondo hoy" : "Regá a fondo " + cuando(dd.d, hoy),
+               orden: { nivel: "avi", t: dd.d === hoy ? "Regá a fondo hoy" : (entre(hoy, g.siembra) === 2 ? "Regá a fondo hoy o mañana" : "Regá a fondo " + cuando(dd.d, hoy)),
                         d: "Se siembra el " + cuando(g.siembra, hoy) + ": los 40 L tienen que estar mojados de antes, la semilla va en sustrato húmedo. ≈ 6-8 L por maceta, despacio, hasta que escurra. La lluvia no entra con el cartón." } };
     }
     return { dias: out, hist: hist, resumen: resumen, ancla: ancla, sinDato: sinDato, orden: orden(g, out) };
