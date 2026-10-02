@@ -380,6 +380,13 @@ def main():
         o = g.get("orden") or {}
         if o.get("nivel") in ("urg", "avi"):
             aviso(o["nivel"], f"{g['nombre']}: {o['t'].lower()}", o.get("d", ""))
+    prox_r = sorted(g["proximo"] for g in ordenes if g.get("proximo"))
+    tarea_c = sorted(a["due"] for a in agenda.get("items", []) if a.get("tipo") == "cama" and a.get("due"))
+    cand = [max(hoy, x) for x in (prox_r[:1] + tarea_c[:1])]
+    if ult_pres: cand.append(max(hoy, (fecha(ult_pres) + dt.timedelta(days=4)).isoformat()))
+    if cand:
+        v = min(cand)
+        aviso("info", "Próxima visita: " + nombre_dia(v), "El orden, los litros y el tiempo están en «Visita» arriba de todo en la bitácora.")
     if sin_riego is not None and sin_riego >= 4 and not any((g.get("orden") or {}).get("nivel") in ("urg", "avi") for g in ordenes):
         aviso("info", f"Hace {sin_riego} días que no anotás un riego",
               "Si regaste, anotalo: el cálculo del próximo riego parte de ese dato.")

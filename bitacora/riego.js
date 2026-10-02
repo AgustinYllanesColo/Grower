@@ -104,18 +104,39 @@
     const riegos = new Set((S.diario || []).filter(e => g.riegos.includes(e.a)).map(e => e.d));
     const lluAnot = {}; (S.diario || []).forEach(e => { if (LLUVIA_ANOTADA[e.a] != null) lluAnot[e.d] = Math.max(lluAnot[e.d] || 0, LLUVIA_ANOTADA[e.a]); });
     const dedos = {}; (S.obs || []).forEach(o => { if (o.k === g.dedo) dedos[o.d] = o.v; });
+    /* pluviómetro propio: manda sobre cualquier otra fuente */
+    const pluvio = {}; (S.diario || []).forEach(e => { if (e.a === "lluvia_mm") { const v = parseFloat(String(e.n).replace(",", ".")); if (isFinite(v)) pluvio[e.d] = v; } });
+    /* calibración: cada vez que el dedo contradijo al cálculo, el consumo del grupo se corrige */
+    const Q = { hum: 0.2, apenas: 0.5, seca: 0.85, secas: 0.6 };
+    let kcal = 1, ncal = 0;
+    (S.obs || []).filter(o => o.k === g.dedo && o.p != null && Q[o.v] != null).sort((a, b) => a.d < b.d ? -1 : 1)
+      .forEach(o => { kcal = Math.min(1.6, Math.max(0.6, kcal * (1 + 0.6 * (Q[o.v] - o.p)))); ncal++; });
     /* ancla: el último dato firme (riego, dedo o armado) */
     const firmes = [...riegos, ...Object.keys(dedos), g.desde].filter(Boolean).filter(d => d <= hoy).sort();
     let ancla = firmes.length ? firmes[firmes.length - 1] : suma(hoy, -7);
     let def = 0, sinDato = !firmes.length;
     if (dedos[ancla] && !riegos.has(ancla)) def = g.cap * ({ hum: 0.2, apenas: 0.5, seca: 0.85, secas: 0.6 }[dedos[ancla]] || 0.3);
     if (sinDato) def = g.cap * 0.5;
-    const perdida = (c, f) => { const e = et0(c, f); return g.tipo === "suelo" ? e * g.kc : e * g.coef; };
+    const perdida = (c, f) => { const e = et0(c, f); return (g.tipo === "suelo" ? e * g.kc : e * g.coef) * kcal; };
     const entra = (c, f, segura) => {
       let mm = c ? (segura ? lluviaSegura(c, f, hoy) : (c.mm || 0)) : (lluAnot[f] || 0);
       if (!c && lluAnot[f]) mm = lluAnot[f];
+      if (pluvio[f] != null) mm = pluvio[f];
       if (g.tipo === "suelo") return Math.max(0, mm - 1);
       return g.lluviaTapa ? 0 : mm * 0.1;            // una geotextil de 40 L junta ~0,1 L por mm
+    };
+    /* qué tan confiable es el número: días desde el último dato firme, calibración y origen de la lluvia */
+    const conConfianza = r => {
+      const firme = [...riegos, ...Object.keys(dedos)].filter(d => d <= hoy).sort().pop();
+      const df = firme ? entre(firme, hoy) : 99;
+      const hayPluvio = Object.keys(pluvio).some(d => d >= suma(hoy, -7));
+      const nivel = df <= 3 && ncal >= 2 ? "alta" : df <= 6 ? "media" : "baja";
+      const txt = (df >= 99 ? "sin riegos ni dedo anotados" : "último dato firme hace " + df + (df === 1 ? " día" : " días"))
+        + " · " + (ncal ? "calibrado con " + ncal + (ncal === 1 ? " medición" : " mediciones") + " del dedo" : "sin calibrar con tu dedo")
+        + " · lluvia " + (hayPluvio ? "de tu pluviómetro" : "medida por el SMN a 12-20 km");
+      r.confianza = { nivel: nivel, txt: txt, firme: firme || null, dias: df, kcal: Math.round(kcal * 100) / 100, ncal: ncal, pluvio: hayPluvio };
+      const p = r.dias.find(x => x.est === "regar" || x.est === "urgente"); r.proximo = p ? p.d : null;
+      return r;
     };
     /* pasado: desde el día siguiente al ancla hasta ayer (queda como historia) */
     const hist = [];
@@ -156,11 +177,11 @@
     if (g.siembra && entre(hoy, g.siembra) >= 0 && entre(hoy, g.siembra) <= 2 && ![...riegos].some(d => d >= suma(hoy, -2))) {
       const dd = out.find(x => x.d === suma(g.siembra, -1)) || out[0];
       out.forEach(x => { if (x.d === dd.d) { x.est = "regar"; x.txt = "regar a fondo"; } });
-      return { dias: out, hist: hist, resumen: resumen, ancla: ancla, sinDato: sinDato,
+      return conConfianza({ dias: out, hist: hist, resumen: resumen, ancla: ancla, sinDato: sinDato,
                orden: { nivel: "avi", t: dd.d === hoy ? "Regá a fondo hoy" : (entre(hoy, g.siembra) === 2 ? "Regá a fondo hoy o mañana" : "Regá a fondo " + cuando(dd.d, hoy)),
-                        d: "Se siembra el " + cuando(g.siembra, hoy) + ": los 40 L tienen que estar mojados de antes, la semilla va en sustrato húmedo. ≈ 6-8 L por maceta, despacio, hasta que escurra. La lluvia no entra con el cartón." } };
+                        d: "Se siembra el " + cuando(g.siembra, hoy) + ": los 40 L tienen que estar mojados de antes, la semilla va en sustrato húmedo. ≈ 6-8 L por maceta, despacio, hasta que escurra. La lluvia no entra con el cartón." } });
     }
-    return { dias: out, hist: hist, resumen: resumen, ancla: ancla, sinDato: sinDato, orden: orden(g, out) };
+    return conConfianza({ dias: out, hist: hist, resumen: resumen, ancla: ancla, sinDato: sinDato, orden: orden(g, out) });
   }
   function dosis(g, def) {
     if (g.tipo === "suelo" && g.cap <= 8) return "riego suave: 8-10 mm = 16-20 L con regadera o a mano, sin lavar la semilla";
@@ -204,6 +225,6 @@
     const ag = process.argv[6] && fs.existsSync(process.argv[6]) ? ld(process.argv[6]) : {};
     const sb = {}; (ag.items || []).forEach(a => { if (a.id === "germ_t1") sb.t1 = a.due; if (a.id === "germ_t2") sb.t2 = a.due; });
     const P = plan({ hoy: hoy, flor: fl, tandas: ck.tandas, eventos: ck.eventos, obs: ck.obs, diario: ck.diario, clima: cl.dias, siembras: sb });
-    process.stdout.write(JSON.stringify(P.map(g => ({ id: g.id, nombre: g.nombre, etapa: g.etapa, orden: g.orden, dias: g.dias.slice(0, 4) }))));
+    process.stdout.write(JSON.stringify(P.map(g => ({ id: g.id, nombre: g.nombre, etapa: g.etapa, orden: g.orden, proximo: g.proximo, confianza: g.confianza, dias: g.dias.slice(0, 4) }))));
   }
 })(typeof window !== "undefined" ? window : this);

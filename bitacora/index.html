@@ -533,6 +533,46 @@ td.aw .rg-c{margin-top:5px}
 .oc .i{width:13px;height:13px;margin-right:2px}
 .al-t .i{width:15px;height:15px}
 .al-urg .al-t .i{color:#B4521F}.al-avi .al-t .i{color:var(--leaf);width:9px;height:9px;margin:0 7px 0 3px;vertical-align:.05em}.al-info .al-t .i{color:var(--sky)}
+.hd{display:flex;justify-content:space-between;align-items:center;gap:10px;padding:14px 0 12px;border-bottom:1px solid var(--line);margin:0 0 14px}
+.hd-l{display:flex;flex-direction:column;gap:2px;min-width:0}
+.hd-d{font-family:"JetBrains Mono",monospace;font-size:11px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.hd-e{font-family:Archivo,sans-serif;font-weight:700;font-size:16px;letter-spacing:-.01em}
+.hd-p{flex:none;font-family:Archivo,sans-serif;font-size:12px;font-weight:600;border-radius:99px;padding:5px 10px;background:var(--surface-2);color:var(--muted)}
+.hd-p.mal{background:var(--iron-soft);color:var(--iron)}.hd-p.ok{background:var(--leaf-soft);color:var(--leaf)}
+.vis{background:var(--ink);color:var(--ground);border-radius:6px;padding:14px;margin:0 0 14px}
+.vis .oc{background:color-mix(in srgb,var(--ground) 14%,transparent);color:var(--ground)}
+.vis-h{display:flex;justify-content:space-between;align-items:flex-start;gap:10px;margin:0 0 8px}
+.vis-k{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.1em;text-transform:uppercase;opacity:.75}
+.vis h2{font-family:Archivo,sans-serif;font-size:22px;letter-spacing:-.02em;margin:2px 0 0}
+.vis-n{display:flex;gap:12px;font-family:Archivo,sans-serif;font-size:12px;opacity:.9}
+.vis-n span{display:flex;flex-direction:column;align-items:flex-end;line-height:1.1}
+.vis-n b{font-size:22px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.vis-d>summary{font-family:Archivo,sans-serif;font-size:13px;font-weight:600;cursor:pointer;list-style:none;padding:8px 0 4px;opacity:.9}
+.vis-d>summary::-webkit-details-marker{display:none}
+.vs-l{list-style:none;margin:6px 0 8px;padding:0;display:flex;flex-direction:column;gap:6px}
+.vs{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;background:var(--surface);color:var(--ink);border-radius:5px;padding:9px 10px}
+.vs.ok{opacity:.55}
+.vs.ok b{text-decoration:line-through}
+.vs-c{width:24px;height:24px;border-radius:99px;border:1.5px solid var(--line-strong);background:var(--ground);display:grid;place-items:center;padding:0;cursor:pointer;color:var(--leaf)}
+.vs.ok .vs-c{background:var(--leaf-soft);border-color:var(--leaf)}
+.vs-c .i{margin:0;width:14px;height:14px}
+.vs-b{display:flex;flex-direction:column;gap:2px;min-width:0}
+.vs-b b{font-family:Archivo,sans-serif;font-size:14.5px;line-height:1.25}
+.vs-b span{font-size:12.5px;color:var(--muted);line-height:1.35}
+.vs-a{font-family:Archivo,sans-serif;font-size:12.5px;font-weight:700;border:0;border-radius:99px;padding:8px 12px;background:var(--leaf);color:var(--ground);cursor:pointer;white-space:nowrap}
+.vis-ll{font-size:13px;margin:4px 0 0;opacity:.9}
+.conf{display:flex;flex-direction:column;gap:2px;border-radius:4px;padding:8px 10px;margin:0 0 9px;border:1px dashed var(--line-strong)}
+.conf-k{font-family:Archivo,sans-serif;font-size:11px;font-weight:700;letter-spacing:.06em;text-transform:uppercase}
+.conf-t,.conf-h{font-size:12.5px;color:var(--muted)}
+.conf-h{color:var(--ink)}
+.conf-alta{border-style:solid;border-color:var(--leaf)}.conf-alta .conf-k{color:var(--leaf)}
+.conf-media .conf-k{color:#9A6F00}
+.conf-baja{border-color:#B4521F}.conf-baja .conf-k{color:#B4521F}
+.an-row{display:flex;flex-wrap:wrap;align-items:center;gap:7px;margin:8px 0 0}
+.an-l{display:inline-flex;align-items:center;font-family:Archivo,sans-serif;font-size:13px;font-weight:600;min-width:104px}
+.an-row input{flex:1 1 120px;font:inherit;font-size:16px;color:var(--ink);background:var(--ground);border:1px solid var(--line-strong);border-radius:4px;padding:9px 10px;min-height:42px;min-width:0}
+.an-ok{font-size:13px;color:var(--leaf);margin:8px 0 0;font-weight:600}
+.confirma{background:#B4521F!important;color:#fff!important}
 .regla b{font-family:Archivo,sans-serif;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--leaf);display:block;margin-bottom:4px}
 </style>
 
@@ -1658,7 +1698,12 @@ function florFoto(){ return (typeof evd==="function" && evd("flor_toxi")) || FLO
 
 /* ---- observaciones (lo que viste, con fecha) ---- */
 function obsUlt(k){ let m=null; obs.forEach(o=>{ if(o.k===k && (!m || o.d>m.d || (o.d===m.d && (o.ts||0)>(m.ts||0)))) m=o; }); return m; }
-function obsSet(k,v){ const d=fdiario||today; obs=obs.filter(o=>!(o.k===k&&o.d===d)); obs.push({k:k,v:v,d:d,ts:Date.now()}); }
+function obsSet(k,v){ const d=fdiario||today; const p=(d===today)?prediccionHoy(k):null; obs=obs.filter(o=>!(o.k===k&&o.d===d)); const o={k:k,v:v,d:d,ts:Date.now()}; if(p!=null) o.p=p; obs.push(o); }
+/* lo que la tabla creía antes de que mires: con eso aprende */
+function prediccionHoy(k){
+  if (k!=="dedo" && k!=="mhum") return null;
+  const guard=obs; try{ obs=obs.filter(o=>!(o.k===k&&o.d===today)); const P=planRiego(); const g=P&&P.find(x=>x.dedo===k); return g&&g.dias[0] ? Math.round(g.dias[0].pct)/100 : null; }catch(e){ return null; } finally{ obs=guard; }
+}
 function obsEn(k,d){ return obs.find(o=>o.k===k&&o.d===d); }
 function ultima(acc){ const e = diario.filter(x=>x.a===acc).sort((a,b)=>a.d<b.d?1:-1)[0]; return e ? e.d : null; }
 function ultimaPresencia(){ let m=null; diario.forEach(x=>{ if(x.a in LLUV) return; if(!m||x.d>m) m=x.d; }); obs.forEach(x=>{ if(!m||x.d>m) m=x.d; }); Object.keys(eventos).forEach(k=>{ const e=eventos[k]; if(e&&e.d&&e.estado==="hecho"&&(!m||e.d>m)) m=e.d; }); return m; }
@@ -1984,7 +2029,7 @@ function estadoTanda(tanda){
     pct: enFlor ? Math.min(100,Math.round(df/65*100)) : 0};
 }
 
-const ACC_BTN = [["riego","Regué todo"],["riego_b","Regué bancal"],["riego_m","Regué macetas"],["melaza","Melaza"],["nota","Nota…"]];
+const ACC_BTN = [["riego","Regué todo"],["riego_b","Regué bancal"],["riego_m","Regué macetas"],["melaza","Melaza"],["nota","Nota"],["lluvia_mm","Lluvia (mm)"]];
 const ACC_OTRAS = [["extracto","Extracto de humus"],["top","Top dressing"],["mulch","Mulch"],
   ["fermento","Fermento"],["foliar","Foliar"],["lst","LST"],["bicho","Vi un bicho"],["poda","Deshojé"],["secado","Secado: T y HR"],["lluvia_poca","Llovizna (menos de 5 mm)"],["lluvia","Llovió"],["lluvia_fuerte","Tormenta / lluvia fuerte"]];
 const ACC_MAP = Object.fromEntries(ACC_BTN.concat(ACC_OTRAS));
@@ -2517,6 +2562,54 @@ const ICP = {
   olas:'<path d="M2 8c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2M2 14c2.5 0 2.5-2 5-2s2.5 2 5 2 2.5-2 5-2 2.5 2 5 2"/>'
 };
 function ic(n, cl){ return '<svg class="i'+(cl?' '+cl:'')+'" viewBox="0 0 24 24" aria-hidden="true">'+(ICP[n]||'')+'</svg>'; }
+let anotarModo = "nota", anotarMsg = "";
+function durMin(s){ const m=String(s||"").match(/(\d+)\s*(min|h)/); if(!m) return 10; return m[2]==="h"?Number(m[1])*60:Number(m[1]); }
+function litrosGrupo(g,d){
+  if(g.tipo==="suelo") return g.cap<=8 ? 18 : Math.max(15,Math.min(30,Math.round(d.def+5)))*2;
+  return Math.max(g.siembra?7:3, Math.round(d.def+1))*g.n;
+}
+function planVisita(){
+  const P=planRiego()||[], A=accConEstado();
+  const up=ultimaPresencia(), lim=up?sumarDias(up,4):today;
+  const motivos=[]; let V=null;
+  const poner=(d,m)=>{ if(d<today) d=today; if(!V||d<V){ V=d; } motivos.push([d,m]); };
+  P.forEach(g=>{ if(g.proximo) poner(g.proximo,"riego "+g.nombre.toLowerCase()); });
+  A.filter(a=>a.tipo==="cama"&&a.due&&["toca","pendiente","futura"].includes(a.st)).forEach(a=>poner((a.st==="toca"||a.st==="pendiente")?today:a.due, a.n));
+  poner(lim<today?today:lim, up?"4 días sin ir":"sin visitas anotadas");
+  const por=motivos.filter(m=>m[0]<=V).map(m=>m[1]);
+  const riegos=P.map(g=>{ const d=g.dias.find(x=>x.d===V); if(!d) return null;
+    const ordenHoy=V===today&&g.orden&&(g.orden.nivel==="urg"||g.orden.nivel==="avi")&&/hoy/.test(g.orden.t);
+    const hace=ordenHoy||d.est==="regar"||d.est==="urgente"||(d.pct>=35&&d.est!=="lluvia"&&d.est!=="saturado");
+    return hace?{g:g,d:d,L:litrosGrupo(g,d),hecho:diario.some(e=>e.d===today&&V===today&&g.riegos.includes(e.a))}:null; }).filter(Boolean);
+  const riegaMacetas=riegos.some(r=>r.g.tipo==="maceta");
+  const tareas=A.filter(a=>a.tipo==="cama"&&a.due&&a.due<=V&&["toca","pendiente","futura"].includes(a.st)&&!(riegaMacetas&&a.id==="papel_t1")).sort((a,b)=>a.due<b.due?-1:1);
+  const litros=riegos.reduce((x,r)=>x+r.L,0);
+  const min=5+riegos.reduce((x,r)=>x+Math.ceil(r.L/10)*3,0)+tareas.reduce((x,a)=>x+durMin(a.dur),0)+5;
+  return {V:V, por:[...new Set(por)], riegos:riegos, tareas:tareas, litros:litros, min:min};
+}
+let visTicks={}; try{ visTicks=JSON.parse(localStorage.getItem("bitacora-vis")||"{}"); }catch(e){}
+function visTick(k){ return !!visTicks[today+"|"+k]; }
+function visitaHTML(){
+  if(typeof Riego==="undefined") return "";
+  const v=planVisita(); const hoyV=v.V===today;
+  const cuando=hoyV?"Hoy":Riego.cuando(v.V,today).replace(/^./,c=>c.toUpperCase());
+  const paso=(k,titulo,sub,acc,hecho)=>'<li class="vs'+(hecho?' ok':'')+'"><button type="button" class="vs-c" data-vtick="'+k+'" aria-pressed="'+(hecho?'true':'false')+'" aria-label="Marcar">'+(hecho?ic("ok"):'')+'</button><div class="vs-b"><b>'+titulo+'</b>'+(sub?'<span>'+sub+'</span>':'')+'</div>'+(acc||'')+'</li>';
+  const obsHecha=(obsEn("dedo",today)?1:0);
+  let pasos='';
+  pasos+=paso("mirar","Mirar antes de tocar · 5 min","Dedo a 3 cm en cada grupo, trébol, olor de las macetas, babosas. Anotalo en «Lo vivo» antes de regar: con eso la tabla se calibra.", '<button class="vs-a" type="button" data-ir="vivo">Anotar</button>', hoyV&&(visTick("mirar")||obsHecha));
+  v.riegos.forEach(r=>{ const dosis=(r.g.orden&&/a fondo/.test(r.g.orden.t)) ? r.g.orden.d.split(". ").slice(1).join(". ") : (r.d.est==="regar"||r.d.est==="urgente") ? r.d.dosis : "le queda "+(100-r.d.pct)+" %: aprovechá que estás";
+    pasos+=paso("riego-"+r.g.id, ic("gota")+"Regar "+esc(r.g.nombre.toLowerCase())+" · "+r.L+" L", esc(dosis), hoyV&&!r.hecho?'<button class="vs-a" type="button" data-acc="'+(r.g.id==="bancal"?"riego_b":"riego_m")+'">Hecho</button>':'', r.hecho); });
+  v.tareas.forEach(a=>{ pasos+=paso("t-"+a.id, esc(a.n)+(a.dur?' · '+esc(a.dur):''), a.st==="futura"?'toca el '+esc(fechaCorta(a.due)):'', '<button class="vs-a" type="button" data-guia="'+a.id+'">Abrir</button>', false); });
+  pasos+=paso("cierre","Antes de irte · 3 min","Foto del bancal desde el ángulo de siempre, cartón de las macetas con peso, ramas cruzadas sobre la tierra a la vista.", '<button class="vs-a" type="button" data-fab="foto">Foto</button>', hoyV&&visTick("cierre"));
+  const llevar=[v.litros?v.litros+" L de agua (de lluvia si tenés)":null,"regadera o botella con la tapa agujereada"].concat(v.tareas.filter(a=>/^Juntar lo de|kit/i.test(a.n)).map(a=>"lo de: "+a.n.replace(/^Juntar lo de |^Juntar /,""))).filter(Boolean);
+  return '<section class="vis'+(hoyV?' vis-hoy':'')+'" id="visita">'
+    + '<div class="vis-h"><div><span class="vis-k">'+(hoyV?'Visita de hoy':'Próxima visita')+'</span><h2>'+esc(cuando)+(hoyV?'':' · '+esc(fechaCorta(v.V)))+'</h2></div>'
+    + '<div class="vis-n"><span><b>'+v.min+'</b> min</span><span><b>'+v.litros+'</b> L</span></div></div>'
+    + '<div class="ocs">'+v.por.slice(0,4).map(m=>'<span class="oc oc-neu">'+esc(m)+'</span>').join("")+'</div>'
+    + '<details class="vis-d"'+(hoyV?' open':'')+'><summary>'+(hoyV?'El orden de hoy':'Qué vas a hacer ese día')+' · '+(2+v.riegos.length+v.tareas.length)+' pasos</summary>'
+    + '<ol class="vs-l">'+pasos+'</ol>'
+    + '<p class="vis-ll"><b>Llevá:</b> '+esc(llevar.join(" · "))+'</p></details></section>';
+}
 let riegoSel = null; try{ riegoSel = localStorage.getItem("bitacora-rg"); }catch(e){}
 function planRiego(){
   if (typeof Riego==="undefined") return null;
@@ -2559,6 +2652,7 @@ function climaTablaHTML(){
     + '<div class="cr-top"><h2 class="cr-t">Clima y riego</h2><span class="cr-f">'+(climaVigente()?'actualizado '+esc(fechaCorta(CLIMA.cargado)):'pronóstico vencido')+'</span></div>'
     + (dias(CLIMA.cargado)>=2?'<p class="ord-dd ord-warn" style="margin:0 0 8px">'+ic("alerta")+'El clima no se actualiza desde el '+esc(fechaCorta(CLIMA.cargado))+': la ronda automática falló. No te guíes por esta tabla hasta que se actualice; pedímelo en el chat.</p>':'')
     + '<div class="ords">'+ords+'</div>'
+    + (g.confianza?'<div class="conf conf-'+g.confianza.nivel+'"><span class="conf-k">Agua útil · confianza '+g.confianza.nivel+'</span><span class="conf-t">'+esc(g.confianza.txt)+(g.confianza.ncal?' · consumo ×'+String(g.confianza.kcal).replace(".",","):'')+'</span>'+(g.confianza.nivel!=="alta"?'<span class="conf-h">Para subirla: dedo en «Lo vivo» en cada visita'+(g.confianza.pluvio?'':' y pluviómetro en la cama')+'.</span>':'')+'</div>':'')
     + '<div class="ord-det '+NIVEL_CL[o.nivel||"ok"]+'"><p class="ord-dt">'+ic(ORD_IC[o.nivel||"ok"])+esc(g.nombre)+': '+esc(o.t||"")+'</p><p class="ord-dd">'+esc(o.d||"")+'</p>'
     +   (function(){ const r=g.resumen||{}; const st=(k,v,sub)=>'<div class="st1"><span class="st1-k">'+k+'</span><b>'+v+'</b>'+(sub?'<span class="st1-s">'+sub+'</span>':'')+'</div>';
           let h='<div class="st3">'
@@ -2580,15 +2674,7 @@ function climaTablaHTML(){
     +   '<p><b>Fuentes.</b> '+esc(CLIMA.fuente||"")+' La probabilidad (%) sale de 31 corridas del modelo GFS; «¿?» marca los días en que las fuentes no coinciden. Un pronóstico nunca es seguro: por eso la tabla apuesta a la lluvia solo cuando es probable, y con semillas o plántulas nunca apuesta a la de mañana.</p>'
     + '</div></details></div>';
 }
-function climaLinea(){
-  if (!climaVigente()) return '<p class="vivo-l aviso">Pronóstico vencido (cargado el '+esc(fechaCorta(CLIMA.cargado))+'): pedime uno nuevo en el chat. Mientras, anotá la lluvia con los botones de Anotar.</p>';
-  const R=CLIMA.dias.filter(c=>c.d<today && c.d>=sumarDias(today,-7));
-  const tot=R.filter(c=>c.obs).reduce((a,c)=>a+c.mm,0), sinDato=R.filter(c=>!c.obs).length;
-  const conLluvia=R.filter(c=>c.mm>=1).map(c=>fechaCorta(c.d)+" "+String(c.mm).replace(".",",")+" mm"+(c.obs?"":" (estimado)"));
-  const reg = R.length ? '<p class="vivo-l">Últimos 7 días: <b>'+String(Math.round(tot*10)/10).replace(".",",")+' mm registrados</b>'+(conLluvia.length?' ('+esc(conLluvia.join(" · "))+')':' (nada)')+(sinDato?'<span class="vivo-m"> · '+sinDato+' día'+(sinDato>1?'s':'')+' sin dato de la estación</span>':'')+'</p>' : '';
-  const P=CLIMA.dias.filter(c=>c.d>=today).slice(0,5);
-  return reg+'<p class="vivo-l">Viene: '+P.map(c=>'<b>'+esc(fechaDia(c.d))+'</b> '+(c.tmax!=null?c.tmin+'-'+c.tmax+'° ':'')+(c.mm>=1?'☔ ≈'+c.mm+' mm, ':'')+esc(c.txt)).join(' · ')+'<span class="vivo-m"> · cargado el '+esc(fechaCorta(CLIMA.cargado))+'</span></p>';
-}
+
 /* aviso de clima para cada acción según su tipo */
 function climaAviso(a){
   const id=a.id||""; const px=p=>id.indexOf(p)===0;
@@ -2604,27 +2690,7 @@ function climaAviso(a){
   if (px("cog_") && rec) return "Llovió el "+fechaCorta(rec.d)+": sacudí suave cada cola y mirá adentro de los más gordos.";
   return "";
 }
-function riegoPlan(){
-  const urR=ultima("riego"); const LL=lluviasTodas().filter(l=>l.k>=1); const lu=LL[0]||null; const urL=lu?lu.d:null;
-  const ur=(urL&&(!urR||urL>urR))?urL:urR; const n=ur?dias(ur):null;
-  const porLluvia=!!(urL&&ur===urL);
-  const tre=obsUlt("trebol"), dedo=obsUlt("dedo"), V=vivas();
-  let cada, motivo;
-  if (V.some(([t,e])=>e.sem&&e.sem<=2)) { cada=2; motivo="plántulas con raíz de 2 cm en 40 L: no aguantan un día secas"; }
-  else if (V.length) { cada=3; motivo="macetas de 40 L al sol"; }
-  else if (!tre || tre.v==="nada" || tre.v==="asomo") { cada=3; motivo="el trébol recién nace y la semilla no puede secarse"; }
-  else { cada=4; motivo="trébol establecido y mulch"; }
-  let hoy=false;
-  if (dedo && dedo.d===today){ if(dedo.v==="seca"||dedo.v==="apenas") hoy=true; if(dedo.v==="hum") cada+=1; }
-  if (porLluvia && lu.k===2) cada+=1;
-  const secos = CLIMA.dias.filter(c=>ur && c.d>ur && c.d<today && ((c.tmax||0)>=27 || (c.hrmin||100)<=35));
-  if (secos.length && cada>2){ cada-=1; motivo += " · hubo calor seco el "+secos.map(c=>fechaCorta(c.d)).join(", ")+": el suelo pierde más agua"; }
-  let prox = hoy ? today : (ur ? sumarDias(ur,cada) : today);
-  const viene = climaVigente() ? lluviaQueViene(1,8) : null;
-  if (!hoy && viene && prox<=viene.d){ prox = viene.d; motivo += " · no riegues: viene lluvia el "+fechaDia(viene.d)+" (≈"+viene.mm+" mm), salvo que el dedo salga seco"; }
-  if (porLluvia) motivo += " · cuenta la lluvia del "+fechaCorta(urL)+(lu.src==="pronóstico"?" (según el pronóstico, no anotada)":(lu.src==="estación"?" ("+String(lu.mm).replace(".",",")+" mm en la estación de Lanús)":""))+(lu.k===2?", fuerte: un día más de margen":"")+": sin medir, confirmalo con el dedo";
-  return {prox:prox, cada:cada, motivo:motivo, ur:ur, n:n, atras: today>prox ? dias(prox) : 0, hoy:hoy, lluvia:porLluvia};
-}
+
 function melazaBloqueo(){
   const f=fdiario||today;
   const tre=obsUlt("trebol");
@@ -2794,19 +2860,14 @@ function ultimaSync(){ return CAMBIOS.map(c=>c.d).sort().slice(-1)[0]; }
 
 /* ============ HOY ============ */
 function cabeceraHTML(){
-  const f=faseActiva(), s=faseSiguiente(f);
+  const f=faseActiva();
   const up=ultimaPresencia(); const n=up?dias(up):null;
-  const pres = n===null ? "Sin registros todavía" : (n===0 ? "Estuviste hoy" : (n===1 ? "Estuviste ayer" : "Hace "+n+" días que no anotás nada"));
-  return '<div class="estado"><p class="k">'+esc(fechaDia(today))+' · día '+(dias("2026-08-28")+1)+' de la temporada</p>'
-    + '<h2>'+esc(f.title)+'</h2>'
-    + '<p class="sig">Etapa '+f.n+' de '+ETAPAS().length+' · '+esc(f.range)+(s?' · después: <b>'+esc(s.title)+'</b>':'')+'</p>'
-    + '<p class="sig'+(n!==null&&n>=5?' aviso':'')+'">'+esc(pres)+'</p></div>';
+  const pres = n===null ? "sin visitas anotadas" : (n===0 ? "estuviste hoy" : (n===1 ? "estuviste ayer" : "última visita hace "+n+" días"));
+  return '<div class="hd"><div class="hd-l"><span class="hd-d">'+esc(fechaDia(today))+'</span><span class="hd-e">'+esc(f.title)+'</span></div>'
+    + '<span class="hd-p'+(n!==null&&n>=5?' mal':(n!==null&&n<=3?' ok':''))+'">'+esc(pres)+'</span></div>';
 }
 function alertas(){
   const A=[]; const V=vivas();
-  const r=riegoPlan();
-  if (false && r.atras>=1 && !r.hoy) A.push({n:r.atras>=3?"urg":"avi", id:"riego"+r.prox, t:"Te tocaba regar el "+fechaCorta(r.prox)+(r.ur?(r.lluvia?" (lo último fue la lluvia del ":" (último riego: ")+fechaCorta(r.ur)+")":""), d:"Cada "+r.cada+" días porque "+r.motivo+". Si regaste y no lo anotaste, tocá «Regué»."});
-  if (false && r.hoy) A.push({n:"avi", id:"riegohoy"+today, t:"Regá hoy antes de irte", d:"Lo dijiste con el dedo: la tierra está seca o apenas húmeda. 2 baldes de 20 L en 2-3 pasadas."});
   const tf=lluviasTodas().find(l=>l.k===2 && dias(l.d)<=1); if (tf) A.push({n:"avi", id:"tormenta"+tf.d, t:"Hubo tormenta fuerte el "+fechaCorta(tf.d), d:"En la próxima visita: tutores, cúpulas, cartón de las macetas, mulch volado y charcos. El bancal no se riega hasta que el dedo diga seco."});
   const up=ultimaPresencia(); if(up && dias(up)>=5) A.push({n:"urg", id:"pres"+up, t:"Hace "+dias(up)+" días que no hay registro de la cama", d:"Con más de cuatro días, ni el mulch sostiene. Andá, y anotá lo que veas con los botones de «Lo vivo»."});
   const tarde=accConEstado().filter(a=>(a.st==="toca"||a.st==="pendiente") && a.due && dias(a.due)>=5 && a.riesgo && !a.temprano).sort((x,y)=>x.due<y.due?-1:1);
@@ -2843,16 +2904,7 @@ function alertasHTML(){
   const ord={urg:0,avi:1,info:2}; A.sort((a,b)=>ord[a.n]-ord[b.n]);
   return '<div class="alertas">'+A.map(alHTML).join("")+'</div>';
 }
-function riegoLinea(){
-  const r=riegoPlan();
-  const ult = r.ur ? (r.lluvia ? (r.n===0?"Llovió hoy":(r.n===1?"Llovió ayer":"Última agua (lluvia) hace "+r.n+" días")) : (r.n===0?"Regaste hoy":(r.n===1?"Regaste ayer":"Último riego hace "+r.n+" días"))) : "Sin riegos anotados";
-  let prox;
-  if (r.hoy) prox = "regá hoy";
-  else if (r.n===0) prox = "próximo el "+fechaDia(r.prox);
-  else if (r.atras>0) prox = "te tocaba el "+fechaCorta(r.prox);
-  else prox = (r.prox===today ? "hoy" : "próximo el "+fechaDia(r.prox));
-  return '<p class="vivo-l'+((r.atras>0||r.hoy)?' aviso':'')+'">'+esc(ult)+' · '+esc(prox)+'<span class="vivo-m"> · cada '+r.cada+' días: '+esc(r.motivo)+'</span></p>';
-}
+
 let vivoOpen = {};
 const OBS_BUENO = {trebol:["hojas","cubre"], dedo:["hum"], suelo:["no","tape"], olor:["bosque"], macetas:["bosque"], mhum:["hum"], enves:["nada"], hojas:["ok"]};
 const OBS_MALO = {trebol:[], dedo:["seca"], suelo:["sin"], olor:["agrio"], macetas:["agrio"], mhum:["secas"], enves:["algo"], hojas:["garra","mustia"]};
@@ -2954,7 +3006,10 @@ function anotarHTML(){
   const lista = diario.slice().sort((a,b)=> a.d===b.d ? (b.ts||0)-(a.ts||0) : (a.d<b.d?1:-1));
   return '<h2 class="sec">Anotar</h2><div class="anotar">'
     + (hoyF?'':'<p class="dia-last aviso">Anotando el '+fechaLinda(f)+'</p>')
-    + '<div class="accs">'+ACC_BTN.map(btn).join("")+'<button class="acc" data-fab="foto" type="button">Foto</button></div>'
+    + '<div class="accs">'+ACC_BTN.filter(a=>a[0]!=="nota").map(btn).join("")+'<button class="acc" data-fab="foto" type="button">Foto</button></div>'
+    + '<div class="an-row"><label class="an-l" for="an-mm">'+ic("lluvia")+'Pluviómetro</label><input id="an-mm" type="number" inputmode="decimal" min="0" step="0.5" placeholder="mm"><button class="acc" data-an="mm" type="button">Guardar lluvia</button></div>'
+    + '<div class="an-row"><label class="an-l" for="an-txt">'+ic(anotarModo==="secado"?"reloj":"info")+(anotarModo==="secado"?'Secado':'Nota')+'</label><input id="an-txt" type="text" maxlength="200" placeholder="'+(anotarModo==="secado"?'temperatura y humedad (ej: 24 °C · 58 %)':'lo que viste o hiciste')+'"><button class="acc" data-an="txt" type="button">Guardar</button></div>'
+    + (anotarMsg?'<p class="an-ok">'+ic("ok")+esc(anotarMsg)+'</p>':'')
     + (tipAnotar?'<p class="tan-tip">'+esc(tipAnotar)+(tipAnotar.startsWith("Melaza")?' <button class="acc" data-acc="melaza-igual" type="button" style="min-height:32px;padding:5px 10px;margin-left:6px">Igual la puse</button>':'')+'</p>':'')
     + '<details class="card"><summary>Otra fecha u otras cosas<span class="cnt">'+ACC_OTRAS.length+'</span></summary><div class="card-body">'
     +   '<div class="dia-f'+(hoyF?'':' on')+'"><span>Anotar en</span><input type="date" id="fdiario" value="'+f+'" max="'+today+'">'+(hoyF?'':'<button class="dia-hoy" data-fdia="hoy" type="button">Volver a hoy</button>')+'</div>'
@@ -3006,7 +3061,7 @@ function renderHoy(){
   if (guia){ document.getElementById("hoy").innerHTML = guiaHTML(); return; }
   if (diagAbierto){ document.getElementById("hoy").innerHTML = diagHTML(); return; }
   document.getElementById("hoy").innerHTML =
-      cabeceraHTML() + climaTablaHTML() + rondaHTML() + alertasHTML() + vivoHTML() + ahoraHTML() + esperaHTML() + anotarHTML()
+      cabeceraHTML() + visitaHTML() + climaTablaHTML() + rondaHTML() + alertasHTML() + vivoHTML() + ahoraHTML() + esperaHTML() + anotarHTML()
     + '<button id="sos" type="button">Algo anda mal →</button>'
     + (hayCosechaCerca() ? cosechaHTML() : "")
     + casaHTML() + proximosHTML() + cambiosHTML();
@@ -3050,7 +3105,7 @@ function mensajeContexto(){
   const L = ["Bitácora Suelo Vivo · "+fechaLinda(today)];
   const et = etapaActual(); L.push("Etapa: "+(et==="suelo"?"solo suelo y cover crop":(et==="planta"?"plantas en vegetativo":"plantas en flor"))+" · "+faseActiva().title);
   vivas().forEach(([t,e])=>L.push(t.nombre+": día "+e.d+(e.sem?", semana "+e.sem:"")+" · "+e.etapa));
-  const r=riegoPlan(); L.push("Último riego: "+(r.ur?fechaLinda(r.ur)+" (hace "+r.n+" días)":"sin registrar"));
+  (planRiego()||[]).forEach(g=>{ const r=g.resumen||{}, d=g.dias[0]; L.push(g.nombre+": agua útil "+(d?(100-d.pct)+" %":"—")+" · último riego "+(r.ultRiego?fechaLinda(r.ultRiego):"sin anotar")+" · "+((g.orden||{}).t||"")); });
   const desde=sumarDias(today,-7); const rec=diario.filter(x=>x.d>=desde).sort((a,b)=>a.d<b.d?-1:1).map(x=>x.d.slice(5)+" "+(ACC_MAP[x.a]||x.a)+(x.n?" ("+x.n+")":""));
   if(rec.length) L.push("Últimos 7 días: "+rec.join(" · "));
   const ob=Object.keys(OBS).map(k=>{ const o=obsUlt(k); return o?k+": "+obsTxt(k):null; }).filter(Boolean); if(ob.length) L.push("Lo último que vi: "+ob.join(" · "));
@@ -3409,6 +3464,18 @@ function onChange(e){
 }
 document.body.addEventListener("change", onChange);
 document.body.addEventListener("click", e=>{
+  const an=e.target.closest("button[data-an]");
+  if (an){
+    if (an.dataset.an==="mm"){ const el=document.getElementById("an-mm"); const v=parseFloat(String(el&&el.value||"").replace(",",".")); if(!(v>=0)){ if(el) el.focus(); return; }
+      const f=fdiario||today; diario=diario.filter(x=>{ const borra=x.d===f&&x.a==="lluvia_mm"; if(borra) borrados[kdia(x)]=Date.now(); return !borra; });
+      apuntar("lluvia_mm", String(v)); anotarMsg="Lluvia de "+String(v).replace(".",",")+" mm guardada: la tabla ya la usa."; renderHoy(); return; }
+    const el=document.getElementById("an-txt"); const t=(el&&el.value||"").trim(); if(!t){ if(el) el.focus(); return; }
+    apuntar(anotarModo==="secado"?"secado":"nota", t.slice(0,200)); anotarMsg=(anotarModo==="secado"?"Secado":"Nota")+" guardada."; anotarModo="nota"; renderHoy(); return;
+  }
+  const vt=e.target.closest("button[data-vtick]");
+  if (vt){ const k=today+"|"+vt.dataset.vtick; if(visTicks[k]) delete visTicks[k]; else visTicks[k]=1; try{ localStorage.setItem("bitacora-vis",JSON.stringify(visTicks)); }catch(err){} renderHoy(); return; }
+  const ir=e.target.closest("button[data-ir]");
+  if (ir){ const t=document.querySelector(".vivos"); if(t) t.scrollIntoView({block:"start",behavior:"smooth"}); return; }
   const rgb=e.target.closest("button[data-rg]");
   if (rgb){ riegoSel=rgb.dataset.rg; try{ localStorage.setItem("bitacora-rg",riegoSel); }catch(err){} renderHoy(); const c=document.getElementById("clima-card"); if(c) c.scrollIntoView({block:"start"}); return; }
   if (e.target.closest("#ex-ok")){
@@ -3455,7 +3522,7 @@ document.body.addEventListener("click", e=>{
     const v=cb.dataset.cond;
     if (v==="si"||v==="igual"){ guia.paso="pasos"; renderHoy(); window.scrollTo(0,0); return; }
     if (v==="no"){ const a=acc(guia.id); eventos[guia.id]={estado:"espera",d:today,prox:sumarDias(today,3),t:Date.now(),ticks:guia.ticks}; if(a&&a.cond) obsNoCond(a); guia=null; save(); renderTodo(); window.scrollTo(0,0); return; }
-    if (v==="desc"){ if(confirm("¿Sacar «"+(acc(guia.id)||{}).n+"» del plan? Queda en el Plan, en «Sacadas», por si querés volver.")){ eventos[guia.id]={estado:"descartada",d:today,t:Date.now()}; guia=null; save(); renderTodo(); window.scrollTo(0,0); } return; }
+    if (v==="desc"){ if(cb.dataset.ok!=="1"){ cb.dataset.ok="1"; cb.textContent="Tocá de nuevo para sacarla del plan (queda en el Plan, en «Sacadas»)"; cb.classList.add("confirma"); return; } eventos[guia.id]={estado:"descartada",d:today,t:Date.now()}; guia=null; save(); renderTodo(); window.scrollTo(0,0); return; }
   }
   const ud = e.target.closest("button[data-undesc]");
   if (ud){ delete eventos[ud.dataset.undesc]; save(); renderTodo(); return; }
@@ -3496,13 +3563,12 @@ document.body.addEventListener("click", e=>{
   }
   if (e.target.closest("#lightbox")){ document.getElementById("lightbox").classList.add("hidden"); document.getElementById("lightbox").innerHTML=""; document.body.style.overflow=""; return; }
   const gd = e.target.closest("button[data-gdel]");
-  if (gd){ if(confirm("¿Borrar esta foto? No se puede deshacer.")){ const id=gd.dataset.gdel; fotos = fotos.filter(f=>f.id!==id); save(); renderGen(); if(assetsNS) assetsNS.delete(id).catch(()=>{}); } return; }
+  if (gd){ if(gd.dataset.ok!=="1"){ gd.dataset.ok="1"; gd.textContent="¿Borrar?"; gd.classList.add("confirma"); setTimeout(()=>{ if(gd.isConnected){ gd.dataset.ok=""; gd.textContent="×"; gd.classList.remove("confirma"); } },3000); return; } const id=gd.dataset.gdel; fotos = fotos.filter(f=>f.id!==id); save(); renderGen(); if(assetsNS) assetsNS.delete(id).catch(()=>{}); return; }
   const accB = e.target.closest("button[data-acc]");
   if (accB){
     const a = accB.dataset.acc, enFab = !!accB.closest("#fab-sheet");
     tipAnotar="";
-    if (a==="nota"){ const n = prompt("¿Qué anotás?"); if (n && n.trim()) apuntar("nota", n.trim().slice(0,200)); }
-    else if (a==="secado"){ const n = prompt("Secado: temperatura y humedad en la caja (ej: 24 °C · 58 %)"); if (n && n.trim()) apuntar("secado", n.trim().slice(0,60)); }
+    if (a==="nota"||a==="secado"){ anotarModo=a; renderHoy(); const t=document.getElementById("an-txt"); if(t) t.focus(); }
     else if (a==="melaza-igual"){ apuntar("melaza"); }
     else {
       const f = fdiario || today;
