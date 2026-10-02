@@ -49,6 +49,10 @@ def vpd(t, hr):
 RANGOS = {"plántula": (0.4, 0.8), "vegetativo": (0.8, 1.2), "flor": (1.0, 1.5), "fin de flor": (1.2, 1.6)}
 
 
+def mmf(x):
+    return f"{x:g}".replace(".", ",")
+
+
 def kpa(x):
     return f"{x:.1f}".replace(".", ",")
 
@@ -70,7 +74,7 @@ def wttr():
         vd = [vpd(float(h["tempC"]), float(h["humidity"])) for h in dia] or [0]
         vn = [vpd(float(h["tempC"]), float(h["humidity"])) for h in noche] or [0]
         hrmax = max(int(h["humidity"]) for h in hs)
-        txt = (f"lluvia {mm:g} mm" if mm >= 1 else ("chaparrón posible" if prob >= 60 else "seco"))
+        txt = (f"lluvia {mmf(mm)} mm" if mm >= 1 else ("chaparrón posible" if prob >= 60 else "seco"))
         if racha >= 40:
             txt += f", ráfagas de {racha} km/h"
         out.append({"d": w["date"], "mm": mm, "tmax": int(w["maxtempC"]), "tmin": int(w["mintempC"]),
@@ -201,7 +205,7 @@ def pronostico():
         if e.get("prob") is not None and 30 <= e["prob"] <= 70 and conf == "alta": conf = "media"
         base["conf"] = conf
         mm = base.get("mm") or 0
-        txt = (f"lluvia {mm:g} mm" if mm >= 1 else ("chaparrón posible" if e.get("prob", 0) >= 50 else "seco"))
+        txt = (f"lluvia {mmf(mm)} mm" if mm >= 1 else ("chaparrón posible" if e.get("prob", 0) >= 50 else "seco"))
         if base.get("racha", 0) >= 40: txt += f", ráfagas de {base['racha']} km/h"
         base.update({"d": d, "obs": False, "txt": txt})
         out.append(base)
@@ -213,16 +217,29 @@ def main():
     clima_prev = cargar(sys.argv[2]) if len(sys.argv) > 2 else {}
     agenda = cargar(sys.argv[3]) if len(sys.argv) > 3 else {}
     fc, fuentes = pronostico()
+    # si la probabilidad no llegó hoy, se conserva la de la ronda anterior (máximo 2 días de antigüedad)
+    if clima_prev.get("cargado") and (HOY - fecha(clima_prev["cargado"])).days <= 2:
+        prev = {d["d"]: d for d in clima_prev.get("dias", [])}
+        for d in fc:
+            if d.get("prob") is None and prev.get(d["d"], {}).get("prob") is not None:
+                for k in ("prob", "mm_p25", "mm_p75"):
+                    if k in prev[d["d"]]: d[k] = prev[d["d"]][k]
+                d["prob_de"] = clima_prev["cargado"]
     hoy = HOY.isoformat()
 
     # ---- clima: pasado conservado, pronóstico nuevo ----
     pasados = [d for d in clima_prev.get("dias", []) if d.get("d", "") < hoy][-12:]
     # los días pasados no se quedan con el pronóstico viejo: temperatura y humedad medidas (SMN) y lluvia del análisis
-    ultimos = [(HOY - dt.timedelta(days=k)).isoformat() for k in (3, 2, 1)]
+    ultimos = [(HOY - dt.timedelta(days=k)).isoformat() for k in (5, 4, 3, 2, 1)]
     try: obs_t = smn_obs(ultimos)
     except Exception as e: obs_t = {}; print("SMN falló:", e, file=sys.stderr)
     try: llu_p = lluvia_pasada()
     except Exception as e: llu_p = {}; print("lluvia pasada falló:", e, file=sys.stderr)
+    try:
+        sys.path.insert(0, os.path.dirname(os.path.abspath(__file__)))
+        import synop
+        llu_m = synop.lluvia_medida(ultimos)
+    except Exception as e: llu_m = {}; print("SYNOP falló:", e, file=sys.stderr)
     anotada = {e["d"]: e for e in (ck.get("diario") or []) if e.get("a") == "lluvia_mm"}
     por_d = {d["d"]: d for d in pasados}
     for f in ultimos:
@@ -231,13 +248,17 @@ def main():
         if f in obs_t: d.update(obs_t[f]); d["src_t"] = "SMN medido"
         if f in anotada:
             d["mm"] = float(anotada[f].get("n") or 0); d["obs"] = True; d["src"] = "pluviómetro"
+        elif f in llu_m:
+            d["mm"] = llu_m[f]["mm"]; d["obs"] = True; d["src"] = "SMN medido"; d["mm_est"] = llu_m[f]["est"]
+        elif d.get("src") == "SMN medido":
+            pass
         elif f in llu_p:
             d["mm"] = llu_p[f]; d["obs"] = False; d["src"] = "modelo"
         for k in ("prob", "mm_p25", "mm_p75", "mm2", "conf", "racha"): d.pop(k, None)
-        d["txt"] = (f"lluvia {d['mm']:g} mm" if (d.get("mm") or 0) >= 1 else "seco")
+        d["txt"] = (f"lluvia {mmf(d['mm'])} mm" if (d.get("mm") or 0) >= 1 else "seco")
         por_d[f] = d
     pasados = [por_d[k] for k in sorted(por_d)]
-    clima = {"cargado": hoy, "fuente": "Pronóstico: " + fuentes + ". Días pasados: temperatura y humedad medidas por el SMN (Buenos Aires Observatorio); lluvia del pluviómetro si la anotás, si no, análisis del modelo.",
+    clima = {"cargado": hoy, "fuente": "Pronóstico: " + fuentes + ". Días pasados: MEDIDOS por el SMN (lluvia: mediana de Observatorio, Aeroparque y Ezeiza; temperatura y humedad: Observatorio). Si anotás tu pluviómetro, manda ese dato.",
              "dias": pasados + fc}
 
     # ---- estado del cultivo ----
@@ -289,7 +310,7 @@ def main():
         items.append({"n": n, "t": t, "d": d})
 
     if llu48 >= 8:
-        aviso("info", f"Lluvia {nombre_dia(dia_lluvia['d'])}: {dia_lluvia['mm']:g} mm",
+        aviso("info", f"Lluvia {nombre_dia(dia_lluvia['d'])}: {mmf(dia_lluvia['mm'])} mm",
               "Si hay que regar o no lo decide la tabla de Clima y riego de cada grupo: con semillas o plántulas no se apuesta a la lluvia de mañana, y a una maceta la lluvia casi no le llega.")
         if any(k in prox_ids for k in ("borra", "humus_td", "bok_", "pescado", "plantar_toxi", "preflor")):
             aviso("info", "Aprovechá la lluvia para los aportes",

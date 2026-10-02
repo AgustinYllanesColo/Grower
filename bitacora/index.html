@@ -2550,7 +2550,7 @@ function climaTablaHTML(){
     return '<tr class="'+(c.d===today?'vpd-hoy':'')+(pas?' vpd-pas':'')+'">'
       + '<td>'+(c.d===today?'<b>hoy</b>':esc(DIA[dd.getDay()].slice(0,3)))+'<span class="cr-f">'+dd.getDate()+'/'+(dd.getMonth()+1)+'</span></td>'
       + '<td class="num">'+CIELO(c)+' '+(c.tmax!=null?Math.round(c.tmin)+'-'+Math.round(c.tmax)+'°':'')+'</td>'
-      + '<td class="num">'+(c.mm>=0.5?'<b class="mm-si">'+String(Math.round(c.mm*10)/10).replace(".",",")+'</b>':'<span class="mm-no">0</span>')+(c.prob!=null&&!pas?'<span class="cr-f">'+c.prob+'%'+(c.conf==="baja"?' · dudoso':'')+'</span>':(pas?'<span class="cr-f">'+(c.obs?'medido':'estimado')+'</span>':''))+'</td>'
+      + '<td class="num">'+(c.mm>=0.5?'<b class="mm-si">'+String(Math.round(c.mm*10)/10).replace(".",",")+'</b>':'<span class="mm-no">0</span>')+(c.prob!=null&&!pas?'<span class="cr-f">'+c.prob+'%'+(c.conf==="baja"?' · dudoso':'')+'</span>':(pas?'<span class="cr-f" title="'+esc(c.mm_est?Object.entries(c.mm_est).map(e=>e[0]+': '+e[1]+' mm').join(' · '):(c.src||''))+'">'+(c.src==="pluviómetro"?'tu pluviómetro':c.obs?'medido SMN':'estimado')+'</span>':''))+'</td>'
       + '<td class="num">'+(vd?vchip(vd.v,false):'—')+vchip(c.vpdn,true)+'</td>'
       + '<td class="aw">'+agua+chip+'</td></tr>'; }).join("");
   const o = g.orden||{};
@@ -3006,7 +3006,7 @@ function renderHoy(){
   if (guia){ document.getElementById("hoy").innerHTML = guiaHTML(); return; }
   if (diagAbierto){ document.getElementById("hoy").innerHTML = diagHTML(); return; }
   document.getElementById("hoy").innerHTML =
-      cabeceraHTML() + rondaHTML() + alertasHTML() + climaTablaHTML() + vivoHTML() + ahoraHTML() + esperaHTML() + anotarHTML()
+      cabeceraHTML() + climaTablaHTML() + rondaHTML() + alertasHTML() + vivoHTML() + ahoraHTML() + esperaHTML() + anotarHTML()
     + '<button id="sos" type="button">Algo anda mal →</button>'
     + (hayCosechaCerca() ? cosechaHTML() : "")
     + casaHTML() + proximosHTML() + cambiosHTML();
