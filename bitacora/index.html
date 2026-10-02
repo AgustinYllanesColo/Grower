@@ -2520,7 +2520,8 @@ function ic(n, cl){ return '<svg class="i'+(cl?' '+cl:'')+'" viewBox="0 0 24 24"
 let riegoSel = null; try{ riegoSel = localStorage.getItem("bitacora-rg"); }catch(e){}
 function planRiego(){
   if (typeof Riego==="undefined") return null;
-  try{ return Riego.plan({hoy:today, flor:florFoto(), tandas:tandas, eventos:eventos, obs:obs, diario:diario, clima:CLIMA.dias}); }catch(e){ return null; }
+  try{ const sb={}; const g1=acc("germ_t1"), g2=acc("germ_t2"); if(g1&&!(tandas.t1||{}).f) sb.t1=g1.due; if(g2&&!(tandas.t2||{}).f) sb.t2=g2.due;
+    return Riego.plan({hoy:today, flor:florFoto(), tandas:tandas, eventos:eventos, obs:obs, diario:diario, clima:CLIMA.dias, siembras:sb}); }catch(e){ return null; }
 }
 const CIELO = c => ic(c.mm>=10?"tormenta":c.mm>=2?"lluvia":(c.prob!=null&&c.prob>=50)?"solnube":(c.hrmin!=null&&c.hrmin>=75)?"nube":"sol", c.mm>=2?"i-llu":(c.mm<2&&!(c.hrmin>=75)&&!(c.prob>=50))?"i-sol":"i-nub");
 const RG_ACC = {regar:["gota","Regar","rg-regar"], urgente:["gota","Regar ya","rg-urg"], lluvia:["lluvia","No regar","rg-llu"], saturado:["olas","Sobra agua","rg-llu"], regado:["ok","Regado","rg-ok"]};
@@ -2556,6 +2557,7 @@ function climaTablaHTML(){
   const hoyP = pdia[today];
   return '<div class="cr" id="clima-card">'
     + '<div class="cr-top"><h2 class="cr-t">Clima y riego</h2><span class="cr-f">'+(climaVigente()?'actualizado '+esc(fechaCorta(CLIMA.cargado)):'pronóstico vencido')+'</span></div>'
+    + (dias(CLIMA.cargado)>=2?'<p class="ord-dd ord-warn" style="margin:0 0 8px">'+ic("alerta")+'El clima no se actualiza desde el '+esc(fechaCorta(CLIMA.cargado))+': la ronda automática falló. No te guíes por esta tabla hasta que se actualice; pedímelo en el chat.</p>':'')
     + '<div class="ords">'+ords+'</div>'
     + '<div class="ord-det '+NIVEL_CL[o.nivel||"ok"]+'"><p class="ord-dt">'+ic(ORD_IC[o.nivel||"ok"])+esc(g.nombre)+': '+esc(o.t||"")+'</p><p class="ord-dd">'+esc(o.d||"")+'</p>'
     +   (function(){ const r=g.resumen||{}; const st=(k,v,sub)=>'<div class="st1"><span class="st1-k">'+k+'</span><b>'+v+'</b>'+(sub?'<span class="st1-s">'+sub+'</span>':'')+'</div>';

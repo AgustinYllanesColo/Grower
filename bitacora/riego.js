@@ -87,7 +87,8 @@
         txt = et + " · día " + d;
       }
       G.push({ id: id, nombre: nombre, tipo: "maceta", etapa: et, txt: txt, coef: coef, cap: 11, unidad: "L", n: n,
-               lluviaTapa: et === "cocinando", rango: RANGO[et] || null, desde: armada, riegos: ["riego", "riego_m"], dedo: "mhum" });
+               lluviaTapa: et === "cocinando", rango: RANGO[et] || null, desde: armada, riegos: ["riego", "riego_m"], dedo: "mhum",
+               siembra: et === "cocinando" && S.siembras && S.siembras[id] ? S.siembras[id] : null });
     };
     maceta("t1", "Macetas tanda 1", hecho(ev, "macetas"), (ta.t1 || {}).f, "auto", 4);
     maceta("toxi4", "Maceta 4ª Toxi", hecho(ev, "armar_toxi4"), pt, "foto", 1);
@@ -151,6 +152,14 @@
       out.push({ d: f, def: r1(def), pct: Math.round(frac * 100), est: est, txt: txt, et: r1(e), llu: r1(llu), dosis: dosis(g, def) });
       def = (est === "regar" || est === "urgente") ? e * 0.5 : fin;
     }
+    /* macetas a punto de sembrarse: se riegan a fondo 1-2 días antes, haga lo que haga el balance */
+    if (g.siembra && entre(hoy, g.siembra) >= 0 && entre(hoy, g.siembra) <= 2 && ![...riegos].some(d => d >= suma(hoy, -2))) {
+      const dd = out.find(x => x.d === suma(g.siembra, -1)) || out[0];
+      out.forEach(x => { if (x.d === dd.d) { x.est = "regar"; x.txt = "regar a fondo"; } });
+      return { dias: out, hist: hist, resumen: resumen, ancla: ancla, sinDato: sinDato,
+               orden: { nivel: "avi", t: dd.d === hoy ? "Regá a fondo hoy" : "Regá a fondo " + cuando(dd.d, hoy),
+                        d: "Se siembra el " + cuando(g.siembra, hoy) + ": los 40 L tienen que estar mojados de antes, la semilla va en sustrato húmedo. ≈ 6-8 L por maceta, despacio, hasta que escurra. La lluvia no entra con el cartón." } };
+    }
     return { dias: out, hist: hist, resumen: resumen, ancla: ancla, sinDato: sinDato, orden: orden(g, out) };
   }
   function dosis(g, def) {
@@ -166,7 +175,10 @@
     const hoy = D[0].d, r = D.find(x => x.est === "regar" || x.est === "urgente"), l = D.find(x => x.est === "lluvia");
     if (D[0].est === "regado") { const p = D.find(x => x.est === "regar" || x.est === "urgente"); return { nivel: "ok", t: "Regado hoy", d: p ? "Próximo riego: " + cuando(p.d, hoy) + "." : "No vuelve a hacer falta en los próximos días." }; }
     if (D[0].est === "urgente") return { nivel: "urg", t: "Regá hoy", d: "Usó el " + D[0].pct + " % del agua útil. " + D[0].dosis + "." };
-    if (D[0].est === "regar") return { nivel: "avi", t: "Regá hoy", d: "Usó el " + D[0].pct + " % del agua útil y no viene lluvia que alcance. " + D[0].dosis + "." };
+    if (D[0].est === "regar") {
+      const m = D[1] && D[1].llu >= D[0].def ? D[1] : null;
+      return { nivel: "avi", t: "Regá hoy", d: "Usó el " + D[0].pct + " % del agua útil. " + D[0].dosis + "." + (m ? " Si hoy no podés ir, la lluvia de mañana (" + String(m.llu).replace(".", ",") + " mm seguros) lo cubre: con semilla recién nacida conviene no esperar, pero no es grave." : " No viene lluvia que alcance.") };
+    }
     if (D[0].est === "lluvia") return { nivel: "info", t: "No riegues: llueve", d: "Viene lluvia que repone lo que falta (" + D[0].pct + " % usado). Si el dedo a 3 cm sale seco igual, regá." };
     if (D[0].est === "saturado") return { nivel: "info", t: "No riegues", d: "Llovió o llueve de más: dejá que escurra." };
     if (r) { const n = entre(hoy, r.d); return { nivel: n <= 1 ? "avi" : "ok", t: n === 1 ? "Regá mañana" : "Próximo riego " + cuando(r.d, hoy), d: (n <= 2 ? "Si vas antes, regá: " : "") + r.dosis + "." }; }
@@ -189,7 +201,9 @@
     const ck = ld(process.argv[2]), cl = ld(process.argv[3]);
     const hoy = process.argv[4] || new Date(Date.now() - 3 * 3600000).toISOString().slice(0, 10);
     const fl = (ck.eventos && ck.eventos.flor_toxi && ck.eventos.flor_toxi.estado === "hecho" && ck.eventos.flor_toxi.d) || process.argv[5] || "2027-02-01";
-    const P = plan({ hoy: hoy, flor: fl, tandas: ck.tandas, eventos: ck.eventos, obs: ck.obs, diario: ck.diario, clima: cl.dias });
+    const ag = process.argv[6] && fs.existsSync(process.argv[6]) ? ld(process.argv[6]) : {};
+    const sb = {}; (ag.items || []).forEach(a => { if (a.id === "germ_t1") sb.t1 = a.due; if (a.id === "germ_t2") sb.t2 = a.due; });
+    const P = plan({ hoy: hoy, flor: fl, tandas: ck.tandas, eventos: ck.eventos, obs: ck.obs, diario: ck.diario, clima: cl.dias, siembras: sb });
     process.stdout.write(JSON.stringify(P.map(g => ({ id: g.id, nombre: g.nombre, etapa: g.etapa, orden: g.orden, dias: g.dias.slice(0, 4) }))));
   }
 })(typeof window !== "undefined" ? window : this);

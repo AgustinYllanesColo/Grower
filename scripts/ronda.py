@@ -131,6 +131,48 @@ def ensemble():
     return out
 
 
+def smn_obs(fechas):
+    """Observaciones horarias del SMN (Buenos Aires Observatorio): temperatura y humedad MEDIDAS de los días pasados.
+    El archivo de cada fecha trae el día anterior, por eso se piden los dos."""
+    filas = {}
+    pedir = sorted({f for d in fechas for f in (d, (fecha(d) + dt.timedelta(days=1)).isoformat())})
+    for d in pedir:
+        url = "https://ssl.smn.gob.ar/dpd/descarga_opendata.php?file=observaciones/datohorario" + d.replace("-", "") + ".txt"
+        try:
+            txt = urllib.request.urlopen(urllib.request.Request(url, headers={"User-Agent": "Mozilla/5.0"}), timeout=40).read().decode("latin-1")
+        except Exception as e:
+            print("SMN falló", d, e, file=sys.stderr); continue
+        for l in txt.splitlines():
+            if "BUENOS AIRES OBSERVATORIO" not in l: continue
+            p = l.split()
+            try:
+                f = f"{p[0][4:8]}-{p[0][2:4]}-{p[0][0:2]}"; h, T, H = int(p[1]), float(p[2]), float(p[3])
+            except Exception:
+                continue
+            filas.setdefault(f, {})[h] = (T, H)
+    out = {}
+    for f in fechas:
+        hs = filas.get(f, {})
+        if len(hs) < 20: continue
+        T = [v[0] for v in hs.values()]; H = [v[1] for v in hs.values()]
+        vd = [vpd(*hs[h]) for h in hs if 9 <= h <= 18]; vn = [vpd(*hs[h]) for h in hs if h >= 21 or h <= 6]
+        out[f] = {"tmax": max(T), "tmin": min(T), "hrmin": round(min(H)), "hrmax": round(max(H)),
+                  "vpd": round(sum(vd) / len(vd), 2) if vd else None, "vpdmax": max(vd) if vd else None, "vpdn": min(vn) if vn else None}
+    return out
+
+
+def lluvia_pasada():
+    """Lluvia de los últimos días según el análisis del modelo (mediana de 31 corridas). No es un pluviómetro."""
+    j = get_json("https://ensemble-api.open-meteo.com/v1/ensemble?latitude=-34.70&longitude=-58.39&daily=precipitation_sum"
+                 "&models=gfs025&timezone=America%2FArgentina%2FBuenos_Aires&past_days=3&forecast_days=1")
+    dd = j["daily"]; ks = [k for k in dd if k.startswith("precipitation_sum")]
+    out = {}
+    for i, d in enumerate(dd["time"]):
+        v = sorted(x for x in (dd[k][i] for k in ks) if x is not None)
+        if v and d < HOY.isoformat(): out[d] = round(v[len(v) // 2], 1)
+    return out
+
+
 def pronostico():
     """Une las tres fuentes. MET Norway manda en temperatura, humedad y lluvia; el conjunto da la probabilidad;
     wttr.in aporta las ráfagas y un segundo voto. La confianza sale de cuánto coinciden."""
@@ -174,8 +216,28 @@ def main():
     hoy = HOY.isoformat()
 
     # ---- clima: pasado conservado, pronóstico nuevo ----
-    pasados = [d for d in clima_prev.get("dias", []) if d.get("d", "") < hoy][-10:]
-    clima = {"cargado": hoy, "fuente": "Pronóstico: " + fuentes + " (Lanús, ronda automática). Pasado: lo registrado.",
+    pasados = [d for d in clima_prev.get("dias", []) if d.get("d", "") < hoy][-12:]
+    # los días pasados no se quedan con el pronóstico viejo: temperatura y humedad medidas (SMN) y lluvia del análisis
+    ultimos = [(HOY - dt.timedelta(days=k)).isoformat() for k in (3, 2, 1)]
+    try: obs_t = smn_obs(ultimos)
+    except Exception as e: obs_t = {}; print("SMN falló:", e, file=sys.stderr)
+    try: llu_p = lluvia_pasada()
+    except Exception as e: llu_p = {}; print("lluvia pasada falló:", e, file=sys.stderr)
+    anotada = {e["d"]: e for e in (ck.get("diario") or []) if e.get("a") == "lluvia_mm"}
+    por_d = {d["d"]: d for d in pasados}
+    for f in ultimos:
+        d = dict(por_d.get(f) or {"d": f, "txt": ""})
+        if d.get("obs") and d.get("src") == "pluviómetro": continue
+        if f in obs_t: d.update(obs_t[f]); d["src_t"] = "SMN medido"
+        if f in anotada:
+            d["mm"] = float(anotada[f].get("n") or 0); d["obs"] = True; d["src"] = "pluviómetro"
+        elif f in llu_p:
+            d["mm"] = llu_p[f]; d["obs"] = False; d["src"] = "modelo"
+        for k in ("prob", "mm_p25", "mm_p75", "mm2", "conf", "racha"): d.pop(k, None)
+        d["txt"] = (f"lluvia {d['mm']:g} mm" if (d.get("mm") or 0) >= 1 else "seco")
+        por_d[f] = d
+    pasados = [por_d[k] for k in sorted(por_d)]
+    clima = {"cargado": hoy, "fuente": "Pronóstico: " + fuentes + ". Días pasados: temperatura y humedad medidas por el SMN (Buenos Aires Observatorio); lluvia del pluviómetro si la anotás, si no, análisis del modelo.",
              "dias": pasados + fc}
 
     # ---- estado del cultivo ----
@@ -227,8 +289,8 @@ def main():
         items.append({"n": n, "t": t, "d": d})
 
     if llu48 >= 8:
-        aviso("avi", f"No riegues: vienen {llu48:g} mm en 48 h",
-              f"Lluvia fuerte {nombre_dia(dia_lluvia['d'])}. Aunque la bitácora marque riego, esa lluvia es el riego del bancal. Las macetas tapadas con cartón no reciben casi nada: esas sí se revisan con el dedo.")
+        aviso("info", f"Lluvia {nombre_dia(dia_lluvia['d'])}: {dia_lluvia['mm']:g} mm",
+              "Si hay que regar o no lo decide la tabla de Clima y riego de cada grupo: con semillas o plántulas no se apuesta a la lluvia de mañana, y a una maceta la lluvia casi no le llega.")
         if any(k in prox_ids for k in ("borra", "humus_td", "bok_", "pescado", "plantar_toxi", "preflor")):
             aviso("info", "Aprovechá la lluvia para los aportes",
                   "Borra, humus, bokashi, pescado o trasplante van ANTES de una lluvia normal: la lluvia los incorpora sin que riegues. Después de una tormenta, esperá a que escurra.")
@@ -274,7 +336,7 @@ def main():
         if a.get("id", "").startswith("germ_t1") or a.get("id", "") == "germ_t2":
             d_siembra = next((d for d in fc if d["d"] == a.get("due")), None)
             if d_siembra:
-                aviso("info", f"Día de siembra: {d_siembra['txt']}, {d_siembra['tmin']}-{d_siembra['tmax']} °C",
+                aviso("info", f"Día de siembra: {d_siembra['txt']}, {round(d_siembra['tmin'])}-{round(d_siembra['tmax'])} °C",
                       "Con sol y más de 15 °C, cúpula enterrada y sustrato húmedo de antes. Con lluvia fuerte ese día, sembrá igual: la cúpula protege.")
 
     # ---- VPD: el clima leído como lo lee la planta ----
@@ -292,7 +354,7 @@ def main():
     else:
         lo = hi = None
     # ---- recordatorios de la bitácora ----
-    ordenes = riego_motor(sys.argv[1], clima, hoy)
+    ordenes = riego_motor(sys.argv[1], clima, hoy, sys.argv[3] if len(sys.argv) > 3 else "")
     for g in ordenes:
         o = g.get("orden") or {}
         if o.get("nivel") in ("urg", "avi"):
@@ -300,12 +362,13 @@ def main():
     if sin_riego is not None and sin_riego >= 4 and not any((g.get("orden") or {}).get("nivel") in ("urg", "avi") for g in ordenes):
         aviso("info", f"Hace {sin_riego} días que no anotás un riego",
               "Si regaste, anotalo: el cálculo del próximo riego parte de ese dato.")
-    for a in prox:
-        if a.get("st") in ("toca", "pendiente", "vencida") and a.get("due", "9") <= hoy:
-            aviso("info", f"Toca: {a['n']}", "Está en «Hoy» con sus pasos.")
+    tocan = [a["n"] for a in prox if a.get("st") in ("toca", "pendiente", "vencida") and a.get("due", "9") <= hoy]
+    if tocan:
+        aviso("info", f"Tareas para hoy: {len(tocan)}", " · ".join(tocan))
 
     orden = {"urg": 0, "avi": 1, "info": 2}
-    items.sort(key=lambda i: orden[i["n"]])
+    riego_t = tuple(g["nombre"] + ":" for g in ordenes)
+    items.sort(key=lambda i: (orden[i["n"]], 0 if i["t"].startswith(riego_t) else 1))
     linea = " · ".join(f"{nombre_dia(d['d'])} {round(d['tmin'])}-{round(d['tmax'])} °C {d['txt']}" + (f", VPD {kpa(d['vpd'])}" if d.get("vpd") is not None else "") for d in fc[:3])
     titulo = items[0]["t"] if items else "Nada que cambie el plan"
     avisos = {"fecha": hoy, "titulo": titulo, "resumen": linea, "items": items, "riego": [{"id": g["id"], "orden": g.get("orden")} for g in ordenes], "etapa": etapa, "rango": [lo, hi] if lo else None}
@@ -317,14 +380,14 @@ def main():
     print(("⚠ " if urg else "") + titulo + (f" (+{len(items)-1} avisos)" if len(items) > 1 else "") + ". " + linea)
 
 
-def riego_motor(ck_path, clima, hoy):
+def riego_motor(ck_path, clima, hoy, agenda_path=""):
     """Corre el mismo motor de riego que usa la página (bitacora/riego.js) con el clima recién armado."""
     import subprocess, tempfile
     js = os.path.join(os.path.dirname(os.path.abspath(__file__)), "..", "bitacora", "riego.js")
     with tempfile.NamedTemporaryFile("w", suffix=".json", delete=False) as t:
         json.dump(clima, t, ensure_ascii=False)
     try:
-        r = subprocess.run(["node", js, ck_path, t.name, hoy], capture_output=True, text=True, timeout=60)
+        r = subprocess.run(["node", js, ck_path, t.name, hoy, "", agenda_path], capture_output=True, text=True, timeout=60)
         return json.loads(r.stdout) if r.returncode == 0 and r.stdout else []
     except Exception as e:
         print("motor de riego falló:", e, file=sys.stderr)
