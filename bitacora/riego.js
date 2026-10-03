@@ -87,7 +87,7 @@
         txt = et + " · día " + d;
       }
       G.push({ id: id, nombre: nombre, tipo: "maceta", etapa: et, txt: txt, coef: coef, cap: 11, unidad: "L", n: n,
-               lluviaTapa: et === "cocinando", rango: RANGO[et] || null, desde: armada, riegos: ["riego", "riego_m"], dedo: "mhum",
+               lluviaTapa: S.macetasAlAire ? et === "cocinando" : true,   /* las macetas están bajo techo: la lluvia no les llega */ rango: RANGO[et] || null, desde: armada, riegos: ["riego", "riego_m"], dedo: "mhum",
                siembra: et === "cocinando" && S.siembras && S.siembras[id] ? S.siembras[id] : null });
     };
     maceta("t1", "Macetas tanda 1", hecho(ev, "macetas"), (ta.t1 || {}).f, "auto", 4);
@@ -142,7 +142,7 @@
       const nivel = df <= 3 && ncal >= 2 ? "alta" : df <= 6 ? "media" : "baja";
       const txt = (df >= 99 ? "sin riegos ni dedo anotados" : "último dato firme hace " + df + (df === 1 ? " día" : " días"))
         + " · " + (ncal ? "calibrado con " + ncal + (ncal === 1 ? " medición" : " mediciones") + " del dedo" : "sin calibrar con tu dedo")
-        + " · lluvia " + (hayPluvio ? "de tu pluviómetro" : "medida por el SMN a 12-20 km");
+        + " · lluvia medida por el SMN";
       r.confianza = { nivel: nivel, txt: txt, firme: firme || null, dias: df, kcal: Math.round(kcal * 100) / 100, ncal: ncal, pluvio: hayPluvio };
       const p = r.dias.find(x => x.est === "regar" || x.est === "urgente"); r.proximo = p ? p.d : null;
       return r;
@@ -195,7 +195,7 @@
   function dosis(g, def) {
     if (g.tipo === "suelo" && g.cap <= 8) return "riego suave: 8-10 mm = 16-20 L (2 baldes de 10 L) con regadera o a mano, sin lavar la semilla";
     if (g.tipo === "suelo") { const mm = Math.max(15, Math.min(30, Math.round(def + 5))); return mm + " mm = " + Math.round(mm * 2) + " L (" + Math.ceil(mm * 2 / 10) + " baldes de 10 L) en 2-3 pasadas"; }
-    const l = Math.max(3, Math.round(def + 1)); return "≈ " + l + " L por maceta (" + (l >= 10 ? Math.round(l / 10 * 10) / 10 + " baldes" : "medio balde o menos") + "), despacio, hasta que escurra";
+    const l = Math.max(3, Math.round(def + 1)); return "≈ " + l + " L por maceta (" + (l >= 10 ? String(Math.round(l / 10 * 10) / 10).replace(".", ",") + " baldes" : l >= 6 ? "casi un balde" : l >= 4 ? "medio balde" : "un cuarto de balde") + "), despacio, hasta que escurra";
   }
   const DIAS_N = ["dom", "lun", "mar", "mié", "jue", "vie", "sáb"];
   function cuando(f, hoy) { const n = entre(hoy, f); return n === 0 ? "hoy" : n === 1 ? "mañana" : DIAS_N[d2(f).getDay()] + " " + d2(f).getDate() + "/" + (d2(f).getMonth() + 1); }

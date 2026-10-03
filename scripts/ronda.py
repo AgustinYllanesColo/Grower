@@ -278,7 +278,8 @@ def main():
     dia_flor_toxi = (HOY - flor_toxi).days + 1 if flor_toxi else None
     fechas_pres = [e["d"] for e in diario if e.get("a") not in ("lluvia", "lluvia_poca", "lluvia_fuerte")]
     fechas_pres += [o.get("d") for o in ck.get("obs", []) if o.get("d")]
-    ult_pres = agenda.get("presencia") or (max(fechas_pres) if fechas_pres else None)
+    fechas_pres += [e.get("d") for e in (eventos or {}).values() if isinstance(e, dict) and e.get("estado") == "hecho" and e.get("d")]
+    ult_pres = max([x for x in fechas_pres + [agenda.get("presencia")] if x] or [None]) if (fechas_pres or agenda.get("presencia")) else None
     sin_ir = (HOY - fecha(ult_pres)).days if ult_pres else None
     plantulas = [n for n, e in (("tanda 1", t1), ("tanda 2", t2)) if e and e <= 21]
     autos_flor = [n for n, e in (("tanda 1", t1), ("tanda 2", t2)) if e and 35 <= e <= 95]
@@ -289,7 +290,7 @@ def main():
              else "vegetativo" if (toxi_plantada or (t1 and t1 > 21) or (t2 and t2 > 21))
              else "plántula" if plantulas else None)
     # último riego efectivo: riego anotado, lluvia anotada, o ≥8 mm en el clima
-    riegos = [e["d"] for e in diario if e.get("a") in ("riego", "lluvia", "lluvia_fuerte")]
+    riegos = [e["d"] for e in diario if e.get("a") in ("riego", "riego_b", "riego_m", "lluvia", "lluvia_fuerte", "lluvia_mm")]
     riegos += [d["d"] for d in clima["dias"] if d.get("d", "") <= hoy and d.get("mm", 0) >= 8]
     ult_riego = max(riegos) if riegos else None
     sin_riego = (HOY - fecha(ult_riego)).days if ult_riego else None
@@ -381,7 +382,7 @@ def main():
         if o.get("nivel") in ("urg", "avi"):
             aviso(o["nivel"], f"{g['nombre']}: {o['t'].lower()}", o.get("d", ""))
     prox_r = sorted(g["proximo"] for g in ordenes if g.get("proximo"))
-    tarea_c = sorted(a["due"] for a in agenda.get("items", []) if a.get("tipo") == "cama" and a.get("due"))
+    tarea_c = sorted(a["due"] for a in agenda.get("items", []) if a.get("tipo") == "cama" and a.get("due") and a["due"] >= hoy and (eventos.get(a.get("id")) or {}).get("estado") != "hecho")
     cand = [max(hoy, x) for x in (prox_r[:1] + tarea_c[:1])]
     if ult_pres: cand.append(max(hoy, (fecha(ult_pres) + dt.timedelta(days=4)).isoformat()))
     if cand:
@@ -390,7 +391,7 @@ def main():
     if sin_riego is not None and sin_riego >= 4 and not any((g.get("orden") or {}).get("nivel") in ("urg", "avi") for g in ordenes):
         aviso("info", f"Hace {sin_riego} días que no anotás un riego",
               "Si regaste, anotalo: el cálculo del próximo riego parte de ese dato.")
-    tocan = [a["n"] for a in prox if a.get("st") in ("toca", "pendiente", "vencida") and a.get("due", "9") <= hoy]
+    tocan = [a["n"] for a in prox if a.get("st") in ("toca", "pendiente", "vencida") and a.get("due", "9") <= hoy and (eventos.get(a.get("id")) or {}).get("estado") != "hecho"]
     if tocan:
         aviso("info", f"Tareas para hoy: {len(tocan)}", " · ".join(tocan))
 

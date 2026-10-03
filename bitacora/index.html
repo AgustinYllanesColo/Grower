@@ -400,6 +400,7 @@ details.card>summary .cnt{margin-left:auto;font-family:"JetBrains Mono",monospac
 /* botón flotante */
 #fab{position:fixed;right:16px;bottom:calc(84px + env(safe-area-inset-bottom));z-index:45;width:56px;height:56px;border-radius:99px;border:0;background:var(--leaf);color:#fff;font:400 32px/1 Archivo,sans-serif;box-shadow:0 4px 14px rgba(0,0,0,.25);cursor:pointer}
 #fab[aria-expanded="true"]{transform:rotate(45deg)}
+#fab,#fab-sheet{display:none!important}
 #fab-sheet{position:fixed;right:16px;bottom:calc(150px + env(safe-area-inset-bottom));z-index:45;background:var(--surface);border:1px solid var(--line-strong);border-radius:12px;padding:10px;box-shadow:var(--shadow-lg);display:flex;flex-direction:column;gap:6px;min-width:190px}
 #fab-sheet .acc{text-align:left;min-height:46px}
 #fab-sheet .fab-d{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted);margin:0 0 2px 4px}
@@ -573,6 +574,8 @@ td.aw .rg-c{margin-top:5px}
 .an-row input{flex:1 1 120px;font:inherit;font-size:16px;color:var(--ink);background:var(--ground);border:1px solid var(--line-strong);border-radius:4px;padding:9px 10px;min-height:42px;min-width:0}
 .an-ok{font-size:13px;color:var(--leaf);margin:8px 0 0;font-weight:600}
 .confirma{background:#B4521F!important;color:#fff!important}
+.vs-sep{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;padding:6px 2px 0}
+.vs-a2{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line-strong)}
 .regla b{font-family:Archivo,sans-serif;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--leaf);display:block;margin-bottom:4px}
 </style>
 
@@ -2574,7 +2577,8 @@ function planVisita(){
   const motivos=[]; let V=null;
   const poner=(d,m)=>{ if(d<today) d=today; if(!V||d<V){ V=d; } motivos.push([d,m]); };
   P.forEach(g=>{ if(g.proximo) poner(g.proximo,"riego "+g.nombre.toLowerCase()); });
-  A.filter(a=>a.tipo==="cama"&&a.due&&["toca","pendiente","futura"].includes(a.st)).forEach(a=>poner((a.st==="toca"||a.st==="pendiente")?today:a.due, a.n));
+  /* una tarea atrasada sin riesgo (juntar agua de lluvia) no justifica ir: se hace cuando vayas */
+  A.filter(a=>a.tipo==="cama"&&a.due&&["toca","pendiente","futura"].includes(a.st)&&(a.riesgo||a.due>=today)).forEach(a=>poner((a.st==="toca"||a.st==="pendiente")?today:a.due, a.n));
   poner(lim<today?today:lim, up?"4 días sin ir":"sin visitas anotadas");
   const por=motivos.filter(m=>m[0]<=V).map(m=>m[1]);
   const riegos=P.map(g=>{ const d=g.dias.find(x=>x.d===V); if(!d) return null;
@@ -2582,10 +2586,13 @@ function planVisita(){
     const hace=ordenHoy||d.est==="regar"||d.est==="urgente"||(d.pct>=35&&d.est!=="lluvia"&&d.est!=="saturado");
     return hace?{g:g,d:d,L:litrosGrupo(g,d),hecho:diario.some(e=>e.d===today&&V===today&&g.riegos.includes(e.a))}:null; }).filter(Boolean);
   const riegaMacetas=riegos.some(r=>r.g.tipo==="maceta");
-  const tareas=A.filter(a=>a.tipo==="cama"&&a.due&&a.due<=V&&["toca","pendiente","futura"].includes(a.st)&&!(riegaMacetas&&a.id==="papel_t1")).sort((a,b)=>a.due<b.due?-1:1);
+  const todas=A.filter(a=>a.tipo==="cama"&&a.due&&a.due<=V&&["toca","pendiente","futura"].includes(a.st)&&!(riegaMacetas&&a.id==="papel_t1")).sort((a,b)=>a.due<b.due?-1:1);
+  /* lo imprescindible primero (tiene riesgo si no se hace); el resto, solo si sobra tiempo */
+  const clave=a=>!!a.riesgo||/^(germ_|plantar_|cos_|cup_)/.test(a.id);
+  const tareas=todas.filter(clave), extra=todas.filter(a=>!clave(a));
   const litros=riegos.reduce((x,r)=>x+r.L,0);
   const min=5+riegos.reduce((x,r)=>x+Math.ceil(r.L/10)*3,0)+tareas.reduce((x,a)=>x+durMin(a.dur),0)+5;
-  return {V:V, por:[...new Set(por)], riegos:riegos, tareas:tareas, litros:litros, min:min};
+  return {V:V, por:[...new Set(por)], riegos:riegos, tareas:tareas, extra:extra, litros:litros, min:min, minExtra:extra.reduce((x,a)=>x+durMin(a.dur),0)};
 }
 let visTicks={}; try{ visTicks=JSON.parse(localStorage.getItem("bitacora-vis")||"{}"); }catch(e){}
 function visTick(k){ return !!visTicks[today+"|"+k]; }
@@ -2600,13 +2607,14 @@ function visitaHTML(){
   v.riegos.forEach(r=>{ const dosis=(r.g.orden&&/a fondo/.test(r.g.orden.t)) ? r.g.orden.d.split(". ").slice(1).join(". ") : (r.d.est==="regar"||r.d.est==="urgente") ? r.d.dosis : "le queda "+(100-r.d.pct)+" %: aprovechá que estás";
     pasos+=paso("riego-"+r.g.id, ic("gota")+"Regar "+esc(r.g.nombre.toLowerCase())+" · "+r.L+" L", esc(dosis), hoyV&&!r.hecho?'<button class="vs-a" type="button" data-acc="'+(r.g.id==="bancal"?"riego_b":"riego_m")+'">Hecho</button>':'', r.hecho); });
   v.tareas.forEach(a=>{ pasos+=paso("t-"+a.id, esc(a.n)+(a.dur?' · '+esc(a.dur):''), a.st==="futura"?'toca el '+esc(fechaCorta(a.due)):'', '<button class="vs-a" type="button" data-guia="'+a.id+'">Abrir</button>', false); });
+  if(v.extra.length) pasos+='<li class="vs-sep">Si te sobra tiempo · +'+v.minExtra+' min</li>'+v.extra.map(a=>paso("t-"+a.id, esc(a.n)+(a.dur?' · '+esc(a.dur):''), '', '<button class="vs-a vs-a2" type="button" data-guia="'+a.id+'">Abrir</button>', false)).join("");
   pasos+=paso("cierre","Antes de irte · 3 min","Foto del bancal desde el ángulo de siempre, cartón de las macetas con peso, ramas cruzadas sobre la tierra a la vista.", '<button class="vs-a" type="button" data-fab="foto">Foto</button>', hoyV&&visTick("cierre"));
   const llevar=[v.litros?v.litros+" L de agua (de lluvia si tenés)":null,"regadera o botella con la tapa agujereada"].concat(v.tareas.filter(a=>/^Juntar lo de|kit/i.test(a.n)).map(a=>"lo de: "+a.n.replace(/^Juntar lo de |^Juntar /,""))).filter(Boolean);
   return '<section class="vis'+(hoyV?' vis-hoy':'')+'" id="visita">'
     + '<div class="vis-h"><div><span class="vis-k">'+(hoyV?'Visita de hoy':'Próxima visita')+'</span><h2>'+esc(cuando)+(hoyV?'':' · '+esc(fechaCorta(v.V)))+'</h2></div>'
     + '<div class="vis-n"><span><b>'+v.min+'</b> min</span><span><b>'+v.litros+'</b> L</span></div></div>'
-    + '<div class="ocs">'+v.por.slice(0,4).map(m=>'<span class="oc oc-neu">'+esc(m)+'</span>').join("")+'</div>'
-    + '<details class="vis-d"'+(hoyV?' open':'')+'><summary>'+(hoyV?'El orden de hoy':'Qué vas a hacer ese día')+' · '+(2+v.riegos.length+v.tareas.length)+' pasos</summary>'
+    + '<div class="ocs">'+v.por.filter(m=>!v.extra.some(a=>a.n===m)).slice(0,3).map(m=>'<span class="oc oc-neu">'+esc(m)+'</span>').join("")+'</div>'
+    + '<details class="vis-d"'+(hoyV?' open':'')+'><summary>'+(hoyV?'El orden de hoy':'Qué vas a hacer ese día')+' · '+(2+v.riegos.length+v.tareas.length)+' pasos'+(v.extra.length?' + '+v.extra.length+' si sobra tiempo':'')+'</summary>'
     + '<ol class="vs-l">'+pasos+'</ol>'
     + '<p class="vis-ll"><b>Llevá:</b> '+esc(llevar.join(" · "))+'</p></details></section>';
 }
@@ -2649,28 +2657,26 @@ function climaTablaHTML(){
   const o = g.orden||{};
   const hoyP = pdia[today];
   return '<div class="cr" id="clima-card">'
-    + '<div class="cr-top"><h2 class="cr-t">Clima y riego</h2><span class="cr-f">'+(climaVigente()?'actualizado '+esc(fechaCorta(CLIMA.cargado)):'pronóstico vencido')+'</span></div>'
+    + '<div class="cr-top"><h2 class="cr-t">Clima y riego</h2><span class="cr-f">'+(climaVigente()?'actualizado '+esc(fechaCorta(CLIMA.cargado)):'pronóstico vencido')+(g.confianza?' · <b class="conf-'+g.confianza.nivel+'-t">confianza '+g.confianza.nivel+'</b>':'')+'</span></div>'
     + (dias(CLIMA.cargado)>=2?'<p class="ord-dd ord-warn" style="margin:0 0 8px">'+ic("alerta")+'El clima no se actualiza desde el '+esc(fechaCorta(CLIMA.cargado))+': la ronda automática falló. No te guíes por esta tabla hasta que se actualice; pedímelo en el chat.</p>':'')
     + '<div class="ords">'+ords+'</div>'
-    + (g.confianza?'<div class="conf conf-'+g.confianza.nivel+'"><span class="conf-k">Agua útil · confianza '+g.confianza.nivel+'</span><span class="conf-t">'+esc(g.confianza.txt)+(g.confianza.ncal?' · consumo ×'+String(g.confianza.kcal).replace(".",","):'')+'</span>'+(g.confianza.nivel!=="alta"?'<span class="conf-h">Para subirla: dedo en «Lo vivo» en cada visita'+(g.confianza.pluvio?'':' y pluviómetro en la cama')+'.</span>':'')+'</div>':'')
     + '<div class="ord-det '+NIVEL_CL[o.nivel||"ok"]+'"><p class="ord-dt">'+ic(ORD_IC[o.nivel||"ok"])+esc(g.nombre)+': '+esc(o.t||"")+'</p><p class="ord-dd">'+esc(o.d||"")+'</p>'
     +   (function(){ const r=g.resumen||{}; const st=(k,v,sub)=>'<div class="st1"><span class="st1-k">'+k+'</span><b>'+v+'</b>'+(sub?'<span class="st1-s">'+sub+'</span>':'')+'</div>';
           let h='<div class="st3">'
-            + st("Último riego", r.ultRiego?(r.diasSin===0?"hoy":"hace "+r.diasSin+" días"):"sin anotar", r.ultRiego?fechaCorta(r.ultRiego):"anotalo en Anotar")
+            + st("Último riego", r.ultRiego?(r.diasSin===0?"hoy":r.diasSin===1?"ayer":"hace "+r.diasSin+" días"):"sin anotar", r.ultRiego?fechaCorta(r.ultRiego):"")
             + st("Lluvia desde entonces", r.lluvia!=null?String(r.lluvia).replace(".",",")+" mm":"—", r.ultRiego?"hasta ayer":"")
             + st("Agua útil hoy", hoyP?(100-hoyP.pct)+"%":"—", hoyP?"se van "+String(hoyP.et).replace(".",",")+(g.tipo==="suelo"?" mm":" L")+"/día":"")
             + '</div>';
           if(r.pico!=null && r.pico>=90 && r.picoD) h+='<p class="ord-dd ord-warn">'+ic("alerta")+' Se quedó sin agua útil el '+esc(fechaCorta(r.picoD))+(g.id==="bancal"&&g.etapa==="cobertura"?': las plántulas de trébol sin mulch encima pudieron secarse. Mirá los claros en la visita.':'.')+'</p>';
-          if(g.sinDato) h+='<p class="ord-dd">Sin un riego o un dedo anotado, el cálculo es una estimación gruesa.</p>';
+
           return h; })()
-    +   (g.rango?'<p class="ord-dd">VPD ideal para '+esc(g.etapa)+': <b>'+fk(g.rango[0])+'-'+fk(g.rango[1])+' kPa</b></p>':'<p class="ord-dd">Sin plantas en este grupo: el VPD no se colorea todavía.</p>')
-    +   (g.etapa==="plántula"?'<p class="ord-dd">Plántula: el centro se seca antes que la maceta. En cada visita, dedo a 3 cm; si sale seco, anillo de 300 ml alrededor del tallo aunque la tabla diga «bien».</p>':'')
+    +   (g.etapa==="plántula"?'<p class="ord-dd">Plántula: dedo a 3 cm en el centro; si sale seco, 300 ml alrededor del tallo aunque la tabla diga que aguanta.</p>':'')
     + '</div>'
-    + '<div class="tablewrap"><table class="vpd-t"><tr><th>Día</th><th>Cielo</th><th>Lluvia</th><th>VPD</th><th>Agua útil</th></tr>'+filas+'</table></div>'
+    + '<div class="tablewrap"><table class="vpd-t"><tr><th>Día</th><th>Cielo</th><th>Lluvia</th><th>VPD'+(g.rango?'<span class="cr-f">ideal '+fk(g.rango[0])+'-'+fk(g.rango[1])+'</span>':'')+'</th><th>Agua útil</th></tr>'+filas+'</table></div>'
     + '<details class="cr-more"><summary>Cómo leer la tabla y de dónde salen los números</summary><div>'
     +   '<p><b>Agua útil.</b> '+gauge(20)+' la barra es lo que le queda: azul sobra, ámbar hay que ir pensando, rojo está seco. La etiqueta aparece solo el día que hay que hacer algo: <span class="rg-c rg-regar">'+ic("gota")+'Regar</span> <span class="rg-c rg-urg">'+ic("gota")+'Regar ya</span> <span class="rg-c rg-llu">'+ic("lluvia")+'No regar</span>. Se riega cuando se usó la mitad. Cada día se va lo que pide el clima (ET0, método Hargreaves de la FAO, corregido por el VPD) multiplicado por lo que consume la etapa. Entra la lluvia: la medida entera, la pronosticada solo si es probable. En una maceta la lluvia casi no cuenta: 10 mm son 1 litro.</p>'
     +   '<p><b>VPD</b> (kPa, de 9 a 18 h): <span class="vpd-c vpd-ok">en rango</span> <span class="vpd-c vpd-medio">algo alto</span> <span class="vpd-c vpd-alto">estrés</span> <span class="vpd-c vpd-bajo">bajo</span>, contra la etapa del grupo que elegiste arriba. En flor aparece '+ic("niebla")+' cuando la noche está saturada: rocío adentro del cogollo.</p>'
-    +   '<p><b>El dedo manda.</b> La tabla es un cálculo; el suelo es el dato. Si el dedo contradice la tabla, marcalo en «Lo vivo»: el cálculo arranca de nuevo desde lo que viste. Por eso anotar cada riego (bancal, macetas o todo) es lo que la hace confiable.</p>'
+    +   (g.confianza?'<p><b>Confianza '+g.confianza.nivel+'.</b> '+esc(g.confianza.txt)+(g.confianza.ncal?' · consumo corregido ×'+String(g.confianza.kcal).replace(".",","):'')+'. Sube cuando en cada visita contás el dedo antes de regar: la tabla compara lo que tocaste con lo que calculaba y se corrige sola.</p>':'')
     +   '<p><b>Fuentes.</b> '+esc(CLIMA.fuente||"")+' La probabilidad (%) sale de 31 corridas del modelo GFS; «¿?» marca los días en que las fuentes no coinciden. Un pronóstico nunca es seguro: por eso la tabla apuesta a la lluvia solo cuando es probable, y con semillas o plántulas nunca apuesta a la de mañana.</p>'
     + '</div></details></div>';
 }
@@ -2899,6 +2905,15 @@ function alHTML(a){
   return '<div class="al al-'+(a.n||"info")+'"><button class="al-x" data-visto="'+esc(a.id)+'" type="button" aria-label="Listo">✓</button>'
     + (a.d ? '<details><summary class="al-t">'+icn+esc(a.t)+'</summary><p class="al-d">'+esc(a.d)+'</p></details>' : '<p class="al-t">'+icn+esc(a.t)+'</p>') + '</div>';
 }
+function avisosHTML(){
+  const grupos=["Bancal:","Macetas","Maceta 4ª","Próxima visita","Tareas para hoy","Lluvia "];
+  const a=avisosDoc; let R=[];
+  if(a && a.fecha && dias(a.fecha)<=1 && Array.isArray(a.items)) R=a.items.map((x,i)=>Object.assign({id:"rv|"+a.fecha+"|"+i},x)).filter(x=>!vistas[x.id] && !grupos.some(gn=>String(x.t||"").startsWith(gn)));
+  const L=R.concat(alertas()); const vistos=new Set(); const U=L.filter(x=>{ const k=String(x.t).slice(0,30); if(vistos.has(k)) return false; vistos.add(k); return true; });
+  if(!U.length) return "";
+  const ord={urg:0,avi:1,info:2}; U.sort((x,y)=>(ord[x.n]||2)-(ord[y.n]||2));
+  return '<div class="alertas">'+U.map(alHTML).join("")+'</div>';
+}
 function alertasHTML(){
   const A=alertas(); if(!A.length) return "";
   const ord={urg:0,avi:1,info:2}; A.sort((a,b)=>ord[a.n]-ord[b.n]);
@@ -2917,19 +2932,19 @@ function obsChip(k){
   return '<span class="oc '+cl+(n>=5?' oc-viejo':'')+'">'+OBS_NOM[k]+': '+esc(op?op[1].toLowerCase():o.v)+' <small>'+(n===0?'hoy':n===1?'ayer':'hace '+n+' d')+'</small></span>';
 }
 function vivoHTML(){
-  const V=vivas(); let out='<h2 class="sec">Lo vivo</h2><div class="vivos">';
+  const V=vivas(); let out='<h2 class="sec">Estado</h2><div class="vivos">';
   const f=fdiario||today; const abrir = k => !obsEn(k,f);
   const od = (key, def) => ' data-vk="'+key+'"'+((vivoOpen[key]!==undefined ? vivoOpen[key] : def) ? ' open' : '');
   /* bancal */
   out += '<div class="vv"><div class="vv-h"><b>'+ic("brote")+'Bancal</b><span class="vv-n">cover · día '+(dias(SIEMBRA_COVER)+1)+'</span></div>'
     + '<div class="ocs">'+obsChip("trebol")+obsChip("dedo")+obsChip("olor")+obsChip("suelo")+'</div>'
-    + '<details class="vivo-d"'+od("bancal", false)+'><summary>Anotar cómo lo ves</summary><div class="vivo-b">'+chipsHTML("trebol")+chipsHTML("dedo")+chipsHTML("suelo")+chipsHTML("olor")+'</div></details></div>';
+    + '</div>';
   /* macetas cocinando */
   if (!tandas.t1){
     const d=dias(MACETAS_ARMADAS)+1;
     out += '<div class="vv"><div class="vv-h"><b>'+ic("maceta")+'Las 4 macetas</b><span class="vv-n">cocinando · día '+d+'</span></div>'
       + '<div class="ocs"><span class="oc '+(d>=10?'oc-ok':'oc-neu')+'">'+(d>=10?'listas para sembrar':'faltan '+(10-d)+' días')+'</span>'+obsChip("macetas")+obsChip("mhum")+'</div>'
-      + '<details class="vivo-d"'+od("macetas", false)+'><summary>Anotar cómo están</summary><div class="vivo-b">'+chipsHTML("macetas")+chipsHTML("mhum")+'</div></details></div>';
+      + '</div>';
   }
   /* tandas vivas */
   V.forEach(([t,e])=>{
@@ -2938,7 +2953,7 @@ function vivoHTML(){
       + '<div class="bar"><i style="width:'+e.pct+'%"></i></div>'
       + '<details class="vivo-d"><summary>Qué toca esta semana</summary><div class="vivo-b"><p class="tan-que">'+esc(e.que)+'</p><p class="tan-cos">Cosecha estimada: '+fechaLinda(e.cosecha)+' al '+fechaLinda(e.cosechaHasta)+'. Se corta por tricomas.</p>'
       + '<label class="tan-f">Germinó el <input type="date" data-tanda="'+t.id+'" value="'+e.g+'"></label>'+(e.sem?hitosCalHTML(t,e):'')+'</div></details>'
-      + '<details class="vivo-d"'+od("t-"+t.id, false)+'><summary>Anotar cómo las ves</summary><div class="vivo-b">'+chipsHTML("enves")+chipsHTML("hojas")+'</div></details></div>';
+      + '</div>';
   });
   out += '</div>';
   const esp=TANDAS.filter(t=>!(tandas[t.id]||{}).f);
@@ -2969,13 +2984,21 @@ function paraChip(a){
   const t = n<0 ? "ya hacía falta" : (n===0 ? "para hoy" : "para el "+fechaCorta(a.para)+" · "+n+" días");
   return '<span class="st '+cl+'">'+esc(t)+'</span>';
 }
+function pendientesHTML(){
+  const L=accConEstado().filter(a=>a.tipo!=="cama"&&(a.st==="toca"||a.st==="pendiente")).sort((a,b)=>(a.due||"9")<(b.due||"9")?-1:1);
+  if(!L.length) return "";
+  return '<details class="card"><summary>Para resolver fuera de la cama<span class="cnt">'+L.length+'</span></summary><div class="card-body"><ul class="dlog casa">'
+    + L.map(a=>'<li><span class="da"><b>'+esc(a.n)+'</b><br><span class="esp-m">'+(a.tipo==="compra"?'compra':'en casa')+(a.due?' · desde el '+esc(fechaCorta(a.due)):'')+'</span></span><button class="acc" data-guia="'+a.id+'" type="button" style="min-height:34px;padding:6px 12px">Ver</button></li>').join("")
+    + '</ul></div></details>';
+}
 function casaHTML(){
   const L=accConEstado().filter(a=>a.st==="sugerida").sort((a,b)=>(a.para||"9")<(b.para||"9")?-1:1);
   if(!L.length) return "";
   const urg=L.filter(a=>a.para&&dias(today,a.para)<=10).length;
-  return '<details class="card" id="grp-casa"'+(urg?' open':'')+'><summary>Para hacer en casa, cuando puedas<span class="cnt">'+(urg?urg+' se acercan · ':'')+L.length+'</span></summary><div class="card-body"><p class="intro">Sin fecha fija, pero cada una tiene un «para cuándo»: la fecha en que la vas a necesitar. Rojo: menos de 10 días. Amarillo: menos de un mes. Cada una destraba la siguiente de su cadena.</p>'
-    + '<ul class="dlog casa">'+L.map(a=>'<li><span class="da"><b>'+esc(a.n)+'</b>'+(a.dur?' <span class="chip">'+esc(a.dur)+'</span>':'')+'<br>'+paraChip(a)+(a.paraTxt?' <span class="esp-m">'+esc(a.paraTxt)+'</span>':'')+'</span><button class="acc" data-guia="'+a.id+'" type="button" style="min-height:34px;padding:6px 12px">Ver</button></li>').join("")+'</ul></div></details>';
+  return '<details class="card" id="grp-casa"><summary>En casa, cuando puedas<span class="cnt">'+(urg?urg+' urgentes · ':'')+L.length+'</span></summary><div class="card-body">'
+    + '<ul class="dlog casa">'+L.map(a=>'<li><span class="da"><b>'+esc(a.n)+'</b><br>'+paraChip(a)+(a.dur?' <span class="chip">'+esc(a.dur)+'</span>':'')+'</span><button class="acc" data-guia="'+a.id+'" type="button" style="min-height:34px;padding:6px 12px">Ver</button></li>').join("")+'</ul></div></details>';
 }
+
 function proximosHTML(){
   const lim=sumarDias(today,30);
   const L=accConEstado().filter(a=>(a.st==="futura"||a.st==="bloqueada")&&a.due&&a.due<=lim).sort((a,b)=>a.due<b.due?-1:1);
@@ -3007,7 +3030,6 @@ function anotarHTML(){
   return '<h2 class="sec">Anotar</h2><div class="anotar">'
     + (hoyF?'':'<p class="dia-last aviso">Anotando el '+fechaLinda(f)+'</p>')
     + '<div class="accs">'+ACC_BTN.filter(a=>a[0]!=="nota").map(btn).join("")+'<button class="acc" data-fab="foto" type="button">Foto</button></div>'
-    + '<div class="an-row"><label class="an-l" for="an-mm">'+ic("lluvia")+'Pluviómetro</label><input id="an-mm" type="number" inputmode="decimal" min="0" step="0.5" placeholder="mm"><button class="acc" data-an="mm" type="button">Guardar lluvia</button></div>'
     + '<div class="an-row"><label class="an-l" for="an-txt">'+ic(anotarModo==="secado"?"reloj":"info")+(anotarModo==="secado"?'Secado':'Nota')+'</label><input id="an-txt" type="text" maxlength="200" placeholder="'+(anotarModo==="secado"?'temperatura y humedad (ej: 24 °C · 58 %)':'lo que viste o hiciste')+'"><button class="acc" data-an="txt" type="button">Guardar</button></div>'
     + (anotarMsg?'<p class="an-ok">'+ic("ok")+esc(anotarMsg)+'</p>':'')
     + (tipAnotar?'<p class="tan-tip">'+esc(tipAnotar)+(tipAnotar.startsWith("Melaza")?' <button class="acc" data-acc="melaza-igual" type="button" style="min-height:32px;padding:5px 10px;margin-left:6px">Igual la puse</button>':'')+'</p>':'')
@@ -3061,10 +3083,10 @@ function renderHoy(){
   if (guia){ document.getElementById("hoy").innerHTML = guiaHTML(); return; }
   if (diagAbierto){ document.getElementById("hoy").innerHTML = diagHTML(); return; }
   document.getElementById("hoy").innerHTML =
-      cabeceraHTML() + visitaHTML() + climaTablaHTML() + rondaHTML() + alertasHTML() + vivoHTML() + ahoraHTML() + esperaHTML() + anotarHTML()
-    + '<button id="sos" type="button">Algo anda mal →</button>'
+      cabeceraHTML() + visitaHTML() + climaTablaHTML() + avisosHTML() + vivoHTML()
     + (hayCosechaCerca() ? cosechaHTML() : "")
-    + casaHTML() + proximosHTML() + cambiosHTML();
+    + '<div class="mas">' + pendientesHTML() + casaHTML() + proximosHTML() + '</div>'
+    + '<button id="sos" type="button">Algo anda mal →</button>';
   const sh=document.getElementById("fab-sheet"); if(sh) sh.innerHTML = fabHTML();
 }
 function renderTodo(){ renderHoy(); renderCal(); renderPend(); buildIndex(); }
