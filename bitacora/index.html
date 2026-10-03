@@ -600,6 +600,12 @@ body[data-tab="fichas"] .brand{margin-bottom:8px}
 .cp-l li{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:9px 10px}
 .cp-l b{font-family:Archivo,sans-serif;font-size:14px;line-height:1.3}
 .ess{margin:0 0 12px}
+.junta{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
+.junta li{display:flex;flex-direction:column;gap:2px;padding:9px 0;border-bottom:1px solid var(--line)}
+.junta li:last-child{border-bottom:0}
+.junta b{font-family:Archivo,sans-serif;font-size:14px}
+.junta span{font-size:13.5px;line-height:1.4}
+.junta small{font-size:12px;color:var(--muted);line-height:1.35}
 .regla b{font-family:Archivo,sans-serif;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--leaf);display:block;margin-bottom:4px}
 </style>
 
@@ -2139,8 +2145,8 @@ const SINTOMAS = [
    h:"Nada. Si te preocupa, mulch más grueso conserva algo de calor en la raíz. Es de las cosas que más se diagnostica mal y más se corrige al pedo."}
 ];
 
-const FOTOS_FIJAS = [{"src": "fotos/fija1.jpg", "d": "2026-09-11", "s": "bancal", "cap": "Bancal recién sembrado con el cover crop y el primer mulch de pasto seco"}, {"src": "fotos/fija2.jpg", "d": "2026-09-11", "s": "insumos", "cap": "Biochar sobrante después de dos semanas tapado: micelio blanco y verde, colonización normal"}, {"src": "fotos/fija3.jpg", "d": "2026-09-13", "s": "insumos", "cap": "Los paquetes de semillas de Heaven's Fruit, donde apareció que la Doble Tangie es autofloreciente"}, {"src": "fotos/fija4.jpg", "d": "2026-09-14", "s": "bancal", "cap": "La cama revuelta por gatos: mulch corrido y parches de suelo desnudo"}, {"src": "fotos/fija5.jpg", "d": "2026-09-14", "s": "bancal", "cap": "Arreglado el mismo día: mulch repuesto y engrosado, con ramas cruzadas encima"}, {"src": "fotos/fija6.jpg", "d": "2026-09-14", "s": "insumos", "cap": "El tronco viejo podrido que sumó a la cama: lignina y esponja de humedad"}, {"src": "fotos/fija7.jpg", "d": "2026-09-14", "s": "insumos", "cap": "Micelio blanco en pasto seco viejo: inoculante nativo y gratis"}];
-const SUJETOS=[["bancal","Bancal"],["insumos","Insumos y hallazgos"],["tw","Toxi Watermelon"],["dt","Doble Tangie"],["pj","Permanent Jealousy"],["ps","Pineapple Slush"],["slh","Super Lemon Haze"]];
+const FOTOS_FIJAS = [{"src": "fotos/fija1.jpg", "d": "2026-09-11", "s": "bancal", "cap": "Bancal recién sembrado con el cover crop y el primer mulch de pasto seco"}, {"src": "fotos/fija2.jpg", "d": "2026-09-11", "s": "insumos", "cap": "Biochar sobrante después de dos semanas tapado: micelio blanco y verde, colonización normal"}, {"src": "fotos/fija3.jpg", "d": "2026-09-13", "s": "insumos", "cap": "Los paquetes de semillas de Heaven's Fruit, donde apareció que la Doble Tangie es autofloreciente"}, {"src": "fotos/fija4.jpg", "d": "2026-09-14", "s": "bancal", "cap": "La cama revuelta por gatos: mulch corrido y parches de suelo desnudo"}, {"src": "fotos/fija5.jpg", "d": "2026-09-14", "s": "bancal", "cap": "Arreglado el mismo día: mulch repuesto y engrosado, con ramas cruzadas encima"}, {"src": "fotos/fija6.jpg", "d": "2026-09-14", "s": "insumos", "cap": "El tronco viejo podrido que sumó a la cama: lignina y esponja de humedad"}, {"src": "fotos/fija7.jpg", "d": "2026-09-14", "s": "insumos", "cap": "Micelio blanco en pasto seco viejo: inoculante nativo y gratis"}, {"src": "fotos/fija8.jpg", "d": "2026-10-02", "s": "macetas", "cap": "Maceta 1 el 2/10, antes de regar: superficie seca, perlita a la vista"}, {"src": "fotos/fija9.jpg", "d": "2026-10-02", "s": "macetas", "cap": "Maceta 2 el 2/10, antes de regar"}, {"src": "fotos/fija10.jpg", "d": "2026-10-02", "s": "macetas", "cap": "Maceta 3 el 2/10, antes de regar: mezcla suelta, sin costra"}, {"src": "fotos/fija11.jpg", "d": "2026-10-02", "s": "macetas", "cap": "Maceta 4 el 2/10, antes de regar"}, {"src": "fotos/fija12.jpg", "d": "2026-10-02", "s": "macetas", "cap": "De cerca: hilos blancos de hongo sobre la mezcla. Es la tierra viva colonizando, no una plaga"}, {"src": "fotos/fija13.jpg", "d": "2026-10-02", "s": "macetas", "cap": "Más micelio blanco entre la perlita y la corteza: señal de buena vida en la mezcla"}, {"src": "fotos/fija14.jpg", "d": "2026-10-03", "s": "insumos", "cap": "Borra de café de una semana en un recipiente cerrado: micelio blanco y manchas verde-azuladas. Sirve para el bancal"}, {"src": "fotos/fija15.jpg", "d": "2026-10-03", "s": "insumos", "cap": "El fondo del mismo recipiente, con agua juntada: el punto flojo, porque sin aire la borra se avinagra"}, {"src": "fotos/fija16.jpg", "d": "2026-10-03", "s": "insumos", "cap": "Otra tanda de borra con menos hongo. Desde ahora se guarda abierta y sin agua en el fondo"}];
+const SUJETOS=[["bancal","Bancal"],["macetas","Macetas"],["insumos","Insumos y hallazgos"],["tw","Toxi Watermelon"],["dt","Doble Tangie"],["pj","Permanent Jealousy"],["ps","Pineapple Slush"],["slh","Super Lemon Haze"]];
 const SUJ_MAP=Object.fromEntries(SUJETOS);
 let galFiltro="todas", gfecha=null;
 function galeriaHTML(){
@@ -3012,6 +3018,26 @@ function paraChip(a){
   const t = n<0 ? "ya hacía falta" : (n===0 ? "para hoy" : "para el "+fechaCorta(a.para)+" · "+n+" días");
   return '<span class="st '+cl+'">'+esc(t)+'</span>';
 }
+/* materiales gratis o casi: lo que se junta, no se compra */
+const JUNTAR=[
+  {n:"Cartón corrugado marrón", para:"Mezclarlo picado con la borra, y en planchas bajo el mulch de los bordes y pasillos contra la gramilla", ojo:"Sin cinta, sin plástico, sin parafina ni impresión brillante. Nunca en planchas sobre la cama: ahoga el cover crop"},
+  {n:"Borra de café", para:"Nitrógeno lento para el bancal, finita bajo el mulch", ojo:"Abierta y sin agua en el fondo. Hasta 5 L por mes en el bancal, mezclada con cartón. Nada en las macetas hasta que las plantas tengan 4 semanas"},
+  {n:"Yerba usada", para:"Igual que la borra, más suave: se integra rápido bajo el mulch", ojo:"Secala un poco antes de guardarla; mojada y tapada se pudre"},
+  {n:"Pasto seco y hojas", para:"Reponer el mulch: la cama tiene que estar siempre tapada, 5-8 cm", ojo:"Pasto recién cortado, secarlo 2 días al sol antes; verde y en capa gruesa fermenta"},
+  {n:"Ramas finas de poda", para:"Cruzadas sobre el mulch contra los gatos y el viento", ojo:"Sin espinas, sin hojas de eucalipto o laurel en cantidad"},
+  {n:"Ceniza de leña del asado", para:"Potasio y calcio para el bancal", ojo:"Solo leña o carbón vegetal, sin briquetas ni encendedor químico. Un puñado por m² por temporada como máximo: sube el pH"},
+  {n:"Carbón vegetal en pedacitos", para:"Biochar casero: molido, cargado una semana en agua con humus o en la borra", ojo:"Sin cargar roba nutrientes las primeras semanas"},
+  {n:"Cáscaras de huevo", para:"Calcio lento, y una barrera floja contra babosas alrededor de los tallos", ojo:"Secas y molidas finas; enteras tardan años"},
+  {n:"Arpillera de yute (bolsas de papa)", para:"Sombra para las geotextiles en enero, y cubrir la borra guardada", ojo:"Pedila en la verdulería; la de plástico no sirve"},
+  {n:"Cajones de verdulería o ladrillos", para:"Levantar las macetas de las baldosas en noviembre", ojo:"Que queden firmes: una maceta de 40 L mojada pesa 45 kg"},
+  {n:"Baldes y bidones con tapa", para:"Juntar agua de lluvia sin cloro", ojo:"Tapados con tela: abiertos crían mosquitos en una semana"},
+  {n:"Cajas de cartón grandes", para:"El secado en el altillo (abril)", ojo:"Guardalas planas y secas desde ahora"}
+];
+function juntarHTML(){
+  return '<details class="card" id="juntar"><summary>Para juntar: gratis o casi<span class="cnt">'+JUNTAR.length+'</span></summary><div class="card-body"><ul class="junta">'
+    + JUNTAR.map(j=>'<li><b>'+esc(j.n)+'</b><span>'+esc(j.para)+'</span><small>'+esc(j.ojo)+'</small></li>').join("")
+    + '</ul></div></details>';
+}
 function pendientesHTML(){
   const L=accConEstado().filter(a=>a.tipo!=="cama"&&(a.st==="toca"||a.st==="pendiente")).sort((a,b)=>(a.due||"9")<(b.due||"9")?-1:1);
   if(!L.length) return "";
@@ -3348,6 +3374,7 @@ function renderPend(){
     + (comprar.length ? '<ul class="cp-l">'+comprar.map(a=>{ const n=a.due?dias(today,a.due):0;
         return '<li><span class="st '+(n<=0?'st-comprar':n<=7?'st-llega':'st-listo')+'">'+(n<=0?'ya':n===1?'mañana':'en '+n+' días')+'</span><b>'+esc(a.n)+'</b><button class="acc" data-guia="'+a.id+'" type="button" style="min-height:32px;padding:5px 11px">Ver</button></li>'; }).join("")+'</ul>'
       : '<p class="empty">Nada para comprar en las próximas tres semanas.</p>')
+    + juntarHTML()
     + '<details class="card" id="cp-ref"><summary>Referencia: inventario, pedidos, proveedores y gastos</summary><div class="card-body" id="cp-ref-b">'
     + inventarioHTML()
     + grupos
