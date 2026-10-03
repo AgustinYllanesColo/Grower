@@ -553,6 +553,7 @@ td.aw .rg-c{margin-top:5px}
 .vs-l{list-style:none;margin:6px 0 8px;padding:0;display:flex;flex-direction:column;gap:6px}
 .vs{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;background:var(--surface);color:var(--ink);border-radius:5px;padding:9px 10px}
 .vs.ok{opacity:.55}
+.vs.parte{display:block;border:1px dashed var(--line-strong);border-radius:6px;padding:9px 11px}
 .vs.ok b{text-decoration:line-through}
 .vs-c{width:24px;height:24px;border-radius:99px;border:1.5px solid var(--line-strong);background:var(--ground);display:grid;place-items:center;padding:0;cursor:pointer;color:var(--leaf)}
 .vs.ok .vs-c{background:var(--leaf-soft);border-color:var(--leaf)}
@@ -581,6 +582,8 @@ td.aw .rg-c{margin-top:5px}
 .brand h1{font-size:16px;white-space:nowrap}
 .brand{flex-wrap:nowrap}
 .brand .season{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.brand h1{flex:none}
+@media (max-width:420px){.brand .season{display:none}}
 #sol{flex:none}
 body:not([data-tab="fichas"]) .searchwrap{display:none}
 body[data-tab="fichas"] .brand{margin-bottom:8px}
@@ -2379,6 +2382,9 @@ function acciones(){
       pasos:COSECHA.slice(5).map(k=>k[1])});
   });
   /* --- compras: una semana antes de usarlas, nunca el mismo día --- */
+  A.push({id:"c_lupa", n:"Comprar una lupa de 60x con luz (o clip para el celular)", tipo:"compra", desde:"2026-11-15", due:"2026-12-05", venc:30,
+    why:"El corte de las autos (fines de diciembre) y de las Toxi se decide mirando los tricomas: transparentes = falta, lechosos = pico, ámbar = más pesado. A ojo no se ven; con la lupa sí. Es la compra más barata con más impacto en la calidad de toda la temporada.",
+    pasos:["Lupa de joyero 60x con LED, o lente clip macro para el celular (permite foto y te la paso a mí para decidir juntos)","Mirar cogollos, no hojitas: las hojas se ponen ámbar antes y engañan","Probarla en noviembre con cualquier planta para aprender a enfocar"], dur:"10 min"});
   A.push({id:"c_ascorbico", n:"Comprar ácido ascórbico en polvo (100 g) — de respaldo", tipo:"compra", desde:"2026-09-29", due:"2026-11-15", venc:60,
     why:"Desde el 29/9 el agua principal es la de lluvia: no tiene cloro. El ascórbico queda de respaldo para cuando no llueva (diciembre-enero) y tengas que usar canilla. Una pizca entre dos dedos por tacho de 20 L, disuelta antes de regar. En farmacia no lo consiguió dos veces: probar dietética o Mercado Libre.",
     pasos:["Pedilo así: «ácido ascórbico en polvo, puro, 100 gramos» (es vitamina C pura). Redoxon NO: la efervescente trae bicarbonato de sodio y ácido cítrico, y el sodio se acumula en el suelo riego tras riego; la masticable trae azúcar. Solo como parche de uno o dos días si no conseguís el polvo. Farmacia con recetario magistral, dietética, o Mercado Libre buscando «ácido ascórbico polvo puro»","Frasco oscuro y seco, cuchara chica adentro","Uso: una pizca entre dos dedos (~0,3 g) por tacho de 20 L, revolver, regar"], al:{inv:{ascorbico:100}}, dur:"15 min",
@@ -2637,12 +2643,13 @@ function visitaHTML(){
   const paso=(k,titulo,sub,acc,hecho)=>'<li class="vs'+(hecho?' ok':'')+'"><button type="button" class="vs-c" data-vtick="'+k+'" aria-pressed="'+(hecho?'true':'false')+'" aria-label="Marcar">'+(hecho?ic("ok"):'')+'</button><div class="vs-b"><b>'+titulo+'</b>'+(sub?'<span>'+sub+'</span>':'')+'</div>'+(acc||'')+'</li>';
   const obsHecha=(obsEn("dedo",today)?1:0);
   let pasos='';
-  pasos+=paso("mirar","Mirar antes de tocar · 5 min","Dedo a 3 cm en cada grupo, trébol, olor de las macetas, babosas. Anotalo en «Lo vivo» antes de regar: con eso la tabla se calibra.", '<button class="vs-a" type="button" data-ir="vivo">Anotar</button>', hoyV&&(visTick("mirar")||obsHecha));
+  pasos+=paso("mirar","Mirar antes de tocar · 5 min","Dedo a 3 cm en cada grupo, trébol, olor de las macetas, babosas. Antes de regar: lo que ves sin regar es lo que calibra la tabla.", "", hoyV&&(visTick("mirar")||obsHecha));
   v.riegos.forEach(r=>{ const dosis=(r.g.orden&&/a fondo/.test(r.g.orden.t)) ? r.g.orden.d.split(". ").slice(1).join(". ") : (r.d.est==="regar"||r.d.est==="urgente") ? r.d.dosis : "le queda "+(100-r.d.pct)+" %: aprovechá que estás";
     pasos+=paso("riego-"+r.g.id, ic("gota")+"Regar "+esc(r.g.nombre.toLowerCase())+" · "+r.L+" L", esc(dosis), hoyV&&!r.hecho?'<button class="vs-a" type="button" data-acc="'+(r.g.id==="bancal"?"riego_b":"riego_m")+'">Hecho</button>':'', r.hecho); });
   v.tareas.forEach(a=>{ pasos+=paso("t-"+a.id, esc(a.n)+(a.dur?' · '+esc(a.dur):''), a.st==="futura"?'toca el '+esc(fechaCorta(a.due)):'', '<button class="vs-a" type="button" data-guia="'+a.id+'">Abrir</button>', false); });
   if(v.extra.length) pasos+='<li class="vs-sep">Si te sobra tiempo · +'+v.minExtra+' min</li>'+v.extra.map(a=>paso("t-"+a.id, esc(a.n)+(a.dur?' · '+esc(a.dur):''), '', '<button class="vs-a vs-a2" type="button" data-guia="'+a.id+'">Abrir</button>', false)).join("");
-  pasos+=paso("cierre","Antes de irte · 3 min","Foto del bancal desde el ángulo de siempre, cartón de las macetas con peso, ramas cruzadas sobre la tierra a la vista.", '<button class="vs-a" type="button" data-fab="foto">Foto</button>', hoyV&&visTick("cierre"));
+  pasos+=paso("cierre","Antes de irte · 3 min","3 fotos desde los mismos ángulos de siempre: el bancal desde la esquina, las macetas desde arriba y la planta más chica de cerca. Cartón de las macetas con peso y ramas cruzadas sobre la tierra a la vista.", "", hoyV&&visTick("cierre"));
+  pasos+='<li class="vs-sep">Al volver · 2 min</li><li class="vs parte"><div class="vs-b"><b>Mandame el parte por el chat</b><span>Dedo del bancal y de las macetas (seco / apenas / húmedo) · olor · cuántos baldes a cada grupo · lo raro que viste · las 3 fotos. Con eso anoto todo y la tabla se recalibra.</span></div></li>';
   const llevar=[v.litros?v.litros+" L de agua (de lluvia si tenés)":null,"regadera o botella con la tapa agujereada"].concat(v.tareas.filter(a=>/^Juntar lo de|kit/i.test(a.n)).map(a=>"lo de: "+a.n.replace(/^Juntar lo de |^Juntar /,""))).filter(Boolean);
   return '<section class="vis'+(hoyV?' vis-hoy':'')+'" id="visita">'
     + '<div class="vis-h"><div><span class="vis-k">'+(hoyV?'Visita de hoy':'Próxima visita')+'</span><h2>'+esc(cuando)+(hoyV?'':' · '+esc(fechaCorta(v.V)))+'</h2></div>'
