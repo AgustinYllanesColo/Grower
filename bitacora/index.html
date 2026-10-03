@@ -603,6 +603,35 @@ body[data-tab="fichas"] .brand{margin-bottom:8px}
 .cp-l li{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:9px 10px}
 .cp-l b{font-family:Archivo,sans-serif;font-size:14px;line-height:1.3}
 .ess{margin:0 0 12px}
+.tps{display:grid;grid-template-columns:repeat(auto-fill,minmax(150px,1fr));gap:8px;margin:0 0 16px}
+.tp{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:10px 12px;display:flex;flex-direction:column;min-width:0}
+.tp-k{font-family:"JetBrains Mono",monospace;font-size:10px;letter-spacing:.08em;text-transform:uppercase;color:var(--muted)}
+.tp b{font-family:Archivo,sans-serif;font-size:22px;letter-spacing:-.02em;font-variant-numeric:tabular-nums;line-height:1.2}
+.tp-s{font-size:11.5px;color:var(--muted);line-height:1.3}
+.pfs{display:grid;grid-template-columns:repeat(auto-fill,minmax(160px,1fr));gap:9px;margin:0 0 16px}
+.pf{background:var(--surface);border:1px solid var(--line);border-radius:6px;padding:11px 12px;min-width:0}
+.pf>summary{list-style:none;cursor:pointer}.pf>summary::-webkit-details-marker{display:none}
+.pf[open]{grid-column:1/-1}
+.pf-off{opacity:.55;background:transparent;border-style:dashed}
+.pf-h{display:flex;justify-content:space-between;gap:6px;align-items:flex-start}
+.pf-h>div{display:flex;flex-direction:column;min-width:0}
+.pf-h b{font-family:Archivo,sans-serif;font-size:15px;letter-spacing:-.01em}
+.pf-h span{font-size:12px;color:var(--muted);line-height:1.25}
+.pf-l{font-family:"JetBrains Mono",monospace;font-size:9.5px!important;text-transform:uppercase;letter-spacing:.06em;text-align:right;flex:none;max-width:70px}
+.pf-n{display:flex;gap:12px;margin:9px 0 4px}
+.pf-n span{display:flex;flex-direction:column;font-size:10.5px;color:var(--muted);text-transform:uppercase;letter-spacing:.05em;font-family:"JetBrains Mono",monospace}
+.pf-n b{font-family:Archivo,sans-serif;font-size:20px;color:var(--ink);letter-spacing:-.02em;text-transform:none;font-variant-numeric:tabular-nums;line-height:1.1}
+.pf-e{font-family:Archivo,sans-serif;font-size:12.5px;font-weight:600;margin:2px 0 6px;line-height:1.3}
+.pf-bar{height:4px;background:var(--line);border-radius:99px;overflow:hidden}.pf-bar i{display:block;height:100%;background:var(--leaf)}
+.pf-c{font-size:11.5px;color:var(--muted);margin:5px 0 0}
+.pf-b{border-top:1px solid var(--line);margin-top:10px;padding-top:10px;display:flex;flex-direction:column;gap:8px}
+.pf-img{width:100%;max-height:260px;object-fit:cover;border-radius:4px}
+.pf-k{font-size:13px;margin:0;line-height:1.4}
+.pf-alt{display:flex;align-items:center;gap:10px;font-size:13px}
+.pf-sp{width:120px;height:34px;flex:none}.pf-sp polyline{fill:none;stroke:var(--leaf);stroke-width:2;stroke-linejoin:round;stroke-linecap:round}
+.pf-ev{list-style:none;margin:0;padding:0;font-size:13px}
+.pf-ev li{display:grid;grid-template-columns:auto 1fr;gap:8px;padding:4px 0;border-bottom:1px solid var(--line)}
+.pf-ev li span{font-family:"JetBrains Mono",monospace;font-size:11px;color:var(--muted);white-space:nowrap}
 .junta{list-style:none;margin:0;padding:0;display:flex;flex-direction:column}
 .junta li{display:flex;flex-direction:column;gap:2px;padding:9px 0;border-bottom:1px solid var(--line)}
 .junta li:last-child{border-bottom:0}
@@ -1998,7 +2027,7 @@ function mergeDiario(r){ if(Array.isArray(r)){ const vis=new Set(diario.map(kdia
   diario = diario.filter(e=>!borrado(e)); }
 function mergeCosecha(r){ if(!r) return; for(const id in r){ const v=r[id]||{}; const lt=cosecha[id]?(cosecha[id].t||0):-1; if((v.t||0)>=lt) cosecha[id]=v; } }
 function mergeExtr(r){ if(Array.isArray(r)){ const vis=new Set(extr.map(x=>x.id)); r.forEach(x=>{ if(x&&x.id&&!vis.has(x.id)){ extr.push(x); vis.add(x.id); } }); } extr=extr.filter(x=>!borrados["x|"+x.id]); }
-function limpiarPlantas(){ for(const id in plantas){ const v=plantas[id]||{}; if(!METRICAS.some(([k])=>(v[k]||0)>0) && !v.nota && !v.peso) delete plantas[id]; } }
+function limpiarPlantas(){ for(const id in plantas){ const v=plantas[id]||{}; if(!METRICAS.some(([k])=>(v[k]||0)>0) && !v.nota && !v.peso && !(v.alt||[]).length && !(v.ev||[]).length && !v.estado && !v.germ && v.machos==null) delete plantas[id]; } }
 function mergeBorrados(r){ if(!r) return; for(const k in r) if(!borrados[k]) borrados[k]=r[k]; }
 function mergeEventos(r){ if(!r) return; for(const k in r){ const v=r[k]||{}; const lt=eventos[k]?(eventos[k].t||0):-1; if((v.t||0)>=lt) eventos[k]=v; } }
 function mergeInv(r){ if(!r) return; for(const k in r){ const v=r[k]||{}; const lt=inv[k]?(inv[k].t||0):-1; if((v.t||0)>=lt) inv[k]=v; } }
@@ -2328,10 +2357,6 @@ function acciones(){
       why:"Desde la semana 3 de flor, cada lluvia que moja los cogollos es humedad adentro de la flor por días. Un techo de nylon cristal a 30-40 cm sobre las puntas, abierto de los costados, deja pasar sol y aire y saca el agua. Contra la botrytis de abril pesa más que cualquier foliar.",
       pasos:["4 postes o cañas firmes en las esquinas (1,8-2 m), bien enterrados: con viento es una vela","Nylon cristal de 150-200 micrones, con caída hacia el lado que no moja la cama","Costados ABIERTOS: cerrado es un invernadero húmedo, peor que la lluvia","Fijo desde la semana 3, o como mínimo antes de cada lluvia anunciada","Revisar amarres antes de cada tormenta"], dur:"1 h",
       riesgo:"Una semana de lluvia en abril con los cogollos mojados es exactamente cómo perdiste la cosecha del año pasado."});
-    A.push({id:"macetas_alto", venc:20, n:"Levantar las macetas de las baldosas", tipo:"cama", desde:"2026-11-01", due:"2026-11-10",
-      why:"En noviembre la baldosa al sol pasa los 45 °C y cocina las raíces del fondo de la geotextil; además sella el drenaje. Dos listones o tres ladrillos debajo dejan pasar aire: la maceta respira, drena y el fondo queda 8-10 °C más fresco.",
-      pasos:["2 listones o 3 ladrillos por maceta, nivelados","Levantarla entre dos, con la tierra húmeda (pesa ~45 kg): no arrastrar la geotextil","Que quede firme: con viento una de 40 L en altura se vuelca"], dur:"15 min",
-      riesgo:"Raíces del fondo cocidas en el primer golpe de calor: la planta se frena justo antes de la flor."});
     A.push({id:"clon_toxi", venc:30, n:"Elegir la mejor Toxi y clonarla con agua de sauce", tipo:"cama", desde:"2027-01-10", due:"2027-01-17", req:["plantar_toxi"],
       cond:{q:"¿Ya distinguís cuál huele mejor al frotar el tallo?", si:"Sí", no:"Todavía son iguales"},
       why:"Es mejoramiento real y cuesta cero. Solo sobre las Toxi: las autos no se clonan.",
@@ -2382,9 +2407,10 @@ function acciones(){
       pasos:COSECHA.slice(5).map(k=>k[1])});
   });
   /* --- compras: una semana antes de usarlas, nunca el mismo día --- */
-  A.push({id:"c_lupa", n:"Comprar una lupa de 60x con luz (o clip para el celular)", tipo:"compra", desde:"2026-11-15", due:"2026-12-05", venc:30,
-    why:"El corte de las autos (fines de diciembre) y de las Toxi se decide mirando los tricomas: transparentes = falta, lechosos = pico, ámbar = más pesado. A ojo no se ven; con la lupa sí. Es la compra más barata con más impacto en la calidad de toda la temporada.",
-    pasos:["Lupa de joyero 60x con LED, o lente clip macro para el celular (permite foto y te la paso a mí para decidir juntos)","Mirar cogollos, no hojitas: las hojas se ponen ámbar antes y engañan","Probarla en noviembre con cualquier planta para aprender a enfocar"], dur:"10 min"});
+  A.push({id:"macetas_alto", venc:20, n:"Levantar las macetas de las baldosas", tipo:"cama", desde:"2026-11-01", due:"2026-11-10",
+    why:"En noviembre la baldosa al sol pasa los 45 °C y cocina las raíces del fondo de la geotextil; además sella el drenaje. Dos listones o tres ladrillos debajo dejan pasar aire: la maceta respira, drena y el fondo queda 8-10 °C más fresco.",
+    pasos:["2 listones o 3 ladrillos por maceta, nivelados","Levantarla entre dos, con la tierra húmeda (pesa ~45 kg): no arrastrar la geotextil","Que quede firme: con viento una de 40 L en altura se vuelca"], dur:"15 min",
+    riesgo:"Raíces del fondo cocidas en el primer golpe de calor: la planta se frena justo antes de la flor."});
   A.push({id:"c_ascorbico", n:"Comprar ácido ascórbico en polvo (100 g) — de respaldo", tipo:"compra", desde:"2026-09-29", due:"2026-11-15", venc:60,
     why:"Desde el 29/9 el agua principal es la de lluvia: no tiene cloro. El ascórbico queda de respaldo para cuando no llueva (diciembre-enero) y tengas que usar canilla. Una pizca entre dos dedos por tacho de 20 L, disuelta antes de regar. En farmacia no lo consiguió dos veces: probar dietética o Mercado Libre.",
     pasos:["Pedilo así: «ácido ascórbico en polvo, puro, 100 gramos» (es vitamina C pura). Redoxon NO: la efervescente trae bicarbonato de sodio y ácido cítrico, y el sodio se acumula en el suelo riego tras riego; la masticable trae azúcar. Solo como parche de uno o dos días si no conseguís el polvo. Farmacia con recetario magistral, dietética, o Mercado Libre buscando «ácido ascórbico polvo puro»","Frasco oscuro y seco, cuchara chica adentro","Uso: una pizca entre dos dedos (~0,3 g) por tacho de 20 L, revolver, regar"], al:{inv:{ascorbico:100}}, dur:"15 min",
@@ -3171,6 +3197,7 @@ function renderCal(){
   const lineaT='<ol class="tl2">'+clave.map(a=>{ const n=dias(today,a.due);
       return '<li class="'+(n<=0?'ya':n<=7?'pronto':'')+'"><span class="tl2-d"><b>'+esc(fechaCorta(a.due))+'</b><small>'+(n<=0?'ahora':n===1?'mañana':'en '+n+' días')+'</small></span><span class="tl2-n">'+esc(a.n)+'</span></li>'; }).join("")+'</ol>';
   document.getElementById("cal").innerHTML = tiraHTML()
+    + temporadaHTML()
     + '<h2 class="sec">Fechas clave</h2>' + lineaT
     + grupo("Todo lo que viene", g("toca").concat(g("pendiente")).concat(g("esperando")).concat(fut), false)
     + grupo("En casa, sin fecha", g("sugerida"), false)
@@ -3281,9 +3308,84 @@ function extrHTML(){
       : '<p class="gal-vacia">Todavía nada. Arrancamos ya: «Experimento 1 · rosin de kief con la planchita» está en Hoy → cosas de casa. Después, manteca con el recorte de la tanda 1 en enero.</p>')
     + '</div></details>';
 }
+/* ============ ficha por planta: desde que germina hasta el frasco ============ */
+const VNOM = {tw:"Toxi Watermelon", dt:"Doble Tangie", pj:"Permanent Jealousy", ps:"Pineapple Slush", slh:"Super Lemon Haze"};
+function plantaEstado(x){
+  const P=plantas[x.id]||{}; const t=TANDAS.find(y=>y.id===x.t); const e=t?estadoTanda(t):null;
+  if(P.estado==="descartada") return {fin:true, txt:"descartada"+(P.motivo?" · "+P.motivo:"")};
+  if(!e) return {pre:true, txt:"germina "+(t?t.prev:"más adelante")};
+  if(e.futuro) return {pre:true, txt:"germina en "+e.faltan+" días"};
+  const g=P.germ||e.g, d=dias(g)+1;
+  return {g:g, d:d, sem:Math.max(1,Math.ceil(d/7)), etapa:e.etapa, pct:e.pct, cosecha:e.cosecha, cosechaHasta:e.cosechaHasta,
+    cortada:!!(cosecha[x.id]||{}).corte};
+}
+function sparkAlt(alt){
+  if(!alt||alt.length<2) return "";
+  const xs=alt.map(a=>dias(alt[0].d,a.d)), ys=alt.map(a=>num(a.cm)); const mx=Math.max(1,xs[xs.length-1]), my=Math.max(1,...ys);
+  const pts=xs.map((x,i)=>(4+x/mx*112).toFixed(1)+","+(30-ys[i]/my*26).toFixed(1)).join(" ");
+  return '<svg class="pf-sp" viewBox="0 0 120 34" aria-hidden="true"><polyline points="'+pts+'"/></svg>';
+}
+function fichaPlantaHTML(x){
+  const P=plantas[x.id]||{}, E=plantaEstado(x);
+  const alt=(P.alt||[]).slice().sort((a,b)=>a.d<b.d?-1:1), ult=alt[alt.length-1];
+  let ritmo=""; if(alt.length>=2){ const a=alt[alt.length-2], dd=Math.max(1,dias(a.d,ult.d)); ritmo=Math.round((num(ult.cm)-num(a.cm))/dd*7*10)/10; }
+  const ev=(P.ev||[]).slice().sort((a,b)=>a.d<b.d?1:-1);
+  const foto=FOTOS_FIJAS.map(f=>Object.assign({fija:1},f)).concat(fotos).filter(f=>f.p===x.id).sort((a,b)=>a.d<b.d?1:-1)[0];
+  const head='<div class="pf-h"><div><b>'+esc(x.id)+'</b><span>'+esc(VNOM[x.v]||x.v)+'</span></div><span class="pf-l">'+esc(x.l)+'</span></div>';
+  if(E.pre||E.fin) return '<div class="pf pf-off">'+head+'<p class="pf-e">'+esc(E.txt)+'</p></div>';
+  return '<details class="pf">'
+    + '<summary>'+head
+    +   '<div class="pf-n"><span><b>'+E.d+'</b>días</span><span><b>'+E.sem+'</b>semana</span><span><b>'+(ult?fmtQ(num(ult.cm)):'—')+'</b>cm</span></div>'
+    +   '<p class="pf-e">'+esc(E.etapa)+'</p>'
+    +   '<div class="pf-bar"><i style="width:'+(E.pct||0)+'%"></i></div>'
+    +   '<p class="pf-c">'+(E.cortada?'cortada el '+esc(fechaCorta(cosecha[x.id].corte)):'cosecha '+esc(fechaCorta(E.cosecha))+' a '+esc(fechaCorta(E.cosechaHasta)))+'</p>'
+    + '</summary><div class="pf-b">'
+    +   (foto?'<img class="pf-img" src="'+(foto.fija?foto.src:'/_blob/'+esc(foto.id))+'" alt="" loading="lazy">':'')
+    +   '<p class="pf-k">Germinó el '+esc(fechaLinda(E.g))+'</p>'
+    +   (alt.length?'<div class="pf-alt">'+sparkAlt(alt)+'<span>'+alt.length+' medidas'+(ritmo!==""?' · <b>'+String(ritmo).replace(".",",")+' cm/semana</b>':'')+'</span></div>':'<p class="pf-k">Sin altura medida todavía: en cada visita, del sustrato a la punta, y me la pasás.</p>')
+    +   (ev.length?'<ul class="pf-ev">'+ev.slice(0,8).map(a=>'<li><span>'+esc(fechaCorta(a.d))+'</span>'+esc(a.t)+'</li>').join("")+'</ul>':'')
+    +   (P.nota?'<p class="pf-k">'+esc(P.nota)+'</p>':'')
+    + '</div></details>';
+}
+/* ============ la temporada en números ============ */
+const INICIO_TEMP = "2026-09-11";
+function litrosDe(x){
+  const n=String(x.n||"").toLowerCase().replace(",", "."); const nm=x.a==="riego_m"?4:1;
+  let m=n.match(/([\d.]+)\s*l\b/); if(m) return parseFloat(m[1])*(/c\/u|cada/.test(n)?nm:1);
+  m=n.match(/([\d.]+)\s*balde/); if(m) return parseFloat(m[1])*10*(/c\/u|cada/.test(n)?nm:1);
+  return null;
+}
+function temporadaHTML(){
+  const dT=dias(INICIO_TEMP,today)+1;
+  const vis=new Set(); diario.forEach(x=>{ if(!(x.a in LLUV) && x.a!=="nota" && x.a!=="lluvia_mm") vis.add(x.d); }); obs.forEach(x=>vis.add(x.d));
+  Object.keys(eventos).forEach(k=>{ const e=eventos[k], a=acc(k); if(e&&e.estado==="hecho"&&e.d&&a&&a.tipo==="cama") vis.add(e.d); });
+  const V=[...vis].filter(d=>d>=INICIO_TEMP&&d<=today).sort();
+  const cada=V.length>1?Math.round(dias(V[0],V[V.length-1])/(V.length-1)*10)/10:null;
+  const rg=diario.filter(x=>["riego","riego_b","riego_m"].includes(x.a)&&x.d>=INICIO_TEMP); const Ls=rg.map(litrosDe); const L=Ls.reduce((a,b)=>a+(b||0),0), sinL=Ls.filter(x=>x==null).length;
+  const H=Object.assign({}, CLIMA.hist||{}); (CLIMA.dias||[]).forEach(c=>{ if(c.d<today&&(c.obs||c.src==="SMN medido")) H[c.d]=c.mm||0; });
+  const hoyC=(CLIMA.dias||[]).find(c=>c.d===today); const hd=Object.keys(H).sort();
+  const mm=Object.values(H).reduce((a,b)=>a+(Number(b)||0),0)+(hoyC&&hoyC.mm_med!=null?hoyC.mm_med:0);
+  const G=GASTOS_FIJOS.concat(gastos).reduce((a,g)=>a+(Number(g.m)||0),0);
+  const seco=PLANTAS_TEMP.reduce((a,x)=>a+num((cosecha[x.id]||{}).seco),0);
+  const t=(k,v,sub)=>'<div class="tp"><span class="tp-k">'+k+'</span><b>'+v+'</b><span class="tp-s">'+sub+'</span></div>';
+  return '<h2 class="sec">La temporada en números</h2><div class="tps">'
+    + t("Día", dT, "desde el "+fechaCorta(INICIO_TEMP))
+    + t("Visitas", V.length, cada?"una cada "+String(cada).replace(".",",")+" días":"")
+    + t("Agua regada", fmtQ(Math.round(L))+" L", rg.length+" riegos"+(sinL?" · "+sinL+" sin litros":""))
+    + t("Lluvia medida", fmtQ(Math.round(mm))+" mm", hd.length?"desde el "+fechaCorta(hd[0]):"")
+    + t("Gastado", plata(G), plata(G/PLANTAS_TEMP.length)+" por planta")
+    + t("Cosecha seca", seco?fmtQ(seco)+" g":"—", seco?plata(G/seco)+" el gramo":"la primera, en diciembre")
+    + '</div>';
+}
+function plantasHTML(){
+  const slh=estadoTanda(TANDAS.find(t=>t.id==="slh")); const S=plantas["SLH"]||{};
+  const slhCard = '<div class="pf'+(slh&&!slh.futuro?'':' pf-off')+'"><div class="pf-h"><div><b>SLH ×12</b><span>Super Lemon Haze · breeder</span></div><span class="pf-l">en tu casa</span></div>'
+    + '<p class="pf-e">'+(slh&&!slh.futuro?'día '+slh.d+' · '+(S.machos!=null?S.machos+' machos y '+(S.hembras||0)+' hembras':'sin sexar todavía'):'germina '+esc(TANDAS.find(t=>t.id==="slh").prev))+'</p></div>';
+  return '<h2 class="sec">Las plantas</h2><div class="pfs">'+PLANTAS_TEMP.map(fichaPlantaHTML).join("")+slhCard+'</div>';
+}
 function renderGen(){
   const _gal = galeriaHTML();
-  document.getElementById("gen-dyn").innerHTML = _gal + cosechaRegHTML() + extrHTML();
+  document.getElementById("gen-dyn").innerHTML = plantasHTML() + _gal + cosechaRegHTML() + extrHTML();
   const destGen = document.getElementById("saber-gen") || document.getElementById("gen-dyn");
   destGen.innerHTML = (destGen.id==="saber-gen" ? '<summary>Las genéticas de la temporada<span class="cnt">'+VARIEDADES.length+'</span></summary><div class="card-body">' : '')
     + VARIEDADES.map(v=>
@@ -3761,7 +3863,7 @@ setSync("Guardado solo en este dispositivo","warn");
   dbDoc = db.doc("estado/checklist");
   try{
     const cDoc = db.doc("estado/clima");
-    const usarClima = d => { if(d && Array.isArray(d.dias) && d.cargado && d.cargado>=CLIMA.cargado){ CLIMA.cargado=d.cargado; CLIMA.fuente=d.fuente||CLIMA.fuente; CLIMA.dias=d.dias; return true; } return false; };
+    const usarClima = d => { if(d && Array.isArray(d.dias) && d.cargado && d.cargado>=CLIMA.cargado){ CLIMA.cargado=d.cargado; CLIMA.fuente=d.fuente||CLIMA.fuente; CLIMA.dias=d.dias; if(d.hist) CLIMA.hist=d.hist; return true; } return false; };
     const cs = await cDoc.get(); if(cs.exists && usarClima(cs.data())) renderTodo();
     cDoc.onSnapshot(sn=>{ if(sn.exists && usarClima(sn.data()) && !diagAbierto && !guia) renderTodo(); }, ()=>{});
   }catch(e){}

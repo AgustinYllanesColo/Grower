@@ -19,6 +19,12 @@ Contexto para cualquier sesión de Claude que trabaje sobre el cultivo de Tomy.
 ## Registro
 **Tomy NO anota en la bitácora: anota Claude desde el chat** (riegos con litros en `n`, p. ej. «20 L» o «3,5 L c/u»; dedo con `p` = lo que predecía el cálculo; notas). Su balde es de **10 L**. **Toda foto que pase va a la galería sin preguntar** (fotos/fijaN.jpg, 900 px, en FOTOS_FIJAS con fecha, sujeto y pie de foto).
 
+**Ficha por planta** (pestaña Plantas): Claude anota en `checklist.plantas[ID]` (IDs: PJ-1, PS-1, DT-1..4, TW-1..4, SLH):
+`alt: [{d, cm}]` altura, `ev: [{d, t}]` lo que se le hizo (LST, topping, plaga…), `germ` si germinó otro día que su tanda,
+`estado: "descartada"` + `motivo`, `nota`; para SLH `machos`/`hembras`. Siempre con `t: Date.now()` (gana el más nuevo). Fotos de una planta: campo `p: ID` en FOTOS_FIJAS.
+**Calendario del iPhone**: `scripts/calendario.py` arma `calendario/temporada-26-27.ics` (UID = id de la acción). Si las fechas cambian mucho, regenerarlo y mandárselo.
+**Alertas oficiales SMN**: `scripts/alertas_smn.py` (CAP público, polígono que contiene Lanús) entra en la ronda diaria.
+
 ## Cómo hablarle a Tomy
 Crítico, sincero y exigente; nada de elogios. Corregir, enseñar y dar el porqué con números. Castellano rioplatense, de vos.
 Regla de la bitácora: **certeza, no dudas**. Lo que no hace falta no va, y lo que va lleva su estado.

@@ -275,7 +275,9 @@ def main():
             d["mm"] = round(med["mm"] + d["mm_resto"], 1)
             d["txt"] = (f"lluvia {mmf(d['mm'])} mm" if d["mm"] >= 1 else "seco") + (f", ráfagas de {d['racha']} km/h" if d.get("racha", 0) >= 40 else "")
     clima = {"cargado": hoy, "fuente": "Pronóstico: " + fuentes + ". Días pasados: MEDIDOS por el SMN (lluvia: mediana de Observatorio, Aeroparque y Ezeiza; temperatura y humedad: Observatorio). Si anotás tu pluviómetro, manda ese dato.",
-             "dias": pasados + fc}
+             "dias": pasados + fc,
+             # lluvia de toda la temporada (no se recorta): {fecha: mm medido}
+             "hist": dict(sorted({**(clima_prev.get("hist") or {}), **{d["d"]: d.get("mm", 0) for d in pasados if d.get("obs") or d.get("src") == "SMN medido"}}.items()))}
 
     # ---- estado del cultivo ----
     tandas = ck.get("tandas", {}) or {}
@@ -325,6 +327,22 @@ def main():
     items = []
     def aviso(n, t, d):
         items.append({"n": n, "t": t, "d": d})
+
+    # ---- alertas OFICIALES del SMN que caen sobre Lanús (van primero) ----
+    try:
+        import alertas_smn
+        for al in alertas_smn.alertas():
+            ev = al["evento"].lower()
+            if "granizo" in ev or "tormenta" in ev: que = "Tutores firmes, cartón de las macetas con peso, ramas sobre el mulch." + (" Techito armado: hay cogollos." if etapa in ("flor", "fin de flor") else "")
+            elif "viento" in ev or "zonda" in ev: que = "Tutores firmes y macetas que no se vuelquen; cartón y mulch con peso encima."
+            elif "calor" in ev or "temperaturas extremas" in ev: que = "Regá antes de que empiece y sombra a las geotextiles (arpillera): el sustrato negro pasa los 40 °C."
+            elif "lluvia" in ev: que = "No riegues; en la próxima visita mirá charcos y que el mulch no se haya lavado."
+            elif "frío" in ev or "helada" in ev or "nevada" in ev: que = "Plántulas tapadas de noche (vasito o botella cortada)."
+            else: que = "Revisá el cultivo en la próxima visita."
+            ini = al["desde"][11:16] + " h " + nombre_dia(al["desde"][:10]) if al["desde"] else ""
+            aviso("urg" if al["nivel"] in ("naranja", "roja") else "avi",
+                  f"Alerta {al['nivel']} del SMN: {al['evento'].lower()}" + (f" desde las {ini}" if ini else ""), que)
+    except Exception as e: print("alertas SMN fallaron:", e, file=sys.stderr)
 
     if llu48 >= 8:
         aviso("info", f"Lluvia {nombre_dia(dia_lluvia['d'])}: {mmf(dia_lluvia['mm'])} mm",

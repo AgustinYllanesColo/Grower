@@ -1,0 +1,1325 @@
+BEGIN:VCALENDAR
+VERSION:2.0
+PRODID:-//Grower//Bitacora Suelo Vivo//ES
+CALSCALE:GREGORIAN
+METHOD:PUBLISH
+X-WR-CALNAME:Suelo Vivo 26/27
+X-WR-TIMEZONE:America/Argentina/Buenos_Aires
+BEGIN:VEVENT
+UID:resiembra@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261004
+DTEND;VALUE=DATE:20261005
+SUMMARY:Resembrar solo los claros del trébol
+DESCRIPTION:Un claro es suelo desnudo al sol de octubre\, y es donde vuelv
+ en los gatos. Se resiembra el claro\, nunca toda la cama.\n\nPasos:\n• 
+ Un puñadito de semilla por claro (Cover Crop que sobró\, o lentejas y a
+ rvejas del almacén)\n• Un poco de humus encima\, fino\n• Regar suave
+ \n• Ramas finas cruzadas sobre los claros hasta que cierre\n\nTiempo: 1
+ 0 min\n\nLa fecha se mueve según el clima y lo que pase: la bitácora ma
+ nda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Resembrar solo los claros del trébol
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:extracto@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261004
+DTEND;VALUE=DATE:20261005
+SUMMARY:Extracto de humus al bancal
+DESCRIPTION:10 L revueltos a mano el mismo día: biología para el bancal 
+ cada tres semanas. Es la única melaza con destinatario que va al bancal.
+ \n\nPasos:\n• 2 puñados de humus en una media\, en 10 L de agua sin cl
+ oro\n• 1 cucharada de melaza disuelta en agua tibia\n• Revolver fuert
+ e 20-30 min y usar en el día\n• Sobre el mulch\, no sobre las plantas\
+ n\nTiempo: 40 min\n\nLa fecha se mueve según el clima y lo que pase: la 
+ bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Extracto de humus al bancal
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:germ_t1@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261004
+DTEND;VALUE=DATE:20261005
+SUMMARY:Sembrar la tanda 1 en las 4 macetas
+DESCRIPTION:Siembra directa de las autos: 1 Permanent Jealousy\, 1 Pineapp
+ le Slush y 2 Doble Tangie\, una por geotextil de 40 L.\n\nPasos:\n• Ded
+ o a 5 cm en el centro de cada maceta: si sale seco\, medio litro alrededo
+ r del hoyo antes de sembrar\n• Semilla a 0\,5-1 cm\, tierra apenas apre
+ tada\n• Vasito con agujeros encima hasta que asome\n• Mandame el part
+ e y las fotos\n\nTiempo: 20 min\n\nLa fecha se mueve según el clima y lo
+  que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Sembrar la tanda 1 en las 4 macetas
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:germ_toxi@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261004
+DTEND;VALUE=DATE:20261005
+SUMMARY:En casa · Germinar las 4 Toxi Watermelon en vasitos\, en tu casa
+DESCRIPTION:Las 3 mejores van al bancal a fines de octubre y la 4ª a una 
+ geotextil de 40 L.\n\nTiempo: 15 min\n\nLa fecha se mueve según el clima
+  y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Germinar las 4 Toxi Watermelon en vasitos\, en tu casa
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:slh_germ@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261004
+DTEND;VALUE=DATE:20261005
+SUMMARY:En casa · Breeder · germinar 12 Super Lemon Haze en tu casa
+DESCRIPTION:12 regulares para sexar y elegir padres.\n\nTiempo: 15 min\n\n
+ La fecha se mueve según el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Breeder · germinar 12 Super Lemon Haze en tu casa
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:repo_t2@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261008
+DTEND;VALUE=DATE:20261009
+SUMMARY:Comprar · Compra grande: 3 geotextiles 40 L\, Growmix\, compost y
+  humus
+DESCRIPTION:Una sola compra para tres cosas: la geotextil de la 4ª Toxi (
+ se arma el 11/10)\, las 2 geotextiles de 40 L de la tanda 2 (se arman el 
+ 1/11\; 40 L y no 20\, por agua y por cosecha) y el humus del primer top d
+ ressing. Stock hoy: compost 0\, Kashi 0\, humus 10 L\, Growmix 60 L. Amir
+ a (lo más barato por litro) o Perla Negra (retiro gratis en Lanús).\n\n
+ Pasos:\n• 3 geotextiles de 40 L (las Lotus de Amira\, unos $6.300 cada 
+ una)\n• 1 Growmix de 80 L (la 4ª Toxi + tanda 2 + vasitos SLH piden ~8
+ 5 L y quedan 60)\n• Compost: 20 L (6 por maceta × 3). Si no hay\, más
+  humus lo reemplaza\n• Humus: 30 L (8 macetas nuevas\, 20 para el top d
+ ressing de noviembre)\n• Biochar 1-2 L si hay: Perla Negra lo tiene\n\n
+ Tiempo: 1 h\n\nLa fecha se mueve según el clima y lo que pase: la bitác
+ ora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Compra grande: 3 geotextiles 40 L\, Growmix\, compost y humus
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:borra@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261011
+DTEND;VALUE=DATE:20261012
+SUMMARY:Borra de café al bancal
+DESCRIPTION:2 litros cada 15 días para los 2 m²\, tan fina que sigas vie
+ ndo el mulch por abajo. Es nitrógeno y micros para el vegetativo largo d
+ e las Toxi.\n\nPasos:\n• 2 L (4 vasos de 500 ml)\, no más\n• Espolvo
+ reada sobre el mulch\, capa de 1 mm: se tiene que seguir viendo el mulch\
+ n• Nunca apilada: hace costra y se pone anaeróbica\n• Regar después
+ \n\nTiempo: 5 min\n\nLa fecha se mueve según el clima y lo que pase: la 
+ bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Borra de café al bancal
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:armar_toxi4@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261011
+DTEND;VALUE=DATE:20261012
+SUMMARY:Armar la geotextil de 40 L de la 4ª Toxi (estimado)
+DESCRIPTION:Cocina 14 días y recibe a la 4ª Toxi el día que las otras v
+ an al bancal (~25/10). Apoyada sobre TIERRA\, al lado del bancal\, donde 
+ le dé el mismo sol: las raíces van a atravesar la tela hacia el suelo\,
+  y eso es lo que la hace aguantar enero.\n\nPasos:\n• Receta de las aut
+ os: 25 L Growmix + 6 L compost + 4 L humus + 500 ml biochar si hay + 50 g
+  gypsum (pesalo esta vez) + un chorro de IMO si ya lo tenés\n• Mezclar
+ \, mojar hasta que escurra apenas\n• Apoyarla sobre tierra (o enterrarl
+ a un tercio)\, nunca sobre baldosa\n• Tapar con cartón y piedra\, igua
+ l que las otras\n\nTiempo: 30 min\n\nLa fecha se mueve según el clima y 
+ lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Armar la geotextil de 40 L de la 4ª Toxi (estimado)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cup_t1@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261014
+DTEND;VALUE=DATE:20261015
+SUMMARY:Sacar la cúpula · Tanda 1
+DESCRIPTION:Con dos pares de hojas verdaderas la cúpula ya es humedad de 
+ más: tallo blando y damping-off. Desde acá\, sol y viento suave la endu
+ recen.\n\nPasos:\n• Sacar la media botella de cada planta\n• Mulch pu
+ esto sí o sí\, sin tocar el tallo (dejar 2 cm libres)\n• Riego: solo 
+ un anillo de 300-500 ml alrededor del tallo\, si el dedo a 3 cm sale seco
+ . Los 40 L de abajo siguen húmedos\n• Si el tallo se estiró y cayó d
+ e costado: enterrarlo hasta las hojas con sustrato\, hace raíz del tallo
+ \n\nTiempo: 5 min\n\nLa fecha se mueve según el clima y lo que pase: la 
+ bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Sacar la cúpula · Tanda 1
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:c_rosin@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261015
+DTEND;VALUE=DATE:20261016
+SUMMARY:Conseguir el papel para el rosin (o una lámina de teflón)
+DESCRIPTION:El papel manteca común no sirve: no tiene silicona\, se pega 
+ y arruina la muestra. Sirve papel para hornear SILICONADO (la caja tiene 
+ que decir «siliconado» o «antiadherente»\, supermercado o casa de rep
+ ostería) o\, mejor\, una lámina de teflón (PTFE) de las de prensas de 
+ sublimación: reutilizable\, no se pega nada\, Mercado Libre. En growshop
+ s también hay «papel para rosin».\n\nPasos:\n• Opción barata: papel
+  para hornear siliconado (que lo diga en la caja)\n• Opción que dura: 
+ lámina de teflón PTFE 30×30 cm (ML: «lámina teflón sublimación»)\
+ n• Una tarjeta vieja o espátula chica de metal para juntar\n\nTiempo: 
+ 20 min\n\nLa fecha se mueve según el clima y lo que pase: la bitácora m
+ anda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Conseguir el papel para el rosin (o una lámina de teflón)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:c_lst@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261018
+DTEND;VALUE=DATE:20261019
+SUMMARY:Armar el kit de LST: ganchos de percha\, tiras de remera\, estacas
+DESCRIPTION:Para el LST de la tanda 1 (semana 3\, ~25/10) y después de la
+ s Toxi. Gratis: alambre de perchas de tintorería cortado y doblado en U\
+ , una remera vieja cortada en tiras de 2 cm\, estaquitas de 20 cm.\n\nPas
+ os:\n• 10 ganchos en U de alambre de percha (15 cm)\n• 20 tiras de re
+ mera vieja\n• 6 estaquitas de madera\n\nTiempo: 20 min\n\nLa fecha se m
+ ueve según el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Armar el kit de LST: ganchos de percha\, tiras de remera\, est
+ acas
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:medir_alt1@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261018
+DTEND;VALUE=DATE:20261019
+SUMMARY:En casa · Medir el altillo (base de octubre)
+DESCRIPTION:Se seca en el altillo: primero hay que saber cuánto calienta.
+  Octubre es la base\; noviembre se repite con calor. Sin estos números e
+ l secado de diciembre es a ciegas.\n\nPasos:\n• Termohigrómetro en el 
+ PISO del altillo\, donde van a ir las cajas\n• Tres días seguidos: ano
+ tar temperatura y humedad a las 8\, a las 15 y a las 22 (Nota: «altillo 
+ 15 h: 26 ° 48 %»)\n• Anotar ese mismo día la máxima de afuera (la b
+ itácora la tiene en el clima): la diferencia altillo − afuera es lo qu
+ e te sirve para predecir diciembre\n• Mirar si la ventana/chapa recibe 
+ sol directo a la tarde\n\nTiempo: 5 min × 3 días\n\nLa fecha se mueve s
+ egún el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Medir el altillo (base de octubre)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:c_rafia@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261020
+DTEND;VALUE=DATE:20261021
+SUMMARY:Conseguir 12 bolsas de rafia (3-5 L) para las Super Lemon Haze
+DESCRIPTION:Las 12 SLH pasan de vasito a 3-5 L a las 3 semanas (~25/10). B
+ olsas de arroz o de balanceado con agujeros\; las regalan en verdulerías
+  y forrajerías.\n\nPasos:\n• 12 bolsas de rafia chicas (o botellas de 
+ 5 L cortadas) con agujeros\n• (La 4ª Toxi ya no va acá: va a una geot
+ extil de 40 L de la compra grande)\n\nTiempo: 30 min\n\nLa fecha se mueve
+  según el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Conseguir 12 bolsas de rafia (3-5 L) para las Super Lemon Haze
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:c_balanza@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261020
+DTEND;VALUE=DATE:20261021
+SUMMARY:Comprar una balanza de joyería de 0\,01 g
+DESCRIPTION:Para las extracciones: un rosin de 0\,5 g de kief da 0\,1-0\,2
+ 5 g. La balanza de cocina (de a 1 g) no lo ve: sin 0\,01 g no hay rendimi
+ ento\, y sin rendimiento el experimento no enseña nada. Mercado Libre\, 
+ «balanza digital 0\,01 g 100 g»\, es barata.\n\nPasos:\n• Balanza dig
+ ital de bolsillo\, 0\,01 g de precisión\, hasta 100-200 g\n• Si trae p
+ esa de calibración\, mejor\n\nTiempo: 10 min\n\nLa fecha se mueve según
+  el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Comprar una balanza de joyería de 0\,01 g
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:lst_t1@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261021
+DTEND;VALUE=DATE:20261022
+SUMMARY:LST suave · Tanda 1
+DESCRIPTION:Semana 3. En tus autos no es por rendimiento\, es por aire: ab
+ rir el centro para que el cogollo apical no sea una sola bola cerrada. Nu
+ nca cortar: una auto no tiene semanas para recuperarse.\n\nPasos:\n• Ga
+ nchos de alambre de percha y tiras de remera vieja\n• Doblar la punta p
+ rincipal hacia un costado y atarla\, sin quebrar\n• Abrir el centro: qu
+ e la luz entre a los nudos de abajo\n• Revisar el envés mientras está
+ s ahí\n\nTiempo: 10 min\n\nLa fecha se mueve según el clima y lo que pa
+ se: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:LST suave · Tanda 1
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:plantar_toxi@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261022
+DTEND;VALUE=DATE:20261023
+SUMMARY:Pasar las Toxi al bancal
+DESCRIPTION:Se abre un hueco y nada más: la red de hongos tardó semanas 
+ en armarse. Tres plantas a 70 cm\, no cuatro a 50: el año pasado dos pla
+ ntas dieron un kilo cada una en este mismo lugar\, y en marzo una copa ce
+ rrada contra la pared es botrytis. En línea: 30 cm del borde · 70 · 70
+  · 30 cm del otro borde.\n\nPasos:\n• Las 3 mejores al bancal\; la 4ª
+  (la más chica o la que menos te convence) a su geotextil de 40 L\, apoy
+ ada sobre tierra y con el mismo hoyo de pescado y humus\n• Despejar un 
+ anillo de 30 cm de cover alrededor de cada hoyo (cortar a ras\, dejar lo 
+ cortado ahí): un cover de 5 semanas le hace sombra y compite con un plan
+ tín\n• Hoyos a 70 cm entre sí\, las de los lados a 30 cm del borde de
+ l bancal\, todas a 40 cm de la pared\n• En el fondo de cada hoyo: 25 g 
+ de harina de pescado tapados con un puñado de humus (75 g en total\; los
+  25 g que sobran se suman a diciembre)\n• Plantar sin romper el pan de 
+ raíces\, al mismo nivel\n• Tutor firme al lado de cada una\, hoy\n• 
+ Mulch fino alrededor sin tocar el tallo y regar profundo\n\nTiempo: 45 mi
+ n\n\nLa fecha se mueve según el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Pasar las Toxi al bancal
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:c_aspirina@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261025
+DTEND;VALUE=DATE:20261026
+SUMMARY:Comprar aspirina 500 mg (un blíster)
+DESCRIPTION:Para el último foliar de la tanda 1 (semana 5\, ~1/11) y los 
+ foliares de vegetativo de las Toxi. Un blíster sobra para toda la tempor
+ ada.\n\nPasos:\n• Farmacia o kiosco: aspirina 500 mg\n\nTiempo: 5 min\n
+ \nLa fecha se mueve según el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Comprar aspirina 500 mg (un blíster)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:bok_t1@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261028
+DTEND;VALUE=DATE:20261029
+SUMMARY:Bokashi Flora · Tanda 1
+DESCRIPTION:Semana 4. Es el ÚNICO aporte en toda la vida de la auto. A la
+  Permanent Jealousy solo si la ves con hambre real: el linaje Cookies hac
+ e garra con nitrógeno.\n\nPasos:\n• 2 cucharadas (30 ml) de VAMP Bokas
+ hi Flora sobre el mulch de cada maceta\n• Permanent Jealousy: solo si a
+ marillea de verdad\n• Regar después\n\nTiempo: 5 min\n\nLa fecha se mu
+ eve según el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Bokashi Flora · Tanda 1
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:c_lupa@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261102
+SUMMARY:Comprar la lente macro de clip para el celular
+DESCRIPTION:La necesitás dos veces: para buscar preflores en las SLH desd
+ e mediados de noviembre y para los tricomas de la tanda 1 desde diciembre
+ . Mercado Libre\, es más barata que la lupa 60x y te deja mandarme la fo
+ to.\n\nPasos:\n• Lente macro de clip para celular (Mercado Libre)\n\nTi
+ empo: 10 min\n\nLa fecha se mueve según el clima y lo que pase: la bitá
+ cora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Comprar la lente macro de clip para el celular
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:armar_t2@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261101
+DTEND;VALUE=DATE:20261102
+SUMMARY:Armar las 2 geotextiles de 40 L de la tanda 2 (estimado)
+DESCRIPTION:Macetas sopladas de 20 L o baldes agujereados (o 2 geotextiles
+  de 40 L si decidís comprarlas: más volumen = más cosecha en una auto)
+ . NO esperar a que se liberen las de la tanda 1: eso es fin de diciembre\
+ , la cosecha caería a fines de marzo\, junto con las Toxi (dos secados a
+  la vez\, lo que se quiere evitar)\, con noches húmedas de otoño y meno
+ s sol. Mitad de la receta en 20 L\, receta entera en 40 L. Cocinan 10-14 
+ días.\n\nPasos:\n• Por geotextil: 25 L Growmix + 6 L compost + 4 L hum
+ us + 500 ml biochar si hay + un chorro de IMO + 50 g gypsum (PESADO)\n•
+  Mojar hasta que escurra apenas\n• Tapar y cocinar hasta que huela a bo
+ sque\n\nTiempo: 30 min\n\nLa fecha se mueve según el clima y lo que pase
+ : la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Armar las 2 geotextiles de 40 L de la tanda 2 (estimado)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:foliar_t1@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261104
+DTEND;VALUE=DATE:20261105
+SUMMARY:Último foliar de aspirina · Tanda 1
+DESCRIPTION:Semana 5\, antes de que se armen los cogollos. Después de la 
+ semana 2 de flor\, ningún foliar más: botrytis.\n\nPasos:\n• 1 compri
+ mido de 500 mg en 4-5 L\n• Al atardecer\, sobre el envés\n• Reforzar
+  el tutor: arranca el estiramiento\n\nTiempo: 10 min\n\nLa fecha se mueve
+  según el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último foliar de aspirina · Tanda 1
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:c_bt@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261105
+DTEND;VALUE=DATE:20261106
+SUMMARY:Comprar Bt (Bacillus thuringiensis kurstaki) y un pulverizador
+DESCRIPTION:Para la flor de la tanda 1 (desde ~8/11) y después las Toxi. 
+ Agronomías y viveros: Dipel DF (Summit Agro) u otro Bt kurstaki. Un sobr
+ e chico alcanza la temporada. Son esporas vivas: fresco\, seco\, y no dur
+ a años.\n\nPasos:\n• Agronomía o vivero: Bt kurstaki (Dipel DF o simi
+ lar)\, la presentación más chica\n• Pulverizador de mano de 1-2 L\, n
+ uevo o que nunca tuvo herbicida\n\nTiempo: 20 min\n\nLa fecha se mueve se
+ gún el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Comprar Bt (Bacillus thuringiensis kurstaki) y un pulverizador
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:macetas_alto@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261110
+DTEND;VALUE=DATE:20261111
+SUMMARY:Levantar las macetas de las baldosas
+DESCRIPTION:En noviembre la baldosa al sol pasa los 45 °C y cocina las ra
+ íces del fondo de la geotextil\; además sella el drenaje. Dos listones 
+ o tres ladrillos debajo dejan pasar aire: la maceta respira\, drena y el 
+ fondo queda 8-10 °C más fresco.\n\nPasos:\n• 2 listones o 3 ladrillos
+  por maceta\, nivelados\n• Levantarla entre dos\, con la tierra húmeda
+  (pesa ~45 kg): no arrastrar la geotextil\n• Que quede firme: con vient
+ o una de 40 L en altura se vuelca\n\nTiempo: 15 min\n\nLa fecha se mueve 
+ según el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Levantar las macetas de las baldosas
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:bt_t1@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261111
+DTEND;VALUE=DATE:20261112
+SUMMARY:Bt contra orugas · Tanda 1
+DESCRIPTION:Desde que arman flor (semana 5-6) hasta dos semanas antes del 
+ corte. Una larva adentro del cogollo denso de la Permanent Jealousy es bo
+ trytis asegurada. Al atardecer\, dosis de etiqueta\; se repite después d
+ e lluvia fuerte.\n\nPasos:\n• Bt kurstaki (Dipel DF) 0\,5-1 g por litro
+ \n• Al atardecer\n• Mojar cogollos arriba y abajo\n• Ventaja de la 
+ maceta: en las últimas 3 semanas\, si viene lluvia\, se mueve bajo techo
+ \n\nTiempo: 10 min\n\nLa fecha se mueve según el clima y lo que pase: la
+  bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Bt contra orugas · Tanda 1
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cog_t1@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261115
+DTEND;VALUE=DATE:20261116
+SUMMARY:Mirar adentro de los cogollos · Tanda 1
+DESCRIPTION:Desde la semana 7 y hasta el corte: la botrytis trabaja de ade
+ ntro hacia afuera. Una hoja seca marrón asomando es la primera señal.\n
+ \nPasos:\n• Abrir 2-3 cogollos por planta con los dedos\, sobre todo el
+  apical\n• Sacar las hojas de ADENTRO de los cogollos\, no las de afuer
+ a\n• Si hay tejido gris o marrón: cortar ese cogollo con 10 cm de marg
+ en y sacarlo del patio en bolsa\n\nTiempo: 5 min\n\nLa fecha se mueve seg
+ ún el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mirar adentro de los cogollos · Tanda 1
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:c_ascorbico@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261115
+DTEND;VALUE=DATE:20261116
+SUMMARY:Comprar ácido ascórbico en polvo (100 g) — de respaldo
+DESCRIPTION:Desde el 29/9 el agua principal es la de lluvia: no tiene clor
+ o. El ascórbico queda de respaldo para cuando no llueva (diciembre-enero
+ ) y tengas que usar canilla. Una pizca entre dos dedos por tacho de 20 L\
+ , disuelta antes de regar. En farmacia no lo consiguió dos veces: probar
+  dietética o Mercado Libre.\n\nPasos:\n• Pedilo así: «ácido ascórb
+ ico en polvo\, puro\, 100 gramos» (es vitamina C pura). Redoxon NO: la e
+ fervescente trae bicarbonato de sodio y ácido cítrico\, y el sodio se a
+ cumula en el suelo riego tras riego\; la masticable trae azúcar. Solo co
+ mo parche de uno o dos días si no conseguís el polvo. Farmacia con rece
+ tario magistral\, dietética\, o Mercado Libre buscando «ácido ascórbi
+ co polvo puro»\n• Frasco oscuro y seco\, cuchara chica adentro\n• Us
+ o: una pizca entre dos dedos (~0\,3 g) por tacho de 20 L\, revolver\, reg
+ ar\n\nTiempo: 15 min\n\nLa fecha se mueve según el clima y lo que pase: 
+ la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Comprar ácido ascórbico en polvo (100 g) — de respaldo
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:c_epsom@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261115
+DTEND;VALUE=DATE:20261116
+SUMMARY:Comprar sal de Epsom (250 g)
+DESCRIPTION:No es preventivo: queda guardada como remedio si en flor apare
+ ce amarilleo entre nervaduras en hojas viejas (magnesio). Con el gypsum d
+ e más que les pusiste a las macetas\, es probable que lo necesites. Se c
+ ompra antes de que las autos entren en flor.\n\nPasos:\n• Farmacia: sul
+ fato de magnesio (sal de Epsom)\, 250 g\n\nTiempo: 5 min\n\nLa fecha se m
+ ueve según el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Comprar sal de Epsom (250 g)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:topping_toxi@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261119
+DTEND;VALUE=DATE:20261120
+SUMMARY:Topping de las Toxi (estimado)
+DESCRIPTION:Son fotoperiódicas: acá sí se poda. Cortar la punta sobre e
+ l 4º-5º nudo reparte la planta en varias colas abiertas en vez de una p
+ unta dominante cerrada. Con tres meses de vegetativo por delante\, se rec
+ uperan de sobra.\n\nPasos:\n• Tijera limpia con alcohol\n• Cortar el 
+ brote apical justo sobre el 5º nudo\n• Nada más ese día: sin aportes
+ \, sin LST\n• Anotar cuál planta topeaste y cuándo\n• Dentro de un 
+ mes: 2º topping (la bitácora te lo pide). No hay tercero\n\nTiempo: 10 
+ min\n\nLa fecha se mueve según el clima y lo que pase: la bitácora mand
+ a.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Topping de las Toxi (estimado)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:humus_td@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261122
+DTEND;VALUE=DATE:20261123
+SUMMARY:Top dressing de humus en el bancal (estimado)
+DESCRIPTION:1 cm de humus sobre el mulch y el trébol\, sin escarbar\, cad
+ a 5 semanas en vegetativo: es la comida de fondo del bancal. 2 m² × 1 c
+ m = unos 15-20 L por vez. Es la compra de humus más grande de la tempora
+ da.\n\nPasos:\n• 15-20 L de humus repartidos parejo arriba del mulch\n
+ • Sin escarbar ni tocar el tallo\n• Regar después\n\nTiempo: 15 min\
+ n\nLa fecha se mueve según el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Top dressing de humus en el bancal (estimado)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:mulch_dic@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261122
+DTEND;VALUE=DATE:20261123
+SUMMARY:Subir el mulch a 8-10 cm
+DESCRIPTION:Antes de la primera ola de calor\, no durante. Es tu sistema d
+ e riego cuando no estás.\n\nPasos:\n• Pasto seco\, paja u hojas: 8-10 
+ cm parejos\n• Chop and drop del trébol alto: cortar a 5 cm y dejarlo a
+ hí\n• Sin tocar el tallo de las Toxi: dejar 5 cm libres alrededor\n•
+  Regar profundo después\n\nTiempo: 30 min\n\nLa fecha se mueve según el
+  clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Subir el mulch a 8-10 cm
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:lst_toxi@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261122
+DTEND;VALUE=DATE:20261123
+SUMMARY:LST y tutores · Toxi Watermelon (estimado)
+DESCRIPTION:Arranca una semana después del 1º topping y sigue cada diez 
+ o doce días hasta fines de enero: doblar\, atar\, abrir. Nunca el mismo 
+ día de un corte. Las 4 puntas bajan y las ramas de los nudos 3 y 4 se ab
+ ren y suben hasta la misma altura: copa pareja y horizontal\, 8 colas o m
+ ás.\n\nPasos:\n• Ganchos de alambre de percha y tiras de remera vieja\
+ n• Doblar las ramas principales hacia afuera y atarlas\, sin quebrar\n
+ • Que la luz entre a los nudos de abajo\n• Reforzar tutores: el vient
+ o del año pasado\n• Revisar el envés mientras estás ahí\n\nTiempo: 
+ 15 min\n\nLa fecha se mueve según el clima y lo que pase: la bitácora m
+ anda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:LST y tutores · Toxi Watermelon (estimado)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:medir_secado@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261122
+DTEND;VALUE=DATE:20261123
+SUMMARY:En casa · Medir el altillo con calor y hacer el ensayo de secado
+DESCRIPTION:La primera semana de más de 28 °C afuera. Con la diferencia 
+ que mediste en octubre sabés qué esperar\; ahora se confirma y se prueb
+ a el protocolo con material que no importa.\n\nPasos:\n• Tres días: te
+ rmohigrómetro en el piso a las 8\, 15 y 22\n• Ensayo: hojas y ramitas 
+ del LST colgadas en la soga\, termohigrómetro al lado\n• Contar los d
+ ías hasta que el tallito se parte: 10-14 = protocolo bien\; 5 o menos = 
+ demasiado calor: membrana bajo la chapa y ventilar de noche\n• Anotar l
+ a conclusión en Nota: «secado: …»\n\nTiempo: 10 min\n\nLa fecha se m
+ ueve según el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Medir el altillo con calor y hacer el ensayo de secado
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:slh_sexar@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261122
+DTEND;VALUE=DATE:20261123
+SUMMARY:En casa · Breeder · buscar el sexo de las Super Lemon Haze
+DESCRIPTION:En exterior no hay apuro ni forma de forzarlo: la planta muest
+ ra preflores cuando madura (semana 6 a 10 de vida\, chiquitas\, con lupa)
+  y lo confirma sin dudas cuando los días se acortan\, a fines de enero. 
+ Esta guía vuelve cada 10 días: anotás lo que ves y no cortás nada has
+ ta estar seguro. Mientras tanto viven todas en tu casa\, en macetas chica
+ s\, lejos del bancal.\n\nPasos:\n• Lupa o clip macro en las axilas de l
+ os 3-4 nudos de arriba\, con luz de mañana\n• Anotar en el cuaderno: n
+ úmero\, lo que viste\, fecha (¿nada? / ¿parece hembra? / ¿parece mach
+ o?)\n• Opcional\, para saber antes: a las 6-8 semanas cortá un esqueje
+  de cada planta con su número\, enraizalo en un vasito y dale 12 h de os
+ curidad total por día (caja encima o placard) mientras la madre sigue al
+  sol. El esqueje muestra el sexo en 1-3 semanas y la madre no se entera\n
+ • Recién con certeza: machos\, quedarse con los 2 de mejor olor de tal
+ lo\; hembras\, con las 2-3 mejores\n• Ninguna sale de tu casa hacia el 
+ bancal hasta estar sexada con certeza\n\nLa fecha se mueve según el clim
+ a y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Breeder · buscar el sexo de las Super Lemon Haze
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cup_t2@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261125
+DTEND;VALUE=DATE:20261126
+SUMMARY:Sacar la cúpula · Tanda 2
+DESCRIPTION:Con dos pares de hojas verdaderas la cúpula ya es humedad de 
+ más: tallo blando y damping-off. Desde acá\, sol y viento suave la endu
+ recen.\n\nPasos:\n• Sacar la media botella de cada planta\n• Mulch pu
+ esto sí o sí\, sin tocar el tallo (dejar 2 cm libres)\n• Riego: solo 
+ un anillo de 300-500 ml alrededor del tallo\, si el dedo a 3 cm sale seco
+ . Los 40 L de abajo siguen húmedos\n• Si el tallo se estiró y cayó d
+ e costado: enterrarlo hasta las hojas con sustrato\, hace raíz del tallo
+ \n\nTiempo: 5 min\n\nLa fecha se mueve según el clima y lo que pase: la 
+ bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Sacar la cúpula · Tanda 2
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:c_tamiz@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261201
+DTEND;VALUE=DATE:20261202
+SUMMARY:Bandeja de trimming con malla para juntar el kief
+DESCRIPTION:Lo que se te cae al manicurar no es polen: es kief (tricomas\,
+  la resina). El polen es de los machos y te llenaría de semillas. Para n
+ o perderlo nunca más: manicurar SIEMPRE sobre una bandeja de doble fondo
+  con malla de 120-150 µm. Los tricomas pasan la malla y quedan en el fon
+ do\; las hojitas quedan arriba. Hacé falta antes de la cosecha de la tan
+ da 1 (fin de diciembre).\n\nPasos:\n• Growshop o Mercado Libre: «bande
+ ja trimming con malla» o «tamiz de polen 120 µm» (el nombre comercial
+  usa «polen»\, es lo mismo)\n• Malla de 120-150 µm: más fina junta 
+ menos\; más gruesa deja pasar basura verde\n• Una tarjeta y un pincel 
+ para juntar el fondo\n• Trucazo: el recorte congelado 1 hora antes de t
+ amizar suelta mucho más\n\nTiempo: 20 min\n\nLa fecha se mueve según el
+  clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Bandeja de trimming con malla para juntar el kief
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:lst_t2@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261202
+DTEND;VALUE=DATE:20261203
+SUMMARY:LST suave · Tanda 2
+DESCRIPTION:Semana 3. En tus autos no es por rendimiento\, es por aire: ab
+ rir el centro para que el cogollo apical no sea una sola bola cerrada. Nu
+ nca cortar: una auto no tiene semanas para recuperarse.\n\nPasos:\n• Ga
+ nchos de alambre de percha y tiras de remera vieja\n• Doblar la punta p
+ rincipal hacia un costado y atarla\, sin quebrar\n• Abrir el centro: qu
+ e la luz entre a los nudos de abajo\n• Revisar el envés mientras está
+ s ahí\n\nTiempo: 10 min\n\nLa fecha se mueve según el clima y lo que pa
+ se: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:LST suave · Tanda 2
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:pescado_dic@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261206
+DTEND;VALUE=DATE:20261207
+SUMMARY:Top dressing de pescado en vegetativo (estimado)
+DESCRIPTION:Los 100 g que guardaste. Diciembre es plena demanda de nitróg
+ eno en el vegetativo largo. Siempre tapada.\n\nPasos:\n• Apartar el mul
+ ch alrededor de cada Toxi\, a 15 cm del tallo\n• 25 g por planta\, espa
+ rcida\n• Tapar con humus y volver a poner el mulch\n• Regar\n\nTiempo
+ : 15 min\n\nLa fecha se mueve según el clima y lo que pase: la bitácora
+  manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Top dressing de pescado en vegetativo (estimado)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:secprep_t1@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261206
+DTEND;VALUE=DATE:20261207
+SUMMARY:En casa · Dejar listo el secado · Tanda 1
+DESCRIPTION:Semana 10. Desde acá solo agua. El lugar se prepara ahora\, n
+ o el día que cortaste.\n\nPasos:\n• Termohigrómetro 3 días a la altu
+ ra de la soga: anotar máx y mín\n• Soga tendida lo más baja posible\
+ , con lugar para que nada se toque\n• Ventilador apuntando a la pared\,
+  nunca a las plantas\n• Si la máxima pasa 28 °C: ventilar de noche y 
+ cerrar de día\, membrana aislante o sombra bajo la chapa (un balde de ag
+ ua NO sirve: ver «Secado en el altillo»)\n• Mirar la tabla de clima y
+  elegir el día de corte antes de días frescos\n• Lupa o clip macro a 
+ mano para los tricomas\n\nTiempo: 30 min\n\nLa fecha se mueve según el c
+ lima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Dejar listo el secado · Tanda 1
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:c_secado@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261206
+DTEND;VALUE=DATE:20261207
+SUMMARY:Juntar lo del secado: cajas de cartón\, frascos de vidrio\, bolsa
+ s de papel
+DESCRIPTION:Para la cosecha de la tanda 1 (fin de diciembre). Cajas grande
+ s limpias sin plastificar\, 6-8 frascos de vidrio con tapa (de la cocina)
+ \, bolsas de papel madera. Todo gratis o de almacén.\n\nPasos:\n• 2-3 
+ cajas de cartón grandes\, sin cinta ni impresión\n• 6-8 frascos de vi
+ drio con tapa\, lavados y secos\n• Bolsas de papel madera\n• Sábana 
+ vieja o media sombra por si hay ola de calor\n\nTiempo: 30 min\n\nLa fech
+ a se mueve según el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Juntar lo del secado: cajas de cartón\, frascos de vidrio\, b
+ olsas de papel
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:bok_t2@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261209
+DTEND;VALUE=DATE:20261210
+SUMMARY:Bokashi Flora · Tanda 2
+DESCRIPTION:Semana 4. Es el ÚNICO aporte en toda la vida de la auto. A la
+  Permanent Jealousy solo si la ves con hambre real: el linaje Cookies hac
+ e garra con nitrógeno.\n\nPasos:\n• 2 cucharadas (30 ml) de VAMP Bokas
+ hi Flora sobre el mulch de cada maceta\n• Permanent Jealousy: solo si a
+ marillea de verdad\n• Regar después\n\nTiempo: 5 min\n\nLa fecha se mu
+ eve según el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Bokashi Flora · Tanda 2
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:foliar_t2@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261216
+DTEND;VALUE=DATE:20261217
+SUMMARY:Último foliar de aspirina · Tanda 2
+DESCRIPTION:Semana 5\, antes de que se armen los cogollos. Después de la 
+ semana 2 de flor\, ningún foliar más: botrytis.\n\nPasos:\n• 1 compri
+ mido de 500 mg en 4-5 L\n• Al atardecer\, sobre el envés\n• Reforzar
+  el tutor: arranca el estiramiento\n\nTiempo: 10 min\n\nLa fecha se mueve
+  según el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Último foliar de aspirina · Tanda 2
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:topping2_toxi@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261220
+DTEND;VALUE=DATE:20261221
+SUMMARY:Segundo topping de las Toxi (el último) (estimado)
+DESCRIPTION:Un corte sobre cada una de las 2 puntas del primer topping: qu
+ edan 4 puntas principales. Es el último: un tercero caería cuando empie
+ zan a estirar. Las colas 5 a 8 salen de las ramas de los nudos 3 y 4\, ab
+ iertas con LST.\n\nPasos:\n• Tijera limpia con alcohol\n• Cortar cada
+  una de las 2 puntas arriba de su 2º nudo\n• Ese día nada más: sin L
+ ST ni aportes\n• Anotar\n\nTiempo: 10 min\n\nLa fecha se mueve según e
+ l clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Segundo topping de las Toxi (el último) (estimado)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:c_humus2@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261220
+DTEND;VALUE=DATE:20261221
+SUMMARY:Comprar humus para el segundo top dressing (20 L)
+DESCRIPTION:Segundo top dressing del bancal a fines de diciembre y preflor
+  en enero. Amira o Perla Negra.\n\nPasos:\n• Humus: 20 L\n\nTiempo: 30 
+ min\n\nLa fecha se mueve según el clima y lo que pase: la bitácora mand
+ a.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Comprar humus para el segundo top dressing (20 L)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:bt_t2@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261223
+DTEND;VALUE=DATE:20261224
+SUMMARY:Bt contra orugas · Tanda 2
+DESCRIPTION:Desde que arman flor (semana 5-6) hasta dos semanas antes del 
+ corte. Una larva adentro del cogollo denso de la Permanent Jealousy es bo
+ trytis asegurada. Al atardecer\, dosis de etiqueta\; se repite después d
+ e lluvia fuerte.\n\nPasos:\n• Bt kurstaki (Dipel DF) 0\,5-1 g por litro
+ \n• Al atardecer\n• Mojar cogollos arriba y abajo\n• Ventaja de la 
+ maceta: en las últimas 3 semanas\, si viene lluvia\, se mueve bajo techo
+ \n\nTiempo: 10 min\n\nLa fecha se mueve según el clima y lo que pase: la
+  bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Bt contra orugas · Tanda 2
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cos_t1@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261227
+DTEND;VALUE=DATE:20261228
+SUMMARY:Cosechar · Tanda 1
+DESCRIPTION:Semana 12-13: 3-4 semanas de vegetativo más los 65 días de f
+ lor que declara el banco (confirmado: son de floración). Se corta por tr
+ icomas\, no por esta fecha. Planta por planta: no maduran juntas.\n\nPaso
+ s:\n• Tres días antes: el altillo listo\n• Últimos 7 a 10 días: se
+ quía leve controlada\n• El día del corte: temprano a la mañana\n• 
+ Cortá la planta entera con tallo\, no cogollo por cogollo\n• Pesala ap
+ enas cortada\n\nLa fecha se mueve según el clima y lo que pase: la bitá
+ cora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Cosechar · Tanda 1
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:sec_t1@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261227
+DTEND;VALUE=DATE:20261228
+SUMMARY:En casa · Secado y curado · Tanda 1 (estimado)
+DESCRIPTION:En el altillo\, colgado en la soga. Objetivo alrededor de las 
+ flores: 16-22 °C y 55-65 % (VPD 0\,6-0\,9). En verano no vas a tener 18:
+  lo compensás eligiendo el día de corte\, planta entera\, ventilar de n
+ oche y revisión diaria. Anotá T y HR en cada visita con «Secado» en A
+ notar.\n\nPasos:\n• Colgada boca abajo\, a oscuras\, sin ventilador apu
+ ntándole\n• Todos los días: mirá\, olé y anotá\n• Entre el día 
+ 10 y el 14: la prueba del tallito\n• Pesá y a frascos\, llenos al 75 %
+ \n• Primera semana: abrí 10 minutos por día\n• Segunda semana en ad
+ elante: abrí cada 2 o 3 días\n• Anotá todo lo que aprendiste de esta
+  tanda\n\nLa fecha se mueve según el clima y lo que pase: la bitácora m
+ anda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Secado y curado · Tanda 1 (estimado)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cog_t2@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20261227
+DTEND;VALUE=DATE:20261228
+SUMMARY:Mirar adentro de los cogollos · Tanda 2
+DESCRIPTION:Desde la semana 7 y hasta el corte: la botrytis trabaja de ade
+ ntro hacia afuera. Una hoja seca marrón asomando es la primera señal.\n
+ \nPasos:\n• Abrir 2-3 cogollos por planta con los dedos\, sobre todo el
+  apical\n• Sacar las hojas de ADENTRO de los cogollos\, no las de afuer
+ a\n• Si hay tejido gris o marrón: cortar ese cogollo con 10 cm de marg
+ en y sacarlo del patio en bolsa\n\nTiempo: 5 min\n\nLa fecha se mueve seg
+ ún el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Mirar adentro de los cogollos · Tanda 2
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:clon_toxi@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20270117
+DTEND;VALUE=DATE:20270118
+SUMMARY:Elegir la mejor Toxi y clonarla con agua de sauce (estimado)
+DESCRIPTION:Es mejoramiento real y cuesta cero. Solo sobre las Toxi: las a
+ utos no se clonan.\n\nPasos:\n• Ramitas de sauce picadas 24-48 h en agu
+ a\, colar\n• Esquejes de rama baja\, 10-15 cm\, corte en bisel\n• Bas
+ e una noche en el agua de sauce\n• Vasito con Growmix\, cúpula\, sombr
+ a\; regar con agua de sauce dos semanas\n• Anotar de qué planta salió
+ \n\nTiempo: 40 min\n\nLa fecha se mueve según el clima y lo que pase: la
+  bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Elegir la mejor Toxi y clonarla con agua de sauce (estimado)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:secprep_t2@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20270117
+DTEND;VALUE=DATE:20270118
+SUMMARY:En casa · Dejar listo el secado · Tanda 2
+DESCRIPTION:Semana 10. Desde acá solo agua. El lugar se prepara ahora\, n
+ o el día que cortaste.\n\nPasos:\n• Termohigrómetro 3 días a la altu
+ ra de la soga: anotar máx y mín\n• Soga tendida lo más baja posible\
+ , con lugar para que nada se toque\n• Ventilador apuntando a la pared\,
+  nunca a las plantas\n• Si la máxima pasa 28 °C: ventilar de noche y 
+ cerrar de día\, membrana aislante o sombra bajo la chapa (un balde de ag
+ ua NO sirve: ver «Secado en el altillo»)\n• Mirar la tabla de clima y
+  elegir el día de corte antes de días frescos\n• Lupa o clip macro a 
+ mano para los tricomas\n\nTiempo: 30 min\n\nLa fecha se mueve según el c
+ lima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Dejar listo el secado · Tanda 2
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:c_breeder@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20270117
+DTEND;VALUE=DATE:20270118
+SUMMARY:Kit del breeder: bolsas de papel\, pincel\, hilo de color\, frasqu
+ ito con sílica
+DESCRIPTION:Para juntar polen a fines de enero y polinizar en febrero. Un 
+ pincel fino de acuarela\, bolsas de papel madera\, hilo de color\, un fra
+ squito hermético con sílica (o arroz) para el freezer.\n\nPasos:\n• B
+ olsas de papel madera (3-4)\n• Pincel fino\n• Hilo o lana de color\n
+ • Frasquito hermético + sílica\n\nTiempo: 15 min\n\nLa fecha se mueve
+  según el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Kit del breeder: bolsas de papel\, pincel\, hilo de color\, fr
+ asquito con sílica
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:preflor_toxi@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20270119
+DTEND;VALUE=DATE:20270120
+SUMMARY:Preflor del bancal (estimado)
+DESCRIPTION:Dos semanas antes de que estiren: fósforo\, calcio y azufre y
+ a en el suelo. Después es tarde.\n\nPasos:\n• 2 cdas/m² de Bokashi Fl
+ ora sobre el mulch\n• 100 g/m² de gypsum\n• WCA 1:1000 al riego\n•
+  Regar\n\nTiempo: 20 min\n\nLa fecha se mueve según el clima y lo que pa
+ se: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Preflor del bancal (estimado)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:bt_toxi@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20270204
+DTEND;VALUE=DATE:20270205
+SUMMARY:Bt contra orugas · Toxi Watermelon (estimado)
+DESCRIPTION:La oruga del cogollo (Helicoverpa y parientes) pone huevos en 
+ la flor desde la semana 1\; la larva se mete adentro y deja caca húmeda:
+  ahí nace la botrytis. El Bt (Bacillus thuringiensis kurstaki\, p. ej. D
+ ipel) solo mata larvas de mariposa que lo comen: no toca abejas\, lombric
+ es ni a vos. El sol y la lluvia lo degradan en días: por eso se repite c
+ ada 7-10 días y después de cada lluvia fuerte. Última pasada dos seman
+ as antes del corte.\n\nPasos:\n• Dosis de etiqueta (Dipel DF: 0\,5-1 g 
+ por litro)\, en pulverizador limpio\n• Al atardecer: el UV lo destruye\
+ n• Mojar bien puntas y cogollos\, arriba y abajo\n• Si llueve fuerte 
+ en las 24 h siguientes\, se repite\n• Anotarlo\n\nTiempo: 15 min\n\nLa 
+ fecha se mueve según el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Bt contra orugas · Toxi Watermelon (estimado)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cos_t2@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20270207
+DTEND;VALUE=DATE:20270208
+SUMMARY:Cosechar · Tanda 2
+DESCRIPTION:Semana 12-13: 3-4 semanas de vegetativo más los 65 días de f
+ lor que declara el banco (confirmado: son de floración). Se corta por tr
+ icomas\, no por esta fecha. Planta por planta: no maduran juntas.\n\nPaso
+ s:\n• Tres días antes: el altillo listo\n• Últimos 7 a 10 días: se
+ quía leve controlada\n• El día del corte: temprano a la mañana\n• 
+ Cortá la planta entera con tallo\, no cogollo por cogollo\n• Pesala ap
+ enas cortada\n\nLa fecha se mueve según el clima y lo que pase: la bitá
+ cora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Cosechar · Tanda 2
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:sec_t2@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20270207
+DTEND;VALUE=DATE:20270208
+SUMMARY:En casa · Secado y curado · Tanda 2 (estimado)
+DESCRIPTION:En el altillo\, colgado en la soga. Objetivo alrededor de las 
+ flores: 16-22 °C y 55-65 % (VPD 0\,6-0\,9). En verano no vas a tener 18:
+  lo compensás eligiendo el día de corte\, planta entera\, ventilar de n
+ oche y revisión diaria. Anotá T y HR en cada visita con «Secado» en A
+ notar.\n\nPasos:\n• Colgada boca abajo\, a oscuras\, sin ventilador apu
+ ntándole\n• Todos los días: mirá\, olé y anotá\n• Entre el día 
+ 10 y el 14: la prueba del tallito\n• Pesá y a frascos\, llenos al 75 %
+ \n• Primera semana: abrí 10 minutos por día\n• Segunda semana en ad
+ elante: abrí cada 2 o 3 días\n• Anotá todo lo que aprendiste de esta
+  tanda\n\nLa fecha se mueve según el clima y lo que pase: la bitácora m
+ anda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Secado y curado · Tanda 2 (estimado)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:flor_toxi@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20270208
+DTEND;VALUE=DATE:20270209
+SUMMARY:Marcar el arranque de la flor de las Toxi (estimado)
+DESCRIPTION:La fecha de corte\, el Bt\, el techito y la polinización cuel
+ gan de este día. Hasta que lo marques\, la bitácora usa una estimación
+  (1/2). Un pistilo suelto en una axila es preflor y no cuenta: cuenta el 
+ ramillete en la punta.\n\nPasos:\n• Mirar las puntas de las 3 plantas d
+ el bancal y la de maceta\n• Si hay ramilletes blancos en las puntas: ma
+ rcarlo hecho con la fecha en que lo viste\n• Foto de una punta\, misma 
+ hora y ángulo de siempre\n\nTiempo: 5 min\n\nLa fecha se mueve según el
+  clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Marcar el arranque de la flor de las Toxi (estimado)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:slh_machos@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20270215
+DTEND;VALUE=DATE:20270216
+SUMMARY:En casa · Breeder · aislar los machos y juntar polen (estimado)
+DESCRIPTION:Los machos abren 2-3 semanas después de que se acortan los d
+ ías (fines de enero). El polen se junta en bolsa de papel\, se seca 2 d
+ ías y va al freezer con sílica: dura meses.\n\nPasos:\n• Macho en un 
+ ambiente cerrado (una pieza\, un baño con ventana) o al menos a sotavent
+ o y lejos de cualquier hembra\n• Bolsa de papel sobre una rama con flor
+ es abiertas\, sacudir\, 2-3 días seguidos\n• Extender el polen en un p
+ apel 2 días a secar\n• Frasco chico hermético con sílica\, en el fre
+ ezer\, con etiqueta\n• Después de juntar: el macho se corta y va a la 
+ basura en bolsa\, no al compost\n\nLa fecha se mueve según el clima y lo
+  que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Breeder · aislar los machos y juntar polen (estimado)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:techito@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20270222
+DTEND;VALUE=DATE:20270223
+SUMMARY:Armar el techito de lluvia sobre el bancal (estimado)
+DESCRIPTION:Desde la semana 3 de flor\, cada lluvia que moja los cogollos 
+ es humedad adentro de la flor por días. Un techo de nylon cristal a 30-4
+ 0 cm sobre las puntas\, abierto de los costados\, deja pasar sol y aire y
+  saca el agua. Contra la botrytis de abril pesa más que cualquier foliar
+ .\n\nPasos:\n• 4 postes o cañas firmes en las esquinas (1\,8-2 m)\, bi
+ en enterrados: con viento es una vela\n• Nylon cristal de 150-200 micro
+ nes\, con caída hacia el lado que no moja la cama\n• Costados ABIERTOS
+ : cerrado es un invernadero húmedo\, peor que la lluvia\n• Fijo desde 
+ la semana 3\, o como mínimo antes de cada lluvia anunciada\n• Revisar 
+ amarres antes de cada tormenta\n\nTiempo: 1 h\n\nLa fecha se mueve según
+  el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Armar el techito de lluvia sobre el bancal (estimado)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:slh_polinizar@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20270225
+DTEND;VALUE=DATE:20270226
+SUMMARY:Breeder · polinizar UNA rama baja (estimado)
+DESCRIPTION:Una rama baja de una Toxi (cruza SLH × Toxi) o de una SLH hem
+ bra (línea pura). Pincel\, bolsa 24-48 h\, rociar con agua al sacar\, hi
+ lo de color en la rama. El resto de la planta queda sin semilla.\n\nPasos
+ :\n• Elegir la rama: baja\, escondida\, con pistilos blancos\n• Pince
+ l fino con polen sobre los pistilos\, sin sacudir\n• Bolsa de papel cer
+ rada 24-48 h\n• Al sacar la bolsa: rociar la rama con agua para matar e
+ l polen que quede\n• Hilo de color y anotar: madre\, padre\, fecha\n•
+  Lavarse manos y cambiarse la remera antes de tocar otra planta\n\nLa fec
+ ha se mueve según el clima y lo que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Breeder · polinizar UNA rama baja (estimado)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:slh_semillas@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20270404
+DTEND;VALUE=DATE:20270405
+SUMMARY:Breeder · cosechar las semillas (estimado)
+DESCRIPTION:4-6 semanas después de polinizar. Se cosechan con la rama\, s
+ e secan una semana y se guardan como las regulares.\n\nPasos:\n• Cortar
+  la rama marcada aparte del resto\n• Secar 7-10 días en bolsa de papel
+ \n• Sacar las semillas a mano\; descartar las blancas o verdes\n• Fra
+ sco con sílica\, etiqueta: cruce y fecha\n• Anotar en el cuaderno todo
+  lo que aprendiste del cruce\n\nLa fecha se mueve según el clima y lo qu
+ e pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Breeder · cosechar las semillas (estimado)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:invierno@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20270411
+DTEND;VALUE=DATE:20270412
+SUMMARY:En casa · Planificar el cultivo de invierno
+DESCRIPTION:Decisión de Tomy: en invierno se cultiva sí o sí. Se planif
+ ica en abril con la temporada cerrada y las conclusiones del cuaderno en 
+ la mano. Expectativa honesta: en exterior de invierno en Buenos Aires se 
+ cosechan 10-40 g por planta\; lo que más rinde en invierno es mantener u
+ na MADRE de la mejor Toxi para clonar en septiembre.\n\nPasos:\n• Leer 
+ el cuaderno entero: qué genética dio mejor y por qué\n• Decidir: aut
+ os en mini invernadero de plástico\, madre de Toxi bajo lamparita o vent
+ ana\, o las dos cosas\n• Ver qué quedó de insumos y qué hay que comp
+ rar en el pedido grande de abril\n• Abrir la temporada de invierno en l
+ a bitácora\n\nTiempo: 1 h\n\nLa fecha se mueve según el clima y lo que 
+ pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Planificar el cultivo de invierno
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:cos_toxi@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20270412
+DTEND;VALUE=DATE:20270413
+SUMMARY:Cosechar · Toxi Watermelon (estimado)
+DESCRIPTION:Por tricomas\, no por fecha. Ventana estimada: primera quincen
+ a de abril (60-70 días desde la flor franca). Abril es el mes de la botr
+ ytis del año pasado: si los tricomas están casi y viene una semana de l
+ luvia\, se corta antes de la lluvia. Planta por planta\, no todas juntas.
+ \n\nPasos:\n• Tres días antes: el altillo listo\n• Últimos 7 a 10 d
+ ías: sequía leve controlada\n• El día del corte: temprano a la maña
+ na\n• Cortá la planta entera con tallo\, no cogollo por cogollo\n• P
+ esala apenas cortada\n\nLa fecha se mueve según el clima y lo que pase: 
+ la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Cosechar · Toxi Watermelon (estimado)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+BEGIN:VEVENT
+UID:sec_toxi@grower-suelo-vivo
+DTSTAMP:20261003T163125Z
+DTSTART;VALUE=DATE:20270412
+DTEND;VALUE=DATE:20270413
+SUMMARY:En casa · Secado y curado · Toxi Watermelon (estimado)
+DESCRIPTION:Con lo que aprendiste en la tanda 1. Anotá T y HR en cada vis
+ ita con «Secado» en Anotar.\n\nPasos:\n• Colgada boca abajo\, a oscur
+ as\, sin ventilador apuntándole\n• Todos los días: mirá\, olé y ano
+ tá\n• Entre el día 10 y el 14: la prueba del tallito\n• Pesá y a f
+ rascos\, llenos al 75 %\n• Primera semana: abrí 10 minutos por día\n
+ • Segunda semana en adelante: abrí cada 2 o 3 días\n• Anotá todo l
+ o que aprendiste de esta tanda\n\nLa fecha se mueve según el clima y lo 
+ que pase: la bitácora manda.
+TRANSP:TRANSPARENT
+BEGIN:VALARM
+ACTION:DISPLAY
+DESCRIPTION:Secado y curado · Toxi Watermelon (estimado)
+TRIGGER:-PT15H
+END:VALARM
+END:VEVENT
+END:VCALENDAR
