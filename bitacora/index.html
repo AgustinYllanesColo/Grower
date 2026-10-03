@@ -2698,7 +2698,7 @@ function climaTablaHTML(){
     +   (function(){ const r=g.resumen||{}; const st=(k,v,sub)=>'<div class="st1"><span class="st1-k">'+k+'</span><b>'+v+'</b>'+(sub?'<span class="st1-s">'+sub+'</span>':'')+'</div>';
           let h='<div class="st3">'
             + st("Último riego", r.ultRiego?(r.diasSin===0?"hoy":r.diasSin===1?"ayer":"hace "+r.diasSin+" días"):"sin anotar", r.ultRiego?fechaCorta(r.ultRiego):"")
-            + st("Lluvia desde entonces", r.lluvia!=null?String(r.lluvia).replace(".",",")+" mm":"—", r.ultRiego?"hasta ayer":"")
+            + st("Lluvia desde entonces", r.lluvia!=null?"~"+String(r.lluvia).replace(".",",")+" mm":"—", !r.ultRiego?"":(g.lluviaTapa&&g.tipo!=="suelo"?"bajo techo: no les llega":((r.medHasta!=null?"medida hasta las "+r.medHasta+" h":"medida hasta ayer")+(r.lluviaFalta>=1?" · faltan ~"+String(r.lluviaFalta).replace(".",",")+" mm hoy":""))))
             + st("Agua útil hoy", hoyP?(100-hoyP.pct)+"%":"—", hoyP?"se van "+String(hoyP.et).replace(".",",")+(g.tipo==="suelo"?" mm":" L")+"/día":"")
             + '</div>';
           if(r.pico!=null && r.pico>=90 && r.picoD) h+='<p class="ord-dd ord-warn">'+ic("alerta")+' Se quedó sin agua útil el '+esc(fechaCorta(r.picoD))+(g.id==="bancal"&&g.etapa==="cobertura"?': las plántulas de trébol sin mulch encima pudieron secarse. Mirá los claros en la visita.':'.')+'</p>';

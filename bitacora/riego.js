@@ -42,6 +42,10 @@
     if (!c) return 0;
     const mm = c.mm || 0;
     if (fecha < hoy || c.obs) return mm;
+    if (c.mm_med != null) {                  /* hoy: lo medido es seguro; lo que falta, según la probabilidad */
+      const r = c.mm_resto || 0, p = c.prob == null ? 60 : c.prob;
+      return c.mm_med + (p >= 75 ? r * 0.8 : p >= 50 ? r * 0.4 : 0);
+    }
     if (c.prob == null) return mm * 0.6;
     if (c.prob >= 75) return c.mm_p25 != null ? Math.max(c.mm_p25, mm * 0.6) : mm * 0.8;
     if (c.prob >= 50) return mm * 0.4;
@@ -158,9 +162,13 @@
       hist.push({ d: f, pct: Math.round(def / g.cap * 100), llu: r1(llu), regado: riegos.has(f) });
     }
     const ultR = [...riegos].filter(d => d <= hoy).sort().pop() || null;
-    const lluviaDesde = ultR ? r1(hist.filter(h => h.d > ultR).reduce((a, h) => a + (dias[h.d] ? (dias[h.d].mm || 0) : (lluAnot[h.d] || 0)), 0)) : null;
+    /* lluvia desde el último riego: días completos medidos + lo que ya cayó hoy; aparte, lo que falta de hoy */
+    const cHoy = dias[hoy];
+    const medHoy = ultR && ultR < hoy && cHoy ? (cHoy.mm_med != null ? cHoy.mm_med : (pluvio[hoy] != null ? pluvio[hoy] : null)) : null;
+    const lluviaDesde = ultR ? r1(hist.filter(h => h.d > ultR).reduce((a, h) => a + (dias[h.d] ? (dias[h.d].mm || 0) : (lluAnot[h.d] || 0)), 0) + (medHoy || 0)) : null;
+    const lluviaFalta = cHoy && ultR ? (cHoy.mm_med != null ? (cHoy.mm_resto || 0) : (cHoy.mm || 0)) : null;
     const pico = hist.reduce((m, h) => h.pct > (m ? m.pct : -1) ? h : m, null);
-    const resumen = { ultRiego: ultR, diasSin: ultR ? entre(ultR, hoy) : null, lluvia: lluviaDesde, pico: pico ? pico.pct : null, picoD: pico ? pico.d : null };
+    const resumen = { ultRiego: ultR, diasSin: ultR ? entre(ultR, hoy) : null, lluvia: lluviaDesde, lluviaFalta: lluviaFalta != null ? r1(lluviaFalta) : null, medHasta: cHoy && cHoy.mm_med != null ? cHoy.med_hasta : null, pico: pico ? pico.pct : null, picoD: pico ? pico.d : null };
     /* hoy y lo que viene: decidir */
     const out = [], hoyRegado = riegos.has(hoy);
     if (hoyRegado) def = regar(def, hoy);

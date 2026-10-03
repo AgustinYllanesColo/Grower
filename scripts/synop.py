@@ -53,13 +53,7 @@ def leer(bloque, desde, hasta):
 
 
 def por_dia(partes, dias):
-    seis = {(c, h): mm for c, h, mm in partes}
-    # el parte de las 12 UTC suele traer solo el acumulado de 24 h: su tramo de 6 h sale por diferencia
-    for (c, h), mm in list(seis.items()):
-        if h == 24 and c.hour == 12 and (c, 6) not in seis:
-            prev = [seis.get((c - dt.timedelta(hours=k), 6)) for k in (18, 12, 6)]
-            if all(x is not None for x in prev):
-                seis[(c, 6)] = round(max(0.0, mm - sum(prev)), 1)
+    seis = seis_horas(partes)
     out = {}
     for d in dias:
         f = dt.datetime.fromisoformat(d)
@@ -70,6 +64,38 @@ def por_dia(partes, dias):
         elif seis.get((f + dt.timedelta(days=1, hours=12), 24)) is not None:
             out[d] = seis[(f + dt.timedelta(days=1, hours=12), 24)]
     return out
+
+
+def seis_horas(partes):
+    """{(fin UTC, 6): mm}, con el tramo 06-12 UTC sacado del acumulado de 24 h cuando falta."""
+    seis = {(c, h): mm for c, h, mm in partes}
+    for (c, h), mm in list(seis.items()):
+        if h == 24 and c.hour == 12 and (c, 6) not in seis:
+            prev = [seis.get((c - dt.timedelta(hours=k), 6)) for k in (18, 12, 6)]
+            if all(x is not None for x in prev):
+                seis[(c, 6)] = round(max(0.0, mm - sum(prev)), 1)
+    return seis
+
+
+def lluvia_hoy(hoy):
+    """Lo medido en el día local que está corriendo (desde las 3 h): {"mm", "hasta" (hora local), "est"}."""
+    f = dt.datetime.fromisoformat(hoy)
+    por_est, hasta = {}, None
+    for i, (b, nombre) in enumerate(ESTACIONES.items()):
+        if i: time.sleep(25)
+        try:
+            seis = seis_horas(leer(b, f.date() - dt.timedelta(days=1), f.date()))
+            tramos = [(t, seis.get((t, 6))) for t in (f.replace(hour=12), f.replace(hour=18))]
+            ok = [(t, v) for t, v in tramos if v is not None]
+            # solo tramos consecutivos desde el primero
+            if ok and ok[0][0] == tramos[0][0]:
+                por_est[nombre] = round(sum(v for _, v in ok), 1)
+                h = ok[-1][0].hour - 3
+                hasta = h if hasta is None else min(hasta, h)
+        except Exception as e: print("ogimet", b, e, file=sys.stderr)
+    if not por_est: return None
+    xs = sorted(por_est.values())
+    return {"mm": xs[len(xs) // 2], "hasta": hasta, "est": por_est}
 
 
 def lluvia_medida(dias):
@@ -90,4 +116,5 @@ def lluvia_medida(dias):
 
 
 if __name__ == "__main__":
-    print(lluvia_medida(sys.argv[1:]))
+    if sys.argv[1:2] == ["hoy"]: print(lluvia_hoy(sys.argv[2]))
+    else: print(lluvia_medida(sys.argv[1:]))

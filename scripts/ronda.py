@@ -91,6 +91,9 @@ def get_json(url, timeout=40):
     return json.load(urllib.request.urlopen(urllib.request.Request(url, headers=UA), timeout=timeout))
 
 
+RESTO_HOY = {}
+
+
 def metno():
     """MET Norway (modelo ECMWF): temperatura, humedad y lluvia hora a hora. La fuente principal."""
     j = get_json(f"https://api.met.no/weatherapi/locationforecast/2.0/complete?lat={LAT}&lon={LON}")
@@ -112,6 +115,8 @@ def metno():
             for k in ("air_temperature_max", "air_temperature_min"):
                 if k in n6["details"]: x["t"].append(n6["details"][k])
     out = {}
+    hoy = HOY.isoformat()
+    if hoy in dias: RESTO_HOY["mm"] = round(dias[hoy]["mm"], 1)   # lo que falta de hoy, desde la hora actual
     for d, x in dias.items():
         if x["horas"] < 18:          # día incompleto (hoy ya empezado o el último): se completa con otra fuente
             continue
@@ -258,6 +263,17 @@ def main():
         d["txt"] = (f"lluvia {mmf(d['mm'])} mm" if (d.get("mm") or 0) >= 1 else "seco")
         por_d[f] = d
     pasados = [por_d[k] for k in sorted(por_d)]
+    # hoy: lo que ya cayó (medido) + lo que falta (pronóstico de las próximas horas)
+    try: med = synop.lluvia_hoy(hoy)
+    except Exception as e: med = None; print("SYNOP hoy falló:", e, file=sys.stderr)
+    for d in fc:
+        if d["d"] != hoy: continue
+        resto = RESTO_HOY.get("mm")
+        if med:
+            d["mm_med"] = med["mm"]; d["med_hasta"] = med["hasta"]; d["mm_med_est"] = med["est"]
+            d["mm_resto"] = resto if resto is not None else 0
+            d["mm"] = round(med["mm"] + d["mm_resto"], 1)
+            d["txt"] = (f"lluvia {mmf(d['mm'])} mm" if d["mm"] >= 1 else "seco") + (f", ráfagas de {d['racha']} km/h" if d.get("racha", 0) >= 40 else "")
     clima = {"cargado": hoy, "fuente": "Pronóstico: " + fuentes + ". Días pasados: MEDIDOS por el SMN (lluvia: mediana de Observatorio, Aeroparque y Ezeiza; temperatura y humedad: Observatorio). Si anotás tu pluviómetro, manda ese dato.",
              "dias": pasados + fc}
 
