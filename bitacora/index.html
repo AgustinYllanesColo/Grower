@@ -576,6 +576,30 @@ td.aw .rg-c{margin-top:5px}
 .confirma{background:#B4521F!important;color:#fff!important}
 .vs-sep{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;opacity:.75;padding:6px 2px 0}
 .vs-a2{background:transparent;color:var(--ink);box-shadow:inset 0 0 0 1.5px var(--line-strong)}
+.topbar{padding:10px 18px 8px}
+.brand{margin-bottom:0;align-items:center}
+.brand h1{font-size:16px;white-space:nowrap}
+.brand{flex-wrap:nowrap}
+.brand .season{white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+#sol{flex:none}
+body:not([data-tab="fichas"]) .searchwrap{display:none}
+body[data-tab="fichas"] .brand{margin-bottom:8px}
+.tl2{list-style:none;margin:0 0 14px;padding:0;border-left:2px solid var(--line-strong)}
+.tl2 li{position:relative;display:grid;grid-template-columns:86px 1fr;gap:10px;padding:8px 0 8px 14px}
+.tl2 li::before{content:"";position:absolute;left:-6px;top:14px;width:10px;height:10px;border-radius:99px;background:var(--surface);border:2px solid var(--line-strong)}
+.tl2 li.pronto::before{border-color:var(--leaf);background:var(--leaf-soft)}
+.tl2 li.ya::before{border-color:#B4521F;background:#B4521F}
+.tl2-d{display:flex;flex-direction:column;font-family:Archivo,sans-serif;line-height:1.15}
+.tl2-d b{font-size:14px}.tl2-d small{font-size:11px;color:var(--muted)}
+.tl2-n{font-family:Archivo,sans-serif;font-size:14px;font-weight:600;line-height:1.3}
+.cp-top{display:flex;gap:10px;margin:4px 0 6px}
+.cp-top>div{flex:1;background:var(--ink);color:var(--ground);border-radius:6px;padding:12px 14px;display:flex;flex-direction:column}
+.cp-k{font-family:"JetBrains Mono",monospace;font-size:10.5px;letter-spacing:.08em;text-transform:uppercase;opacity:.75}
+.cp-top b{font-family:Archivo,sans-serif;font-size:24px;letter-spacing:-.02em;font-variant-numeric:tabular-nums}
+.cp-l{list-style:none;margin:0 0 14px;padding:0;display:flex;flex-direction:column;gap:6px}
+.cp-l li{display:grid;grid-template-columns:auto 1fr auto;gap:10px;align-items:center;background:var(--surface);border:1px solid var(--line);border-radius:5px;padding:9px 10px}
+.cp-l b{font-family:Archivo,sans-serif;font-size:14px;line-height:1.3}
+.ess{margin:0 0 12px}
 .regla b{font-family:Archivo,sans-serif;font-size:10.5px;letter-spacing:.09em;text-transform:uppercase;color:var(--leaf);display:block;margin-bottom:4px}
 </style>
 
@@ -2359,7 +2383,7 @@ function acciones(){
   A.push({id:"c_lst", n:"Armar el kit de LST: ganchos de percha, tiras de remera, estacas", tipo:"compra", desde:"2026-10-11", due:"2026-10-18", venc:30,
     why:"Para el LST de la tanda 1 (semana 3, ~25/10) y después de las Toxi. Gratis: alambre de perchas de tintorería cortado y doblado en U, una remera vieja cortada en tiras de 2 cm, estaquitas de 20 cm.",
     pasos:["10 ganchos en U de alambre de percha (15 cm)","20 tiras de remera vieja","6 estaquitas de madera"], dur:"20 min"});
-  A.push({id:"c_rafia", n:"Conseguir 12 bolsas de rafia (3-5 L) y una maceta de 20 L", tipo:"compra", desde:"2026-10-11", due:"2026-10-20", venc:30,
+  A.push({id:"c_rafia", n:"Conseguir 12 bolsas de rafia (3-5 L) para las Super Lemon Haze", tipo:"compra", desde:"2026-10-11", due:"2026-10-20", venc:30,
     why:"Las 12 SLH pasan de vasito a 3-5 L a las 3 semanas (~25/10). Bolsas de arroz o de balanceado con agujeros; las regalan en verdulerías y forrajerías.",
     pasos:["12 bolsas de rafia chicas (o botellas de 5 L cortadas) con agujeros","(La 4ª Toxi ya no va acá: va a una geotextil de 40 L de la compra grande)"], dur:"30 min"});
   A.push({id:"c_lupa", n:"Comprar la lente macro de clip para el celular", tipo:"compra", desde:"2026-10-25", due:"2026-11-01", venc:45,
@@ -3104,19 +3128,23 @@ function renderCal(){
   const fut=L.filter(a=>a.st==="futura"||a.st==="bloqueada").sort((a,b)=>(a.due||"9")<(b.due||"9")?-1:1);
   const hechas=g("hecha").sort((a,b)=>a.due<b.due?1:-1);
   const grupo=(t,arr,open)=>arr.length?'<details class="card"'+(open?' open':'')+'><summary>'+t+'<span class="cnt">'+arr.length+'</span></summary><div class="card-body"><ul class="dlog">'+arr.map(filaAcc).join("")+'</ul></div></details>':'';
+  /* fechas clave: siembras, trasplantes, cortes de poda, flor, cosechas y lo que se arma antes */
+  const CLAVE=/^(germ_|plantar_|armar_|topping|flor_toxi|preflor|techito|cos_|sec_|bok_|cup_|lst_t|medir_)/;
+  const clave=L.filter(a=>CLAVE.test(a.id)&&a.due&&["toca","pendiente","futura","bloqueada","esperando"].includes(a.st)).sort((a,b)=>a.due<b.due?-1:1).slice(0,10);
+  const lineaT='<ol class="tl2">'+clave.map(a=>{ const n=dias(today,a.due);
+      return '<li class="'+(n<=0?'ya':n<=7?'pronto':'')+'"><span class="tl2-d"><b>'+esc(fechaCorta(a.due))+'</b><small>'+(n<=0?'ahora':n===1?'mañana':'en '+n+' días')+'</small></span><span class="tl2-n">'+esc(a.n)+'</span></li>'; }).join("")+'</ol>';
   document.getElementById("cal").innerHTML = tiraHTML()
-    + '<p class="intro">El plan es una sugerencia viva: cada acción tiene su fecha y su condición, y se mueve con lo que vas marcando. Nada se da por hecho.</p>'
-    + grupo("Ahora", g("toca").concat(g("pendiente")), true)
-    + grupo("A la espera de una condición", g("esperando"), false)
-    + grupo("Lo que viene", fut, true)
+    + '<h2 class="sec">Fechas clave</h2>' + lineaT
+    + grupo("Todo lo que viene", g("toca").concat(g("pendiente")).concat(g("esperando")).concat(fut), false)
     + grupo("En casa, sin fecha", g("sugerida"), false)
     + grupo("Hechas", hechas, false)
     + grupo("Se pasó la ventana", g("vencida"), false)
     + grupo("Sacadas del plan", g("descartada"), false)
-    + '<h2 class="sec">Las etapas de la temporada</h2>'
+    + '<details class="card"><summary>Las etapas de la temporada<span class="cnt">'+ETAPAS().length+'</span></summary><div class="card-body">'
     + ETAPAS().map(f=>{ const esAct=f.id===act.id, esSig=sig&&f.id===sig.id;
         return '<details class="phase'+(esAct?" now":"")+(esSig?" next":"")+'" id="fase-'+f.id+'"'+(esAct?" open":"")+'><summary class="ph-btn"><span class="ph-l1"><span class="ph-num">ETAPA '+f.n+'</span><h3>'+esc(f.title)+'</h3>'+(esAct?'<span class="badge">Ahora</span>':(esSig?'<span class="badge sig">Siguiente</span>':""))+'</span><span class="ph-l2">'+esc(f.range)+'</span><span class="ph-r"><svg class="caret" viewBox="0 0 24 24"><path d="M6 9l6 6 6-6"/></svg></span></summary>'
           + '<div class="ph-body"><div class="why"><b>Por qué</b>'+esc(f.why)+'</div></div></details>'; }).join("")
+    + '</div></details>'
     + cambiosHTML()
     + '<details class="card" style="margin-top:12px"><summary>Registro de la temporada<span class="cnt">'+REGISTRO_N+'</span></summary><div class="card-body"><ul class="log">'+REGISTRO_HTML+'</ul></div></details>';
   plegarRegistro();
@@ -3218,8 +3246,9 @@ function extrHTML(){
 }
 function renderGen(){
   const _gal = galeriaHTML();
-  document.getElementById("gen-dyn").innerHTML = _gal + cosechaRegHTML() + extrHTML()
-    + '<div class="toolbar"><button type="button" data-all="open" data-scope="#genetica">Abrir todo</button><button type="button" data-all="close" data-scope="#genetica">Cerrar todo</button></div>'
+  document.getElementById("gen-dyn").innerHTML = _gal + cosechaRegHTML() + extrHTML();
+  const destGen = document.getElementById("saber-gen") || document.getElementById("gen-dyn");
+  destGen.innerHTML = (destGen.id==="saber-gen" ? '<summary>Las genéticas de la temporada<span class="cnt">'+VARIEDADES.length+'</span></summary><div class="card-body">' : '')
     + VARIEDADES.map(v=>
     '<details class="gen" id="gen-'+v.id+'">'
     + '<summary class="gen-btn"><span><h3>'+esc(v.nombre)+'</h3><span class="sub">'+esc(v.banco)+'</span></span>'
@@ -3244,7 +3273,7 @@ function renderGen(){
                 + '</div>'; }).join("")
           + '</div></div></details>'
         : "")
-    + '</div></details>').join("");
+    + '</div></details>').join("") + (destGen.id==="saber-gen" ? "</div>" : "");
 }
 
 /* ============ PENDIENTES ============ */
@@ -3306,15 +3335,25 @@ function renderPend(){
       + (g.note ? '<details class="sub"><summary>Más sobre esta lista</summary><div class="sub-body"><p class="intro">'+esc(g.note)+'</p></div></details>' : '')
       + '</div></details>';
   }).join("");
+  const lim=sumarDias(today,21);
+  const comprar=accConEstado().filter(a=>a.tipo==="compra"&&["toca","pendiente","futura"].includes(a.st)&&(a.due||"0")<=lim).sort((a,b)=>(a.due||"0")<(b.due||"0")?-1:1);
+  const todosG=GASTOS_FIJOS.concat(gastos); const totalG=todosG.reduce((x,gg)=>x+(Number(gg.m)||0),0);
   document.getElementById("pend-dyn").innerHTML =
-    '<div class="toolbar"><button type="button" data-all="open" data-scope="#pend">Abrir todo</button><button type="button" data-all="close" data-scope="#pend">Cerrar todo</button></div>'
+    '<div class="cp-top"><div><span class="cp-k">Gastado en la temporada</span><b>'+plata(totalG)+'</b></div></div>'
+    + '<h2 class="sec">Para comprar en las próximas 3 semanas</h2>'
+    + (comprar.length ? '<ul class="cp-l">'+comprar.map(a=>{ const n=a.due?dias(today,a.due):0;
+        return '<li><span class="st '+(n<=0?'st-comprar':n<=7?'st-llega':'st-listo')+'">'+(n<=0?'ya':n===1?'mañana':'en '+n+' días')+'</span><b>'+esc(a.n)+'</b><button class="acc" data-guia="'+a.id+'" type="button" style="min-height:32px;padding:5px 11px">Ver</button></li>'; }).join("")+'</ul>'
+      : '<p class="empty">Nada para comprar en las próximas tres semanas.</p>')
+    + '<details class="card" id="cp-ref"><summary>Referencia: inventario, pedidos, proveedores y gastos</summary><div class="card-body" id="cp-ref-b">'
     + inventarioHTML()
     + grupos
     + '<details class="card" id="grp-no"><summary>Lo que no hace falta comprar<span class="cnt">'+noHace.length+'</span></summary><div class="card-body">'
     + '<p class="intro">Está para que no gastes, no para que lo estudies. Una línea por producto; tocá para ver el motivo.</p>'
     + '<ul class="tasks">'+noHace.map(([g,it])=>taskHTML(Object.assign({},it,{title:it.title.replace(/^(NO (comprar|pedir)( en CBKR)?:?\s*)/i,"").replace(/\s*—\s*RESUELTO.*$/i,"")}),{plain:true,st:["no","No"]})).join("")+'</ul>'
     + '</div></details>'
-    + gastosHTML();
+    + gastosHTML()
+    + '</div></details>';
+  const pf=document.getElementById("pend-fichas"), rb=document.getElementById("cp-ref-b"); if(pf&&rb) rb.appendChild(pf);
 }
 
 function plegarFichas(){
@@ -3353,6 +3392,28 @@ function plegarFichas(){
   sec.insertBefore(tb, sec.firstChild);
 }
 
+/* ============ Saber: 10 fichas a la vista, el resto en el archivo ============ */
+const ESENCIALES = ["Secado en el altillo","Plagas de exterior","Momento de corte","Topping y LST","Las primeras tres semanas de una auto","El termohigrómetro","Señales para vigilar","La cama a distancia","Calendario de top dressing","Magnesio, sin vueltas","Extracciones caseras"];
+function ordenarSaber(){
+  const sec=document.getElementById("fichas"); if(!sec || sec.dataset.ok) return; sec.dataset.ok="1";
+  const tb=sec.querySelector(":scope > .toolbar"); if(tb) tb.remove();
+  const todas=[...document.querySelectorAll("details.ficha")];
+  const titulo=d=>{ const sm=d.querySelector("summary"); return sm?sm.textContent:""; };
+  const ess=document.createElement("div"); ess.className="ess";
+  ess.innerHTML='<h2 class="sec">Lo esencial</h2>';
+  ESENCIALES.forEach(t=>{ const d=todas.find(x=>titulo(x).trim().startsWith(t)); if(d) ess.appendChild(d); });
+  const arch=document.createElement("details"); arch.className="card"; arch.id="archivo";
+  const resto=[...sec.children];
+  const gen=document.createElement("details"); gen.className="card"; gen.id="saber-gen";
+  const plantasF=document.getElementById("gen-fichas");
+  const body=document.createElement("div"); body.className="card-body";
+  resto.forEach(n=>body.appendChild(n));
+  if(plantasF){ const h=plantasF.querySelector("h2"); if(h) h.remove(); [...plantasF.children].forEach(n=>body.appendChild(n)); plantasF.remove(); }
+  const nArch=body.querySelectorAll("details.ficha").length;
+  arch.innerHTML='<summary>Archivo: todas las demás fichas<span class="cnt">'+nArch+'</span></summary>'; arch.appendChild(body);
+  sec.appendChild(ess); sec.appendChild(gen); sec.appendChild(arch);
+  renderGen();
+}
 /* ============ registro: cada entrada plegable ============ */
 function plegarRegistro(){
   document.querySelectorAll(".log li").forEach(li=>{
@@ -3445,7 +3506,7 @@ function goto(it){
 
 const TABS = [["tab-hoy","hoy","hoy"],["tab-cal","cal","cal"],["tab-gen","genetica","gen"],["tab-fichas","fichas","fichas"],["tab-pend","pend","pend"]];
 function setTab(name){
-  tab = name;
+  tab = name; document.body.dataset.tab = name;
   TABS.forEach(([b,sec,key])=>{
     const on = key===name;
     document.getElementById(b).setAttribute("aria-selected", on);
@@ -3652,7 +3713,7 @@ REGISTRO_SRC.remove();
 readLocal();
 if(!obs.length && !obsUlt("trebol")) obs.push({k:"trebol",v:"asomo",d:"2026-09-20",ts:1758402000001});
 renderHoy(); renderCal(); renderGen(); renderPend();
-plegarFichas(); plegarRegistro();
+plegarFichas(); plegarRegistro(); ordenarSaber();
 buildIndex();
 setSync("Guardado solo en este dispositivo","warn");
 
