@@ -294,7 +294,7 @@ def main():
     ft = (eventos.get("flor_toxi") or {})
     flor_toxi = fecha(ft["d"]) if ft.get("estado") == "hecho" and ft.get("d") else None
     dia_flor_toxi = (HOY - flor_toxi).days + 1 if flor_toxi else None
-    fechas_pres = [e["d"] for e in diario if e.get("a") not in ("lluvia", "lluvia_poca", "lluvia_fuerte")]
+    fechas_pres = [e["d"] for e in diario if e.get("a") not in ("lluvia", "lluvia_poca", "lluvia_fuerte", "lluvia_mm", "nota")]
     fechas_pres += [o.get("d") for o in ck.get("obs", []) if o.get("d")]
     fechas_pres += [e.get("d") for e in (eventos or {}).values() if isinstance(e, dict) and e.get("estado") == "hecho" and e.get("d")]
     ult_pres = max([x for x in fechas_pres + [agenda.get("presencia")] if x] or [None]) if (fechas_pres or agenda.get("presencia")) else None
