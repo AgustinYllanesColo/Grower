@@ -196,7 +196,7 @@
       out.forEach(x => { if (x.d === dd.d) { x.est = "regar"; x.txt = "regar a fondo"; } });
       return conConfianza({ dias: out, hist: hist, resumen: resumen, ancla: ancla, sinDato: sinDato,
                orden: { nivel: "avi", t: dd.d === hoy ? "Regá a fondo hoy" : (entre(hoy, g.siembra) === 2 ? "Regá a fondo hoy o mañana" : "Regá a fondo " + cuando(dd.d, hoy)),
-                        d: "Se siembra el " + cuando(g.siembra, hoy) + ": los 40 L tienen que estar mojados de antes, la semilla va en sustrato húmedo. ≈ 6-8 L por maceta, despacio, hasta que escurra. La lluvia no entra con el cartón." } });
+                        d: "Se siembra " + (entre(hoy, g.siembra) <= 1 ? "" : "el ") + cuando(g.siembra, hoy) + ": los 40 L tienen que estar mojados de antes, la semilla va en sustrato húmedo. ≈ 6-8 L por maceta, despacio, hasta que escurra. La lluvia no entra con el cartón." } });
     }
     return conConfianza({ dias: out, hist: hist, resumen: resumen, ancla: ancla, sinDato: sinDato, orden: orden(g, out) });
   }

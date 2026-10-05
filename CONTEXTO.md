@@ -7,7 +7,7 @@ Contexto para cualquier sesión de Claude que trabaje sobre el cultivo de Tomy.
   Tomy la usa en su casa, **planificando con un mate**: consulta cuándo regó, qué comprar y qué le toca. **No la usa en el cultivo.**
   Las decisiones se toman en el chat con Claude, y Claude las pasa a la página el mismo día.
 - **Código fuente**: `bitacora/index.html`, con las fotos fijas en `bitacora/fotos/`. Para publicar: Artifact publish con
-  `url` del artifact, `file_path` bitacora/index.html y `files` fotos/fija1..7.jpg. `bitacora/original.html` es la versión anterior al 29/9, solo de referencia.
+  `url` del artifact, `file_path` bitacora/index.html y `files` riego.js y fotos/fija1..17.jpg. `bitacora/original.html` es la versión anterior al 29/9, solo de referencia.
 - **Base de datos** (se lee y escribe con ArtifactData sobre la URL de arriba):
   - `estado/checklist`: todo lo que carga Tomy (diario, obs, eventos, tandas, inv, fotos, cosecha, extr, borrados…).
     La página hace `set` del documento entero: nunca borrar campos, siempre leer antes y escribir con `if_version`.
@@ -29,14 +29,14 @@ Contexto para cualquier sesión de Claude que trabaje sobre el cultivo de Tomy.
 Crítico, sincero y exigente; nada de elogios. Corregir, enseñar y dar el porqué con números. Castellano rioplatense, de vos.
 Regla de la bitácora: **certeza, no dudas**. Lo que no hace falta no va, y lo que va lleva su estado.
 
-## Decisiones vigentes (29/9/26)
+## Decisiones vigentes (29/9/26, germinación corrida el 5/10)
 - Bancal de 2 m² de suelo vivo, lejos de la casa; visitas cada 3-4 días. Cover crop sembrado el 11/9. Última visita: 21/9.
-- **Tanda 1** (autos, siembra directa en geotextiles de 40 L): domingo 4/10. 1 Permanent Jealousy, 1 Pineapple Slush y 2 Doble Tangie. Corte a fines de diciembre.
-- **Toxi Watermelon** (fotoperiódica): 4 germinan el 4/10 en casa. Las 3 mejores van al bancal (~25/10, a 70 cm) y la 4ª a una geotextil de 40 L apoyada sobre tierra.
+- **Tanda 1** (autos, siembra directa en geotextiles de 40 L): iba el domingo 4/10 y NO se hizo. Papel húmedo el lunes 5/10, siembra en las macetas el martes 6/10 (a más tardar el miércoles 7). 1 Permanent Jealousy, 1 Pineapple Slush y 2 Doble Tangie. Corte a fines de diciembre.
+- **Toxi Watermelon** (fotoperiódica): 4 germinan el 5/10 en casa (corrido del 4/10), a vasitos cuando asome la raíz. Las 3 mejores van al bancal (~25/10, a 70 cm) y la 4ª a una geotextil de 40 L apoyada sobre tierra.
   Flor franca **estimada ~1/2** (fotoperíodo crítico 14-15,5 h, Lanús 34,7° S). Del banco son 60 días; afuera, 60-70.
   **Corte estimado: 1ª quincena de abril.** La bitácora recalcula todo desde el evento `flor_toxi` cuando Tomy lo marca.
 - **Tanda 2**: 2 Doble Tangie en 2 geotextiles de 40 L, siembra a mediados de noviembre.
-- **Breeder**: 12 Super Lemon Haze regulares en casa, lejos del bancal.
+- **Breeder**: 12 Super Lemon Haze regulares en casa, lejos del bancal. Papel húmedo el 5/10.
 - **Secado: en el ALTILLO.** Medirlo con el termohigrómetro en octubre y en noviembre, y hacer el ensayo de secado. Cajas en el piso y ventilación de noche.
 - **Plagas**: Bt kurstaki (Dipel) en flor cada 7-10 días; techito de nylon sobre el bancal desde la semana 3 de flor de las Toxi; cúpula enterrada contra babosas.
 - **Registro de cosecha** por planta (húmedo, seco, descarte) y registro de extracciones.
