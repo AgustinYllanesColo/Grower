@@ -49,3 +49,6 @@ Regla de la bitácora: **certeza, no dudas**. Lo que no hace falta no va, y lo q
 - Agua: de lluvia como principal; ácido ascórbico en polvo de respaldo.
 - Borra de café: va al bancal, finita bajo el mulch y mezclada con cartón (hasta 5 L por mes). En las macetas no, hasta que las plantas tengan 4 semanas. Se guarda abierta. Lista «Para juntar» en Compras.
 - Nada de lombricario. Nada de freezer ni heladera para secar.
+- **5/10: sin compras por ahora.** La compra grande se decide a fin de octubre y solo si hay tanda 2. La 4ª Toxi queda de reserva en bolsa de rafia en casa.
+- **Trébol falló (se secó).** No se compra más trébol: resiembra de claros con lentejas o arvejas del almacén a 2-3 cm (aguantan visitas cada 3-4 días). Las Toxi no esperan al cover: van con 2-3 pares de hojas.
+- Azúcar rubia: hay. IMO y LAB arrancan el 5-6/10 con el mismo arroz.
