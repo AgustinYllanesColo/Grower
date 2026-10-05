@@ -49,3 +49,4 @@ Regla de la bitácora: **certeza, no dudas**. Lo que no hace falta no va, y lo q
 - Agua: de lluvia como principal; ácido ascórbico en polvo de respaldo.
 - Borra de café: va al bancal, finita bajo el mulch y mezclada con cartón (hasta 5 L por mes). En las macetas no, hasta que las plantas tengan 4 semanas. Se guarda abierta. Lista «Para juntar» en Compras.
 - Nada de lombricario. Nada de freezer ni heladera para secar.
+- **Huerta de verduras en casa** (aparte del cultivo): plan y presupuesto en `huerta/PLAN.md`. Borrador del 5/10; falta que Tomy confirme lugar, metros, piso y sol.
