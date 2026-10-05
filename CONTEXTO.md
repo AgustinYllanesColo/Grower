@@ -27,7 +27,7 @@ Contexto para cualquier sesión de Claude que trabaje sobre el cultivo de Tomy.
 
 ## Cómo hablarle a Tomy
 Crítico, sincero y exigente; nada de elogios. Corregir, enseñar y dar el porqué con números. Castellano rioplatense, de vos.
-Regla de la bitácora: **certeza, no dudas**. Lo que no hace falta no va, y lo que va lleva su estado.
+Regla de la bitácora: **certeza, no dudas**. **Claude mantiene la bitácora (fechas, tabla de riego, avisos) al día con lo que se dice en el chat SIN que Tomy lo pida.** Lo que no hace falta no va, y lo que va lleva su estado.
 
 ## Decisiones vigentes (29/9/26, germinación corrida el 5/10)
 - Bancal de 2 m² de suelo vivo, lejos de la casa; visitas cada 3-4 días. Cover crop sembrado el 11/9. Última visita: 21/9.
@@ -46,7 +46,7 @@ Regla de la bitácora: **certeza, no dudas**. Lo que no hace falta no va, y lo q
 - **Lluvia de días pasados: MEDIDA** (SYNOP del SMN vía Ogimet: Observatorio, Aeroparque, Ezeiza; mediana) en scripts/synop.py. Tomy no va a tener pluviómetro. Macetas BAJO TECHO: la lluvia no les llega.
 - **Clima = aliado:** VPD en kPa de día (9-18 h) y de noche en la tabla «Clima y VPD». Rangos de día: plántula 0,4-0,8 · vegetativo 0,8-1,2 · flor 1,0-1,5 · fin de flor 1,2-1,6. Noche <0,15 = rocío. Secado: 0,6-0,9 adentro de la caja; curado 58-62 % en el frasco.
 - **Notificaciones propias:** app ntfy, suscripta al tema que está en la Routine «Ronda Suelo Vivo» (trig_01QU2vywp6rGJqJrsxJpUsNV). Lo que Tomy quiere a futuro: una app de verdad (PWA con push).
-- Agua: por ahora canilla batida y reposada (no puede dejar baldes de lluvia); mientras tanto vitamina C de farmacia como concentrado (1 g en 1 L, 100 ml por balde de 10 L) o condensado de aire acondicionado.
+- Agua: por ahora canilla batida y reposada (no puede dejar baldes de lluvia); Vitamina C NO se consigue: el agua se trata con jugo de 1 limón por balde de 10 L. Ascórbico en polvo solo si aparece.
 - Borra de café: va al bancal, finita bajo el mulch y mezclada con cartón (hasta 5 L por mes). En las macetas no, hasta que las plantas tengan 4 semanas. Se guarda abierta. Lista «Para juntar» en Compras.
 - Nada de lombricario. Nada de freezer ni heladera para secar.
 - **5/10: sin compras por ahora.** La compra grande se decide a fin de octubre y solo si hay tanda 2. La 4ª Toxi queda de reserva en bolsa de rafia en casa.

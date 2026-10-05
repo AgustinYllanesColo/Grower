@@ -113,6 +113,9 @@
       if (m && e.a !== "riego") { const L = parseFloat(m[1].replace(",", ".")); parcial[e.d] = (parcial[e.d] || 0) + (g.tipo === "suelo" ? L / 2 : L); }
       else lleno.add(e.d);
     });
+    /* el riego a fondo previo a la siembra (guía «Antes de sembrar») también cuenta */
+    const pre = g.id === "t1" ? hecho(S.eventos || {}, "papel_t1") : null;
+    if (pre && pre <= hoy) { riegos.add(pre); lleno.add(pre); }
     const regar = (def, f) => { if (lleno.has(f)) def = 0; if (parcial[f] != null) def = Math.max(0, def - parcial[f]); return def; };
     const lluAnot = {}; (S.diario || []).forEach(e => { if (LLUVIA_ANOTADA[e.a] != null) lluAnot[e.d] = Math.max(lluAnot[e.d] || 0, LLUVIA_ANOTADA[e.a]); });
     const dedos = {}; (S.obs || []).forEach(o => { if (o.k === g.dedo) dedos[o.d] = o.v; });
@@ -191,12 +194,21 @@
       def = (est === "regar" || est === "urgente") ? e * 0.5 : fin;
     }
     /* macetas a punto de sembrarse: se riegan a fondo 1-2 días antes, haga lo que haga el balance */
-    if (g.siembra && entre(hoy, g.siembra) >= 0 && entre(hoy, g.siembra) <= 2 && ![...riegos].some(d => d >= suma(hoy, -2))) {
+    /* tapadas y bajo techo, un riego a fondo dura ~5 días: si es más viejo, se riega antes de sembrar */
+    const ventana = g.lluviaTapa ? -5 : -2;
+    if (g.siembra && entre(hoy, g.siembra) >= 0 && entre(hoy, g.siembra) <= 2 && ![...riegos].some(d => d >= suma(hoy, ventana))) {
       const dd = out.find(x => x.d === suma(g.siembra, -1)) || out[0];
       out.forEach(x => { if (x.d === dd.d) { x.est = "regar"; x.txt = "regar a fondo"; } });
       return conConfianza({ dias: out, hist: hist, resumen: resumen, ancla: ancla, sinDato: sinDato,
                orden: { nivel: "avi", t: dd.d === hoy ? "Regá a fondo hoy" : (entre(hoy, g.siembra) === 2 ? "Regá a fondo hoy o mañana" : "Regá a fondo " + cuando(dd.d, hoy)),
                         d: "Se siembra " + (entre(hoy, g.siembra) <= 1 ? "" : "el ") + cuando(g.siembra, hoy) + ": los 40 L tienen que estar mojados de antes, la semilla va en sustrato húmedo. ≈ 6-8 L por maceta, despacio, hasta que escurra. La lluvia no entra con el cartón." } });
+    }
+    if (g.siembra && entre(hoy, g.siembra) >= 0 && entre(hoy, g.siembra) <= 1) {
+      out.forEach(x => { if (x.d <= g.siembra && (x.est === "regar" || x.est === "urgente")) { x.est = "ok"; x.txt = "bien"; } });
+      const ur = [...riegos].filter(d => d <= hoy).sort().pop();
+      return conConfianza({ dias: out, hist: hist, resumen: resumen, ancla: ancla, sinDato: sinDato,
+               orden: { nivel: "ok", t: g.siembra === hoy ? "Se siembra hoy: sin balde" : "Se siembra mañana: sin balde",
+                        d: "Regadas a fondo el " + (ur ? d2(ur).getDate() + "/" + (d2(ur).getMonth() + 1) : "—") + " y tapadas bajo techo: tienen agua. Dedo a 5 cm antes de sembrar: húmedo, se siembra y solo se rocía el centro; seco, 5-7 L por maceta despacio y media hora de espera antes de la semilla." } });
     }
     return conConfianza({ dias: out, hist: hist, resumen: resumen, ancla: ancla, sinDato: sinDato, orden: orden(g, out) });
   }
