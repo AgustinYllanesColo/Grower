@@ -36,7 +36,7 @@ Regla de la bitácora: **certeza, no dudas**. Lo que no hace falta no va, y lo q
   Flor franca **estimada ~1/2** (fotoperíodo crítico 14-15,5 h, Lanús 34,7° S). Del banco son 60 días; afuera, 60-70.
   **Corte estimado: 1ª quincena de abril.** La bitácora recalcula todo desde el evento `flor_toxi` cuando Tomy lo marca.
 - **Tanda 2**: 2 Doble Tangie en 2 geotextiles de 40 L, siembra a mediados de noviembre.
-- **Breeder**: 12 Super Lemon Haze regulares en casa, lejos del bancal. Germinan a mediados de noviembre (no antes: 4 meses en 3-5 L las estancaría); sexado en enero, polen y una rama en febrero.
+- **Breeder**: 12 Super Lemon Haze regulares en casa, lejos del bancal. TODO en vasitos de 500 ml, sin comprar nada (observación, aprendizaje, selección). Siembra 20/11-1/12; sexado en enero; polen y una rama de la mejor SLH hembra en febrero, en casa.
 - **Secado: en el ALTILLO.** Medirlo con el termohigrómetro en octubre y en noviembre, y hacer el ensayo de secado. Cajas en el piso y ventilación de noche.
 - **Plagas**: Bt kurstaki (Dipel) en flor cada 7-10 días; techito de nylon sobre el bancal desde la semana 3 de flor de las Toxi; cúpula enterrada contra babosas.
 - **Registro de cosecha** por planta (húmedo, seco, descarte) y registro de extracciones.
@@ -46,7 +46,7 @@ Regla de la bitácora: **certeza, no dudas**. Lo que no hace falta no va, y lo q
 - **Lluvia de días pasados: MEDIDA** (SYNOP del SMN vía Ogimet: Observatorio, Aeroparque, Ezeiza; mediana) en scripts/synop.py. Tomy no va a tener pluviómetro. Macetas BAJO TECHO: la lluvia no les llega.
 - **Clima = aliado:** VPD en kPa de día (9-18 h) y de noche en la tabla «Clima y VPD». Rangos de día: plántula 0,4-0,8 · vegetativo 0,8-1,2 · flor 1,0-1,5 · fin de flor 1,2-1,6. Noche <0,15 = rocío. Secado: 0,6-0,9 adentro de la caja; curado 58-62 % en el frasco.
 - **Notificaciones propias:** app ntfy, suscripta al tema que está en la Routine «Ronda Suelo Vivo» (trig_01QU2vywp6rGJqJrsxJpUsNV). Lo que Tomy quiere a futuro: una app de verdad (PWA con push).
-- Agua: por ahora canilla batida y reposada (no puede dejar baldes de lluvia); ácido ascórbico en polvo en cuanto se consiga (dietética o ML, no farmacia).
+- Agua: por ahora canilla batida y reposada (no puede dejar baldes de lluvia); mientras tanto vitamina C de farmacia como concentrado (1 g en 1 L, 100 ml por balde de 10 L) o condensado de aire acondicionado.
 - Borra de café: va al bancal, finita bajo el mulch y mezclada con cartón (hasta 5 L por mes). En las macetas no, hasta que las plantas tengan 4 semanas. Se guarda abierta. Lista «Para juntar» en Compras.
 - Nada de lombricario. Nada de freezer ni heladera para secar.
 - **5/10: sin compras por ahora.** La compra grande se decide a fin de octubre y solo si hay tanda 2. La 4ª Toxi queda de reserva en bolsa de rafia en casa.
