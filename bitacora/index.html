@@ -2305,7 +2305,7 @@ function acciones(){
     why:"Siembra directa, como te gusta: la semilla va a la maceta definitiva. Para eso los 40 L tienen que estar mojados de antes (un sustrato seco recién regado queda con bolsones secos), y el día de la siembra solo se moja el centro.",
     pasos:["Destapar, oler, y regar cada maceta despacio hasta que escurra por abajo","Volver a tapar con el cartón hasta el día de la siembra","Traer para la siembra: 4 medias botellas, 4 tutores, etiquetas, pasto seco"],
     riesgo:"Sembrar en 40 L secos y regar encima: el agua corre por los costados y la semilla queda en seco.", dur:"15 min"});
-  A.push({id:"germ_t1", n:"Sembrar la tanda 1 en las 4 macetas", tipo:"cama", desde:"2026-10-05", due:"2026-10-05", req:["macetas"], fecha:"¿Qué día las sembraste?",
+  A.push({id:"germ_t1", n:"Sembrar la tanda 1 en las 4 macetas", tipo:"cama", desde:"2026-10-06", due:"2026-10-06", req:["macetas"], fecha:"¿Qué día las sembraste?",
     cond:{q:"Destapá una maceta y olé. ¿Huele a tierra de bosque?", si:"Sí, a bosque", no:"Agrio, o a nada"},
     espera:()=>{ const o=obsUlt("macetas"); return (o&&o.v==="agrio"&&dias(o.d)<4) ? "El "+fechaCorta(o.d)+" olían agrio: aire y agua sola, y se vuelve a oler la próxima." : null; },
     why:"Siembra directa, una semilla por maceta en la definitiva. Las tres primeras semanas definen la planta entera: acá no se improvisa. Desde hoy la bitácora cuenta los días de cada planta y te pide cada hito cuando toca.",
@@ -2313,7 +2313,7 @@ function acciones(){
     al:{tanda:"t1", inv:{s_pj:-1,s_ps:-1,s_dt:-2}},
     riesgo:"Cada semana de atraso corre la cosecha a enero, el mes más húmedo para tus cogollos densos.", dur:"40 min"});
   /* --- toxi --- */
-  A.push({id:"germ_toxi", n:"Sembrar 3 Toxi Watermelon en vasitos, en tu casa", tipo:"casa", desde:"2026-10-05", due:"2026-10-05", fecha:"¿Qué día las sembraste?",
+  A.push({id:"germ_toxi", n:"Sembrar 3 Toxi Watermelon en vasitos, en tu casa", tipo:"casa", desde:"2026-10-06", due:"2026-10-06", fecha:"¿Qué día las sembraste?",
     why:"En tu casa las ves todos los días, que es lo que un plantín necesita. Al bancal van a las 2-3 semanas, cuando el trébol ya tape el suelo. Germinan las 4 (decidido el 29/9): las 3 mejores al bancal y la 4ª a una geotextil de 40 L.",
     pasos:["4 vasitos de 500 ml con agujeros: Growmix con un puñado de humus (unos 2 L en total)","Semilla directa a 1 cm, sustrato húmedo de antes; bolsita o film encima hasta que asome (3-6 días) y se saca ese día","Nombre y número en cada vasito","Ventana o patio con sol de mañana; sombra al mediodía los primeros días","Agua cuando el vasito pese liviano, nunca encharcado"],
     al:{tanda:"toxi", inv:{s_tw:-3,growmix:-2}},
@@ -2886,6 +2886,7 @@ function hayCosechaCerca(){
 }
 /* ============ cambios acordados en el chat (la bitácora es la fuente; esto es el rastro) ============ */
 const CAMBIOS = [
+  {d:"2026-10-05", t:"La siembra no se hizo hoy: pasa al martes 6/10. Mismo plan: 4 autos directo en las macetas (dedo a 5 cm; húmedas = sin balde, solo rociador), cúpula de botella enterrada, hilo de color en la manija, 2 baldes con limón al bancal. Al volver, 3 Toxi en vasitos. Un día más no mueve el corte de las autos (fin de diciembre) ni la flor de las Toxi (~1/2). El miércoles llueven ~24 mm: la cúpula bien enterrada."},
   {d:"2026-10-05", t:"Las legumbres todavía no están: la resiembra pasa a la próxima visita (~9/10), junto con IMO, LAB y extracto. Hoy: siembra de autos con cúpula de botella y 2 baldes con limón al bancal. Las macetas no llevan balde: solo rociador sobre la semilla."},
   {d:"2026-10-05", t:"Visita de hoy, 30 min: siembra de las 4 autos, 2 baldes al bancal y legumbres. Agua tratada con LIMÓN (1 por balde de 10 L): la vitamina C no se consigue. IMO, LAB y extracto de humus pasan a la próxima visita (~9/10). La tabla de riego ya sabe que se siembra hoy: el riego a fondo del 2/10 cuenta y no pide 28 L."},
   {d:"2026-10-05", t:"La siembra se adelanta a hoy lunes 5/10 (visita de hoy): 4 autos directo en las macetas y 3 Toxi en vasitos (la 4ª semilla queda de reserva: no hace falta maceta extra). Identificación por color en la manija de cada geotextil: rojo PJ-1, amarillo PS-1, azul DT-1, verde DT-2. Las macetas no se riegan con 28 L antes de sembrar si el dedo sale húmedo: el riego del 2/10 sigue adentro (tapadas y bajo techo)."},

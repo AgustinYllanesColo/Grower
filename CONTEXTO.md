@@ -31,8 +31,8 @@ Regla de la bitácora: **certeza, no dudas**. **Claude mantiene la bitácora (fe
 
 ## Decisiones vigentes (29/9/26, germinación corrida el 5/10)
 - Bancal de 2 m² de suelo vivo, lejos de la casa; visitas cada 3-4 días. Cover crop sembrado el 11/9. Última visita: 21/9.
-- **Tanda 1** (autos, siembra directa en geotextiles de 40 L): iba el domingo 4/10 y NO se hizo. Siembra DIRECTA sin papel en las macetas el lunes 5/10. Color en la manija: rojo PJ-1, amarillo PS-1, azul DT-1, verde DT-2. 1 Permanent Jealousy, 1 Pineapple Slush y 2 Doble Tangie. Corte a fines de diciembre.
-- **Toxi Watermelon** (fotoperiódica): 3 sembradas el 5/10 directo en vasitos (la 4ª semilla de reserva). Las 3 mejores van al bancal (~25/10, a 70 cm) y la 4ª a una geotextil de 40 L apoyada sobre tierra.
+- **Tanda 1** (autos, siembra directa en geotextiles de 40 L): iba el domingo 4/10 y NO se hizo. Siembra DIRECTA sin papel en las macetas el martes 6/10 (se corrió dos veces: 4/10 y 5/10). Color en la manija: rojo PJ-1, amarillo PS-1, azul DT-1, verde DT-2. 1 Permanent Jealousy, 1 Pineapple Slush y 2 Doble Tangie. Corte a fines de diciembre.
+- **Toxi Watermelon** (fotoperiódica): 3 sembradas el 6/10 directo en vasitos (la 4ª semilla de reserva). Las 3 mejores van al bancal (~25/10, a 70 cm) y la 4ª a una geotextil de 40 L apoyada sobre tierra.
   Flor franca **estimada ~1/2** (fotoperíodo crítico 14-15,5 h, Lanús 34,7° S). Del banco son 60 días; afuera, 60-70.
   **Corte estimado: 1ª quincena de abril.** La bitácora recalcula todo desde el evento `flor_toxi` cuando Tomy lo marca.
 - **Tanda 2**: 2 Doble Tangie en 2 geotextiles de 40 L, siembra a mediados de noviembre.
