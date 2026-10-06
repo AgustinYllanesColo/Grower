@@ -17,7 +17,7 @@ Contexto para cualquier sesión de Claude que trabaje sobre el cultivo de Tomy.
 - **Ronda automática**: `scripts/ronda.py` (wttr.in + reglas deterministas). Corre cada 2 días como Routine. Ver `RONDA.md`.
 
 ## Registro
-**Tomy NO anota en la bitácora: anota Claude desde el chat** (riegos con litros en `n`, p. ej. «20 L» o «3,5 L c/u»; dedo con `p` = lo que predecía el cálculo; notas). Su balde es de **10 L**. **Toda foto que pase va a la galería sin preguntar** (fotos/fijaN.jpg, 900 px, en FOTOS_FIJAS con fecha, sujeto y pie de foto).
+**Tomy NO anota en la bitácora: anota Claude desde el chat** (riegos con litros en `n`, p. ej. «20 L» o «3,5 L c/u»; dedo con `p` = lo que predecía el cálculo; notas). Su balde es de **10 L**. **Toda foto que pase va a la galería sin preguntar**: achicarla a 900 px, subirla con Artifact `asset: true` y agregar `{id, d, s, sem, cap, ts}` a `checklist.fotos` (no hace falta republicar la página). **Otra sesión también edita la página**: antes de publicar, partir siempre de la versión viva.
 
 **Ficha por planta** (pestaña Plantas): Claude anota en `checklist.plantas[ID]` (IDs: PJ-1, PS-1, DT-1..4, TW-1..4, SLH):
 `alt: [{d, cm}]` altura, `ev: [{d, t}]` lo que se le hizo (LST, topping, plaga…), `germ` si germinó otro día que su tanda,
