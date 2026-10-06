@@ -29,6 +29,11 @@ Contexto para cualquier sesión de Claude que trabaje sobre el cultivo de Tomy.
 Crítico, sincero y exigente; nada de elogios. Corregir, enseñar y dar el porqué con números. Castellano rioplatense, de vos.
 Regla de la bitácora: **certeza, no dudas**. **Claude mantiene la bitácora (fechas, tabla de riego, avisos) al día con lo que se dice en el chat SIN que Tomy lo pida.** Lo que no hace falta no va, y lo que va lleva su estado.
 
+## Objetivo de calidad (6/10)
+Tomy mandó fotos de referencia (I+D, línea Athena, interior): cogollos densos, escarcha total, pistilos naranjas, violeta en las hojitas.
+Eso es lo que busca. Palancas en orden: genética + selección (PJ la más cercana; clonar la mejor Toxi; breeder SLH) · luz en cada cola (LST/topping, limpiar el tercio de abajo)
+· sin N de más en flor · corte por tricomas · secado lento 10-14 días y manicurado. Color solo con genética + noches <15 °C. Afuera en BA, denso = botrytis: estructura abierta, Bt, techito, corte a tiempo.
+
 ## Decisiones vigentes (29/9/26, germinación corrida el 5/10)
 - Bancal de 2 m² de suelo vivo, lejos de la casa; visitas cada 3-4 días. Cover crop sembrado el 11/9. Última visita: 21/9.
 - **Tanda 1** (autos, siembra directa en geotextiles de 40 L): iba el domingo 4/10 y NO se hizo. Siembra DIRECTA sin papel en las macetas el martes 6/10 (se corrió dos veces: 4/10 y 5/10). Color en la manija: rojo PJ-1, amarillo PS-1, azul DT-1, verde DT-2. 1 Permanent Jealousy, 1 Pineapple Slush y 2 Doble Tangie. Corte a fines de diciembre.
