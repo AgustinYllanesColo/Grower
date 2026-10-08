@@ -259,7 +259,7 @@ def main():
             pass
         elif f in llu_p:
             d["mm"] = llu_p[f]; d["obs"] = False; d["src"] = "modelo"
-        for k in ("prob", "mm_p25", "mm_p75", "mm2", "conf", "racha"): d.pop(k, None)
+        for k in ("prob", "mm_p25", "mm_p75", "mm2", "conf", "racha", "mm_med", "med_hasta", "mm_resto", "mm_med_est"): d.pop(k, None)
         d["txt"] = (f"lluvia {mmf(d['mm'])} mm" if (d.get("mm") or 0) >= 1 else "seco")
         por_d[f] = d
     pasados = [por_d[k] for k in sorted(por_d)]
