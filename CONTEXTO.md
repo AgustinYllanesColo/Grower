@@ -16,6 +16,15 @@ Contexto para cualquier sesión de Claude que trabaje sobre el cultivo de Tomy.
   - `estado/agenda`: la escribe la página cada vez que se abre. Tiene lo que toca en las próximas 3 semanas, el último riego, la última presencia y las tandas.
 - **Ronda automática**: `scripts/ronda.py` (wttr.in + reglas deterministas). Corre cada 2 días como Routine. Ver `RONDA.md`.
 
+## REGLA 0 · Frenar ANTES, no corregir después (13/10/26)
+El 6/10 Tomy sembró la tanda 1 directo en las geotextiles y Claude lo anotó sin más. Vino una semana de 16-19 °C de máxima, 29 mm de lluvia y riego a fondo: ninguna germinó. Cuatro semillas caras perdidas por no haber mirado el pronóstico ANTES. Eso no vuelve a pasar.
+**Antes de cualquier acción irreversible** (sembrar, germinar, trasplantar, podar, topping, cortar, aplicar algo, cambiar de maceta), Claude hace y escribe en el chat este control, y si falla, dice «NO, esperá» con el porqué y la alternativa:
+1. **Clima de los próximos 7 días** (`estado/clima` + pronóstico): temperatura de suelo/aire dentro del rango de la acción. Germinación: 22-26 °C; afuera con máximas <20 °C se germina ADENTRO (papel, 22-25 °C) y se planta brotada.
+2. **Agua**: no regar a fondo sustratos que van a estar fríos o sin plantas que transpiren. Semilla recién puesta: solo humedecer el centro.
+3. **Cuánto se pierde si sale mal** (semillas, semanas de calendario, plata) y si hay forma de hacerlo en 2 tiempos.
+4. **Qué va a pasar entre visitas**: Tomy va cada 3-4 días; si la acción necesita control diario, no se hace afuera.
+Si Tomy avisa que va a hacer algo, la respuesta empieza por el control, no por la bitácora. Si ya lo hizo sin avisar, Claude lo revisa igual ese mismo día y, si está mal, propone la corrección antes de que cueste más. Anotar en la bitácora es lo último, no lo primero.
+
 ## Registro
 **Tomy NO anota en la bitácora: anota Claude desde el chat** (riegos con litros en `n`, p. ej. «20 L» o «3,5 L c/u»; dedo con `p` = lo que predecía el cálculo; notas). Su balde es de **10 L**. **Toda foto que pase va a la galería sin preguntar**: achicarla a 900 px, subirla con Artifact `asset: true` y agregar `{id, d, s, sem, cap, ts}` a `checklist.fotos` (no hace falta republicar la página). **Otra sesión también edita la página**: antes de publicar, partir siempre de la versión viva.
 
@@ -31,7 +40,7 @@ Regla de la bitácora: **certeza, no dudas**. Lo que no hace falta no va, y lo q
 
 ## Decisiones vigentes (29/9/26)
 - Bancal de 2 m² de suelo vivo, lejos de la casa; visitas cada 3-4 días. Cover crop sembrado el 11/9. Última visita: 21/9.
-- **Tanda 1** (autos, siembra directa en geotextiles de 40 L): domingo 4/10. 1 Permanent Jealousy, 1 Pineapple Slush y 2 Doble Tangie. Corte a fines de diciembre.
+- **Tanda 1** (autos): sembrada directo el 6/10, **no germinó** (frío + riego a fondo). Se regermina ADENTRO en papel y se planta brotada en las mismas geotextiles. Siembra directa afuera: solo con máximas ≥22 °C sostenidas. 1 Permanent Jealousy, 1 Pineapple Slush y 2 Doble Tangie. Corte a fines de diciembre.
 - **Toxi Watermelon** (fotoperiódica): 4 germinan el 4/10 en casa. Las 3 mejores van al bancal (~25/10, a 70 cm) y la 4ª a una geotextil de 40 L apoyada sobre tierra.
   Flor franca **estimada ~1/2** (fotoperíodo crítico 14-15,5 h, Lanús 34,7° S). Del banco son 60 días; afuera, 60-70.
   **Corte estimado: 1ª quincena de abril.** La bitácora recalcula todo desde el evento `flor_toxi` cuando Tomy lo marca.
