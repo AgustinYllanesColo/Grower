@@ -20,6 +20,10 @@ Lo que el semáforo NO mide y Claude tiene que preguntar igual: cuántas semilla
 cuándo es la próxima visita (si la acción necesita control diario, no se hace afuera), y si se puede hacer en dos tiempos.
 
 ## Germinación, el procedimiento que vale (desde el 13/10/26)
+0. **Adentro también se mide.** El termohigrómetro 20 minutos en el lugar donde van los vasos; Tomy manda la lectura ANTES de sembrar.
+   <20 °C: ese lugar no sirve. 22-26 °C: va. Un vaso afuera con <20 °C de máxima es el mismo error del 6/10 en chiquito.
+   **Si una siembra falló, lo primero es desenterrar las semillas y mirarlas** (hinchada y dura = viva, al papel; blanda u oscura = perdida).
+   No se gastan semillas nuevas sin ese conteo, y Tomy dice cuántas quedan por variedad.
 1. Papel de cocina húmedo (no chorreando) entre dos platos, en un lugar a 22-25 °C (arriba de la heladera, del router). Oscuridad.
 2. Revisar a las 24, 48 y 72 h. Raíz de 0,5-1 cm = lista. Más de 5 días sin raíz = semilla muerta; no insistir.
 3. Plantar brotada: hoyo de 1 cm en el centro de la maceta, raíz para abajo, tapar sin apretar, mojar solo un vasito en el centro.
