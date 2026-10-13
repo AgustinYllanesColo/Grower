@@ -15,10 +15,11 @@ Contexto para cualquier sesión de Claude que trabaje sobre el cultivo de Tomy.
   - `estado/avisos`: {fecha, titulo, resumen, items[{n: urg|avi|info, t, d}]}. Se muestra arriba de «Hoy» durante 4 días.
   - `estado/agenda`: la escribe la página cada vez que se abre. Tiene lo que toca en las próximas 3 semanas, el último riego, la última presencia y las tandas.
 - **Ronda automática**: `scripts/ronda.py` (wttr.in + reglas deterministas). Corre cada 2 días como Routine. Ver `RONDA.md`.
+- **Semáforo de acciones**: `scripts/semaforo.py` + `PROTOCOLOS.md`. GO/NO GO fijo por acción contra el pronóstico; la ronda lo corre sola sobre la agenda.
 
 ## REGLA 0 · Frenar ANTES, no corregir después (13/10/26)
 El 6/10 Tomy sembró la tanda 1 directo en las geotextiles y Claude lo anotó sin más. Vino una semana de 16-19 °C de máxima, 29 mm de lluvia y riego a fondo: ninguna germinó. Cuatro semillas caras perdidas por no haber mirado el pronóstico ANTES. Eso no vuelve a pasar.
-**Antes de cualquier acción irreversible** (sembrar, germinar, trasplantar, podar, topping, cortar, aplicar algo, cambiar de maceta), Claude hace y escribe en el chat este control, y si falla, dice «NO, esperá» con el porqué y la alternativa:
+**Antes de cualquier acción irreversible** (sembrar, germinar, trasplantar, podar, topping, cortar, aplicar algo, cambiar de maceta), Claude corre `scripts/semaforo.py` (parámetros en `PROTOCOLOS.md`), pega el resultado y además escribe en el chat este control, y si falla, dice «NO, esperá» con el porqué y la alternativa:
 1. **Clima de los próximos 7 días** (`estado/clima` + pronóstico): temperatura de suelo/aire dentro del rango de la acción. Germinación: 22-26 °C; afuera con máximas <20 °C se germina ADENTRO (papel, 22-25 °C) y se planta brotada.
 2. **Agua**: no regar a fondo sustratos que van a estar fríos o sin plantas que transpiren. Semilla recién puesta: solo humedecer el centro.
 3. **Cuánto se pierde si sale mal** (semillas, semanas de calendario, plata) y si hay forma de hacerlo en 2 tiempos.

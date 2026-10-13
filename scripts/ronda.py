@@ -409,6 +409,12 @@ def main():
                   "VPD de noche casi 0 = humedad 95-100 %: se condensa agua adentro de la flor. Es el clima de la botrytis. Cogollos por dentro en la próxima visita, defoliar el interior para que circule aire, techito puesto.")
     else:
         lo = hi = None
+    # ---- semáforo: acciones irreversibles de los próximos 7 días contra el pronóstico (reglas en scripts/semaforo.py) ----
+    try:
+        import semaforo
+        for av in semaforo.avisos_agenda(agenda, clima["dias"], eventos):
+            aviso(av["n"], av["t"], av["d"])
+    except Exception as e: print("semáforo falló:", e, file=sys.stderr)
     # ---- recordatorios de la bitácora ----
     ordenes = riego_motor(sys.argv[1], clima, hoy, sys.argv[3] if len(sys.argv) > 3 else "")
     for g in ordenes:
