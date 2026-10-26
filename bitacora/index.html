@@ -233,6 +233,18 @@ details.card>summary .cnt{margin-left:auto;font-family:"JetBrains Mono",monospac
 .log li[data-open="1"] .det{display:block}
 .log .head{cursor:pointer;font-family:Archivo,sans-serif;font-weight:600;font-size:15px}
 @media (prefers-reduced-motion:reduce){*{transition:none!important;animation:none!important}}
+/* celular: ninguna tabla ni bloque se desplaza de costado (25/10/26) */
+@media (max-width:600px){
+  table{min-width:0;width:100%;table-layout:auto}
+  .tablewrap{overflow-x:visible;margin:0 0 13px}
+  td,th{white-space:normal;overflow-wrap:anywhere;hyphens:auto}
+  td.num,td.aw{white-space:normal;min-width:0}
+  .vpd-t td,.vpd-t th{white-space:normal;padding-right:4px}
+  .rg-c{white-space:normal}
+  .arbol{overflow-x:visible;overflow-wrap:anywhere;font-size:12.5px}
+  .prose,.why,.warn,.tip,.ficha-body p,.ficha-body li,.al-d,.ord-dd{overflow-wrap:anywhere}
+  #sos-out textarea{white-space:pre-wrap;overflow-wrap:anywhere}
+}
 
 /* ---- tandas ---- */
 .tan{background:var(--surface);border:1px solid var(--line);border-left:3px solid var(--leaf);border-radius:3px;padding:12px 14px;margin:0 0 9px}
@@ -1988,82 +2000,80 @@ const VARIEDADES = [
     plantas:[]
   },
   {
-    id:"nyc", nombre:"New York City", banco:"Pyramid Seeds · fotoperiódica feminizada · 2 semillas · regalo Expo Cannabis 24/10/26",
-    fuente:"Seedfinder (ficha vieja del banco + 1 reseña de exterior) y distribuidores. No está en el catálogo actual de pyramidseeds.com",
+    id:"nyc", nombre:"Auto New York City", banco:"Pyramid Seeds · AUTOFLORECIENTE feminizada · 2 semillas · regalo Expo Cannabis 24/10/26",
+    fuente:"Seedfinder (ficha del banco + 1 reseña de interior) + Zamnesia (31 valoraciones, la más documentada de las 4). pyramidseeds.com no publica ningún dato de esta auto",
     datos:[
-      ["Linaje","NYC Diesel (Soma) × Jack Herer (Sensi)"],
-      ["Tipo","70 % sativa · 30 % índica (Seedfinder) · \"+60 % sativa\" (Alchimia)"],
-      ["THC declarado","17 % en la ficha vieja (Seedfinder) · \"15-25 %\" en el distribuidor. Sin análisis independiente"],
-      ["Floración interior","70-80 días (ficha vieja) · \"9 semanas\" (distribuidor)"],
-      ["Cosecha exterior","Principios de noviembre en Europa = principios de MAYO en Lanús"],
-      ["Producción declarada","500-600 g/m² · 400-1000 g por planta afuera. Ningún diario real lo confirma"],
-      ["Fenotipos","Dos conocidos: alto y estirado (sativa) y bajo y compacto (índica)"],
-      ["Única reseña real","Exterior, 9/10: cogollos muy duros y compactos, muy buena relación cogollo/hoja, pega fuerte y largo"],
-      ["Estado en el banco","Descatalogada: Pyramid hoy vende solo la versión Auto. Lo que te dieron es stock viejo"],
-      ["Destino","Guardada. No va esta temporada"]
+      ["Linaje","New York City (NYC Diesel × Jack Herer) × ruderalis"],
+      ["Tipo","70 % sativa · 30 % índica (con la ruderalis adentro)"],
+      ["THC declarado","18 % (Seedfinder) · 20 % (Zamnesia). Sin análisis independiente"],
+      ["De semilla a corte","8 semanas adentro · hasta 10 afuera (62-70 días)"],
+      ["Altura","60-130 cm"],
+      ["Producción declarada","400 g/m² adentro · hasta 200 g por planta afuera (banco). Realista en 40 L: 40-80 g"],
+      ["Reseñas reales","31 valoraciones, 4,5/5. Lo que repiten: cogollo denso y pesado, buena relación cogollo/hoja, sin hermafroditas. Germinación floja en un pedido (4 de 7)"],
+      ["Olor y sabor","Cítrico, limón; el banco dice que resiste el moho"],
+      ["Fenotipos","Ninguno reportado: parece homogénea"],
+      ["Destino","Tanda 3: enero, en las 40 L que libera la tanda 1"]
     ],
-    arbol:"NYC DIESEL (Soma Seeds, ~1999): Mexicana × Afgana según Soma; 60 % sativa. Olor a pomelo rosado y gasoil. Es el mismo \"Diesel\" que está atrás del Mandarino de tus Doble Tangie.\n\nJACK HERER (Sensi Seeds, 1994): Haze × (Northern Lights #5 × Shiva Skunk). Seedfinder marca este padre como \"probable\": Pyramid nunca dijo de quién es el Jack que usó.\n  └ Northern Lights #5 × Haze es la base de media Holanda; por eso en los árboles aparece \"NL5 × Haze\" atrás de todo.\n\nResultado: una sativa de 75-80 días de flor con cogollos densos por el lado afgano y NL. Sativa larga + cogollo denso es justo la combinación que se pudre en abril-mayo acá.",
-    nota:"Es la menos útil de las 7 para tu patio, y no por mala. En Lanús una sativa de 75-80 días arranca la flor franca a fines de febrero y termina en los primeros días de mayo, con 78-80 % de humedad promedio y rocío todas las noches. El año pasado tuviste botrytis cosechando antes que eso. La única reseña real de exterior describe cogollos \"muy duros y muy compactos\": eso es rendimiento en Europa y moho acá.\n\nAdemás está descatalogada: en el sitio de Pyramid ya no existe la fotoperiódica, solo la Auto New York City. Que te regalen una variedad que ya no venden quiere decir sobrante de stock, de edad desconocida. Germinación: contá con que puede fallar una de las dos.",
-    manejo:"No la siembres esta temporada. Si algún año la corrés, dos condiciones: en maceta que pueda entrar bajo techo en abril, y eligiendo el fenotipo bajo y compacto (descartando el estirado a la semana 3-4 de crecimiento). La otra opción seria es forzar la flor tapándola 12 h desde principios de enero para cosechar a mediados de marzo. Sin eso, es una cosecha de mayo, y mayo en Lanús no perdona.",
+    arbol:"NEW YORK CITY (Pyramid, fotoperiódica): NYC Diesel (Soma) × Jack Herer (Sensi).\n  └ NYC DIESEL (Soma Seeds, ~1999): Mexicana × Afgana; 60 % sativa; pomelo rosado y gasoil. Es el mismo \"Diesel\" que está atrás del Mandarino de tus Doble Tangie.\n  └ JACK HERER (Sensi Seeds, 1994): Haze × (Northern Lights #5 × Shiva Skunk). Seedfinder lo marca como \"probable\".\n\n× RUDERALIS desconocida: la que le pone el reloj. Pyramid no dice de qué línea auto viene.\n\nResultado: una auto sativa de 60-130 cm que corta en 65-70 días desde que asoma. Mantiene el cogollo denso del lado afgano y el limón del Jack.",
+    nota:"Es la mejor de las 4 para vos, y no por la ficha: por las 31 personas que la cultivaron y la calificaron 4,5 sobre 5. Ninguna otra Pyramid auto tiene ese respaldo. Lo que cuentan coincide con lo que necesitás: cogollo denso pero planta mediana, sin hermafroditas, y 65-70 días de semilla a corte.\n\nBajá la producción: los \"200 g por planta\" son del banco en condiciones ideales. Con 40 L, suelo vivo y sol de verano, 40-80 g por planta es el número con el que hay que planificar. Y contá con que de 2 semillas germine 1: una reseña reporta 4 de 7.",
+    manejo:"Tanda 3, enero. Cuando cortés la tanda 1 (fines de diciembre), las 40 L quedan libres: se sacan las raíces grandes, se recarga con compost, humus y bokashi, y se siembra directo a 6-12 mm con cúpula. Germinada el 5-10 de enero corta el 15-20 de marzo: antes de la humedad de abril. Riego: en enero una auto en 40 L a pleno sol pide 8-10 L cada 3-4 días; es lo mismo que la tanda 1, no es carga nueva. LST suave desde la semana 3, nada de topping: una auto no recupera el tiempo.",
     plantas:[]
   },
   {
-    id:"ap", nombre:"American Pie", banco:"Pyramid Seeds · fotoperiódica feminizada · 2 semillas · regalo Expo Cannabis 24/10/26",
-    fuente:"pyramidseeds.com (ficha actual) + Seedfinder (ficha vieja) + 2 reseñas reales de GrowDiaries",
+    id:"ap", nombre:"Auto American Pie", banco:"Pyramid Seeds · AUTOFLORECIENTE feminizada · 2 semillas · regalo Expo Cannabis 24/10/26",
+    fuente:"pyramidseeds.com (ficha actual) + Seedfinder (ficha vieja + 1 comentario) + GrowDiaries (8 cosechas reales)",
     datos:[
-      ["Linaje","Power Plant × White Widow"],
-      ["Tipo","60 % sativa · 40 % índica"],
-      ["THC declarado","20 % · CBD 0,6 % (Seedfinder). Sin análisis independiente"],
-      ["Floración interior","65-75 días en la ficha vieja · 60-65 en la actual (\"53-58 con LED\")"],
-      ["Cosecha exterior","Fines de septiembre a mediados de octubre en Europa = fines de marzo a mediados de ABRIL en Lanús"],
-      ["Producción declarada","500-550 g/m² · 0,5-1 kg por planta afuera. Un diario real: 85 g por planta en carpa"],
-      ["Reseñas reales","2 en GrowDiaries, las dos de interior y las dos positivas (\"fácil\", \"mi favorita de la carpa\"). Cero de exterior"],
-      ["Estructura","Colas compactas y cristalinas; el banco la recomienda para SCROG/vertical"],
-      ["Destino","Guardada para la 27/28. Es la segunda más viable de las 4"]
+      ["Linaje","American Pie (Power Plant × White Widow) × ruderalis"],
+      ["Tipo","60 % sativa (banco; la ruderalis no la cuentan)"],
+      ["THC declarado","20 % (ficha vieja) · 19 % (ficha actual) · CBD 0,6 %. Sin análisis independiente"],
+      ["De semilla a corte","Ficha vieja: ~58-60 días de flor · ficha actual: \"50-55 días\" (\"43-48 con LED\"). Realista: 70-75 días desde que asoma"],
+      ["Altura","60-160 cm declarados · 70 cm afuera según GrowDiaries · un usuario: 28 cm a pocas semanas del corte"],
+      ["Producción declarada","500 g/m² adentro · 30-100 g por planta afuera (Seedfinder) · \"700-750 g con LED\" (ficha actual)"],
+      ["Producción REAL","GrowDiaries: 28 g por planta de promedio en 8 cosechas, nota 9,2/10"],
+      ["Reseñas reales","Pocas. Un comentario en Seedfinder: planta de 28 cm, \"los cogollos largos y finos de la ficha no aparecieron\""],
+      ["Destino","Tanda 3 (enero), con la NYC: segunda opción"]
     ],
-    arbol:"POWER PLANT (Dutch Passion, 1997): selección de una sativa sudafricana. Vigor, rendimiento alto, floración corta para ser sativa (8 semanas), efecto eléctrico. Es la razón del \"South African\" que aparece en la descripción vieja de Seedfinder.\n\nWHITE WIDOW (Green House, 1995, criada por Shantibaba): sativa brasileña × índica del sur de la India. Cannabis Cup 1995. Resina blanca, 60-65 días.\n\nResultado: dos genéticas de los 90 con fama de fáciles y rendidoras. Nada de moda ni terpenos de postre: sativa limpia, pimienta, madera y algo cítrico.",
-    nota:"Genética honesta y aburrida, que para exterior es un elogio. Power Plant y White Widow son dos de las plantas más cultivadas de la historia justamente porque aguantan errores. El problema es el dato: Pyramid no publica ningún análisis de laboratorio y las cifras de su propia ficha mejoraron solas con los años (de 65-75 días a 60-65, los 850 g con LED son del dueño del growshop, no de un cliente). Tomá el 20 % de THC como \"fuerte\", no como un número.\n\nLo que sí es creíble: 60-70 días de flor y colas densas. Acá termina a mediados de abril, la misma ventana que tus Toxi.",
-    manejo:"Para la 27/28, no para ahora: tu bancal ya está asignado a las 3 Toxi y las geotextiles a las autos. Cuando la corras: sembrar a principios de septiembre, flor franca ~1-10 de febrero, corte 10-20 de abril. Por la White Widow las colas son densas: mirar por dentro desde la semana 5 de flor, Bt cada 7-10 días y techito desde la semana 3, igual que las Toxi. Si alguna vez tenés que elegir entre las dos American Pie y las dos Nefertiti, van estas.",
+    arbol:"AMERICAN PIE (Pyramid, fotoperiódica): Power Plant × White Widow.\n  └ POWER PLANT (Dutch Passion, 1997): selección de una sativa sudafricana. Vigor, 8 semanas, efecto eléctrico.\n  └ WHITE WIDOW (Green House, 1995, Shantibaba): sativa brasileña × índica del sur de la India. Cannabis Cup 1995.\n\n× RUDERALIS desconocida.\n\nResultado: una auto de porte chico. Las 8 cosechas reales de GrowDiaries dan 28 g por planta: la ruderalis le comió el vigor a la Power Plant.",
+    nota:"La ficha oficial dice 700-750 g con LED y 50 días. Las 8 cosechas reales dicen 28 g por planta. Esa distancia es la que tenés que tener en la cabeza con todo Pyramid: las cifras del banco son del dueño del growshop bajo 720 W, no de clientes.\n\nNo es mala: es chica. Para una 40 L con suelo vivo y sol de enero probablemente pase los 28 g, pero no esperes la planta de la foto. Si tenés que elegir qué 4 van a las 40 L en enero, las 2 Auto NYC y la Auto Wembley van antes; de esta va 1 y la otra queda de reserva.",
+    manejo:"Igual que la Auto NYC: siembra directa en la 40 L recargada, cúpula, 6-12 mm, primera semana de enero. Como es la más chica, es la candidata a la geotextil con menos sol. Sin topping; LST solo si pasa los 40 cm en la semana 3. Con 70-75 días corta a fines de marzo.",
     plantas:[]
   },
   {
-    id:"nef", nombre:"Nefertiti", banco:"Pyramid Seeds · fotoperiódica feminizada · 2 semillas · regalo Expo Cannabis 24/10/26",
-    fuente:"pyramidseeds.com (ficha actual) + Seedfinder (ficha vieja y premios)",
+    id:"nef", nombre:"Auto Nefertiti", banco:"Pyramid Seeds · AUTOFLORECIENTE feminizada · 2 semillas · regalo Expo Cannabis 24/10/26",
+    fuente:"Seedfinder (ficha del banco, desarrollada por L'Hort dels Somnis para Pyramid) + Zamnesia (ficha actual) + GrowDiaries (13 diarios, 5 cosechas)",
     datos:[
-      ["Linaje","Black Widow × White Widow"],
-      ["Tipo","75 % sativa en la ficha vieja · 80 % en la actual"],
-      ["THC declarado","20 % en la ficha vieja · 22 % en la actual. Sin análisis independiente"],
-      ["Floración interior","70-75 días (vieja) · 80 días (actual, \"73 con LED\")"],
-      ["Cosecha exterior","Principios de noviembre en Europa = principios de MAYO en Lanús"],
-      ["Producción declarada","500 g/m² · 0,5-1,5 kg por planta afuera. Un perfil habla de 2,5 m de altura y 600 g"],
-      ["Premios","1º Hidro Spannabis 2007 (como \"Black Hemp\") · 2º Copa Catalunya 2008 · 3º hachís Copa Catalunya 2010"],
-      ["Reseñas reales","Ninguna de la fotoperiódica. Una de la versión Auto menciona moho"],
-      ["Porte","El banco avisa que se va muy grande: pide crecimiento corto o esquejes directo a flor"],
-      ["Destino","Guardada. La menos apta para el bancal, aunque tenga premios"]
+      ["Linaje","Nefertiti (Black Widow × White Widow) × ruderalis"],
+      ["Tipo","65 % sativa · 25 % ruderalis · 10 % índica (Seedfinder)"],
+      ["THC declarado","11-14 % en la ficha del banco · \"21 %\" en la tabla del distribuidor. La misma planta"],
+      ["De semilla a corte","100 días. Es la auto más larga de las 4"],
+      ["Altura","60-180 cm · \"hasta 1,5 m, más si no se poda\" (banco) · un diario de exterior: más de 70 cm"],
+      ["Producción declarada","50-60 g por planta adentro · 100 g afuera en 20 L (banco) · \"hasta 200 g\" (distribuidor)"],
+      ["Reseñas reales","GrowDiaries: 13 diarios, 5 cosechas, solo 2 de exterior; una cosecha de más de 100 g en 20 L; una reseña menciona moho; otra: se pone púrpura al final y responde bien al LST"],
+      ["Olor","Menta fuerte y haze, con cítrico y frutilla (banco)"],
+      ["Destino","Guardada. Reserva para la 27/28 o para una tanda de septiembre"]
     ],
-    arbol:"BLACK WIDOW (Mr. Nice Seedbank, Shantibaba): sativa brasileña × índica del sur de la India. Es la White Widow ORIGINAL con el nombre de su autor: cuando Shantibaba dejó Green House en 1998 se llevó los padres y la volvió a sacar como Black Widow.\n\nWHITE WIDOW (Green House): el mismo cruce, en la línea que se quedó Green House.\n\nO sea: Nefertiti es Widow × Widow, una recombinación de la misma genética brasileña e india. El \"toque Haze\" del aroma que describe el banco viene de la sativa brasileña: no hay ninguna Haze en el árbol.",
-    nota:"Es la de mejor currículum de las 4 y la peor para vos. Los premios son de hidroponia en interior (2007) y de hachís: en interior, con 80 días de flor controlados, rinde. Afuera en Lanús una sativa de 75-80 días se va a 2 m y más y cosecha en mayo, igual que la New York City pero más grande. El propio banco avisa que hay que acortarle el crecimiento porque se dispara.\n\nEl dato que sí te interesa a futuro: ganó una copa de hachís. Si algún día la corrés, es candidata a rosin, no a frasco.",
-    manejo:"No va al bancal esta temporada ni la que viene salvo que la fuerces: para cosechar en marzo habría que taparla 12 h por día desde fines de diciembre, todos los días, durante 10-11 semanas. Con visitas cada 3-4 días eso no existe. Queda guardada hasta que tengas un lugar donde ir todos los días o una maceta bajo techo.",
+    arbol:"NEFERTITI (Pyramid, fotoperiódica): Black Widow × White Widow.\n  └ BLACK WIDOW (Mr. Nice, Shantibaba): sativa brasileña × índica del sur de la India. Es la White Widow ORIGINAL con el nombre de su autor.\n  └ WHITE WIDOW (Green House): el mismo cruce, línea de Green House.\n\n× RUDERALIS: la versión auto la hizo L'Hort dels Somnis para Pyramid.\n\nResultado: Widow × Widow × ruderalis. Una auto sativa de 100 días y hasta 1,8 m: casi una fotoperiódica con reloj. El \"haze\" del aroma es de la sativa brasileña; no hay Haze en el árbol.",
+    nota:"Es la que menos encaja con una auto: 100 días y 1,5-1,8 m. Una auto que tarda 100 días pierde la única ventaja que tiene una auto, que es terminar rápido antes de que cambie el clima. Sembrada en enero corta a mediados de abril, en la humedad; sembrada ahora corta a principios de febrero, pero no tenés maceta libre hasta diciembre.\n\nY la potencia: el banco mismo publicó 11-14 % de THC; el \"21 %\" es la tabla de un distribuidor sobre la misma planta. Para flor, floja. Para rosin, el perfil mentolado y haze puede ser interesante, pero con 2 semillas no da para experimentos.",
+    manejo:"Guardada. Si alguna vez la corrés, tiene que germinar en septiembre u octubre para cortar en enero, con 100 días de sol creciente, y en 40 L porque se va grande. LST desde la semana 3 para abrirla. Si en la 27/28 sobra una geotextil en septiembre, es su lugar; en enero, no.",
     plantas:[]
   },
   {
-    id:"wem", nombre:"Wembley", banco:"Pyramid Seeds · fotoperiódica feminizada · 1 semilla · regalo Expo Cannabis 24/10/26",
-    fuente:"Seedfinder (ficha vieja) + distribuidores (ficha actual) + reseñas sueltas. Confirmar en el sobre si es Wembley, Wembley Fast o Auto",
+    id:"wem", nombre:"Auto Wembley", banco:"Pyramid Seeds · AUTOFLORECIENTE feminizada · 1 semilla · regalo Expo Cannabis 24/10/26",
+    fuente:"Seedfinder (ficha del banco, linaje marcado como \"probable\") + GrowDiaries (1 cosecha registrada)",
     datos:[
-      ["Linaje","AK-47 × Bubble Gum"],
-      ["Tipo","80 % índica · 20 % sativa"],
-      ["THC declarado","16 % en la ficha vieja (Seedfinder) · 21-23 % en el distribuidor hoy. Sin análisis independiente"],
-      ["Floración interior","60-65 días (vieja) · 58 días (actual, \"51 con LED\")"],
-      ["Cosecha exterior","Mediados de octubre en Europa (ficha vieja) = principios a mediados de ABRIL en Lanús"],
-      ["Producción declarada","425-500 g/m² · 0,5-1,5 kg por planta afuera"],
-      ["Altura","80-110 cm adentro · 120-150 cm afuera"],
-      ["Reseñas reales","\"Fácil y resistente\" (GrowDiaries) · 2014: a un usuario le salieron hermafroditas 2 de 3 · en español: cítrico y pimienta, estructura más sativa de lo que dice la ficha"],
-      ["Estado en el banco","La fotoperiódica común ya no se vende: hoy existen Wembley Fast y Auto Wembley"],
-      ["Destino","Guardada. Es la única de las 4 que encaja en tu calendario"]
+      ["Linaje","Wembley (AK-47 × Bubble Gum) × ruderalis (\"probable\", Seedfinder)"],
+      ["Tipo","60 % índica · 20 % sativa · 20 % ruderalis"],
+      ["THC declarado","13 % (ficha del banco). Sin análisis independiente"],
+      ["De semilla a corte","~70 días"],
+      ["Altura","40-120 cm · \"hasta 1 m afuera\" (banco), que pide macetas de 20 L"],
+      ["Producción declarada","30-100 g por planta (banco) · GrowDiaries: una cosecha de 186 g"],
+      ["Reseñas reales","Casi nada: sin reseñas en Seedfinder; GrowDiaries la describe \"fácil y resistente\". Un foro de 2013: una Auto Wembley que no germinó"],
+      ["Cogollo","Denso y compacto, pistilos naranjas, dulce (banco)"],
+      ["Destino","Tanda 3 (enero), con las NYC"]
     ],
-    arbol:"AK-47 (Serious Seeds, 1992): Colombiana × Mexicana × Tailandesa × Afgana. 65 % sativa a pesar del nombre, 53-63 días, de las más premiadas de los 90, olor muy fuerte. Algunas líneas sacan hermafroditas bajo estrés.\n\nBUBBLE GUM (Indiana, EE. UU., años 70; versiones de TH Seeds y Serious Seeds): híbrida de lado índica, sabor a chicle, 55-60 días. Su linaje original no se conoce.\n\nResultado: la más corta y compacta de las 4, y la única que termina en Lanús antes de que el otoño se ponga húmedo.",
-    nota:"Si alguna de las 7 sirve para tu patio, es esta: índica compacta de 1,2-1,5 m que afuera corta a principios de abril, dos semanas antes que las Toxi. El precio es el que tiene toda índica densa: cogollo apretado que hay que vigilar por dentro desde la semana 5.\n\nDos avisos. Uno, tenés UNA semilla: sin margen para que no germine ni para elegir fenotipo. Dos, el 16 % de THC de la ficha vieja pasó a \"21-23 %\" en la actual sin que apareciera ningún análisis: es la misma planta. Y hay un reporte viejo de hermafroditas: si la corrés, buscar bananas desde la semana 3 de flor, sobre todo después de un susto de agua.",
-    manejo:"Guardada. Esta temporada no hay lugar: el bancal es de las Toxi y las geotextiles de las autos, y una planta más son 10 L más de agua por visita. Para la 27/28 es la primera que sembrás de las 7, a principios de septiembre, en geotextil de 40 L o en la punta del bancal. Antes de planificar nada, mirá el sobre: si dice Fast o Auto, el calendario es otro y la ficha se corrige.",
+    arbol:"WEMBLEY (Pyramid, fotoperiódica): AK-47 × Bubble Gum.\n  └ AK-47 (Serious Seeds, 1992): Colombiana × Mexicana × Tailandesa × Afgana. 65 % sativa a pesar del nombre; algunas líneas sacan hermafroditas bajo estrés.\n  └ BUBBLE GUM (Indiana, años 70): híbrida de lado índica, sabor a chicle. Linaje original desconocido.\n\n× RUDERALIS desconocida.\n\nResultado: la auto más índica de las 4: compacta, 70 días, cogollo denso. Es la que mejor resuelve el problema de siempre, pero con 13 % de THC declarados por el mismo banco.",
+    nota:"La más fácil y la más corta, con un dato en contra que el propio banco publicó: 13 % de THC. En Seedfinder, que copia la ficha original de Pyramid, dice 13. Es una planta para rendir en poco tiempo, no para pegar. Y es una sola semilla: si no germina, se terminó; si sale hermafrodita (la AK-47 tiene fama), se descarta y listo.\n\nCon eso claro, para una tanda de enero es buena: 70 días, 1 m, cogollo denso en marzo seco. Vale la pena probarla, sin expectativas.",
+    manejo:"Tanda 3, enero, en una 40 L recargada, junto a las Auto NYC. Siembra directa a 6-12 mm, cúpula, sin papel. Por el cogollo denso: mirar por dentro desde la semana 7 y Bt cada 7-10 días en flor. Buscar bananas desde la semana 4 de flor, sobre todo después de un susto de agua. Si no germina en 8 días, se escarba y se reemplaza por la segunda Auto American Pie.",
     plantas:[]
   }
 ];
